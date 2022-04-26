@@ -12,13 +12,15 @@ export default defineConfig({
     }),
   ],
   build: {
-    lib: {
-      entry: path.resolve(__dirname, "src/lib/index.ts"),
-      formats: ["es"],
-    },
     rollupOptions: {
+      input: [
+        path.resolve(__dirname, "src/lib/index.ts"),
+        path.resolve(__dirname, "src/lib/constant/StyledCommonCss.ts"),
+        path.resolve(__dirname, "src/lib/constant/CssVariables.ts"),
+      ],
       preserveModules: true,
-      external: ["react", "react-dom", "styled-components"],
+      preserveEntrySignatures: "allow-extension",
+      external: ["react", "react-dom", "styled-components", "prop-types"],
       output: {
         dir: "dist",
         format: "es",
