@@ -6,7 +6,7 @@ import dts from "vite-plugin-dts";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    react(),
+    react({ jsxRuntime: "classic" }),
     dts({
       insertTypesEntry: true,
     }),
@@ -17,9 +17,10 @@ export default defineConfig({
         path.resolve(__dirname, "src/lib/index.ts"),
         path.resolve(__dirname, "src/lib/constant/StyledCommonCss.ts"),
         path.resolve(__dirname, "src/lib/constant/CssVariables.ts"),
+        path.resolve(__dirname, "src/lib/components/Badge/index.ts"),
       ],
       preserveModules: true,
-      preserveEntrySignatures: "allow-extension",
+      preserveEntrySignatures: "strict",
       external: ["react", "react-dom", "styled-components", "prop-types"],
       output: {
         dir: "dist",

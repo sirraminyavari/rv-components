@@ -1,2 +1,4 @@
-import Badge from "./components/Badge/Badge";
-export { Badge };
+export {
+  Badge as RVBadge,
+  StatusBadge as RVStatusBadge,
+} from "./components/Badge";

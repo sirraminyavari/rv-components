@@ -4,8 +4,9 @@
   "version": "0.0.0-dev",
   "scripts": {
     "dev": "vite",
-    "build": "npm run clean:dist && npm run export:lib",
+    "build": "npm run clean:dist && npm run export:lib && npm run export:pkgJson",
     "export:lib": "tsc && vite build",
+    "export:pkgJson": "cp package.json ./dist/package.json",
     "clean:dist": "rimraf dist",
     "preview": "vite preview",
     "clean:deps": "json -f package.json -I -e \"delete this.devDependencies; delete this.dependencies\"",
@@ -54,12 +55,7 @@
   "files": [
     "dist"
   ],
-  "main": "./dist/src/lib/index.js",
-  "module": "./dist/src/lib/index.js",
-  "types": "./dist/src/lib/index.d.ts",
-  "exports": {
-    "CssVariables": "./dist/src/lib/constant/CssVariables.js",
-    "StyledCommonCss": "./dist/src/lib/constant/StyledCommonCss.js",
-    "Badge": "./dist/src/lib/components/Badge/index.js"
-  }
+  "main": "./index.js",
+  "module": "./index.js",
+  "types": "./index.d.ts"
 }
