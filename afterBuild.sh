@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
 
 
-cp -r ./dist/src/lib/* ./dist/src/
-rm -rf ./dist/src/lib
+cp -r ./dist/src/lib/* ./dist/
+rm -rf ./dist/src

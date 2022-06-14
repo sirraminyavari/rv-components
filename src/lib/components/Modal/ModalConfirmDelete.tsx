@@ -1,3 +1,4 @@
+import React from 'react';
 import type { IModalConfirm } from './ModalConfirm';
 import DeleteConfirmMessage from './Messages/ModalDeleteConfirmMessage';
 import ConfirmModal from './ModalConfirm';

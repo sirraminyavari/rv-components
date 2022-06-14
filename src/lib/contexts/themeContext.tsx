@@ -1,4 +1,5 @@
-import { PropsWithChildren, useContext, createContext } from 'react';
+import type { PropsWithChildren } from 'react';
+import React, { useContext, createContext } from 'react';
 
 export type IThemeContext = {
   RVDic: { [key: string]: any };

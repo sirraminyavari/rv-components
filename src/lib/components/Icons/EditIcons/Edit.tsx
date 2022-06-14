@@ -1,5 +1,6 @@
 import { BiEditAlt } from 'react-icons/bi';
 import type { SVGProps } from 'react';
+import React from 'react';
 
 export type IEditIcon = SVGProps<SVGSVGElement> & {
   size?: number;

@@ -1,4 +1,5 @@
 import type { HTMLProps, PropsWithChildren } from 'react';
+import React from 'react';
 import classnames from 'classnames';
 
 export type IHeadingProps = HTMLProps<HTMLDivElement> &

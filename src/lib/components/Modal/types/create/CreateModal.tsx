@@ -1,3 +1,4 @@
+import React from 'react';
 import * as Styled from '../ModalTypes.styles';
 import Modal, { IModal } from '../../Modal';
 import { Button } from '../../../Button';

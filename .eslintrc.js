@@ -60,7 +60,7 @@ module.exports = {
     ],
     'no-use-before-define': ['off'],
     'react/jsx-filename-extension': ['off'],
-    'react/react-in-jsx-scope': ['off'],
+    'react/react-in-jsx-scope': ['error'],
     'react/require-default-props': ['off'],
     'react/jsx-no-useless-fragment': ['warn'],
     'react/jsx-props-no-spreading': ['off'],

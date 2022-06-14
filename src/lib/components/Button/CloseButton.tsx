@@ -1,5 +1,6 @@
-import classNames from 'classnames';
 import type { DetailedHTMLProps, ButtonHTMLAttributes } from 'react';
+import classNames from 'classnames';
+import React from 'react';
 import styled from 'styled-components';
 import { BO_RADIUS_CIRCLE } from '../../constant/classnames';
 import CloseIcon from '../Icons/CloseIcon/CloseIcon';

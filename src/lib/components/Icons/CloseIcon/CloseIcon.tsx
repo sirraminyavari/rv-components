@@ -1,4 +1,5 @@
 import type { SVGProps } from 'react';
+import React from 'react';
 import { FaTimes } from 'react-icons/fa';
 import { IoCloseOutline } from 'react-icons/io5';
 

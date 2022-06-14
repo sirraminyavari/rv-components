@@ -1,4 +1,4 @@
-import { HTMLAttributes } from 'react';
+import React, { HTMLAttributes } from 'react';
 import * as Styled from './Badge.styles';
 
 interface StatusBadgeProps

@@ -1,4 +1,5 @@
 import type { SVGProps } from 'react';
+import React from 'react';
 
 export interface IEditCircleIcon extends SVGProps<SVGSVGElement> {
   size?: number;

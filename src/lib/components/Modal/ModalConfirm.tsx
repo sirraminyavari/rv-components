@@ -1,7 +1,7 @@
 /**
  * Renders a confirm modal.
  */
-import { useState } from 'react';
+import React, { useState } from 'react';
 import styled from 'styled-components';
 import type { IModal } from './Modal';
 import Modal from './Modal';

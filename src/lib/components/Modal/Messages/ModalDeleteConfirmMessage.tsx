@@ -1,4 +1,5 @@
 import type { SVGProps } from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import {
   CV_GRAY_DARK,
