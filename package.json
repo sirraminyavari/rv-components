@@ -95,8 +95,11 @@
   "files": [
     "index.js",
     "index.d.ts",
-    "constant/",
-    "components/"
+    "components/",
+    "contexts/",
+    "helpers/",
+    "hooks/",
+    "utilities/"
   ],
   "main": "./src/index.js",
   "module": "./src/index.js",

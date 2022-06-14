@@ -50,6 +50,14 @@ module.exports = {
         tsx: 'never',
       },
     ],
+    'no-unused-vars': [
+      'warn',
+      {
+        argsIgnorePattern: '^_',
+        varsIgnorePattern: '^_',
+        caughtErrorsIgnorePattern: '^_',
+      },
+    ],
     'no-use-before-define': ['off'],
     'react/jsx-filename-extension': ['off'],
     'react/react-in-jsx-scope': ['off'],

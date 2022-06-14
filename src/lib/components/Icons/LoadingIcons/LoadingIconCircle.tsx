@@ -5,7 +5,6 @@ interface ILoadingIconFlat extends SVGProps<SVGSVGElement> {
 }
 
 function LoadingIconCircle({
-  className,
   color = 'blue',
   size = 38,
   ...props

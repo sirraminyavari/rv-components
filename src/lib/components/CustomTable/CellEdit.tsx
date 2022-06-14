@@ -22,28 +22,30 @@ function CellEdit({
 }: ICellEdit) {
   const rowId = cell?.row?.original?.id;
   const columnId = cell?.column?.id;
-  const [type, id] = columnId.split('_');
+  const [_type, id] = columnId.split('_');
 
   const isEditMode =
     rowId === selectedCell?.row?.original?.id &&
     columnId === selectedCell?.column?.id;
 
   const handleStartEditCell = () => {
-    setSelectedCell && setSelectedCell(cell);
-    onEditStart && onEditStart();
+    if (setSelectedCell) setSelectedCell(cell);
+    if (onEditStart) onEditStart();
   };
 
   const handleAcceptChange = () => {
-    setSelectedCell && setSelectedCell(null);
-    onEdit && onEdit(rowId, id);
+    if (setSelectedCell) setSelectedCell(null);
+    if (onEdit) onEdit(rowId, id);
   };
 
   const handleCancelChange = () => {
-    setSelectedCell && setSelectedCell(null);
-    onEditCancel && onEditCancel();
+    if (setSelectedCell) setSelectedCell(null);
+    if (onEditCancel) onEditCancel();
   };
 
   return (
+    // eslint-disable-next-line react/jsx-no-useless-fragment
+    <>
       {isEditMode ? (
         <Styled.EditButtonsWrapper>
           <EditMenuButtons
@@ -55,13 +57,14 @@ function CellEdit({
         </Styled.EditButtonsWrapper>
       ) : (
         <Styled.EditIconWrapper
-          data-edit-icon-wrapper=""
           isShown={cell?.column?.editable}
           onClick={handleStartEditCell}
+          data-edit-icon-wrapper=""
         >
           <EditIcon size={18} color={TCV_DEFAULT} />
         </Styled.EditIconWrapper>
       )}
+    </>
   );
 }
 

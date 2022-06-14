@@ -26,7 +26,7 @@ import {
   BO_RADIUS_QUARTER,
 } from '../../constant/classnames';
 import Heading from '../Heading/Heading';
-import { BG_DISTANT, BG_WHITE, C_GRAY } from '../../constant/Colors';
+import { BG_DISTANT, BG_WHITE, C_GRAY } from '../../constant/CssClassNames';
 
 export const selectStyles = {
   control: (styles: CSSProperties) => ({

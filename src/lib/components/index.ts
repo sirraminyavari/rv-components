@@ -1,5 +1,7 @@
-export { Badge, StatusBadge } from './Badge';
-export { Button, CloseButton } from './Button';
-export { Heading } from './Heading';
+export * from './Badge';
+export * from './Button';
+export * from './Heading';
 export * from './Modal';
+export * from './Inputs';
+export * from './Icons';
 export * from './Icons';

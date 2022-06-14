@@ -1,7 +1,7 @@
 import * as Styled from '../ModalTypes.styles';
 import Modal, { IModal } from '../../Modal';
 import { Button } from '../../../Button';
-import { TC_DEFAULT, C_GRAY } from '../../../../constant/Colors';
+import { TC_DEFAULT, C_GRAY } from '../../../../constant/CssClassNames';
 import AnimatedInput from '../../../Inputs/AnimatedInput';
 import { useThemeContext } from '../../../../contexts/themeContext';
 

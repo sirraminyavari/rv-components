@@ -10,16 +10,16 @@ import {
 } from '@cliqmind/react-table';
 import { useSticky } from 'react-table-sticky';
 import { DragDropContext, Droppable, Draggable } from 'react-beautiful-dnd';
+import LogoLoader from 'components/Loaders/LogoLoader/LogoLoader';
+import ModalFallbackLoader from 'components/Loaders/ModalFallbackLoader/ModalFallbackLoader';
+import { getUUID } from '../../helpers';
 import * as Styled from './CustomTable.styles';
 import Pagination from './Pagination';
-import LogoLoader from 'components/Loaders/LogoLoader/LogoLoader';
 import TableAction from './TableAction';
-import ModalFallbackLoader from 'components/Loaders/ModalFallbackLoader/ModalFallbackLoader';
 import ColumnHeader from './ColumnHeader';
-import { getUUID } from 'helpers/helpers';
 
 const TableModal = lazy(() =>
-  import(/* webpackChunkName: "table-modal"*/ 'components/Modal/Modal')
+  import(/* webpackChunkName: "table-modal" */ '../Modal/Modal')
 );
 
 const defaultPropGetter = () => ({});
@@ -62,7 +62,7 @@ const DEFAULT_MODAL_PROPS = { show: false, title: '', type: '', content: null };
  * @component
  * @param {PropType} props -Props that passed to custom table.
  */
-const CustomTable = (props) => {
+function CustomTable(props) {
   //! Properties that passed to custom table component.
   const {
     tableId,
@@ -100,7 +100,7 @@ const CustomTable = (props) => {
 
   //! Enable add new row button whenever the new row has been created.
   useEffect(() => {
-    let hasNewRow = data?.some((row) => row?.id?.substr()?.includes('new'));
+    const hasNewRow = data?.some((row) => row?.id?.substr()?.includes('new'));
 
     if (!hasNewRow) {
       setTempRowId(null);
@@ -135,10 +135,10 @@ const CustomTable = (props) => {
   const reachedPaginationThreshold = data?.length > pageSize;
 
   const paginationStates = useMemo(() => {
-    return !!pagination
+    return pagination
       ? {
           pageIndex: pagination?.initialPageIndex || 0,
-          pageSize: pageSize,
+          pageSize,
         }
       : {};
   }, []);
@@ -203,7 +203,7 @@ const CustomTable = (props) => {
   //! Fires on add new row.
   const handleAddItem = () => {
     if (!tempRowId) {
-      let tempRowId = 'new_' + getUUID();
+      const tempRowId = `new_${getUUID()}`;
       setTempRowId(tempRowId);
       onCreateNewRow && onCreateNewRow(tempRowId);
     }
@@ -333,6 +333,6 @@ const CustomTable = (props) => {
       )}
     </Styled.TableContainer>
   );
-};
+}
 
 export default memo(CustomTable);
