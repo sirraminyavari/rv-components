@@ -1,4 +1,4 @@
-import Badge from "./Badge";
-import StatusBadge from "./StatusBadge";
+import Badge from './Badge';
+import StatusBadge from './StatusBadge';
 
 export { Badge, StatusBadge };

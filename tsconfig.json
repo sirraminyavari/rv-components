@@ -1,8 +1,18 @@
 {
   "compilerOptions": {
+    "outDir": "./dist/src",
+    "paths": {
+      "@cliqmind/react-table": [
+        "./node_modules/@types/react-table"
+      ]
+    },
     "target": "ESNext",
     "useDefineForClassFields": true,
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": false,
@@ -16,6 +26,12 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src/lib"],
-  "references": [{ "path": "./tsconfig.node.json" }]
+  "include": [
+    "src/lib"
+  ],
+  "references": [
+    {
+      "path": "./tsconfig.node.json"
+    }
+  ]
 }

@@ -1,11 +1,11 @@
+import styled, { css } from 'styled-components';
 import {
   CV_RED,
   CV_RED_VERYSOFT,
   TCV_DEFAULT,
   TCV_VERY_SOFT,
-} from "./../../constant/CssVariables";
-import { FLEX_RCC } from "../../constant/StyledCommonCss";
-import styled, { css } from "styled-components";
+} from '../../constant/CssVariables';
+import { FLEX_RCC } from '../../constant/StyledCommonCss';
 
 export const BadgeWrapper = styled.div<{
   length: number;
@@ -15,12 +15,12 @@ export const BadgeWrapper = styled.div<{
   ${FLEX_RCC}
   border-radius: 50%;
   text-align: center;
-  font-size: ${({ length }) => (length < 3 ? "60%" : "50%")};
+  font-size: ${({ length }) => (length < 3 ? '60%' : '50%')};
   direction: rtl;
 `;
 
 export const PureBadge = styled.span.attrs({
-  className: "rv-border-radius-1",
+  className: 'rv-border-radius-1',
 })<{
   type: string;
 }>`
@@ -34,16 +34,18 @@ export const PureBadge = styled.span.attrs({
   text-overflow: ellipsis;
   ${({ type }) => {
     switch (type) {
-      case "default":
+      case 'default':
         return css`
           color: ${TCV_DEFAULT};
           background-color: ${TCV_VERY_SOFT};
         `;
-      case "error":
+      case 'error':
         return css`
           color: ${CV_RED};
           background-color: ${CV_RED_VERYSOFT};
         `;
+      default:
+        return ``;
     }
   }}
 `;

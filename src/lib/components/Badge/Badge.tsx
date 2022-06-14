@@ -1,13 +1,13 @@
 /**
  * A Badge component
  */
-import { HTMLAttributes } from "react";
-import * as Styled from "./Badge.styles";
+import { HTMLAttributes } from 'react';
+import * as Styled from './Badge.styles';
 
 interface BadgeProps extends HTMLAttributes<HTMLDivElement> {
   value: number;
   limit: number;
-  showText?: boolean;
+  showText?: string;
 }
 
 /**
@@ -17,32 +17,26 @@ interface BadgeProps extends HTMLAttributes<HTMLDivElement> {
  * @property {number} props.limit - The maximum number to show, If exceeds the limitation will show '+'.
  * @property {string} [props.showText] - The data that must show to user, Ignore value and limitation.
  */
-const Badge = ({
+function Badge({
   value,
-  limit,
-  showText,
+  limit = 100,
+  showText = '',
   ...rest
-}: BadgeProps): JSX.Element => {
+}: BadgeProps): JSX.Element {
   const getBadgeValue = () => {
     if (value < limit) {
       return value;
-    } else {
-      return `+${limit - 1}`;
     }
+    return `+${limit - 1}`;
   };
 
   return (
-    <Styled.BadgeWrapper length={(value + "").length} {...rest}>
-      {!!showText ? showText : getBadgeValue()}
+    <Styled.BadgeWrapper length={`${value}`.length} {...rest}>
+      {showText || getBadgeValue()}
     </Styled.BadgeWrapper>
   );
-};
+}
 
-Badge.defaultProps = {
-  limit: 100,
-  showText: "",
-};
-
-Badge.displayName = "BadgeComponent";
+Badge.displayName = 'BadgeComponent';
 
 export default Badge;

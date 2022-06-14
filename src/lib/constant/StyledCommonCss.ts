@@ -1,5 +1,7 @@
-import { css } from "styled-components";
-import { CV_DISTANT, CV_GRAY_DARK } from "./CssVariables";
+/* eslint-disable no-underscore-dangle */
+/* eslint-disable camelcase */
+import { css } from 'styled-components';
+import { CV_DISTANT, CV_GRAY_DARK } from './CssVariables';
 
 const FLEX_COLUMN = css`
   display: flex;
