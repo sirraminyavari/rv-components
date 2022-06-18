@@ -11,6 +11,7 @@ export type IModal = Omit<HTMLProps<HTMLDivElement>, 'ref'> & {
   middle?: boolean;
   stick?: boolean;
   show?: boolean;
+  preventParentScroll?: boolean;
   onClose?: () => void;
   contentClass?: string;
   contentWidth?: string;
@@ -32,6 +33,7 @@ const Modal = ({
   contentWidth,
   titleClass,
   titleContainerClass,
+  preventParentScroll,
   children,
   ...props
 }: IModal) => {
@@ -43,8 +45,11 @@ const Modal = ({
 
   useEffect(() => {
     setShowState(show);
-    if (show) {
+    if (!!show) {
       _setDisposed(false);
+      if (preventParentScroll) document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = '';
     }
   }, [show]);
 
