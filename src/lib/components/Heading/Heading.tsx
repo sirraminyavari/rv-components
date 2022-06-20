@@ -25,7 +25,10 @@ function Heading({
   style,
   ...props
 }: IHeadingProps): JSX.Element {
-  const values = resolveValues({ type, darkBackground });
+  const values = resolveValues({
+    type: type.toUpperCase() as IHeadingProps['type'],
+    darkBackground,
+  });
 
   return (
     <div
