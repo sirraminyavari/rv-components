@@ -3,7 +3,7 @@ name: package deployment
 on:
   push:
     branches:
-      - main
+      - master
 
 jobs:
   code-structure-test:
@@ -25,13 +25,16 @@ jobs:
 
       - uses: actions/checkout@v2
         with:
-          fetch-depth: "0"
+          fetch-depth: '0'
 
       - name: install package dependencies 🛠️
         run: yarn install
 
-      - name: generate package assets ⚙️
+      - name: generate package assets (npm) ⚙️
         run: yarn run build
+
+      - name: generate package assets (storybook-gh) ⚙️
+        run: yarn run storybook:build
 
       - name: Deploy Storybook 🚀
         uses: JamesIves/github-pages-deploy-action@v4
