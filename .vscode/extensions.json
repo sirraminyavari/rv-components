@@ -1,0 +1,22 @@
+{
+  "recommendations": [
+    "formulahendry.auto-complete-tag",
+    "aaron-bond.better-comments",
+    "streetsidesoftware.code-spell-checker",
+    "kisstkondoros.vscode-codemetrics",
+    "naumovs.color-highlight",
+    "vivaxy.vscode-conventional-commits",
+    "zh9528.file-size",
+    "pomber.git-file-history",
+    "tombonnike.vscode-status-bar-format-toggle",
+    "mhutchie.git-graph",
+    "github.vscode-pull-request-github",
+    "eamodio.gitlens",
+    "wix.vscode-import-cost",
+    "brunnerh.insert-unicode",
+    "xabikos.javascriptsnippets",
+    "unifiedjs.vscode-mdx",
+    "esbenp.prettier-vscode",
+    "mrmlnc.vscode-scss"
+  ]
+}

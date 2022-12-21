@@ -1,2 +1,9 @@
+node_modules
+.storybook
+scripts
+dist
+storybook-static
+
+**/*.stories.@(ts|tsx|js|jsx|mdx)
 .eslintrc.js
 vite.config.ts

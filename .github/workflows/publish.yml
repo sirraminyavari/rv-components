@@ -1,4 +1,4 @@
-name: publishing to NPM
+name: package deployment
 
 on:
   push:
@@ -16,7 +16,7 @@ jobs:
         node: [16]
 
     steps:
-      - name: Setup node env
+      - name: Setup node env 🔨
         uses: actions/setup-node@v3
         with:
           node-version: ${{ matrix.node }}
@@ -27,13 +27,18 @@ jobs:
         with:
           fetch-depth: "0"
 
-      - name: install package dependencies
-        run: npm install
+      - name: install package dependencies 🛠️
+        run: yarn install
 
-      - name: run package
-        run: npm run build
+      - name: generate package assets ⚙️
+        run: yarn run build
 
-      - name: Publish to NPM
+      - name: Deploy Storybook 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: storybook-static
+
+      - name: Publish as NPM package 📦
         uses: mikeal/merge-release@master
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
