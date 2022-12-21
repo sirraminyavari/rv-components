@@ -3,7 +3,7 @@ name: package deployment
 on:
   push:
     branches:
-      - master
+      - main
 
 jobs:
   code-structure-test:
