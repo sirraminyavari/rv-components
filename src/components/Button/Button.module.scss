@@ -1,3 +1,96 @@
-.button {
-  background-color: red;
+@import '../../scss/modules/default';
+
+.baseButton {
+  border: none;
+  border-radius: $borderRadiusHalf;
+  border-width: px-to-rem(1);
+  border-style: solid;
+  border-color: transparent;
+  cursor: pointer;
+  text-align: center;
+  transition: all 0.3s ease-out;
+
+  &.circle {
+    border-radius: $borderRadiusFull;
+  }
+
+  &.large {
+    padding-inline: px-to-rem(24);
+    padding-block: px-to-rem(12);
+    font-size: px-to-rem(16);
+  }
+
+  &.small {
+    padding-inline: px-to-rem(24);
+    padding-block: px-to-rem(4);
+    font-size: px-to-rem(16);
+  }
+}
+.primary {
+  background-color: hsl(var(--background));
+  color: hsl(var(--font));
+
+  &:hover {
+    background-color: hsl(var(--light));
+    color: hsl(var(--light-font));
+  }
+  &:focus,
+  &.active {
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7)
+      hsl(var(--transparent) / 25%);
+  }
+
+  &:active {
+    background-color: hsl(var(--dark));
+    color: hsl(var(--dark-font));
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7)
+      hsl(var(--transparent) / 25%);
+  }
+}
+.outline {
+  border-color: hsl(var(--background));
+  color: hsl(var(--background));
+  background-color: hsl(var(--white));
+
+  &:hover {
+    background-color: hsl(var(--background) / 15%);
+    color: hsl(var(--background));
+  }
+  &:focus,
+  &.active {
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7)
+      hsl(var(--transparent) / 25%);
+  }
+
+  &:active {
+    background-color: hsl(var(--background) / 25%);
+    color: hsl(var(--background));
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7)
+      hsl(var(--transparent) / 25%);
+  }
+}
+.white {
+  color: hsl(var(--background));
+  background-color: hsl(var(--white));
+
+  &:hover {
+    background-color: hsl(var(--background) / 5%);
+    color: hsl(var(--background));
+  }
+  &:focus,
+  &.active {
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7)
+      hsl(var(--transparent) / 15%);
+  }
+
+  &:active {
+    background-color: hsl(var(--background) / 15%);
+    color: hsl(var(--background));
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7)
+      hsl(var(--transparent) / 15%);
+  }
+}
+.disabled {
+  color: hsl(var(--transparent) / 20%);
+  background-color: hsl(var(--transparent) / 10%);
 }

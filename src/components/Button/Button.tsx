@@ -13,15 +13,51 @@ export interface IButton
       ButtonHTMLAttributes<HTMLButtonElement>,
       HTMLButtonElement
     >
-  > {}
+  > {
+  variant?: 'primary' | 'white' | 'outline' | 'disabled';
+  color?:
+    | 'red'
+    | 'default'
+    | 'distant'
+    | 'gray'
+    | 'grayDark'
+    | 'veryWarm'
+  | 'warm';
+  size?: "large" | "small";
+  circle?: boolean;
+  active?: boolean;
+}
 
 const Button = forwardRef<HTMLButtonElement, IButton>(
-  ({ children, className, type = 'button', ...props }: IButton, ref) => {
+  (
+    {
+      children,
+      className,
+      color = 'default',
+      variant = 'primary',
+      type = 'button',
+      size="large",
+      disabled,
+      active,
+      circle,
+      ...props
+    }: IButton,
+    ref
+  ) => {
     return (
       <button
         ref={ref}
         type={type}
-        className={clsx(styles.button, className)}
+        className={clsx(
+          styles.baseButton,
+          color,
+          styles[disabled ? 'disabled' : variant],
+          styles[size],
+          circle&&styles.circle,
+          active&&styles.active,
+          className
+        )}
+        disabled={disabled}
         {...props}
       >
         {children}

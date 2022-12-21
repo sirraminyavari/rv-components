@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+
 module.exports = {
   webpackFinal: async (config) => {
     config.plugins.push(
@@ -10,6 +11,7 @@ module.exports = {
   },
   stories: [
     '../stories/**/*.stories.@(ts|tsx|js|jsx|mdx)',
+    '../stories/*.stories.@(ts|tsx|js|jsx|mdx)',
     '../src/**/*.stories.@(ts|tsx|js|jsx|mdx)',
   ],
   framework: '@storybook/react',
@@ -18,7 +20,6 @@ module.exports = {
     '@storybook/addon-links',
     '@storybook/addon-essentials',
     '@storybook/addon-a11y',
-    '@storybook/addon-storysource',
     'storybook-dark-mode',
   ],
   // https://storybook.js.org/docs/react/configure/typescript#mainjs-configuration
