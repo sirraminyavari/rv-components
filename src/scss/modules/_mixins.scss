@@ -5,185 +5,225 @@
 @use 'sass:map';
 
 @mixin for-size($size) {
-	@if $size == phone-only {
-		@media (max-width: 599px) {
-			@content;
-		}
-	} @else if $size == tablet-portrait-up {
-		@media (min-width: 600px) {
-			@content;
-		}
-	} @else if $size == tablet-landscape-up {
-		@media (min-width: 900px) {
-			@content;
-		}
-	} @else if $size == desktop-up {
-		@media (min-width: 1200px) {
-			@content;
-		}
-	} @else if $size == big-desktop-up {
-		@media (min-width: 1800px) {
-			@content;
-		}
-	}
+  @if $size == phone-only {
+    @media (max-width: 599px) {
+      @content;
+    }
+  } @else if $size == tablet-portrait-up {
+    @media (min-width: 600px) {
+      @content;
+    }
+  } @else if $size == tablet-landscape-up {
+    @media (min-width: 900px) {
+      @content;
+    }
+  } @else if $size == desktop-up {
+    @media (min-width: 1200px) {
+      @content;
+    }
+  } @else if $size == big-desktop-up {
+    @media (min-width: 1800px) {
+      @content;
+    }
+  }
 }
 @mixin selection {
-	::-moz-selection {
-		@content;
-	}
-	::selection {
-		@content;
-	}
+  ::-moz-selection {
+    @content;
+  }
+  ::selection {
+    @content;
+  }
 }
 @mixin full-width {
-	.fullWidth {
-		width: clamp(0%, calc(100% - 0.3rem), 100vw);
-	}
+  .fullWidth {
+    width: clamp(0%, calc(100% - 0.3rem), 100vw);
+  }
 }
 @mixin dir {
-	@if not global-variable-exists(exclude-rtl-from-bundle) or not $exclude-rtl-from-bundle {
-		.ltr {
-			direction: ltr;
-		}
-		.rtl {
-			direction: rtl;
-		}
-	}
+  @if not
+    global-variable-exists(exclude-rtl-from-bundle) or not
+    $exclude-rtl-from-bundle
+  {
+    .ltr {
+      direction: ltr;
+    }
+    .rtl {
+      direction: rtl;
+    }
+  }
 }
 
 @mixin bundle-partial($component-name, $component-variant: null) {
-	@if not global-variable-exists(exclude-from-bundle) {
-		@content;
-	} @else {
-		@if $component-variant == null {
-			$bundleStatus: map.get($exclude-from-bundle, $component-name, 'base');
-			@if $bundleStatus {
-				// @debug 'excluding styles for component "#{$component-name}" from css bundle';
-			} @else {
-				@content;
-			}
-		} @else {
-			$bundleStatus: map.get($exclude-from-bundle, $component-name, $component-variant);
-			@if $bundleStatus {
-				// @debug 'excluding styles for component "#{$component-name}" (#{$component-variant}) from css bundle';
-			} @else {
-				@content;
-			}
-		}
-	}
+  @if not global-variable-exists(exclude-from-bundle) {
+    @content;
+  } @else {
+    @if $component-variant == null {
+      $bundleStatus: map.get($exclude-from-bundle, $component-name, 'base');
+      @if $bundleStatus {
+        // @debug 'excluding styles for component "#{$component-name}" from css bundle';
+      } @else {
+        @content;
+      }
+    } @else {
+      $bundleStatus: map.get(
+        $exclude-from-bundle,
+        $component-name,
+        $component-variant
+      );
+      @if $bundleStatus {
+        // @debug 'excluding styles for component "#{$component-name}" (#{$component-variant}) from css bundle';
+      } @else {
+        @content;
+      }
+    }
+  }
 }
 
 @mixin rtl-bundle($component-name: null) {
-	@if not global-variable-exists(exclude-rtl-from-bundle) or not $exclude-rtl-from-bundle {
-		@content;
-	} @else if global-variable-exists(exclude-rtl-from-bundle) and $exclude-rtl-from-bundle {
-		// @debug 'excluding RTL styles for all components from css bundle';
-	} @else if $component-name {
-		@if not global-variable-exists(exclude-from-bundle) {
-			@content;
-		} @else {
-			$rtlBundleStatus: map.get($exclude-from-bundle, $component-name, 'rtl');
-			@if $rtlBundleStatus {
-				// @debug 'excluding styles for component "#{$component-name}" (RTL) from css bundle';
-			} @else {
-				@content;
-			}
-		}
-	}
+  @if not
+    global-variable-exists(exclude-rtl-from-bundle) or not
+    $exclude-rtl-from-bundle
+  {
+    @content;
+  } @else if
+    global-variable-exists(exclude-rtl-from-bundle) and
+    $exclude-rtl-from-bundle
+  {
+    // @debug 'excluding RTL styles for all components from css bundle';
+  } @else if $component-name {
+    @if not global-variable-exists(exclude-from-bundle) {
+      @content;
+    } @else {
+      $rtlBundleStatus: map.get($exclude-from-bundle, $component-name, 'rtl');
+      @if $rtlBundleStatus {
+        // @debug 'excluding styles for component "#{$component-name}" (RTL) from css bundle';
+      } @else {
+        @content;
+      }
+    }
+  }
 }
 @mixin palette-generator-variables {
-	:root {
-		--white: #{color-hsl-args($white)};
-		--black: #{color-hsl-args($black)};
-		--bg-color: #{color-hsl-args($white)};
-		--fg-color: #{color-hsl-args($black)};
-	}
-	.dark {
-		--fg-color: #{color-hsl-args($white)};
-		--bg-color: #{color-hsl-args($black)};
-	}
+  :root {
+    --white: #{color-hsl-args($white)};
+    --black: #{color-hsl-args($black)};
+    --bg-color: #{color-hsl-args($white)};
+    --fg-color: #{color-hsl-args($black)};
+  }
+  .dark {
+    --fg-color: #{color-hsl-args($white)};
+    --bg-color: #{color-hsl-args($black)};
+  }
 }
 @mixin palette-class-variables($localPaletteName) {
-	.#{$localPaletteName} {
-		--background: #{color-hsl-args(map.get($theme-variants, $localPaletteName, 'background'))};
-		--transparent: #{color-hsl-args(map.get($theme-variants, $localPaletteName, 'transparent'))};
-		--light: #{color-hsl-args(map.get($theme-variants, $localPaletteName, 'light'))};
-		--light-font: #{color-hsl-args(map.get($theme-variants, $localPaletteName, 'light-font'))};
-		--dark: #{color-hsl-args(map.get($theme-variants, $localPaletteName, 'dark'))};
-		--dark-font: #{color-hsl-args(map.get($theme-variants, $localPaletteName, 'dark-font'))};
-		--font: #{color-hsl-args(map.get($theme-variants, $localPaletteName, 'font'))};
-	}
+  .#{$localPaletteName} {
+    --background: #{color-hsl-args(
+        map.get($theme-variants, $localPaletteName, 'background')
+      )};
+    --transparent: #{color-hsl-args(
+        map.get($theme-variants, $localPaletteName, 'transparent')
+      )};
+    --light: #{color-hsl-args(
+        map.get($theme-variants, $localPaletteName, 'light')
+      )};
+    --light-font: #{color-hsl-args(
+        map.get($theme-variants, $localPaletteName, 'light-font')
+      )};
+    --dark: #{color-hsl-args(
+        map.get($theme-variants, $localPaletteName, 'dark')
+      )};
+    --dark-font: #{color-hsl-args(
+        map.get($theme-variants, $localPaletteName, 'dark-font')
+      )};
+    --font: #{color-hsl-args(
+        map.get($theme-variants, $localPaletteName, 'font')
+      )};
+  }
 }
 @mixin palette-class-generator-loop {
-	@each $localPaletteName, $paletteValue in $theme-variants {
-
-		@if $localPaletteName != 'black' and $localPaletteName != 'white' {
-			@include palette-class-variables("#{$localPaletteName}");
-		}
-	}
+  @each $localPaletteName, $paletteValue in $theme-variants {
+    @if $localPaletteName != 'black' and $localPaletteName != 'white' {
+      @include palette-class-variables('#{$localPaletteName}');
+    }
+  }
 }
 @mixin palette-generator-polyfill {
-	@each $localPaletteName, $paletteValue in $theme-variants {
-		$color: $paletteValue !global;
-		$background: #{color-hsl-args(map.get($theme-variants, $localPaletteName, 'background'))} !global;
-		$transparent: #{color-hsl-args(map.get($theme-variants, $localPaletteName, 'transparent'))} !global;
-		$light: #{color-hsl-args(map.get($theme-variants, $localPaletteName, 'light'))} !global;
-		$lightFont: #{color-hsl-args(map.get($theme-variants, $localPaletteName, 'light-font'))} !global;
-		$dark: #{color-hsl-args(map.get($theme-variants, $localPaletteName, 'dark'))} !global;
-		$darkFont: #{color-hsl-args(map.get($theme-variants, $localPaletteName, 'dark-font'))} !global;
-		$font: #{color-hsl-args(map.get($theme-variants, $localPaletteName, 'font'))} !global;
-		@at-root .#{$localPaletteName} {
-			@content;
-		}
-	}
+  @each $localPaletteName, $paletteValue in $theme-variants {
+    $color: $paletteValue !global;
+    $background: #{color-hsl-args(
+        map.get($theme-variants, $localPaletteName, 'background')
+      )} !global;
+    $transparent: #{color-hsl-args(
+        map.get($theme-variants, $localPaletteName, 'transparent')
+      )} !global;
+    $light: #{color-hsl-args(
+        map.get($theme-variants, $localPaletteName, 'light')
+      )} !global;
+    $lightFont: #{color-hsl-args(
+        map.get($theme-variants, $localPaletteName, 'light-font')
+      )} !global;
+    $dark: #{color-hsl-args(
+        map.get($theme-variants, $localPaletteName, 'dark')
+      )} !global;
+    $darkFont: #{color-hsl-args(
+        map.get($theme-variants, $localPaletteName, 'dark-font')
+      )} !global;
+    $font: #{color-hsl-args(
+        map.get($theme-variants, $localPaletteName, 'font')
+      )} !global;
+    @at-root .#{$localPaletteName} {
+      @content;
+    }
+  }
 }
 
 @mixin action-hover {
-	&:not([disabled]):hover {
-		@content;
-	}
+  &:not([disabled]):hover {
+    @content;
+  }
 }
 
 @mixin action-active {
-	&:not([disabled]):active {
-		@content;
-	}
+  &:not([disabled]):active {
+    @content;
+  }
 }
 
 @mixin action-focus {
-	&:not([disabled]):focus {
-		@content;
-	}
+  &:not([disabled]):focus {
+    @content;
+  }
 }
 
 @mixin pseudo($display: block, $pos: absolute, $content: '') {
-	content: $content;
-	display: $display;
-	position: $pos;
+  content: $content;
+  display: $display;
+  position: $pos;
 }
 @mixin input-placeholder {
-	&.placeholder {
-		@content;
-	}
-	&:-moz-placeholder {
-		@content;
-	}
-	&::-moz-placeholder {
-		@content;
-	}
-	&:-ms-input-placeholder {
-		@content;
-	}
-	&::-webkit-input-placeholder {
-		@content;
-	}
+  &.placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &:-ms-input-placeholder {
+    @content;
+  }
+  &::-webkit-input-placeholder {
+    @content;
+  }
 }
 
 @mixin truncate($truncation-boundary: null) {
-	@if variable-exists(truncation-boundary) {
-		max-width: $truncation-boundary;
-	}
-	white-space: nowrap;
-	overflow: hidden;
-	text-overflow: ellipsis;
+  @if variable-exists(truncation-boundary) {
+    max-width: $truncation-boundary;
+  }
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

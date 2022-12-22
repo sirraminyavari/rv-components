@@ -1,26 +1,32 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Button, IButton } from '.';
+import { Button as ButtonComponent, IButton } from '.';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Components/Button',
-  component: Button,
+  component: ButtonComponent,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     children: { control: 'text' },
   } as IButton,
-} as ComponentMeta<typeof Button>;
+} as ComponentMeta<typeof ButtonComponent>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof Button> = ({
+const Template: ComponentStory<typeof ButtonComponent> = ({
   children = 'Button',
   ...args
-}) => <Button {...args}>{children}</Button>;
+}) => <ButtonComponent {...args}>{children}</ButtonComponent>;
 
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
+export const Button = Template.bind({});
+
+export const fullCircle = Template.bind({});
+fullCircle.args = { fullCircle: true };
+
 export const primary = Template.bind({});
+primary.args = { variant: 'primary' };
 
 export const outline = Template.bind({});
 outline.args = { variant: 'outline' };
