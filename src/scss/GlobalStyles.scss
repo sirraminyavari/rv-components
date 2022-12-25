@@ -1,10 +1,10 @@
 @import 'modules/default.scss';
 :global {
-	@include palette-generator-variables;
+  @include palette-generator-variables;
 }
 
 html {
-	@include palette-class-generator-loop;
-	@include dir;
-	@include full-width;
+  @include palette-class-generator-loop;
+  @include dir;
+  @include full-width;
 }

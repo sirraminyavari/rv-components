@@ -10,7 +10,7 @@
   text-align: center;
   transition: all 0.3s ease-out;
 
-  &.circle {
+  &.rounded {
     border-radius: $borderRadiusFull;
   }
 
@@ -24,6 +24,13 @@
     padding-inline: px-to-rem(24);
     padding-block: px-to-rem(4);
     font-size: px-to-rem(16);
+  }
+
+  &.fullCircle {
+    aspect-ratio: 1;
+    border-radius: 100%;
+    // padding-block: 1rem;
+    padding-inline: 1rem;
   }
 }
 .primary {

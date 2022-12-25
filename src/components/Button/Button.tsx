@@ -5,6 +5,7 @@ import {
   forwardRef,
   PropsWithoutRef,
 } from 'react';
+import { colorProp, sizeProp, variantProp } from '../../types/global';
 import styles from './Button.module.scss';
 
 export interface IButton
@@ -14,17 +15,11 @@ export interface IButton
       HTMLButtonElement
     >
   > {
-  variant?: 'primary' | 'white' | 'outline' | 'disabled';
-  color?:
-    | 'red'
-    | 'default'
-    | 'distant'
-    | 'gray'
-    | 'grayDark'
-    | 'veryWarm'
-  | 'warm';
-  size?: "large" | "small";
-  circle?: boolean;
+  variant?: variantProp;
+  color?:colorProp;
+  size?: sizeProp;
+  fullCircle?: boolean;
+  rounded?: boolean;
   active?: boolean;
 }
 
@@ -36,12 +31,12 @@ const Button = forwardRef<HTMLButtonElement, IButton>(
       color = 'default',
       variant = 'primary',
       type = 'button',
-      size="large",
+      size = 'large',
       disabled,
       active,
-      circle,
+      fullCircle,rounded,
       ...props
-    }: IButton,
+    },
     ref
   ) => {
     return (
@@ -53,8 +48,9 @@ const Button = forwardRef<HTMLButtonElement, IButton>(
           color,
           styles[disabled ? 'disabled' : variant],
           styles[size],
-          circle&&styles.circle,
-          active&&styles.active,
+          rounded && styles.rounded,
+          fullCircle && styles.fullCircle,
+          active && styles.active,
           className
         )}
         disabled={disabled}
