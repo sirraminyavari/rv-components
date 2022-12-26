@@ -1,22 +1,22 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Heading as HeadingComponent, IHeading } from '.';
+import { Typography as TypographyComponent, ITypography } from '.';
 
 export default {
   title: 'Components/Heading',
-  component: HeadingComponent,
+  component: TypographyComponent,
   argTypes: {
     children: { control: 'text' },
-  } as IHeading,
-} as ComponentMeta<typeof HeadingComponent>;
+  } as ITypography,
+} as ComponentMeta<typeof TypographyComponent>;
 
-const Template: ComponentStory<typeof HeadingComponent> = ({
+const Template: ComponentStory<typeof TypographyComponent> = ({
   children = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
   ...args
-}) => <HeadingComponent {...args}>{children}</HeadingComponent>;
+}) => <TypographyComponent {...args}>{children}</TypographyComponent>;
 
-export const Heading = Template.bind({});
+export const Typography = Template.bind({});
 
 export const H1 = Template.bind({});
 H1.args = { type: 'H1' };

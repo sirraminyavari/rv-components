@@ -7,9 +7,9 @@ import {
   PropsWithoutRef,
 } from 'react';
 import { colorProp } from '../../types/global';
-import styles from './Heading.module.scss';
+import styles from './Typography.module.scss';
 
-export interface IHeading
+export interface ITypography
   extends PropsWithoutRef<
     DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
   > {
@@ -18,19 +18,19 @@ export interface IHeading
   muted?: boolean;
 }
 
-const HeadingTag = forwardRef<HTMLHeadingElement, IHeading>(
+const TypographyTag = forwardRef<HTMLHeadingElement, ITypography>(
   ({ type = 'H6', children, ...props }, ref) => {
     return createElement(type, { ref, ...props }, children);
   }
 );
 
-const Heading = forwardRef<HTMLHeadingElement, IHeading>(
+const Typography = forwardRef<HTMLHeadingElement, ITypography>(
   (
     { children, className, color = 'grayDark', type = 'H6', muted, ...props },
     ref
   ) => {
     return (
-      <HeadingTag
+      <TypographyTag
         ref={ref}
         className={clsx(
           color,
@@ -42,9 +42,9 @@ const Heading = forwardRef<HTMLHeadingElement, IHeading>(
         {...{ type, ...props }}
       >
         {children}
-      </HeadingTag>
+      </TypographyTag>
     );
   }
 );
 
-export default Heading;
+export default Typography;
