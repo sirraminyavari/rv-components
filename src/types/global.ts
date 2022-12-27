@@ -1,3 +1,5 @@
+import type { SVGProps } from 'react';
+
 export type variantProp = 'primary' | 'white' | 'outline' | 'disabled';
 export type colorProp =
   | 'red'
@@ -8,3 +10,8 @@ export type colorProp =
   | 'veryWarm'
   | 'warm';
 export type sizeProp = 'large' | 'small';
+
+export interface ISvgProps extends SVGProps<SVGSVGElement> {
+  size?: string;
+  outline?: boolean;
+}

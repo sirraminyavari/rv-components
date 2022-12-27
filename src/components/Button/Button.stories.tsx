@@ -2,6 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Button as ButtonComponent, IButton } from '.';
+import HomeSvg from '../../assets/svg/home.svg';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -23,7 +24,23 @@ const Template: ComponentStory<typeof ButtonComponent> = ({
 export const Button = Template.bind({});
 
 export const fullCircle = Template.bind({});
-fullCircle.args = { fullCircle: true };
+fullCircle.args = {
+  fullCircle: true,
+  children: (
+    <>
+      <HomeSvg />
+    </>
+  ),
+};
+export const withIcon = Template.bind({});
+withIcon.args = {
+  children: (
+    <>
+      <HomeSvg />
+      custom icon
+    </>
+  ),
+};
 
 export const primary = Template.bind({});
 primary.args = { variant: 'primary' };
