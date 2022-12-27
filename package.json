@@ -12,7 +12,7 @@
     "build": "yarn build:clear-dist && yarn build:tsc && yarn build:scss",
     "build:clear-dist": "rm -rf dist",
     "build:tsc": "tsc -p ./tsconfig.json",
-    "build:scss": "cpx 'src/**/*.{scss,css}' dist",
+    "build:scss": "cpx 'src/**/*.{scss,css,ttf,eot,woff,woff2,svg}' dist",
     "postbuild": "cpx './package.json' dist",
     "lint": "eslint src --color",
     "format": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}'",
