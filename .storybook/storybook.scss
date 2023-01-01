@@ -1,9 +1,11 @@
 @import '../src/scss/modules/default.scss';
+@import '../src/scss/modules/normalize';
 @import '../src/scss/GlobalStyles.scss';
+@import './storybook-fonts.scss';
 
 html,
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  font-family:Roboto,IRANSans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji',
     Vazir;

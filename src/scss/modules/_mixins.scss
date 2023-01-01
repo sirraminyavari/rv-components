@@ -136,6 +136,12 @@
     --dark-font: #{color-hsl-args(
         map.get($theme-variants, $localPaletteName, 'dark-font')
       )};
+    --mid-dark: #{color-hsl-args(
+        map.get($theme-variants, $localPaletteName, 'mid-dark')
+      )};
+    --mid-dark-font: #{color-hsl-args(
+        map.get($theme-variants, $localPaletteName, 'mid-dark-font')
+      )};
     --font: #{color-hsl-args(
         map.get($theme-variants, $localPaletteName, 'font')
       )};
@@ -162,6 +168,12 @@
       )} !global;
     $lightFont: #{color-hsl-args(
         map.get($theme-variants, $localPaletteName, 'light-font')
+      )} !global;
+    $midDark: #{color-hsl-args(
+        map.get($theme-variants, $localPaletteName, 'mid-dark')
+      )} !global;
+    $midDarkFont: #{color-hsl-args(
+        map.get($theme-variants, $localPaletteName, 'mid-dark-font')
       )} !global;
     $dark: #{color-hsl-args(
         map.get($theme-variants, $localPaletteName, 'dark')

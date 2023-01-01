@@ -1,4 +1,5 @@
 const webpack = require('webpack');
+const path = require('path');
 
 module.exports = {
   webpackFinal: async (config) => {
@@ -7,6 +8,19 @@ module.exports = {
         __IS_DEV__: process.env.NODE_ENV === 'development',
       })
     );
+
+    // config.module.rules = [
+    //   {
+    //     test: /\.(woff|woff2|eot|ttf|svg)$/,
+    //     use: [
+    //       {
+    //         loader: 'resolve-url-loader',
+    //       },
+    //     ],
+    //   },
+    //   ...config.module.rules,
+    // ];
+
     return config;
   },
   stories: [

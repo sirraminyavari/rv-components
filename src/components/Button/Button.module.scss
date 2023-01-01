@@ -38,8 +38,8 @@
   color: hsl(var(--font));
 
   &:hover {
-    background-color: hsl(var(--light));
-    color: hsl(var(--light-font));
+    background-color: hsl(var(--mid-dark));
+    color: hsl(var(--mid-dark-font));
   }
   &:focus,
   &.active {
