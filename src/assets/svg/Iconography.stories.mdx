@@ -1,0 +1,53 @@
+<!-- Iconography.stories.mdx -->
+
+import { Meta, Title, IconGallery, IconItem } from '@storybook/addon-docs';
+
+import * as icons from '.';
+
+<Meta title="Iconography" />
+
+# Iconography
+
+List of all icons used and available in the package
+
+<br />
+<br />
+
+<strong>Cliqmind specifics</strong>
+<br />
+<br />
+
+<IconGallery>
+  {Object.entries(icons).map(([name, Icon]) => {
+    if(!name.startsWith("CM"))
+    return;
+    return (
+      <>
+        <IconItem name={name.replace('Svg', '')}>
+          <Icon name={name.replace('Svg', '')} />
+        </IconItem>
+      </>
+    );
+  })}
+</IconGallery>
+
+<strong>available</strong>
+<br />
+<br />
+
+<IconGallery>
+  {Object.entries(icons).map(([name, Icon]) => {
+    if(name.startsWith("CM"))
+    return;
+    return (
+      <>
+        <IconItem name={name.replace('Svg', '')}>
+          <Icon name={name.replace('Svg', '')} />
+        </IconItem>
+        <IconItem name={`${name.replace('Svg', '')} (outline)`}>
+          <Icon name={`${name.replace('Svg', '')} (outline)`} outline />
+        </IconItem>
+      </>
+    );
+  })}
+</IconGallery>

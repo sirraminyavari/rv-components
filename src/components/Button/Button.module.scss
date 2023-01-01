@@ -10,6 +10,14 @@
   text-align: center;
   transition: all 0.3s ease-out;
 
+  & > svg {
+    vertical-align: middle;
+    // padding-block: px-to-rem(4);
+    margin-inline-end: px-to-rem(13);
+    font-size: 1.3em;
+    color: inherit;
+  }
+
   &.rounded {
     border-radius: $borderRadiusFull;
   }
@@ -29,8 +37,14 @@
   &.fullCircle {
     aspect-ratio: 1;
     border-radius: 100%;
-    // padding-block: 1rem;
-    padding-inline: 1rem;
+    padding-block: px-to-rem(4);
+    padding-inline: px-to-rem(4);
+    font-size: px-to-rem(24);
+
+    & > svg {
+      vertical-align: middle;
+      padding:px-to-rem(4);
+    }
   }
 }
 .primary {
@@ -38,8 +52,8 @@
   color: hsl(var(--font));
 
   &:hover {
-    background-color: hsl(var(--light));
-    color: hsl(var(--light-font));
+    background-color: hsl(var(--mid-dark));
+    color: hsl(var(--mid-dark-font));
   }
   &:focus,
   &.active {
