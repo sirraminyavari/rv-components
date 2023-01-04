@@ -12,7 +12,6 @@
 
   & > svg {
     vertical-align: middle;
-    // padding-block: px-to-rem(4);
     margin-inline-end: px-to-rem(13);
     font-size: 1.3em;
     color: inherit;
@@ -39,11 +38,11 @@
     border-radius: 100%;
     padding-block: px-to-rem(4);
     padding-inline: px-to-rem(4);
-    font-size: px-to-rem(24);
+    font-size: px-to-rem(20);
 
     & > svg {
-      vertical-align: middle;
-      padding:px-to-rem(4);
+      margin-inline-end: 0;
+      padding: px-to-rem(8);
     }
   }
 }

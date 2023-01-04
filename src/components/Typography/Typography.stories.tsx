@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Typography as TypographyComponent, ITypography } from '.';
 
 export default {
-  title: 'Components/Heading',
+  title: 'Components/Typography',
   component: TypographyComponent,
   argTypes: {
     children: { control: 'text' },
@@ -14,9 +14,7 @@ export default {
 const Template: ComponentStory<typeof TypographyComponent> = ({
   children = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
   ...args
-}) => <TypographyComponent {...args}>{children}</TypographyComponent>;
-
-export const Typography = Template.bind({});
+}) => <TypographyComponent {...args}>{children}</TypographyComponent>;  
 
 export const H1 = Template.bind({});
 H1.args = { type: 'H1' };
