@@ -1,6 +1,6 @@
-import { ISvgProps } from '../../types';
+import { RVSvgProps } from '../../types';
 
-const CMLogoSvg = ({ size, ...props }: Omit<ISvgProps, 'outline'>) => {
+const CMLogoSvg = ({ size, ...props }: Omit<RVSvgProps, 'outline'>) => {
   return (
     <svg
       width={size || '1em'}
@@ -10,7 +10,7 @@ const CMLogoSvg = ({ size, ...props }: Omit<ISvgProps, 'outline'>) => {
       fill="currentColor"
       {...props}
     >
-      <g >
+      <g>
         <rect opacity="0.1" x="-1" width="50" height="48" rx="8" />
         <path
           d="M16.5449 19.9055C17.2999 18.5354 18.417 17.3992 19.774 16.6209L18.7938 13.9276C16.3364 15.2007 14.4275 17.3261 13.4245 19.9055C13.0715 20.8157 12.8386 21.7681 12.7317 22.7385C12.627 23.6811 12.6401 24.6331 12.7707 25.5725C13.0495 27.577 13.8621 29.4697 15.1233 31.0526L17.1443 29.0315C16.9965 28.8263 16.8559 28.621 16.7255 28.4054C16.1959 27.5343 15.8283 26.5745 15.6406 25.5725C15.5439 25.0539 15.4954 24.5275 15.4959 24C15.4958 23.5778 15.5267 23.1562 15.5882 22.7385C15.7356 21.7447 16.0596 20.7852 16.5449 19.9055Z"

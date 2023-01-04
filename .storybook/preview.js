@@ -20,9 +20,10 @@ export const parameters = {
           'Usage',
           'ColorPalettes',
           'Iconography',
-          'Components', 
+          'Components',
         ],
       },
     },
   },
+  layout: 'fullscreen',  
 };

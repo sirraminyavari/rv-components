@@ -10,7 +10,7 @@
   text-align: center;
   transition: all 0.3s ease-out;
 
-  &>svg {
+  & > svg {
     vertical-align: middle;
     margin-inline-end: px-to-rem(13);
     font-size: 1.3em;
@@ -40,7 +40,7 @@
     padding-inline: px-to-rem(4);
     font-size: px-to-rem(20);
 
-    &>svg {
+    & > svg {
       margin-inline-end: 0;
       padding: px-to-rem(8);
     }
@@ -57,7 +57,6 @@
   }
 
   &:focus {
-
     background-color: hsl(var(--percent-95));
     color: hsl(var(--percent-95-font));
   }

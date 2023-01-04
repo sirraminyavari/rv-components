@@ -1,6 +1,6 @@
-import { ISvgProps } from '../../types';
+import { RVSvgProps } from '../../types';
 
-const BriefcaseSvg = ({ size, outline, ...props }: ISvgProps) => {
+const BriefcaseSvg = ({ size, outline, ...props }: RVSvgProps) => {
   return (
     <svg
       width={size || '1em'}

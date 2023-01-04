@@ -18,7 +18,18 @@ const Template: ComponentStory<typeof SidebarSubMenuComponent> = ({
   children,
   ...args
 }) => (
-  <div style={{display:"flex",minHeight:"100vh",width:"100vw"}}>
+  <div style={{ display: 'flex', minHeight: '100vh', width: '100%' }}>
+    <SidebarSubMenuComponent {...args}>{children}</SidebarSubMenuComponent>
+  </div>
+);
+const TemplateRTL: ComponentStory<typeof SidebarSubMenuComponent> = ({
+  children,
+  ...args
+}) => (
+  <div
+    style={{ display: 'flex', minHeight: '100vh', width: '100%' }}
+    className="direction-rtl"
+  >
     <SidebarSubMenuComponent {...args}>{children}</SidebarSubMenuComponent>
   </div>
 );
@@ -26,4 +37,6 @@ const Template: ComponentStory<typeof SidebarSubMenuComponent> = ({
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 
 export const SubMenu = Template.bind({});
+SubMenu.args = {};
+export const SubMenuRTL = TemplateRTL.bind({});
 SubMenu.args = {};

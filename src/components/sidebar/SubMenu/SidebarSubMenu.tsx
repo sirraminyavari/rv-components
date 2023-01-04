@@ -9,7 +9,7 @@ import {
   useRef,
 } from 'react';
 import { GridSvg, HomeSvg, PeopleSvg } from '../../../assets/svg';
-import { colorProp } from '../../../types';
+import { RVColorProp } from '../../../types';
 import { Typography } from '../../Typography';
 import SidebarSubMenuIndicator from './SidebarIndicator';
 import styles from './SidebarSubMenu.module.scss';
@@ -21,11 +21,14 @@ export interface ISidebarSubMenu
     >,
     'color'
   > {
-  color?: colorProp;
+  color?: RVColorProp;
 }
 
 const SidebarSubMenu = forwardRef<HTMLDivElement, ISidebarSubMenu>(
-  ({ children, color = colorProp.grayLight, ...props }, ref) => {
+  (
+    { children, color = RVColorProp.grayLight, className, ...props },
+    ref
+  ) => {
     const activeIndicatorRef = useRef<HTMLDivElement>(null);
     const activeTile = useRef<HTMLButtonElement | null>(null);
 
@@ -36,7 +39,7 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, ISidebarSubMenu>(
         console.log({ tileBoundingRect });
         if (!activeIndicatorRef.current) return;
         activeIndicatorRef.current.style.top = String(
-          `${tileBoundingRect.top - 15}px`
+          `${tileBoundingRect.top}px`
         );
         activeIndicatorRef.current.style.height = `${tileBoundingRect.height}px`;
         if (activeTile.current)
@@ -48,20 +51,24 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, ISidebarSubMenu>(
     );
 
     return (
-      <div ref={ref} className={clsx(styles.baseSidebarMain, color)} {...props}>
+      <div
+        ref={ref}
+        className={clsx(styles.baseSidebarMain, color, className)}
+        {...props}
+      >
         <SidebarSubMenuIndicator ref={activeIndicatorRef} color={color} />
         <div className={styles.titleBlock}>
           <PeopleSvg className={styles.titleIcon} outline />
           <div>
             <Typography
-              color={colorProp.inherit}
+              color={RVColorProp.inherit}
               type="sub"
               className={styles.titleTypography}
             >
               Amir's workspace
             </Typography>
             <Typography
-              color={colorProp.inherit}
+              color={RVColorProp.inherit}
               type="H3"
               className={styles.titleTypography}
             >
@@ -71,19 +78,19 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, ISidebarSubMenu>(
         </div>
         <button className={styles.menuTile} onClick={onActiveClick}>
           <GridSvg className={styles.menuTileIcon} outline />
-          <Typography color={colorProp.inherit} type="H4">
+          <Typography color={RVColorProp.inherit} type="H4">
             Everything
           </Typography>
         </button>
         <button className={styles.menuTile} onClick={onActiveClick}>
           <PeopleSvg className={styles.menuTileIcon} outline />
-          <Typography color={colorProp.inherit} type="H4">
+          <Typography color={RVColorProp.inherit} type="H4">
             Everything
           </Typography>
         </button>
         <button className={styles.menuTile} onClick={onActiveClick}>
           <HomeSvg className={styles.menuTileIcon} outline />
-          <Typography color={colorProp.inherit} type="H4">
+          <Typography color={RVColorProp.inherit} type="H4">
             Everything
           </Typography>
         </button>

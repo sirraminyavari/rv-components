@@ -1,6 +1,6 @@
-import { ISvgProps } from '../../types';
+import { RVSvgProps } from '../../types';
 
-const HammerWrenchSvg = ({ size, outline, ...props }: ISvgProps) => {
+const HammerWrenchSvg = ({ size, outline, ...props }: RVSvgProps) => {
   return (
     <svg
       width={size || '1em'}

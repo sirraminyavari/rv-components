@@ -1,4 +1,4 @@
-import Typography, { ITypography } from './Typography';
+import Typography, { RVTypography } from './Typography';
 
-export type { ITypography };
+export type { RVTypography };
 export { Typography };

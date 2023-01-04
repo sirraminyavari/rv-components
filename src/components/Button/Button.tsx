@@ -5,10 +5,10 @@ import {
   forwardRef,
   PropsWithoutRef,
 } from 'react';
-import { colorProp, sizeProp, variantProp } from '../../types/global';
+import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types/global';
 import styles from './Button.module.scss';
 
-export interface IButton
+export interface RVButton
   extends Omit<
     PropsWithoutRef<
       DetailedHTMLProps<
@@ -18,20 +18,20 @@ export interface IButton
     >,
     'color'
   > {
-  variant?: variantProp;
-  color?: colorProp;
-  size?: sizeProp;
+  variant?: RVVariantProp;
+  color?: RVColorProp;
+  size?: RVSizeProp;
   fullCircle?: boolean;
   rounded?: boolean;
   active?: boolean;
 }
 
-const Button = forwardRef<HTMLButtonElement, IButton>(
+const Button = forwardRef<HTMLButtonElement, RVButton>(
   (
     {
       children,
       className,
-      color = colorProp.cgBlue,
+      color = RVColorProp.cgBlue,
       variant = 'primary',
       type = 'button',
       size = 'large',

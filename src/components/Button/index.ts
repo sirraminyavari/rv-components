@@ -1,4 +1,4 @@
-import Button, { IButton } from './Button';
+import Button, { RVButton } from './Button';
 
-export type { IButton };
+export type { RVButton };
 export { Button };
