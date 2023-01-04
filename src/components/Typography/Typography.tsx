@@ -10,8 +10,11 @@ import { colorProp } from '../../types/global';
 import styles from './Typography.module.scss';
 
 export interface ITypography
-  extends PropsWithoutRef<
-    DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
+  extends Omit<
+    PropsWithoutRef<
+      DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
+    >,
+    'color'
   > {
   color?: colorProp;
   type?: 'H1' | 'H2' | 'H4' | 'H4' | 'H5' | 'H6' | 'p' | 'sub';
@@ -26,7 +29,14 @@ const TypographyTag = forwardRef<HTMLHeadingElement, ITypography>(
 
 const Typography = forwardRef<HTMLHeadingElement, ITypography>(
   (
-    { children, className, color = 'grayDark', type = 'H6', muted, ...props },
+    {
+      children,
+      className,
+      color = colorProp.grayDark,
+      type = 'H6',
+      muted,
+      ...props
+    },
     ref
   ) => {
     return (

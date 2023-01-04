@@ -26,11 +26,7 @@ export const Button = Template.bind({});
 export const fullCircle = Template.bind({});
 fullCircle.args = {
   fullCircle: true,
-  children: (
-    <>
-      <HomeSvg />
-    </>
-  ),
+  children: <HomeSvg />,
 };
 export const withIcon = Template.bind({});
 withIcon.args = {

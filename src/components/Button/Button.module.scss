@@ -10,7 +10,7 @@
   text-align: center;
   transition: all 0.3s ease-out;
 
-  & > svg {
+  &>svg {
     vertical-align: middle;
     margin-inline-end: px-to-rem(13);
     font-size: 1.3em;
@@ -40,77 +40,84 @@
     padding-inline: px-to-rem(4);
     font-size: px-to-rem(20);
 
-    & > svg {
+    &>svg {
       margin-inline-end: 0;
       padding: px-to-rem(8);
     }
   }
 }
+
 .primary {
-  background-color: hsl(var(--background));
-  color: hsl(var(--font));
+  background-color: hsl(var(--default));
+  color: hsl(var(--default-font));
 
   &:hover {
-    background-color: hsl(var(--mid-dark));
-    color: hsl(var(--mid-dark-font));
+    background-color: hsl(var(--percent-90));
+    color: hsl(var(--percent-90-font));
   }
+
+  &:focus {
+
+    background-color: hsl(var(--percent-95));
+    color: hsl(var(--percent-95-font));
+  }
+
   &:focus,
   &.active {
-    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7)
-      hsl(var(--transparent) / 25%);
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--default) / 25%);
   }
 
   &:active {
-    background-color: hsl(var(--dark));
-    color: hsl(var(--dark-font));
-    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7)
-      hsl(var(--transparent) / 25%);
+    background-color: hsl(var(--percent-90));
+    color: hsl(var(--percent-90-font));
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--default) / 25%);
   }
 }
+
 .outline {
-  border-color: hsl(var(--background));
-  color: hsl(var(--background));
+  border-color: hsl(var(--default));
+  color: hsl(var(--default));
   background-color: hsl(var(--white));
 
   &:hover {
-    background-color: hsl(var(--background) / 15%);
-    color: hsl(var(--background));
+    background-color: hsl(var(--default) / 15%);
+    color: hsl(var(--default));
   }
+
   &:focus,
   &.active {
-    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7)
-      hsl(var(--transparent) / 25%);
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--default) / 25%);
   }
 
   &:active {
-    background-color: hsl(var(--background) / 25%);
-    color: hsl(var(--background));
-    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7)
-      hsl(var(--transparent) / 25%);
+    background-color: hsl(var(--default) / 25%);
+    color: hsl(var(--default));
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--default) / 25%);
   }
 }
+
 .white {
-  color: hsl(var(--background));
+  color: hsl(var(--default));
   background-color: hsl(var(--white));
 
   &:hover {
-    background-color: hsl(var(--background) / 5%);
-    color: hsl(var(--background));
+    background-color: hsl(var(--default) / 5%);
+    color: hsl(var(--default));
   }
+
   &:focus,
   &.active {
-    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7)
-      hsl(var(--transparent) / 15%);
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--default) / 15%);
   }
 
   &:active {
-    background-color: hsl(var(--background) / 15%);
-    color: hsl(var(--background));
-    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7)
-      hsl(var(--transparent) / 15%);
+    background-color: hsl(var(--default) / 15%);
+    color: hsl(var(--default));
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--default) / 15%);
   }
 }
+
 .disabled {
-  color: hsl(var(--transparent) / 20%);
-  background-color: hsl(var(--transparent) / 10%);
+  color: hsl(var(--default) / 20%);
+  background-color: hsl(var(--default) / 10%);
 }

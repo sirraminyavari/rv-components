@@ -1,0 +1,85 @@
+<!-- Colors.stories.mdx -->
+
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs';
+
+import { themes, ThemeProvider, convert, ensure } from '@storybook/theming';
+
+<Meta title="ColorPalettes" />
+
+# Color Palettes
+
+<br />
+<br />
+<br />
+
+<div>
+  {[
+    'color-cgBlue',
+    'color-oxford',
+    'color-orange',
+    'color-grayDark',
+    'color-gray',
+    'color-grayLight',
+    'color-distant',
+    'color-crayola',
+    'color-platinum',
+  ].map((className) =>{
+    const themeColorName = className.replace('color-', '')
+    return (
+    <div className={className}>
+      <h1 style={{ color: 'hsl(var(--default))', textTrasform: 'capitalize' }}>
+        {themeColorName}
+      </h1>
+      <br />
+      <ColorPalette>
+        <ColorItem
+          title={"Theme's Default Color"}
+          subtitle="main color"
+          colors={{
+            default: 'hsl(var(--default))',
+            'default (font)': 'hsl(var(--default-font))',
+          }}
+        />
+        <ColorItem
+          title={`"${themeColorName }" in one Glimpse`}
+          subtitle="respectively generated colors"
+          colors={{
+            '5% lighter': 'hsl(var(--percent-5))',
+            '10% lighter': 'hsl(var(--percent-10))',
+            default: 'hsl(var(--default))',
+            '5% darker': 'hsl(var(--percent-95))',
+            '10% darker': 'hsl(var(--percent-90))',
+            '5% lighter (font)': 'hsl(var(--percent-5-font))',
+            '10% lighter (font)': 'hsl(var(--percent-10-font))',
+            'default (font)': 'hsl(var(--default-font))',
+            '5% darker (font)': 'hsl(var(--percent-95-font))',
+            '10% darker (font)': 'hsl(var(--percent-90-font))',
+          }}
+        />
+        {Object.entries({
+          '5% lighter': 'hsl(var(--percent-5))',
+          '5% lighter (font)': 'hsl(var(--percent-5-font))',
+          '10% lighter': 'hsl(var(--percent-10))',
+          '10% lighter (font)': 'hsl(var(--percent-10-font))',
+          default: 'hsl(var(--default))',
+          'default (font)': 'hsl(var(--default-font))',
+          '10% darker': 'hsl(var(--percent-90))',
+          '10% darker (font)': 'hsl(var(--percent-90-font))',
+          '5% darker': 'hsl(var(--percent-95))',
+          '5% darker (font)': 'hsl(var(--percent-95-font))',
+        }).map(([title, colorVar]) => (
+          <>
+            <ColorItem
+              title={title}
+              //subtitle="respectively generated colors"
+              colors={{ [title]: colorVar }}
+            />
+          </>
+        ))}
+      </ColorPalette>
+      <hr />
+    </div>
+  )
+  } 
+  )}
+</div>

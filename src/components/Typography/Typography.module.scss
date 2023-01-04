@@ -1,7 +1,7 @@
 @import '../../scss/modules/default';
 
 .baseHeading {
-  color: hsl(var(--background));
+  color: hsl(var(--default));
   transition: all 0.3s ease-out;
 
   &.H1 {
@@ -54,5 +54,5 @@
   }
 }
 .muted {
-  color: hsl(var(--transparent) / 50%);
+  color: hsl(var(--default) / 50%);
 }
