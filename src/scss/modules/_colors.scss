@@ -2,94 +2,83 @@
 
 $black: hsl(0, 0%, 4%);
 $white: hsl(240, 20%, 99%);
-$red: hsl(346, 77%, 51%);
-$distant: hsl(215, 33%, 80%);
-$gray: hsl(0, 0%, 44%);
-$grayDark: hsl(0, 5%, 16%);
-$veryWarm: hsl(246, 56%, 15%);
-$warm: hsl(232, 54%, 36%);
-$default: hsl(213, 76%, 52%);
+
+$colorCGBlue: hsla(198, 63%, 38%,1);
+$colorOxford:hsla(221, 51%, 16%, 1);
+$colorOrange: hsla(37, 98%, 53%, 1);
+$colorGrayDark: hsla(0, 5%, 16%, 1);
+$colorGray:hsla(0, 0%, 44%, 1) ;
+$colorGrayLight:hsla(0, 0%, 95%, 1) ;
+$colorDistant: hsla(199, 39%, 81%, 1);
+$colorCrayola:hsla(1, 85%, 65%, 1) ;
+$colorPlatinum: hsla(0, 0%, 90%, 1);
 
 $theme-palette: () !default;
 $theme-variants: (
   'black': $black,
   'white': $white,
-  'red': (
-    'background': $red,
-    'transparent': transparentize($red, 0.4),
-    'light': lighten($red, 30%),
-    'light-font': black-or-white-color(lighten($red, 30%)),
-    'mid-dark': darken($red, 15%),
-    'mid-dark-font': black-or-white-color(darken($red, 15%)),
-    'dark': darken($red, 30%),
-    'dark-font': black-or-white-color(darken($red, 30%)),
-    'font': black-or-white-color($red),
+  'color-cgBlue': (
+    'percent-5': lighten($colorCGBlue,5%),
+    'percent-10': lighten($colorCGBlue, 10%),
+    'default': $colorCGBlue,
+    'percent-90': darken($colorCGBlue, 10%),
+    'percent-95': darken($colorCGBlue, 5%),
   ),
-  'distant': (
-    'background': $distant,
-    'transparent': transparentize($distant, 0.4),
-    'light': lighten($distant, 30%),
-    'light-font': black-or-white-color(lighten($distant, 30%)),
-    'mid-dark': darken($distant, 15%),
-    'mid-dark-font': black-or-white-color(darken($distant, 15%)),
-    'dark': darken($distant, 30%),
-    'dark-font': black-or-white-color(darken($distant, 30%)),
-    'font': black-or-white-color($distant),
+  'color-oxford': (
+    'percent-5': lighten($colorOxford,5%),
+    'percent-10': lighten($colorOxford, 10%),
+    'default': $colorOxford,
+    'percent-90': darken($colorOxford, 10%),
+    'percent-95': darken($colorOxford, 5%),
   ),
-  'gray': (
-    'background': $gray,
-    'transparent': transparentize($gray, 0.4),
-    'light': lighten($gray, 30%),
-    'light-font': black-or-white-color(lighten($gray, 30%)),
-    'mid-dark': darken($gray, 15%),
-    'mid-dark-font': black-or-white-color(darken($gray, 15%)),
-    'dark': darken($gray, 30%),
-    'dark-font': black-or-white-color(darken($gray, 30%)),
-    'font': black-or-white-color($gray),
+  'color-orange': (
+    'percent-5': lighten($colorOrange,5%),
+    'percent-10': lighten($colorOrange, 10%),
+    'default': $colorOrange,
+    'percent-90': darken($colorOrange, 10%),
+    'percent-95': darken($colorOrange, 5%),
   ),
-  'grayDark': (
-    'background': $grayDark,
-    'transparent': transparentize($grayDark, 0.4),
-    'light': lighten($grayDark, 30%),
-    'light-font': black-or-white-color(lighten($grayDark, 30%)),
-    'mid-dark': darken($grayDark, 15%),
-    'mid-dark-font': black-or-white-color(darken($grayDark, 15%)),
-    'dark': darken($grayDark, 30%),
-    'dark-font': black-or-white-color(darken($grayDark, 30%)),
-    'font': black-or-white-color($grayDark),
+  'color-grayDark': (
+    'percent-5': lighten($colorGrayDark,5%),
+    'percent-10': lighten($colorGrayDark, 10%),
+    'default': $colorGrayDark,
+    'percent-90': darken($colorGrayDark, 10%),
+    'percent-95': darken($colorGrayDark, 5%),
   ),
-  'veryWarm': (
-    'background': $veryWarm,
-    'transparent': transparentize($veryWarm, 0.4),
-    'light': lighten($veryWarm, 30%),
-    'light-font': black-or-white-color(lighten($veryWarm, 30%)),
-    'mid-dark': darken($veryWarm, 15%),
-    'mid-dark-font': black-or-white-color(darken($veryWarm, 15%)),
-    'dark': darken($veryWarm, 30%),
-    'dark-font': black-or-white-color(darken($veryWarm, 30%)),
-    'font': black-or-white-color($veryWarm),
+  'color-gray': (
+    'percent-5': lighten($colorGray,5%),
+    'percent-10': lighten($colorGray, 10%),
+    'default': $colorGray,
+    'percent-90': darken($colorGray, 10%),
+    'percent-95': darken($colorGray, 5%),
   ),
-  'warm': (
-    'background': $warm,
-    'transparent': transparentize($warm, 0.4),
-    'light': lighten($warm, 30%),
-    'light-font': black-or-white-color(lighten($warm, 30%)),
-    'mid-dark': darken($warm, 15%),
-    'mid-dark-font': black-or-white-color(darken($warm, 15%)),
-    'dark': darken($warm, 30%),
-    'dark-font': black-or-white-color(darken($warm, 30%)),
-    'font': black-or-white-color($warm),
+  'color-grayLight': (
+    'percent-5': lighten($colorGrayLight,5%),
+    'percent-10': lighten($colorGrayLight, 10%),
+    'default': $colorGrayLight,
+    'percent-90': darken($colorGrayLight, 10%),
+    'percent-95': darken($colorGrayLight, 5%),
   ),
-  'default': (
-    'background': $default,
-    'transparent': transparentize($default, 0.4),
-    'light': lighten($default, 30%),
-    'light-font': black-or-white-color(lighten($default, 30%)),
-    'mid-dark': darken($default, 15%),
-    'mid-dark-font': black-or-white-color(darken($default, 15%)),
-    'dark': darken($default, 30%),
-    'dark-font': black-or-white-color(darken($default, 30%)),
-    'font': black-or-white-color($default),
+  'color-distant': (
+    'percent-5': lighten($colorDistant,5%),
+    'percent-10': lighten($colorDistant, 10%),
+    'default': $colorDistant,
+    'percent-90': darken($colorDistant, 10%),
+    'percent-95': darken($colorDistant, 5%),
+  ),
+  'color-crayola': (
+    'percent-5': lighten($colorCrayola,5%),
+    'percent-10': lighten($colorCrayola, 50%),
+    'default': $colorCrayola,
+    'percent-90': darken($colorCrayola, 10%),
+    'percent-95': darken($colorCrayola, 5%),
+  ),
+  'color-platinum': (
+    'percent-5': lighten($colorPlatinum,5%),
+    'percent-10': lighten($colorPlatinum, 10%),
+    'default': $colorPlatinum,
+    'percent-90': darken($colorPlatinum, 10%),
+    'percent-95': darken($colorPlatinum, 5%),
   ),
 );
 

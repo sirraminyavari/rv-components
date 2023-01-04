@@ -9,14 +9,17 @@ import { colorProp, sizeProp, variantProp } from '../../types/global';
 import styles from './Button.module.scss';
 
 export interface IButton
-  extends PropsWithoutRef<
-    DetailedHTMLProps<
-      ButtonHTMLAttributes<HTMLButtonElement>,
-      HTMLButtonElement
-    >
+  extends Omit<
+    PropsWithoutRef<
+      DetailedHTMLProps<
+        ButtonHTMLAttributes<HTMLButtonElement>,
+        HTMLButtonElement
+      >
+    >,
+    'color'
   > {
   variant?: variantProp;
-  color?:colorProp;
+  color?: colorProp;
   size?: sizeProp;
   fullCircle?: boolean;
   rounded?: boolean;
@@ -28,13 +31,14 @@ const Button = forwardRef<HTMLButtonElement, IButton>(
     {
       children,
       className,
-      color = 'default',
+      color = colorProp.cgBlue,
       variant = 'primary',
       type = 'button',
       size = 'large',
       disabled,
       active,
-      fullCircle,rounded,
+      fullCircle,
+      rounded,
       ...props
     },
     ref
