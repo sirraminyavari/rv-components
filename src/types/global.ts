@@ -11,6 +11,7 @@ export enum colorProp {
   distant = 'color-distant',
   crayola = 'color-crayola',
   platinum = 'color-platinum',
+  inherit = 'color-inherit',
 }
 export type sizeProp = 'large' | 'small';
 

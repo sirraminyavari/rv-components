@@ -17,7 +17,7 @@ export interface ITypography
     'color'
   > {
   color?: colorProp;
-  type?: 'H1' | 'H2' | 'H4' | 'H4' | 'H5' | 'H6' | 'p' | 'sub';
+  type?: 'H1' | 'H2' | 'H3' | 'H4' | 'H5' | 'H6' | 'p' | 'sub';
   muted?: boolean;
 }
 

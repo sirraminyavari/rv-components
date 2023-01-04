@@ -1,0 +1,114 @@
+@import '../../../scss/modules/default';
+
+.baseSidebarMain {
+  background: hsl(var(--default));
+  height: 100vh;
+  padding-block: px-to-rem(12);
+  position: relative;
+  padding-inline-start: px-to-rem(24);
+  width: px-to-rem(350);
+  color: hsl(var(--default-font));
+
+}
+
+.titleBlock {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  column-gap: px-to-rem(13);
+  padding-inline-end: px-to-rem(24);
+  margin-block-end: px-to-rem(24);
+
+
+  .titleIcon {
+    font-size: px-to-rem(45);color: inherit;
+  }
+
+  .titleTypography {
+    margin-block: 0;color: inherit;
+  }
+}
+
+.menuTile {
+  all: unset;
+  padding-block: px-to-rem(0);
+  padding-inline: px-to-rem(10);
+  color: hsl(var(--default-font) / 50%);
+  background-color: transparent;
+  cursor: pointer;
+  min-height: px-to-rem(24);
+  transition: background-color .35s, color .35s, border-radius .35s, border .35s;
+  display: flex;
+  align-items: center;
+  column-gap: px-to-rem(13.5);
+  z-index: 2;
+  position: relative;
+  width: calc(100% - px-to-rem(24));
+
+  &>* {
+    margin-block: 0;
+    color: inherit;
+  }
+
+
+  &:focus {
+    background-color: hsl(var(--default) / 10%);
+    color: hsl(var(--default-font) / 80%);
+
+    .menuTileIcon {
+      animation: pulse 0.4s;
+      animation-iteration-count: 1;
+    }
+  }
+
+  &:hover {
+    // background-color: hsl(var(--background) / 10%);
+    color: hsl(var(--default-font) / 80%);
+
+  }
+
+
+  &.active {
+    color: hsl(var(--default-font));
+    animation-name: pulse .4s;
+    animation-iteration-count: 2;
+  }
+}
+
+.menuTileIcon {
+  justify-self: center;
+  transition: transform .3s;
+  padding: px-to-rem(10);
+  font-size: px-to-rem(24);
+
+}
+
+.menuActiveIndicator {
+  z-index: 1;
+  position: absolute;
+  top: 50%;
+  left: px-to-rem(24);
+  background-color: hsl(var(--percent-5));
+  width: px-to-rem(5);
+  color: hsl(var(--percent-5));
+  height: 0;
+  transition: top 0.25s ease-in-out, height .25s ease-in-out;
+  will-change: top, height;
+  border-start-start-radius: px-to-rem(13);
+  border-end-start-radius: px-to-rem(13);
+  width: calc(100% - px-to-rem(24));
+  
+
+ .svgCurved {
+  position: absolute;
+  &.start{
+    top: px-to-rem(-16);
+    inset-inline-end: 0;
+  }
+  &.end{
+    bottom: px-to-rem(-16);
+    inset-inline-end: 0;
+    transform: scaleY(-1);
+  }
+ }
+}
