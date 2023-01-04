@@ -1,7 +1,7 @@
 import type { SVGProps } from 'react';
 
-export type variantProp = 'primary' | 'white' | 'outline' | 'disabled';
-export enum colorProp {
+export type RVVariantProp = 'primary' | 'white' | 'outline' | 'disabled';
+export enum RVColorProp {
   cgBlue = 'color-cgBlue',
   oxford = 'color-oxford',
   orange = 'color-orange',
@@ -13,9 +13,14 @@ export enum colorProp {
   platinum = 'color-platinum',
   inherit = 'color-inherit',
 }
-export type sizeProp = 'large' | 'small';
 
-export interface ISvgProps extends SVGProps<SVGSVGElement> {
+export enum RVDirectionProp {
+  rtl = 'direction-rtl',
+  ltr = 'direction-ltr',
+}
+export type RVSizeProp = 'large' | 'small';
+
+export interface RVSvgProps extends SVGProps<SVGSVGElement> {
   size?: string;
   outline?: boolean;
 }

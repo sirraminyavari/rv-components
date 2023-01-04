@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { Button as ButtonComponent, IButton } from '.';
+import { Button as ButtonComponent, RVButton } from '.';
 import HomeSvg from '../../assets/svg/home.svg';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -11,7 +11,7 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     children: { control: 'text' },
-  } as IButton,
+  } as RVButton,
 } as ComponentMeta<typeof ButtonComponent>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args

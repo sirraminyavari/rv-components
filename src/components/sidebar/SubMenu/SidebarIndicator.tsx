@@ -5,22 +5,22 @@ import {
   HTMLAttributes,
   PropsWithoutRef,
 } from 'react';
-import { colorProp, ISvgProps } from '../../../types';
+import { RVColorProp, RVSvgProps } from '../../../types';
 import styles from './SidebarSubMenu.module.scss';
 
-export interface ISidebarSubMenuIndicator
+export interface RVSidebarSubMenuIndicator
   extends Omit<
     PropsWithoutRef<
       DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
     >,
     'color'
   > {
-  color?: colorProp;
+  color?: RVColorProp;
 }
 
 const SidebarSubMenuIndicator = forwardRef<
   HTMLDivElement,
-  ISidebarSubMenuIndicator
+  RVSidebarSubMenuIndicator
 >(({ className, color, ...props }, ref) => {
   return (
     <div
@@ -28,8 +28,12 @@ const SidebarSubMenuIndicator = forwardRef<
       className={clsx(styles.menuActiveIndicator, color, className)}
       {...props}
     >
-      <SidebarSubMenuIndicatorCurvedCornerSvg className={clsx(styles.svgCurved,styles.start)} />
-      <SidebarSubMenuIndicatorCurvedCornerSvg className={clsx(styles.svgCurved,styles.end)} />
+      <SidebarSubMenuIndicatorCurvedCornerSvg
+        className={clsx(styles.svgCurved, styles.start)}
+      />
+      <SidebarSubMenuIndicatorCurvedCornerSvg
+        className={clsx(styles.svgCurved, styles.end)}
+      />
     </div>
   );
 });
@@ -37,7 +41,7 @@ const SidebarSubMenuIndicator = forwardRef<
 export default SidebarSubMenuIndicator;
 
 const SidebarSubMenuIndicatorCurvedCornerSvg = (
-  props: Omit<ISvgProps, 'outline'>
+  props: Omit<RVSvgProps, 'outline'>
 ) => {
   return (
     <svg

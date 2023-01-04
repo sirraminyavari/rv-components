@@ -6,33 +6,33 @@ import {
   HTMLAttributes,
   PropsWithoutRef,
 } from 'react';
-import { colorProp } from '../../types/global';
+import { RVColorProp } from '../../types/global';
 import styles from './Typography.module.scss';
 
-export interface ITypography
+export interface RVTypography
   extends Omit<
     PropsWithoutRef<
       DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
     >,
     'color'
   > {
-  color?: colorProp;
+  color?: RVColorProp;
   type?: 'H1' | 'H2' | 'H3' | 'H4' | 'H5' | 'H6' | 'p' | 'sub';
   muted?: boolean;
 }
 
-const TypographyTag = forwardRef<HTMLHeadingElement, ITypography>(
+const TypographyTag = forwardRef<HTMLHeadingElement, RVTypography>(
   ({ type = 'H6', children, ...props }, ref) => {
     return createElement(type, { ref, ...props }, children);
   }
 );
 
-const Typography = forwardRef<HTMLHeadingElement, ITypography>(
+const Typography = forwardRef<HTMLHeadingElement, RVTypography>(
   (
     {
       children,
       className,
-      color = colorProp.grayDark,
+      color = RVColorProp.grayDark,
       type = 'H6',
       muted,
       ...props

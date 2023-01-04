@@ -1,0 +1,47 @@
+@import '../../../../scss/modules/default';
+
+.mainNavLink {
+  all: unset;
+  padding-block: px-to-rem(4);
+  padding-inline: px-to-rem(20);
+  min-height: px-to-rem(55);
+  color: hsl(var(--default-font) / 50%);
+  font-size: px-to-rem(14);
+  cursor: pointer;
+  transition: background-color 0.35s, color 0.35s, border-radius 0.35s,
+  border 0.35s;
+  
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1fr;
+  align-items: center;
+  text-align: center;
+  
+  &>svg {
+    padding-block: px-to-rem(4);
+    font-size: px-to-rem(32);
+  }
+
+  &:focus {
+    background-color: hsl(var(--percent-90) / 15%);
+    color: hsl(var(--default-font) / 80%);
+
+    &>svg {
+      animation: pulse 0.4s;
+      animation-iteration-count: 1;
+    }
+  }
+
+  &:hover {
+    // background-color: hsl(var(--background) / 10%);
+    color: hsl(var(--default-font) / 80%);
+  }
+
+  &.active {
+    color: hsl(var(--default-font));
+    margin-inline-start: 0;
+    animation-name: pulse 0.4s;
+    animation-iteration-count: 2;
+  }
+}

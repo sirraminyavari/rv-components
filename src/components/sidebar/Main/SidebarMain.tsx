@@ -2,28 +2,45 @@ import clsx from 'clsx';
 import {
   DetailedHTMLProps,
   forwardRef,
+  FunctionComponent,
   HTMLAttributes,
+  MouseEvent,
   MouseEventHandler,
   PropsWithoutRef,
   useCallback,
   useRef,
 } from 'react';
-import { CMLogoSvg, HomeSvg } from '../../../assets/svg';
-import { colorProp } from '../../../types';
+import { RVColorProp, RVSvgProps } from '../../../types';
+import { SidebarMainNavLink } from './NavLink';
 import styles from './SidebarMain.module.scss';
 
-export interface ISidebarMain
+export interface RVSidebarMain
   extends Omit<
     PropsWithoutRef<
       DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
     >,
     'color'
   > {
-  color?: colorProp;
+  color?: RVColorProp;
+  primaryLinks: {
+    Icon?: FunctionComponent<RVSvgProps>;
+    title?: string;
+    onClick?: (event?: MouseEvent<HTMLButtonElement>) => void;
+    noIndicator?: boolean;
+  }[];
 }
 
-const SidebarMain = forwardRef<HTMLDivElement, ISidebarMain>(
-  ({ children, color = colorProp.oxford, ...props }, ref) => {
+const SidebarMain = forwardRef<HTMLDivElement, RVSidebarMain>(
+  (
+    {
+      children,
+      primaryLinks = [],
+      color = RVColorProp.oxford,
+      className,
+      ...props
+    },
+    ref
+  ) => {
     const activeIndicatorRef = useRef<HTMLDivElement>(null);
     const activeTile = useRef<HTMLButtonElement | null>(null);
 
@@ -34,37 +51,42 @@ const SidebarMain = forwardRef<HTMLDivElement, ISidebarMain>(
         console.log({ tileBoundingRect });
         if (!activeIndicatorRef.current) return;
         activeIndicatorRef.current.style.top = String(
-          `${tileBoundingRect.top - 7.5}px`
+          `${tileBoundingRect.top + 7.5}px`
         );
         activeIndicatorRef.current.style.height = `${
           tileBoundingRect.height - 15
         }px`;
-        if (activeTile.current)
-          activeTile.current.classList.remove(styles.active);
-        tile.classList.add(styles.active);
+        if (activeTile.current) activeTile.current.classList.remove('active');
+        tile.classList.add('active');
         activeTile.current = event.currentTarget;
       },
       [activeTile]
     );
 
     return (
-      <div ref={ref} className={clsx(styles.baseSidebarMain, color)} {...props}>
+      <div
+        ref={ref}
+        className={clsx(styles.baseSidebarMain, color, className)}
+        {...props}
+      >
         <div
           ref={activeIndicatorRef}
-          className={clsx(styles.menuActiveIndicator, colorProp.crayola)}
+          className={clsx(styles.menuActiveIndicator, RVColorProp.crayola)}
         />
-        <button className={clsx(styles.menuTile, styles.cmLogo)}>
-          <CMLogoSvg className={clsx(styles.menuTileIcon)} />
-        </button>
-        <button className={styles.menuTile} onClick={onActiveClick}>
-          <HomeSvg className={styles.menuTileIcon} outline />
-        </button>
-        <button className={styles.menuTile} onClick={onActiveClick}>
-          <HomeSvg className={styles.menuTileIcon} />
-        </button>
-        <button className={styles.menuTile} onClick={onActiveClick}>
-          <HomeSvg className={styles.menuTileIcon} />
-        </button>
+        {primaryLinks.map(({ onClick, noIndicator, Icon, title }, idx) => (
+          <SidebarMainNavLink
+            key={`sidebarMenu-primary-${idx}`}
+            onClick={(e) => {
+              if (!noIndicator) onActiveClick(e);
+              if (onClick) onClick(e);
+            }}
+            className={clsx(noIndicator && styles.cmLogo)}
+          >
+            {Icon && <Icon className={styles.menuTileIcon} outline />}
+            {title}
+          </SidebarMainNavLink>
+        ))}
+
         {children}
       </div>
     );
