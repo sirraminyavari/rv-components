@@ -9,16 +9,16 @@
   font-size: px-to-rem(14);
   cursor: pointer;
   transition: background-color 0.35s, color 0.35s, border-radius 0.35s,
-  border 0.35s;
-  
+    border 0.35s;
+
   position: relative;
   z-index: 2;
   display: grid;
   grid-template-columns: 1fr;
   align-items: center;
   text-align: center;
-  
-  &>svg {
+
+  & > svg {
     padding-block: px-to-rem(4);
     font-size: px-to-rem(32);
   }
@@ -27,7 +27,7 @@
     background-color: hsl(var(--percent-90) / 15%);
     color: hsl(var(--default-font) / 80%);
 
-    &>svg {
+    & > svg {
       animation: pulse 0.4s;
       animation-iteration-count: 1;
     }
@@ -38,10 +38,10 @@
     color: hsl(var(--default-font) / 80%);
   }
 
-  &.active {
+  &[class*='active'] {
     color: hsl(var(--default-font));
     margin-inline-start: 0;
-    animation-name: pulse 0.4s;
+    animation: pulse 0.4s;
     animation-iteration-count: 2;
   }
 }

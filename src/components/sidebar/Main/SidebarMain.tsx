@@ -82,7 +82,9 @@ const SidebarMain = forwardRef<HTMLDivElement, RVSidebarMain>(
             }}
             className={clsx(noIndicator && styles.cmLogo)}
           >
-            {Icon && <Icon className={styles.menuTileIcon} outline />}
+            {Icon && (
+              <Icon className={styles.menuTileIcon} outline={!noIndicator} />
+            )}
             {title}
           </SidebarMainNavLink>
         ))}

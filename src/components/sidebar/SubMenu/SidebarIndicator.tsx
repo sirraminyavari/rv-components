@@ -53,8 +53,8 @@ const SidebarSubMenuIndicatorCurvedCornerSvg = (
       {...props}
     >
       <path
-        fill-rule="evenodd"
-        clip-rule="evenodd"
+        fillRule="evenodd"
+        clipRule="evenodd"
         d="M0.0078125 16H15.9999V0.00793457C15.9956 8.83823 8.83811 15.9958 0.0078125 16Z"
       />
     </svg>

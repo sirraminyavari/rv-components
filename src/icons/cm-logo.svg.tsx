@@ -1,4 +1,4 @@
-import { RVSvgProps } from '../../types';
+import { RVSvgProps } from '../types';
 
 const CMLogoSvg = ({ size, ...props }: Omit<RVSvgProps, 'outline'>) => {
   return (

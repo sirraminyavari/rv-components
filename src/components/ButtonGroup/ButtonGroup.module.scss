@@ -1,0 +1,26 @@
+@import '../../scss/modules/default';
+
+.buttonGroup {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  & > button {
+    border-radius: 0;
+    margin-inline: px-to-rem(1);
+
+    &:first-of-type {
+      border-start-start-radius: 10px;
+      border-end-start-radius: 10px;
+    }
+
+    &:last-of-type {
+      border-start-end-radius: 10px;
+      border-end-end-radius: 10px;
+    }
+
+    &:last-child {
+      padding-inline: px-to-rem(12);
+    }
+  }
+}

@@ -125,7 +125,7 @@
   --bg-color: #{color-hsl-args($white)};
   --fg-color: #{color-hsl-args($black)};
 
-  .dark {
+  &.dark {
     --fg-color: #{color-hsl-args($white)};
     --bg-color: #{color-hsl-args($black)};
   }

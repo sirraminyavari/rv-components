@@ -1,0 +1,68 @@
+@import '../../scss/modules/default';
+
+.accordionPanel {
+  border-radius: px-to-rem(8);
+  padding-block: px-to-rem(6);
+  overflow: hidden;
+
+  background-color: inherit;
+  color: inherit;
+}
+
+.triggerButton {
+  background-color: inherit;
+  color: inherit;
+  // padding-block: px-to-rem(12);
+  // padding-inline: px-to-rem(16);
+  width: 100%;
+  border: none;
+  outline: none;
+  text-align: start;
+  display: flex;
+  align-items: center;
+
+  .triggerButtonLabel {
+    display: block;
+    width: 100%;
+    padding-block: px-to-rem(12);
+    padding-inline-end: px-to-rem(16);
+    margin-inline-start: px-to-rem(16);
+    z-index: 2;
+  }
+
+  & > svg {
+    color: hsl(var(--default));
+    margin-inline-start: px-to-rem(14);
+    margin-inline-end: px-to-rem(8);
+    font-size: px-to-rem(32);
+    transition: transform 0.32s ease-out, color 0.32s;
+    filter: brightness(0.8);
+  }
+}
+
+.content {
+  padding-inline-start: px-to-rem(48);
+  opacity: 0;
+  transition: opacity 0.4s ease-out, color 0.32s;
+}
+
+.accordionPanel[data-open='true'] {
+  .triggerButton {
+    > svg {
+      transform: rotate(90deg);
+      color: hsl(var(--percent-90) / 90%);
+    }
+  }
+
+  .content {
+    opacity: 1;
+  }
+}
+
+@include on-rtl {
+  .triggerButton {
+    & > svg {
+      transform: scale(-1);
+    }
+  }
+}

@@ -9,16 +9,13 @@
   cursor: pointer;
   text-align: center;
   transition: all 0.3s ease-out;
+  column-gap: px-to-rem(13);
+  display: flex;
 
   & > svg {
     vertical-align: middle;
-    margin-inline-end: px-to-rem(13);
     font-size: 1.3em;
     color: inherit;
-  }
-
-  &.rounded {
-    border-radius: $borderRadiusFull;
   }
 
   &.large {
@@ -27,9 +24,15 @@
     font-size: px-to-rem(16);
   }
 
+  &.medium {
+    padding-inline: px-to-rem(24);
+    padding-block: px-to-rem(12);
+    font-size: px-to-rem(16);
+  }
+
   &.small {
     padding-inline: px-to-rem(24);
-    padding-block: px-to-rem(4);
+    padding-block: px-to-rem(8);
     font-size: px-to-rem(16);
   }
 
@@ -44,6 +47,14 @@
       margin-inline-end: 0;
       padding: px-to-rem(8);
     }
+  }
+
+  &.roundedFull {
+    border-radius: $borderRadiusFull;
+  }
+
+  &.roundedHalf {
+    border-radius: $borderRadiusHalf;
   }
 }
 
@@ -71,12 +82,23 @@
     color: hsl(var(--percent-90-font));
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--default) / 25%);
   }
+
+  &.badge {
+    &:hover,
+    &:active,
+    &:focus {
+      background-color: hsl(var(--default));
+      color: hsl(var(--default-font));
+      box-shadow: unset;
+      cursor: default;
+    }
+  }
 }
 
 .outline {
   border-color: hsl(var(--default));
   color: hsl(var(--default));
-  background-color: hsl(var(--white));
+  background-color: transparent;
 
   &:hover {
     background-color: hsl(var(--default) / 15%);
@@ -92,6 +114,18 @@
     background-color: hsl(var(--default) / 25%);
     color: hsl(var(--default));
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--default) / 25%);
+  }
+
+  &.badge {
+    &:hover,
+    &:active,
+    &:focus {
+      border-color: hsl(var(--default));
+      color: hsl(var(--default));
+      background-color: transparent;
+      box-shadow: unset;
+      cursor: default;
+    }
   }
 }
 
@@ -114,9 +148,26 @@
     color: hsl(var(--default));
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--default) / 15%);
   }
+
+  &.badge {
+    &:hover,
+    &:active,
+    &:focus {
+      color: hsl(var(--default));
+      background-color: hsl(var(--white));
+      box-shadow: unset;
+      cursor: default;
+    }
+  }
 }
 
 .disabled {
   color: hsl(var(--default) / 20%);
   background-color: hsl(var(--default) / 10%);
+
+  &:hover,
+  &:active,
+  &:focus {
+    cursor: default;
+  }
 }

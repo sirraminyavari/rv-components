@@ -1,4 +1,4 @@
-import { RVSvgProps } from '../../types';
+import { RVSvgProps } from '../types';
 
 const GridSvg = ({ size, outline, ...props }: RVSvgProps) => {
   return (
@@ -18,9 +18,9 @@ const GridSvg = ({ size, outline, ...props }: RVSvgProps) => {
             y="48"
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
             rx="20"
             ry="20"
           />
@@ -31,9 +31,9 @@ const GridSvg = ({ size, outline, ...props }: RVSvgProps) => {
             y="48"
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
             rx="20"
             ry="20"
           />
@@ -44,9 +44,9 @@ const GridSvg = ({ size, outline, ...props }: RVSvgProps) => {
             y="288"
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
             rx="20"
             ry="20"
           />
@@ -57,9 +57,9 @@ const GridSvg = ({ size, outline, ...props }: RVSvgProps) => {
             y="288"
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
             rx="20"
             ry="20"
           />
