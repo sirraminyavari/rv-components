@@ -1,13 +1,9 @@
+import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-
-import {
-  SidebarMain as SidebarMainComponent,
-} from '../../src/components/Sidebar/Main';
-import {
-  SidebarSubMenu as SidebarSubMenuComponent,
-} from '../../src/components/Sidebar/SubMenu';
-import { CMLogoSvg, HomeSvg, PeopleSvg } from '../../src/icons';
-import { RVColorProp } from '../../src';
+import { SidebarMain as SidebarMainComponent } from '../components/Sidebar/Main';
+import { SidebarSubMenu as SidebarSubMenuComponent } from '../components/Sidebar/SubMenu';
+import { CMLogoSvg, HomeSvg, PeopleSvg } from '../icons';
+import { RVColorProp } from '..';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -16,7 +12,7 @@ export default {
     subMenuColor: {
       control: {
         type: 'radio',
-        labels:(RVColorProp),
+        labels: RVColorProp,
       },
     },
   },
