@@ -1,0 +1,119 @@
+@import '../../scss/modules/default';
+
+.baseAvatar {
+  border: none;
+  border-radius: $borderRadiusHalf;
+  border-width: px-to-rem(1);
+  border-style: solid;
+  border-color: transparent;
+  transition: all 0.24s ease-out;
+  display: inline;
+  aspect-ratio: 1;
+
+  &.large {
+    width: px-to-rem(68);
+  }
+
+  &.medium {
+    width: px-to-rem(56);
+  }
+
+  &.small {
+    width: px-to-rem(40);
+  }
+
+  &.fullCircle {
+    border-radius: 100%;
+  }
+
+  &.roundedFull {
+    border-radius: $borderRadiusFull;
+  }
+
+  &.roundedHalf {
+    border-radius: $borderRadiusHalf;
+  }
+
+  &.stacked {
+    &:first-of-type:not(:last-of-type) {
+      margin-inline-start: px-to-rem(14);
+
+      &.large {
+        margin-inline-start: px-to-rem(14);
+      }
+
+      &.medium {
+        margin-inline-start: px-to-rem(8);
+      }
+
+      &.small {
+        margin-inline-start: px-to-rem(4);
+      }
+    }
+
+    &:not(:last-of-type) {
+      &.large {
+        margin-inline-end: px-to-rem(-34);
+
+        &:hover {
+          transform: translateX(px-to-rem(-30));
+        }
+      }
+
+      &.medium {
+        margin-inline-end: px-to-rem(-28);
+
+        &:hover {
+          transform: translateX(px-to-rem(-24));
+        }
+      }
+
+      &.small {
+        margin-inline-end: px-to-rem(-20);
+
+        &:hover {
+          transform: translateX(px-to-rem(-16));
+        }
+      }
+    }
+  }
+}
+
+.primary {
+  background-color: hsl(var(--default));
+
+  &:hover {
+    background-color: hsl(var(--percent-90));
+  }
+
+  &:active {
+    background-color: hsl(var(--percent-90));
+  }
+}
+
+.outline {
+  border-color: hsl(var(--default));
+  background-color: transparent;
+  padding: px-to-rem(2);
+
+  &:hover {
+    background-color: hsl(var(--default) / 15%);
+  }
+
+  &:active {
+    background-color: hsl(var(--default) / 25%);
+  }
+}
+
+.white {
+  background-color: hsl(var(--white));
+
+  &:hover {
+    background-color: hsl(var(--default) / 5%);
+  }
+}
+
+.disabled {
+  background-color: hsl(var(--default));
+  filter: contrast(0.5);
+}

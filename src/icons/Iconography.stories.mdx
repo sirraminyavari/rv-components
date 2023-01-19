@@ -2,7 +2,7 @@
 
 import { Meta, Title, IconGallery, IconItem } from '@storybook/addon-docs';
 
-import * as icons from './svg';
+import * as icons from '.';
 
 <Meta title="Iconography" />
 
@@ -19,14 +19,11 @@ List of all icons used and available in the package
 
 <IconGallery>
   {Object.entries(icons).map(([name, Icon]) => {
-    if(!name.startsWith("CM"))
-    return;
+    if (!name.startsWith('CM')) return;
     return (
-      <>
-        <IconItem name={name.replace('Svg', '')}>
+        <IconItem key={name} name={name.replace('Svg', '')}>
           <Icon name={name.replace('Svg', '')} />
         </IconItem>
-      </>
     );
   })}
 </IconGallery>
@@ -37,17 +34,31 @@ List of all icons used and available in the package
 
 <IconGallery>
   {Object.entries(icons).map(([name, Icon]) => {
-    if(name.startsWith("CM"))
-    return;
+    if (name.startsWith('CM')) return;
+    if (['CaretSvg'].includes(name))
+      return ['right', 'up', 'left', 'down'].map((direction) => (
+        <Fragment key={name+direction}>
+          <IconItem  name={name.replace('Svg', '')}>
+            <Icon direction={direction} name={name.replace('Svg', '')} />
+          </IconItem>
+          <IconItem name={`${name.replace('Svg', '')} (outline)`}>
+            <Icon
+              direction={direction}
+              name={`${name.replace('Svg', '')} (outline)`}
+              outline
+            />
+          </IconItem>
+        </Fragment>
+      ));
     return (
-      <>
+      <Fragment key={name}>
         <IconItem name={name.replace('Svg', '')}>
           <Icon name={name.replace('Svg', '')} />
         </IconItem>
         <IconItem name={`${name.replace('Svg', '')} (outline)`}>
           <Icon name={`${name.replace('Svg', '')} (outline)`} outline />
         </IconItem>
-      </>
+      </Fragment>
     );
   })}
 </IconGallery>

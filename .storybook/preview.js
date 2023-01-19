@@ -25,5 +25,12 @@ export const parameters = {
       },
     },
   },
-  layout: 'fullscreen',  
+  darkMode: {
+    darkClass: 'dark',
+    lightClass: 'light',
+    stylePreview: true,
+    classTarget: 'html',
+    current: 'light',
+  },
+  // layout: 'fullscreen',
 };

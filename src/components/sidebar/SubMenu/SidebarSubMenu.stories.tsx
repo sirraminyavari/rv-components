@@ -1,7 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { SidebarSubMenu as SidebarSubMenuComponent, ISidebarSubMenu } from '.';
+import { SidebarSubMenu as SidebarSubMenuComponent, RVSidebarSubMenu } from '.';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -10,7 +10,10 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     children: { control: 'jsx' },
-  } as ISidebarSubMenu,
+  } as RVSidebarSubMenu,
+  parameters: {
+    layout: 'fullscreen',
+  },
 } as ComponentMeta<typeof SidebarSubMenuComponent>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args

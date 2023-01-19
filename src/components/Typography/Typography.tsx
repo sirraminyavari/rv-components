@@ -23,7 +23,7 @@ export interface RVTypography
 
 const TypographyTag = forwardRef<HTMLHeadingElement, RVTypography>(
   ({ type = 'H6', children, ...props }, ref) => {
-    return createElement(type, { ref, ...props }, children);
+    return createElement(type.toLowerCase(), { ref, ...props }, children);
   }
 );
 

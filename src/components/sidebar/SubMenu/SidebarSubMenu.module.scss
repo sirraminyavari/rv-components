@@ -33,7 +33,7 @@
   all: unset;
   padding-block: px-to-rem(0);
   padding-inline: px-to-rem(10);
-  color: hsl(var(--default-font) / 50%);
+  color: hsl(var(--default-font) / 100%);
   background-color: transparent;
   cursor: pointer;
   min-height: px-to-rem(24);
@@ -51,6 +51,26 @@
     color: inherit;
   }
 
+  .menuTileTitle {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding-block: px-to-rem(10);
+
+    .menuTileTitleContent {
+      transition: text-shadow 0.25s;
+      font-weight: 400;
+    }
+
+    .menuTileTitleBadge {
+      color: hsl(var(--percent-90) / 100%);
+      transition: color 0.35s;
+      font-size: px-to-rem(14);
+      padding-inline-end: px-to-rem(8);
+      font-weight: 400;
+    }
+  }
+
   &:focus {
     color: hsl(var(--default-font) / 80%);
 
@@ -65,31 +85,43 @@
     color: hsl(var(--default-font) / 80%);
   }
 
-  &.active {
-    color: hsl(var(--default-font));
+  &[class*='active'] {
+    color: hsl(var(--fg-color));
     animation-name: pulse 0.4s;
     animation-iteration-count: 2;
+
+    .menuTileTitle {
+      .menuTileTitleContent {
+        // text-shadow: .2px .2px 0 hsl(var(--default-font));
+        font-weight: 500;
+      }
+
+      .menuTileTitleBadge {
+        color: transparent;
+      }
+    }
   }
 }
 
 .menuTileIcon {
   justify-self: center;
   transition: transform 0.3s;
-  padding: px-to-rem(10);
-  font-size: px-to-rem(24);
+  padding-inline: px-to-rem(10);
+  font-size: px-to-rem(32);
 }
 
 .menuActiveIndicator {
   z-index: 1;
   position: absolute;
   top: 0%;
-  inset-inline-start: px-to-rem(24);
-  background-color: hsl(var(--percent-5));
+  inset-inline-end: px-to-rem(-0.4);
+  background-color: hsl(var(--bg-color));
   width: px-to-rem(5);
-  color: hsl(var(--percent-5, --white));
+  color: hsl(var(--bg-color));
   height: 0;
-  transition: top 0.25s ease-in-out, height 0.25s ease-in-out;
-  will-change: top, height;
+  transition: top 0.25s ease-in-out, height 0.25s ease-in-out,
+    width 0.25s ease-in-out;
+  will-change: top, height, width;
   border-start-start-radius: px-to-rem(13);
   border-end-start-radius: px-to-rem(13);
   width: calc(100% - px-to-rem(24));
@@ -98,13 +130,13 @@
     position: absolute;
 
     &.start {
-      top: px-to-rem(-16);
-      inset-inline-end: 0;
+      top: px-to-rem(-15.4);
+      inset-inline-end: px-to-rem(-0.4);
     }
 
     &.end {
-      bottom: px-to-rem(-16);
-      inset-inline-end: 0;
+      bottom: px-to-rem(-15.4);
+      inset-inline-end: px-to-rem(-0.4);
       transform: scaleY(-1);
     }
   }

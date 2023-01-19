@@ -1,4 +1,4 @@
-import { RVSvgProps } from '../../types';
+import { RVSvgProps } from '../types';
 
 const NotificationSvg = ({ size, outline, ...props }: RVSvgProps) => {
   return (

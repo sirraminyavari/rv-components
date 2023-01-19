@@ -9,4 +9,6 @@ body {
     'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji',
     Vazir;
+    background-color: hsl(var(--bg-color));
+    color: hsl(var(--fg-color));
 }

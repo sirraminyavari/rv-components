@@ -1,0 +1,11 @@
+@import '../../scss/modules/default';
+
+.baseAvatarGroup {
+  display: flex;
+  flex-direction: row;
+  display: ltr;
+
+  & > img {
+    z-index: 2;
+  }
+}

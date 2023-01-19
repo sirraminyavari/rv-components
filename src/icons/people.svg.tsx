@@ -1,4 +1,4 @@
-import { RVSvgProps } from '../../types';
+import { RVSvgProps } from '../types';
 
 const PeopleSvg = ({ size, outline, ...props }: RVSvgProps) => {
   return (

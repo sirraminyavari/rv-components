@@ -1,20 +1,18 @@
 import clsx from 'clsx';
 import {
-  ButtonHTMLAttributes,
+  HTMLAttributes,
   DetailedHTMLProps,
   forwardRef,
   PropsWithoutRef,
+  ReactNode,
 } from 'react';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types/global';
-import styles from './Button.module.scss';
+import styles from './RowItem.module.scss';
 
-export interface RVButton
+export interface RVRowItem
   extends Omit<
     PropsWithoutRef<
-      DetailedHTMLProps<
-        ButtonHTMLAttributes<HTMLButtonElement>,
-        HTMLButtonElement
-      >
+      DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
     >,
     'color'
   > {
@@ -22,52 +20,45 @@ export interface RVButton
   color?: RVColorProp;
   size?: RVSizeProp;
   fullCircle?: boolean;
-  badge?: boolean;
   rounded?: 'full' | 'half';
-  active?: boolean;
+  ActionsComponent?: ReactNode;
 }
 
-const Button = forwardRef<HTMLButtonElement, RVButton>(
+const RowItem = forwardRef<HTMLDivElement, RVRowItem>(
   (
     {
       children,
       className,
       color = RVColorProp.cgBlue,
-      variant = RVVariantProp.primary,
-      type = 'button',
-      size = RVSizeProp.large,
-      disabled,
-      active,
+      variant = RVVariantProp.outline,
+      size = RVSizeProp.medium,
       fullCircle,
-      rounded,
-      badge,
+      rounded = 'half',
+      ActionsComponent,
       ...props
     },
     ref
   ) => {
     return (
-      <button
+      <div
         ref={ref}
-        type={type}
         className={clsx(
-          styles.baseButton,
+          styles.baseRowItem,
           color,
-          styles[disabled ? 'disabled' : RVVariantProp[variant]],
+          styles[RVVariantProp[variant]],
           styles[RVSizeProp[size]],
           rounded === 'full' && styles.roundedFull,
           rounded === 'half' && styles.roundedHalf,
           fullCircle && styles.fullCircle,
-          badge && styles.badge,
-          active && styles.active,
           className
         )}
-        disabled={disabled}
         {...props}
       >
-        {children}
-      </button>
+        <div className={styles.titleArea}>{children}</div>
+        <div className={styles.actionsArea}>{ActionsComponent}</div>
+      </div>
     );
   }
 );
 
-export default Button;
+export default RowItem;

@@ -1,20 +1,17 @@
 import clsx from 'clsx';
 import {
-  ButtonHTMLAttributes,
+  HTMLAttributes,
   DetailedHTMLProps,
   forwardRef,
   PropsWithoutRef,
 } from 'react';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types/global';
-import styles from './Button.module.scss';
+import styles from './Avatar.module.scss';
 
-export interface RVButton
+export interface RVAvatar
   extends Omit<
     PropsWithoutRef<
-      DetailedHTMLProps<
-        ButtonHTMLAttributes<HTMLButtonElement>,
-        HTMLButtonElement
-      >
+      DetailedHTMLProps<HTMLAttributes<HTMLImageElement>, HTMLImageElement>
     >,
     'color'
   > {
@@ -22,52 +19,46 @@ export interface RVButton
   color?: RVColorProp;
   size?: RVSizeProp;
   fullCircle?: boolean;
-  badge?: boolean;
+  stacked?: boolean;
   rounded?: 'full' | 'half';
-  active?: boolean;
+  src: string;
+  alt?: string;
 }
 
-const Button = forwardRef<HTMLButtonElement, RVButton>(
+const Avatar = forwardRef<HTMLImageElement, RVAvatar>(
   (
     {
-      children,
       className,
       color = RVColorProp.cgBlue,
       variant = RVVariantProp.primary,
-      type = 'button',
       size = RVSizeProp.large,
-      disabled,
-      active,
       fullCircle,
       rounded,
-      badge,
+      stacked,
+      alt = '',
       ...props
     },
     ref
   ) => {
     return (
-      <button
+      <img
         ref={ref}
-        type={type}
         className={clsx(
-          styles.baseButton,
+          styles.baseAvatar,
           color,
-          styles[disabled ? 'disabled' : RVVariantProp[variant]],
+          styles[RVVariantProp[variant]],
           styles[RVSizeProp[size]],
           rounded === 'full' && styles.roundedFull,
           rounded === 'half' && styles.roundedHalf,
           fullCircle && styles.fullCircle,
-          badge && styles.badge,
-          active && styles.active,
+          stacked && styles.stacked,
           className
         )}
-        disabled={disabled}
+        alt={alt}
         {...props}
-      >
-        {children}
-      </button>
+      />
     );
   }
 );
 
-export default Button;
+export default Avatar;

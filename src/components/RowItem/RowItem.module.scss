@@ -1,0 +1,104 @@
+@import '../../scss/modules/default';
+
+.baseRowItem {
+  border: none;
+  border-radius: $borderRadiusHalf;
+  border-width: px-to-rem(2);
+  border-style: solid;
+  padding-inline-start: px-to-rem(16);
+  padding-inline-end: px-to-rem(24);
+  padding-block: px-to-rem(16);
+  width: 100%;
+  box-sizing: border-box;
+  transition: border .3s ease-out;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+
+  &.large {
+    padding-inline-start: px-to-rem(24);
+    padding-inline-end: px-to-rem(32);
+    padding-block: px-to-rem(24);
+  }
+
+  &.medium {
+    padding-inline-start: px-to-rem(16);
+    padding-inline-end: px-to-rem(24);
+    padding-block: px-to-rem(16);
+  }
+
+  &.small {
+    padding-inline-start: px-to-rem(8);
+    padding-inline-end: px-to-rem(16);
+    padding-block: px-to-rem(8);
+  }
+
+  &.fullCircle {
+    border-radius: 100%;
+  }
+
+  &.roundedFull {
+    border-radius: $borderRadiusHalf;
+  }
+
+  &.roundedHalf {
+    border-radius: calc($borderRadiusHalf / 2);
+  }
+
+
+
+  .actionsArea {
+    display: block;
+  }
+
+  .titleArea {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+
+    &>svg {
+      font-size: px-to-rem(32);
+      margin-inline-end: px-to-rem(24);
+    }
+  }
+}
+
+.primary {
+  background-color: hsl(var(--default));
+
+  &:hover {
+    background-color: hsl(var(--percent-90));
+  }
+
+  &:active {
+    background-color: hsl(var(--percent-90));
+  }
+}
+
+.outline {
+  border-color: hsl(var(--default) / 15%);
+  background-color: transparent;
+
+  &:hover {
+    border-color: hsl(var(--default) / 60%);
+  }
+
+  &:active {
+    background-color: hsl(var(--default) / 25%);
+  }
+}
+
+.white {
+  background-color: hsl(var(--white));
+
+  &:hover {
+    background-color: hsl(var(--default) / 5%);
+  }
+}
+
+.disabled {
+  background-color: hsl(var(--default));
+  filter: contrast(0.5);
+}

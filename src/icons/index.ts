@@ -8,3 +8,4 @@ export { default as ShapesSvg } from './shapes.svg';
 export { default as HammerWrenchSvg } from './hammerWrench.svg';
 export { default as GridSvg } from './grid.svg';
 export { default as PeopleSvg } from './people.svg';
+export { default as CaretSvg } from './caret.svg';

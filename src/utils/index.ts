@@ -1,0 +1,1 @@
+export { isRTL } from './isRtl';

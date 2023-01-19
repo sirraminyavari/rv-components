@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { SidebarMain as SidebarMainComponent, RVSidebarMain } from '.';
-import { CMLogoSvg, HomeSvg, PeopleSvg } from '../../../assets/svg';
+import { CMLogoSvg, HomeSvg, PeopleSvg } from '../../../icons';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -12,6 +12,9 @@ export default {
   argTypes: {
     children: { control: 'jsx' },
   } as RVSidebarMain,
+  parameters: {
+    layout: 'fullscreen',
+  },
 } as ComponentMeta<typeof SidebarMainComponent>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args

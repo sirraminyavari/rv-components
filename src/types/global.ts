@@ -1,6 +1,11 @@
 import type { SVGProps } from 'react';
 
-export type RVVariantProp = 'primary' | 'white' | 'outline' | 'disabled';
+export enum RVVariantProp {
+  primary = 'primary',
+  white = 'white',
+  outline = 'outline',
+  disabled = 'disabled',
+}
 export enum RVColorProp {
   cgBlue = 'color-cgBlue',
   oxford = 'color-oxford',
@@ -18,7 +23,11 @@ export enum RVDirectionProp {
   rtl = 'direction-rtl',
   ltr = 'direction-ltr',
 }
-export type RVSizeProp = 'large' | 'small';
+export enum RVSizeProp {
+  large = 'large',
+  medium = 'medium',
+  small = 'small',
+}
 
 export interface RVSvgProps extends SVGProps<SVGSVGElement> {
   size?: string;
