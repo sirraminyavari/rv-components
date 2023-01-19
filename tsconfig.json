@@ -41,7 +41,7 @@
       }
     ]
   },
-  "include": ["src/**/*", "src/types/**/*", "stories"],
+  "include": ["src/**/*", "src/types/**/*"],
   "exclude": [
     "node_modules",
     "build",
