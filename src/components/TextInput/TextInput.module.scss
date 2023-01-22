@@ -1,0 +1,152 @@
+@use 'sass:math';
+@import '../../scss/modules/default';
+
+.textInputContainer {
+    border-color: transparent;
+    border-style: solid;
+    min-width: px-to-rem(280);
+    display: inline-flex;
+    position: relative;
+    padding-inline: px-to-rem(7);
+    align-items: center;
+    box-sizing: border-box;
+
+    .trailingIcon {
+        font-size: px-to-rem(20);
+        transition: color .2s;
+    }
+
+    .label {
+        position: absolute;
+        padding-block: px-to-rem(5);
+        padding-inline: px-to-rem(14);
+        position: absolute;
+        inset-block-start: 50%;
+        inset-inline-start: px-to-rem(1);
+        transform: translate(0, -50%) scale(1);
+        transition: transform .2s ease-out, inset .2s ease-out, background-color .1s ease-out, color .2s ease-out;
+        color: hsl(var(--percent-10));
+        z-index: 1;
+
+        &:before {
+            content: "";
+            z-index: -1;
+            height: px-to-rem(5);
+            width: 0;
+            position: absolute;
+            inset-block-start: 50%;
+            inset-inline-start: 50%;
+            transform: translateX(0) translateY(-50%) scale(1);
+            background-color: transparent;
+            transition: transform .2s ease-out, inset .2s ease-out, background-color .2s ease-out, width .4s ease-out;
+        }
+    }
+
+    &.primary {
+        border-width: 0;
+        border-bottom-width: px-to-rem(2);
+        padding-block: px-to-rem(7);
+        border-color: hsl(var(--percent-10));
+        transition: border .2s ease-out;
+
+        .trailingIcon {
+            color: hsl(var(--percent-10));
+        }
+
+        &:focus-within {
+            border-color: hsl(var(--default));
+
+            .trailingIcon {
+                color: hsl(var(--default));
+            }
+
+            .label {
+                color: hsl(var(--default));
+            }
+        }
+    }
+
+    &.outline {
+        border-width: px-to-rem(2);
+        padding-block: px-to-rem(7);
+        border-radius: $borderRadiusQuarter;
+        border-color: hsl(var(--percent-10));
+        transition: border .2s ease-out;
+
+        .trailingIcon {
+            color: hsl(var(--percent-10));
+        }
+
+        &:focus-within {
+            border-color: hsl(var(--default));
+
+            .trailingIcon {
+                color: hsl(var(--default));
+            }
+
+            .label {
+                color: hsl(var(--default));
+
+                &:before {
+                    background-color: hsl(var(--bg-color));
+                }
+            }
+        }
+
+        .baseTextInput:not(:placeholder-shown)+.label {
+            transform: translate(-10%, -50%) scale(.6);
+
+            &:before {
+                background-color: hsl(var(--bg-color));
+            }
+        }
+    }
+
+    &.white {
+        border-width: px-to-rem(2);
+        padding-block: px-to-rem(7);
+        border-radius: $borderRadiusHalf;
+        background-color: hsl(var(--percent-5) / 10);
+        color: hsl(var(--percent-5-font));
+        transition: color .2s ease-out;
+
+        .trailingIcon,
+        .label {
+            color: hsl(var(--default));
+        }
+
+        &:focus-within {
+            background-color: hsl(var(--percent-5) / 20);
+            color: hsl(var(--default-font));
+
+            .label {
+                color: hsl(var(--default));
+            }
+        }
+    }
+
+    @include full-width;
+}
+
+.baseTextInput {
+    border-color: transparent;
+    background-color: transparent;
+    outline: none;
+    width: 100%;
+    z-index: 2;
+    padding-inline: px-to-rem(5);
+
+    &:not(:placeholder-shown)+.label {
+        transform: translate(-20%, -50%) scale(.6);
+        inset-block-start: 0;
+        inset-inline-start: 0;
+        padding-inline: px-to-rem(7);
+
+        &:before {
+            inset-inline-start: 0;
+            width: calc(100%);
+            transform: scale(1) translateY(-70%) translateX(0%);
+        }
+    }
+
+}

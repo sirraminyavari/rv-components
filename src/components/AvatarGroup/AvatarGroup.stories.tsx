@@ -3,21 +3,15 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { AvatarGroup as AvatarGroupComponent } from '.';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types';
-import Avatar from '../Avatar/Avatar';
+import { default as AvatarComponent } from '../Avatar/Avatar';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Components/AvatarGroup',
-  component: AvatarGroupComponent,
+  component: AvatarComponent,
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
-  // argTypes: {} as RVAvatarGroup,
-} as ComponentMeta<
-  FunctionComponent<{
-    color?: RVColorProp;
-    variant?: RVVariantProp;
-    size?: RVSizeProp;
-  }>
->;
+  argTypes: {},
+} as ComponentMeta<typeof AvatarComponent>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<
@@ -26,30 +20,30 @@ const Template: ComponentStory<
     variant?: RVVariantProp;
     size?: RVSizeProp;
   }>
-> = ({ children, ...args }) => (
+> = ({ ...args }) => (
   <AvatarGroupComponent>
-    <Avatar
+    <AvatarComponent
       rounded="full"
       size={RVSizeProp.large}
       stacked
       src="https://i.pravatar.cc/150?u=a042581f4e29026724d"
       {...args}
     />
-    <Avatar
+    <AvatarComponent
       rounded="full"
       size={RVSizeProp.large}
       stacked
       src="https://i.pravatar.cc/150?u=a042581f4e29026744d"
       {...args}
     />
-    <Avatar
+    <AvatarComponent
       rounded="full"
       size={RVSizeProp.large}
       stacked
       src="https://i.pravatar.cc/150?u=a042581f4e29026774d"
       {...args}
     />
-    <Avatar
+    <AvatarComponent
       rounded="full"
       size={RVSizeProp.large}
       stacked

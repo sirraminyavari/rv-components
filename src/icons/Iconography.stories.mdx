@@ -17,13 +17,18 @@ List of all icons used and available in the package
 <br />
 <br />
 
-<IconGallery>
+<IconGallery
+  style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill,minmax(250px,1fr))',
+  }}
+>
   {Object.entries(icons).map(([name, Icon]) => {
     if (!name.startsWith('CM')) return;
     return (
-        <IconItem key={name} name={name.replace('Svg', '')}>
-          <Icon name={name.replace('Svg', '')} />
-        </IconItem>
+      <IconItem key={name} name={name.replace('Svg', '')}>
+        <Icon name={name.replace('Svg', '')} />
+      </IconItem>
     );
   })}
 </IconGallery>
@@ -32,13 +37,18 @@ List of all icons used and available in the package
 <br />
 <br />
 
-<IconGallery>
+<IconGallery
+  style={{
+    display: 'grid',
+    gridTemplateColumns: 'repeat(auto-fill,minmax(250px,1fr))',
+  }}
+>
   {Object.entries(icons).map(([name, Icon]) => {
     if (name.startsWith('CM')) return;
     if (['CaretSvg'].includes(name))
       return ['right', 'up', 'left', 'down'].map((direction) => (
-        <Fragment key={name+direction}>
-          <IconItem  name={name.replace('Svg', '')}>
+        <Fragment key={name + direction}>
+          <IconItem name={name.replace('Svg', '')}>
             <Icon direction={direction} name={name.replace('Svg', '')} />
           </IconItem>
           <IconItem name={`${name.replace('Svg', '')} (outline)`}>

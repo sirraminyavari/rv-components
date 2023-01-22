@@ -2,6 +2,15 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { SidebarSubMenu as SidebarSubMenuComponent, RVSidebarSubMenu } from '.';
+import {
+  BookmarkSvg,
+  FileTrayFullSvg,
+  GridSvg,
+  HomeSvg,
+  NotificationSvg,
+  PeopleCircleSvg,
+  ShapesSvg,
+} from '../../../icons';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -19,21 +28,89 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof SidebarSubMenuComponent> = ({
   children,
+  links,
   ...args
 }) => (
   <div style={{ display: 'flex', minHeight: '100vh', width: '100%' }}>
-    <SidebarSubMenuComponent {...args}>{children}</SidebarSubMenuComponent>
+    <SidebarSubMenuComponent
+      links={
+        links || [
+          { badge: 1265, title: 'Everything', Icon: GridSvg },
+          { badge: 23, title: 'Bookmarked', Icon: BookmarkSvg },
+          { badge: 11, title: 'Drafts', Icon: FileTrayFullSvg },
+          {
+            title: 'Documents',
+            Icon: HomeSvg,
+            badge: 22,
+            childItems: [
+              { badge: 123, title: 'Diagrams', Icon: NotificationSvg },
+              { badge: 123, title: 'Diagrams', Icon: PeopleCircleSvg },
+              { title: 'Reports1', Icon: ShapesSvg },
+              { badge: 123, title: 'Diagrams2' },
+            ],
+          },
+          {
+            title: 'Files',
+            Icon: HomeSvg,
+            badge: 22,
+            childItems: [
+              { badge: 123, title: 'Diagrams', Icon: NotificationSvg },
+              { badge: 123, title: 'Diagrams', Icon: PeopleCircleSvg },
+              { title: 'Reports1', Icon: ShapesSvg },
+              { badge: 123, title: 'Diagrams2' },
+            ],
+          },
+        ]
+      }
+      {...args}
+    >
+      {children}
+    </SidebarSubMenuComponent>
   </div>
 );
 const TemplateRTL: ComponentStory<typeof SidebarSubMenuComponent> = ({
   children,
+  links,
   ...args
 }) => (
   <div
     style={{ display: 'flex', minHeight: '100vh', width: '100%' }}
     className="direction-rtl"
   >
-    <SidebarSubMenuComponent {...args}>{children}</SidebarSubMenuComponent>
+    <SidebarSubMenuComponent
+      links={
+        links || [
+          { badge: 1265, title: 'Everything', Icon: GridSvg },
+          { badge: 23, title: 'Bookmarked', Icon: BookmarkSvg },
+          { badge: 11, title: 'Drafts', Icon: FileTrayFullSvg },
+          {
+            title: 'Documents',
+            Icon: HomeSvg,
+            badge: 22,
+            childItems: [
+              { badge: 123, title: 'Diagrams', Icon: NotificationSvg },
+              { badge: 123, title: 'Diagrams', Icon: PeopleCircleSvg },
+              { title: 'Reports1', Icon: ShapesSvg },
+              { badge: 123, title: 'Diagrams2' },
+            ],
+          },
+          {
+            title: 'Files',
+            Icon: HomeSvg,
+            badge: 22,
+            childItems: [
+              { badge: 123, title: 'Diagrams', Icon: NotificationSvg },
+              { badge: 123, title: 'Diagrams', Icon: PeopleCircleSvg },
+              { title: 'Reports1', Icon: ShapesSvg },
+              { badge: 123, title: 'Diagrams2' },
+            ],
+          },
+        ]
+      }
+      {...args}
+    >
+      {children}
+    </SidebarSubMenuComponent>
   </div>
 );
 

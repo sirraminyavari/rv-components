@@ -8,6 +8,7 @@
   & > button {
     border-radius: 0;
     margin-inline: px-to-rem(1);
+    height: 100%;
 
     &:first-of-type {
       border-start-start-radius: 10px;

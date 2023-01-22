@@ -12,10 +12,11 @@
   column-gap: px-to-rem(13);
   display: flex;
 
-  & > svg {
+  &>svg {
     vertical-align: middle;
-    font-size: 1.3em;
+    font-size: 1em;
     color: inherit;
+    padding-block: px-to-rem(1);
   }
 
   &.large {
@@ -24,16 +25,20 @@
     font-size: px-to-rem(16);
   }
 
+  &.noWrap {
+    white-space: nowrap;
+  }
+
   &.medium {
-    padding-inline: px-to-rem(24);
-    padding-block: px-to-rem(12);
+    padding-inline: px-to-rem(16);
+    padding-block: px-to-rem(10);
     font-size: px-to-rem(16);
   }
 
   &.small {
-    padding-inline: px-to-rem(24);
-    padding-block: px-to-rem(8);
-    font-size: px-to-rem(16);
+    padding-inline: px-to-rem(12);
+    padding-block: px-to-rem(5);
+    font-size: px-to-rem(15);
   }
 
   &.fullCircle {
@@ -43,7 +48,7 @@
     padding-inline: px-to-rem(4);
     font-size: px-to-rem(20);
 
-    & > svg {
+    &>svg {
       margin-inline-end: 0;
       padding: px-to-rem(8);
     }
@@ -84,6 +89,7 @@
   }
 
   &.badge {
+
     &:hover,
     &:active,
     &:focus {
@@ -117,6 +123,7 @@
   }
 
   &.badge {
+
     &:hover,
     &:active,
     &:focus {
@@ -150,6 +157,7 @@
   }
 
   &.badge {
+
     &:hover,
     &:active,
     &:focus {

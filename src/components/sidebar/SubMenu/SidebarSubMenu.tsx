@@ -2,14 +2,15 @@ import clsx from 'clsx';
 import {
   DetailedHTMLProps,
   forwardRef,
+  FunctionComponent,
   HTMLAttributes,
   MouseEvent,
   PropsWithoutRef,
   useCallback,
   useRef,
 } from 'react';
-import { GridSvg, HomeSvg, PeopleSvg } from '../../../icons';
-import { RVColorProp } from '../../../types';
+import { PeopleCircleSvg } from '../../../icons';
+import { RVColorProp, RVSvgProps } from '../../../types';
 import { isRTL } from '../../../utils/isRtl';
 import { Accordion } from '../../Accordion';
 import { Typography } from '../../Typography';
@@ -24,16 +25,26 @@ export interface RVSidebarSubMenu
     'color'
   > {
   color?: RVColorProp;
-  // links: {
-  //   Icon?: FunctionComponent<RVSvgProps>;
-  //   title?: string;
-  //   onClick?: (event?: MouseEvent<HTMLButtonElement>) => void;
-  //   noIndicator?: boolean;
-  // }[];
+  links: {
+    Icon?: FunctionComponent<RVSvgProps>;
+    title?: string;
+    badge?: string | number;
+    onClick?: (event?: MouseEvent<HTMLButtonElement>) => void;
+    childItems?: {
+      Icon?: FunctionComponent<RVSvgProps>;
+      title?: string;
+      badge?: string | number;
+      onClick?: (event?: MouseEvent<HTMLButtonElement>) => void;
+      childItems?: [];
+    }[];
+  }[];
 }
 
 const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
-  ({ children, color = RVColorProp.grayLight, className, ...props }, ref) => {
+  (
+    { children, color = RVColorProp.grayLight, className, links, ...props },
+    ref
+  ) => {
     const activeIndicatorRef = useRef<HTMLDivElement>(null);
     const activeTile = useRef<HTMLButtonElement | HTMLSpanElement | null>(null);
 
@@ -64,6 +75,59 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
       [activeTile]
     );
 
+    const linkButtonGenerator = useCallback(
+      (links: RVSidebarSubMenu['links']) => {
+        return links.map((link) => {
+          if (link.childItems && link.childItems.length)
+            return (
+              <Accordion
+                key={JSON.stringify(link)}
+                label={link.title}
+                color={RVColorProp.inherit}
+                onLabelClick={(e) => {
+                  onActiveClick(e);
+                  link.onClick && link.onClick(e);
+                }}
+              >
+                {linkButtonGenerator(link.childItems)}
+              </Accordion>
+            );
+          else
+            return (
+              <button
+                key={JSON.stringify(link)}
+                className={styles.menuTile}
+                onClick={(e) => {
+                  onActiveClick(e);
+                  link.onClick && link.onClick(e);
+                }}
+              >
+                {link.Icon && (
+                  <link.Icon className={styles.menuTileIcon} outline />
+                )}
+                <Typography
+                  className={styles.menuTileTitle}
+                  color={RVColorProp.inherit}
+                  type="H4"
+                >
+                  {link.title && (
+                    <span className={styles.menuTileTitleContent}>
+                      {link.title}
+                    </span>
+                  )}
+                  {link.badge && (
+                    <span className={styles.menuTileTitleBadge}>
+                      {link.badge}
+                    </span>
+                  )}
+                </Typography>
+              </button>
+            );
+        });
+      },
+      [links]
+    );
+
     return (
       <div
         ref={ref}
@@ -72,7 +136,7 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
       >
         <SidebarSubMenuIndicator ref={activeIndicatorRef} color={color} />
         <div className={styles.titleBlock}>
-          <PeopleSvg className={styles.titleIcon} outline />
+          <PeopleCircleSvg className={styles.titleIcon} outline />
           <div>
             <Typography
               color={RVColorProp.inherit}
@@ -90,95 +154,8 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
             </Typography>
           </div>
         </div>
-        <button className={styles.menuTile} onClick={onActiveClick}>
-          <GridSvg className={styles.menuTileIcon} outline />
-          <Typography
-            className={styles.menuTileTitle}
-            color={RVColorProp.inherit}
-            type="H4"
-          >
-            <span className={styles.menuTileTitleContent}>Everything</span>
-            <span className={styles.menuTileTitleBadge}>1235</span>
-          </Typography>
-        </button>
-        <button className={styles.menuTile} onClick={onActiveClick}>
-          <PeopleSvg className={styles.menuTileIcon} outline />
-          <Typography
-            className={styles.menuTileTitle}
-            color={RVColorProp.inherit}
-            type="H4"
-          >
-            <span className={styles.menuTileTitleContent}>Bookmarked</span>
-            <span className={styles.menuTileTitleBadge}>23</span>
-          </Typography>
-        </button>
-        <button className={styles.menuTile} onClick={onActiveClick}>
-          <HomeSvg className={styles.menuTileIcon} outline />
-          <Typography
-            className={styles.menuTileTitle}
-            color={RVColorProp.inherit}
-            type="H4"
-          >
-            <span className={styles.menuTileTitleContent}>Drafts</span>
-            <span className={styles.menuTileTitleBadge}>23</span>
-          </Typography>
-        </button>
-        <Accordion
-          label="category 1"
-          color={RVColorProp.inherit}
-          onLabelClick={onActiveClick}
-        >
-          <button className={styles.menuTile} onClick={onActiveClick}>
-            <PeopleSvg className={styles.menuTileIcon} outline />
-            <Typography
-              className={styles.menuTileTitle}
-              color={RVColorProp.inherit}
-              type="H4"
-            >
-              <span className={styles.menuTileTitleContent}>Drafts</span>
-              <span className={styles.menuTileTitleBadge}>23</span>
-            </Typography>
-          </button>
-          <button className={styles.menuTile} onClick={onActiveClick}>
-            <PeopleSvg className={styles.menuTileIcon} outline />
-            <Typography
-              className={styles.menuTileTitle}
-              color={RVColorProp.inherit}
-              type="H4"
-            >
-              <span className={styles.menuTileTitleContent}>Everything</span>
-              <span className={styles.menuTileTitleBadge}>1235</span>
-            </Typography>
-          </button>
-        </Accordion>
-        <Accordion
-          label="category 1"
-          color={RVColorProp.inherit}
-          onLabelClick={onActiveClick}
-        >
-          <button className={styles.menuTile} onClick={onActiveClick}>
-            <PeopleSvg className={styles.menuTileIcon} outline />
-            <Typography
-              className={styles.menuTileTitle}
-              color={RVColorProp.inherit}
-              type="H4"
-            >
-              <span className={styles.menuTileTitleContent}>Drafts</span>
-              <span className={styles.menuTileTitleBadge}>23</span>
-            </Typography>
-          </button>
-          <button className={styles.menuTile} onClick={onActiveClick}>
-            <PeopleSvg className={styles.menuTileIcon} outline />
-            <Typography
-              className={styles.menuTileTitle}
-              color={RVColorProp.inherit}
-              type="H4"
-            >
-              <span className={styles.menuTileTitleContent}>Everything</span>
-              <span className={styles.menuTileTitleBadge}>1235</span>
-            </Typography>
-          </button>
-        </Accordion>
+
+        {links && linkButtonGenerator(links)}
         {children}
       </div>
     );

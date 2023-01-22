@@ -2,7 +2,7 @@ import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { SidebarMain as SidebarMainComponent, RVSidebarMain } from '.';
-import { CMLogoSvg, HomeSvg, PeopleSvg } from '../../../icons';
+import { CMLogoSvg, HomeSvg, PeopleCircleSvg } from '../../../icons';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -56,19 +56,19 @@ Main.args = {
       noIndicator: false,
     },
     {
-      Icon: PeopleSvg,
+      Icon: PeopleCircleSvg,
       title: '',
       onClick: () => {},
       noIndicator: false,
     },
     {
-      Icon: PeopleSvg,
+      Icon: PeopleCircleSvg,
       title: '',
       onClick: () => {},
       noIndicator: false,
     },
     {
-      Icon: PeopleSvg,
+      Icon: PeopleCircleSvg,
       title: '',
       onClick: () => {},
       noIndicator: false,
@@ -92,19 +92,19 @@ MainRTL.args = {
       noIndicator: false,
     },
     {
-      Icon: PeopleSvg,
+      Icon: PeopleCircleSvg,
       title: '',
       onClick: () => {},
       noIndicator: false,
     },
     {
-      Icon: PeopleSvg,
+      Icon: PeopleCircleSvg,
       title: '',
       onClick: () => {},
       noIndicator: false,
     },
     {
-      Icon: PeopleSvg,
+      Icon: PeopleCircleSvg,
       title: '',
       onClick: () => {},
       noIndicator: false,
