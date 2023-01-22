@@ -25,6 +25,7 @@ export interface RVButton
   badge?: boolean;
   rounded?: 'full' | 'half';
   active?: boolean;
+  noWrap?: boolean;
 }
 
 const Button = forwardRef<HTMLButtonElement, RVButton>(
@@ -40,7 +41,7 @@ const Button = forwardRef<HTMLButtonElement, RVButton>(
       active,
       fullCircle,
       rounded,
-      badge,
+      badge,noWrap,
       ...props
     },
     ref
@@ -58,6 +59,7 @@ const Button = forwardRef<HTMLButtonElement, RVButton>(
           rounded === 'half' && styles.roundedHalf,
           fullCircle && styles.fullCircle,
           badge && styles.badge,
+          noWrap && styles.noWrap,
           active && styles.active,
           className
         )}
