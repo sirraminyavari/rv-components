@@ -35,7 +35,6 @@
   }
 
   &.stacked {
-
     &:first-of-type:not(:last-of-type) {
       margin-inline-start: px-to-rem(14);
 
@@ -78,7 +77,6 @@
       }
     }
   }
-
 }
 
 .primary {
@@ -125,21 +123,18 @@
     &.stacked {
       &:not(:last-of-type) {
         &.large {
-
           &:hover {
             transform: translateX(px-to-rem(16));
           }
         }
 
         &.medium {
-
           &:hover {
             transform: translateX(px-to-rem(14));
           }
         }
 
         &.small {
-
           &:hover {
             transform: translateX(px-to-rem(12));
           }

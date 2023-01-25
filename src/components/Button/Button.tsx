@@ -41,7 +41,8 @@ const Button = forwardRef<HTMLButtonElement, RVButton>(
       active,
       fullCircle,
       rounded,
-      badge,noWrap,
+      badge,
+      noWrap,
       ...props
     },
     ref
