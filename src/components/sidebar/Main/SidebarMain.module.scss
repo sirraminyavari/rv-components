@@ -13,6 +13,7 @@
   transition: transform 0.3s;
 }
 
+
 .menuActiveIndicator {
   z-index: 3;
   position: absolute;
@@ -37,6 +38,10 @@
   margin-block-end: px-to-rem(16);
 
   >svg {
-    font-size: 3rem;
+    font-size: px-to-rem(48);
   }
+}
+
+.menuTrigger {
+  font-size: px-to-rem(38) !important;
 }

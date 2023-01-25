@@ -27,6 +27,7 @@ export interface RVSidebarMain
     title?: string;
     onClick?: (event?: MouseEvent<HTMLButtonElement>) => void;
     noIndicator?: boolean;
+    menuTrigger?: boolean;
   }[];
 }
 
@@ -73,21 +74,29 @@ const SidebarMain = forwardRef<HTMLDivElement, RVSidebarMain>(
           ref={activeIndicatorRef}
           className={clsx(styles.menuActiveIndicator, RVColorProp.crayola)}
         />
-        {primaryLinks.map(({ onClick, noIndicator, Icon, title }, idx) => (
-          <SidebarMainNavLink
-            key={`sidebarMenu-primary-${idx}`}
-            onClick={(e) => {
-              if (!noIndicator) onActiveClick(e);
-              if (onClick) onClick(e);
-            }}
-            className={clsx(noIndicator && styles.cmLogo)}
-          >
-            {Icon && (
-              <Icon className={styles.menuTileIcon} outline={!noIndicator} />
-            )}
-            {title}
-          </SidebarMainNavLink>
-        ))}
+        {primaryLinks.map(
+          ({ onClick, noIndicator, menuTrigger, Icon, title }, idx) => (
+            <SidebarMainNavLink
+              key={`sidebarMenu-primary-${idx}`}
+              onClick={(e) => {
+                if (!noIndicator) onActiveClick(e);
+                if (onClick) onClick(e);
+              }}
+              className={clsx(noIndicator && styles.cmLogo)}
+            >
+              {Icon && (
+                <Icon
+                  className={clsx(
+                    styles.menuTileIcon,
+                    menuTrigger && styles.menuTrigger
+                  )}
+                  outline={!noIndicator || !menuTrigger}
+                />
+              )}
+              {title}
+            </SidebarMainNavLink>
+          )
+        )}
 
         {children}
       </div>

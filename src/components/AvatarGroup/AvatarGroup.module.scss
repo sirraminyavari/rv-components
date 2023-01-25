@@ -3,9 +3,8 @@
 .baseAvatarGroup {
   display: flex;
   flex-direction: row;
-  display: ltr;
 
-  & > img {
+  &>img {
     z-index: 2;
   }
 }

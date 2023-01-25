@@ -1,6 +1,17 @@
 @import '../../../scss/modules/default';
 
 .baseSidebarMain {
+  transition: width .5s cubic-bezier(0.86, 0, 0.07, 1);
+  width: px-to-rem(350);
+  overflow-x: hidden;
+
+  &.sidebarClose {
+    width: 0;
+  }
+}
+
+.sidebarContainer {
+  box-sizing: border-box;
   background: hsl(var(--default));
   display: inline-block;
   padding-block: px-to-rem(12);
@@ -8,6 +19,7 @@
   padding-inline-start: px-to-rem(24);
   width: px-to-rem(350);
   color: hsl(var(--default-font));
+  height: 100%;
 }
 
 .titleBlock {
@@ -15,7 +27,6 @@
   justify-content: flex-start;
   align-items: center;
   column-gap: px-to-rem(13);
-  padding-inline-end: px-to-rem(24);
   margin-block-end: px-to-rem(24);
 
   .titleIcon {
@@ -26,6 +37,7 @@
   .titleTypography {
     margin-block: 0;
     color: inherit;
+    padding-inline-end: px-to-rem(24);
   }
 }
 
@@ -46,7 +58,7 @@
   position: relative;
   width: calc(100% - px-to-rem(24));
 
-  & > * {
+  &>* {
     margin-block: 0;
     color: inherit;
   }
@@ -108,6 +120,15 @@
   transition: transform 0.3s;
   padding-inline: px-to-rem(10);
   font-size: px-to-rem(32);
+}
+
+.triggerCollapse {
+  margin-inline-start: auto;
+
+  >svg {
+    color: hsl(var(--default-font));
+    font-size: px-to-rem(24);
+  }
 }
 
 .menuActiveIndicator {

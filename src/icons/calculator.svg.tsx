@@ -18,18 +18,18 @@ const CalculatorSvg = ({ size, outline, ...props }: RVSvgProps) => {
             y="48"
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
             rx="32"
             ry="32"
           />
           <path
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
             d="M160.01 112H352v64H160.01z"
           />
           <circle cx="168" cy="248" r="24" fill="currentColor" />
