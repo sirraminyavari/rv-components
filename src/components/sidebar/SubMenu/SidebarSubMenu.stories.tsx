@@ -29,10 +29,12 @@ export default {
 const Template: ComponentStory<typeof SidebarSubMenuComponent> = ({
   children,
   links,
+  open = true,
   ...args
 }) => (
   <div style={{ display: 'flex', minHeight: '100vh', width: '100%' }}>
     <SidebarSubMenuComponent
+      open={open}
       links={
         links || [
           { badge: 1265, title: 'Everything', Icon: GridSvg },
@@ -71,6 +73,7 @@ const Template: ComponentStory<typeof SidebarSubMenuComponent> = ({
 const TemplateRTL: ComponentStory<typeof SidebarSubMenuComponent> = ({
   children,
   links,
+  open = true,
   ...args
 }) => (
   <div
@@ -78,6 +81,7 @@ const TemplateRTL: ComponentStory<typeof SidebarSubMenuComponent> = ({
     className="direction-rtl"
   >
     <SidebarSubMenuComponent
+      open={open}
       links={
         links || [
           { badge: 1265, title: 'Everything', Icon: GridSvg },

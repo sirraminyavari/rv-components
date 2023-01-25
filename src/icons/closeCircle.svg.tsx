@@ -14,16 +14,16 @@ const CloseCircleSvg = ({ size, outline, ...props }: RVSvgProps) => {
           <path
             fill="none"
             stroke="currentColor"
-            stroke-miterlimit="10"
-            stroke-width="32"
+            strokeMiterlimit="10"
+            strokeWidth="32"
             d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192s192-86 192-192Z"
           />
           <path
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
             d="M320 320L192 192m0 128l128-128"
           />
         </>

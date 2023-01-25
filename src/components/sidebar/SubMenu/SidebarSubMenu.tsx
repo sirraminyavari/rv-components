@@ -1,18 +1,21 @@
 import clsx from 'clsx';
 import {
   DetailedHTMLProps,
+  Dispatch,
   forwardRef,
   FunctionComponent,
   HTMLAttributes,
   MouseEvent,
   PropsWithoutRef,
+  SetStateAction,
   useCallback,
   useRef,
 } from 'react';
-import { PeopleCircleSvg } from '../../../icons';
-import { RVColorProp, RVSvgProps } from '../../../types';
+import { ChevronSvg, PeopleCircleSvg } from '../../../icons';
+import { RVColorProp, RVSvgProps, RVVariantProp } from '../../../types';
 import { isRTL } from '../../../utils/isRtl';
 import { Accordion } from '../../Accordion';
+import { Button } from '../../Button';
 import { Typography } from '../../Typography';
 import SidebarSubMenuIndicator from './SidebarIndicator';
 import styles from './SidebarSubMenu.module.scss';
@@ -25,6 +28,8 @@ export interface RVSidebarSubMenu
     'color'
   > {
   color?: RVColorProp;
+  open?: boolean;
+  CloseTrigger?: Dispatch<SetStateAction<boolean>>;
   links: {
     Icon?: FunctionComponent<RVSvgProps>;
     title?: string;
@@ -42,7 +47,15 @@ export interface RVSidebarSubMenu
 
 const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
   (
-    { children, color = RVColorProp.grayLight, className, links, ...props },
+    {
+      children,
+      color = RVColorProp.grayLight,
+      className,
+      links,
+      open = true,
+      CloseTrigger,
+      ...props
+    },
     ref
   ) => {
     const activeIndicatorRef = useRef<HTMLDivElement>(null);
@@ -65,9 +78,9 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
           tileBoundingRect.width + elementWidthOffset
         }px`;
         if (tileDirection === 'rtl')
-          activeIndicatorRef.current.style.left = `-0.5px`;
+          activeIndicatorRef.current.style.left = `-0.1px`;
         else if (tileDirection === 'ltr')
-          activeIndicatorRef.current.style.right = `-0.5px`;
+          activeIndicatorRef.current.style.right = `-0.1px`;
         if (activeTile.current) activeTile.current.classList.remove('active');
         tile.classList.add('active');
         if (event) activeTile.current = event.currentTarget;
@@ -131,32 +144,57 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
     return (
       <div
         ref={ref}
-        className={clsx(styles.baseSidebarMain, color, className)}
+        className={clsx(
+          styles.baseSidebarMain,
+          color,
+          !open && styles.sidebarClose,
+          className
+        )}
         {...props}
       >
-        <SidebarSubMenuIndicator ref={activeIndicatorRef} color={color} />
-        <div className={styles.titleBlock}>
-          <PeopleCircleSvg className={styles.titleIcon} outline />
-          <div>
-            <Typography
-              color={RVColorProp.inherit}
-              type="sub"
-              className={styles.titleTypography}
-            >
-              Amir's workspace
-            </Typography>
-            <Typography
-              color={RVColorProp.inherit}
-              type="H3"
-              className={styles.titleTypography}
-            >
-              Researchers team
-            </Typography>
+        <div className={styles.sidebarContainer}>
+          <SidebarSubMenuIndicator ref={activeIndicatorRef} color={color} />
+          <div className={styles.titleBlock}>
+            <PeopleCircleSvg className={styles.titleIcon} outline />
+            <div>
+              <Typography
+                color={RVColorProp.inherit}
+                type="sub"
+                className={styles.titleTypography}
+              >
+                Amir's workspace
+              </Typography>
+              <Typography
+                color={RVColorProp.inherit}
+                type="H3"
+                className={styles.titleTypography}
+              >
+                Researchers team
+              </Typography>
+            </div>
+            {CloseTrigger && (
+              <Button
+                className={styles.triggerCollapse}
+                variant={RVVariantProp.outline}
+                color={RVColorProp.inherit}
+                rounded="half"
+                fullCircle
+                onClick={() => {
+                  CloseTrigger((prev) => {
+                    console.log(prev);
+                    return !prev;
+                  });
+                  console.log();
+                }}
+              >
+                <ChevronSvg direction={isRTL() === 'ltr' ? 'left' : 'right'} />
+              </Button>
+            )}
           </div>
-        </div>
 
-        {links && linkButtonGenerator(links)}
-        {children}
+          {links && linkButtonGenerator(links)}
+          {children}
+        </div>
       </div>
     );
   }

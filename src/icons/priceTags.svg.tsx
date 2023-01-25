@@ -14,9 +14,9 @@ const PriceTagsSvg = ({ size, outline, ...props }: RVSvgProps) => {
           <path
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
             d="M403.29 32H280.36a14.46 14.46 0 0 0-10.2 4.2L24.4 281.9a28.85 28.85 0 0 0 0 40.7l117 117a28.86 28.86 0 0 0 40.71 0L427.8 194a14.46 14.46 0 0 0 4.2-10.2v-123A28.66 28.66 0 0 0 403.29 32Z"
           />
           <path
@@ -26,9 +26,9 @@ const PriceTagsSvg = ({ size, outline, ...props }: RVSvgProps) => {
           <path
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
             d="m230 480l262-262a13.81 13.81 0 0 0 4-10V80"
           />
         </>
