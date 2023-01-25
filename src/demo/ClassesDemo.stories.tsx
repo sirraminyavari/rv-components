@@ -1,7 +1,7 @@
 import React, { FunctionComponent, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { SidebarMain as SidebarMainComponent } from '../components/Sidebar/Main';
-import { SidebarSubMenu as SidebarSubMenuComponent } from '../components/Sidebar/SubMenu';
+import { SidebarMain as SidebarMainComponent } from '../components/sidebar/Main';
+import { SidebarSubMenu as SidebarSubMenuComponent } from '../components/sidebar/SubMenu';
 import {
   AtSvg,
   BookmarkSvg,

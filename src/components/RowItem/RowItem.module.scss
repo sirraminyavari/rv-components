@@ -11,12 +11,11 @@
   margin-block: px-to-rem(8);
   width: 100%;
   box-sizing: border-box;
-  transition: border .3s ease-out;
+  transition: border 0.3s ease-out;
   display: flex;
   justify-content: space-between;
   align-items: center;
   flex-wrap: wrap;
-
 
   &.large {
     padding-inline-start: px-to-rem(24);
@@ -48,8 +47,6 @@
     border-radius: calc($borderRadiusHalf / 2);
   }
 
-
-
   .actionsArea {
     display: block;
   }
@@ -59,7 +56,7 @@
     align-items: center;
     flex-wrap: wrap;
 
-    &>svg {
+    & > svg {
       font-size: px-to-rem(32);
       margin-inline-end: px-to-rem(24);
     }

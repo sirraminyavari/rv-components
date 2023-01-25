@@ -1,7 +1,7 @@
 @import '../../../scss/modules/default';
 
 .baseSidebarMain {
-  transition: width .5s cubic-bezier(0.86, 0, 0.07, 1);
+  transition: width 0.5s cubic-bezier(0.86, 0, 0.07, 1);
   width: px-to-rem(350);
   overflow-x: hidden;
 
@@ -58,7 +58,7 @@
   position: relative;
   width: calc(100% - px-to-rem(24));
 
-  &>* {
+  & > * {
     margin-block: 0;
     color: inherit;
   }
@@ -125,7 +125,7 @@
 .triggerCollapse {
   margin-inline-start: auto;
 
-  >svg {
+  > svg {
     color: hsl(var(--default-font));
     font-size: px-to-rem(24);
   }
