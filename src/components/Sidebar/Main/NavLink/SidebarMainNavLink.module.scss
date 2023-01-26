@@ -5,7 +5,7 @@
   padding-block: px-to-rem(4);
   padding-inline: px-to-rem(20);
   min-height: px-to-rem(55);
-  color: hsl(var(--default-font) / 50%);
+  color: hsl(var(--white) / 50%);
   font-size: px-to-rem(14);
   cursor: pointer;
   transition: background-color 0.35s, color 0.35s, border-radius 0.35s,
@@ -18,16 +18,16 @@
   align-items: center;
   text-align: center;
 
-  & > svg {
+  &>svg {
     padding-block: px-to-rem(4);
     font-size: px-to-rem(32);
   }
 
   &:focus {
-    background-color: hsl(var(--percent-90) / 15%);
-    color: hsl(var(--default-font) / 80%);
+    background-color: hsl(var(--dark) / 15%);
+    color: hsl(var(--white) / 80%);
 
-    & > svg {
+    &>svg {
       animation: pulse 0.4s;
       animation-iteration-count: 1;
     }
@@ -35,11 +35,11 @@
 
   &:hover {
     // background-color: hsl(var(--background) / 10%);
-    color: hsl(var(--default-font) / 80%);
+    color: hsl(var(--white) / 80%);
   }
 
   &[class*='active'] {
-    color: hsl(var(--default-font));
+    color: hsl(var(--white));
     margin-inline-start: 0;
     animation: pulse 0.4s;
     animation-iteration-count: 2;

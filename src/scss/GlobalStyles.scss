@@ -1,8 +1,8 @@
 @import 'modules/default.scss';
 
+
 html {
-  @include palette-generator-variables;
-  @include palette-class-generator-loop;
   @include dir;
   @include full-width;
 }
+@include palette-theme-class-generator-loop;

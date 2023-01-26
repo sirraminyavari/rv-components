@@ -27,7 +27,7 @@
         transition: transform 0.2s ease-out, inset 0.2s ease-out,
             background-color 0.1s ease-out, color 0.2s ease-out,
             font-size 0.2s ease-out;
-        color: hsl(var(--percent-10));
+        color: hsl(var(--base));
         z-index: 1;
 
         &:before {
@@ -49,22 +49,22 @@
         border-width: 0;
         border-bottom-width: px-to-rem(2);
         padding-block: px-to-rem(7);
-        border-color: hsl(var(--percent-10));
+        border-color: hsl(var(--base));
         transition: border 0.2s ease-out;
 
         .trailingIcon {
-            color: hsl(var(--percent-10));
+            color: hsl(var(--light));
         }
 
         &:focus-within {
-            border-color: hsl(var(--default));
+            border-color: hsl(var(--base));
 
             .trailingIcon {
-                color: hsl(var(--default));
+                color: hsl(var(--base));
             }
 
             .label {
-                color: hsl(var(--default));
+                color: hsl(var(--base));
             }
         }
     }
@@ -73,25 +73,25 @@
         border-width: px-to-rem(2);
         padding-block: px-to-rem(7);
         border-radius: $borderRadiusQuarter;
-        border-color: hsl(var(--percent-10));
+        border-color: hsl(var(--base));
         transition: border 0.2s ease-out;
 
         .trailingIcon {
-            color: hsl(var(--percent-10));
+            color: hsl(var(--base));
         }
 
         &:focus-within {
-            border-color: hsl(var(--default));
+            border-color: hsl(var(--dark));
 
             .trailingIcon {
-                color: hsl(var(--default));
+                color: hsl(var(--dark));
             }
 
             .label {
-                color: hsl(var(--default));
+                color: hsl(var(--dark));
 
                 &:before {
-                    background-color: hsl(var(--bg-color));
+                    background-color: hsl(var(--white));
                 }
             }
         }
@@ -101,7 +101,7 @@
             font-size: 0.5em;
 
             &:before {
-                background-color: hsl(var(--bg-color));
+                background-color: hsl(var(--white));
             }
         }
     }
@@ -110,21 +110,21 @@
         border-width: px-to-rem(2);
         padding-block: px-to-rem(7);
         border-radius: $borderRadiusHalf;
-        background-color: hsl(var(--percent-5) / 10);
-        color: hsl(var(--percent-5-font));
+        background-color: hsl(var(--lighter) / 10);
+        color: hsl(var(--lighter-font));
         transition: color 0.2s ease-out;
 
         .trailingIcon,
         .label {
-            color: hsl(var(--default));
+            color: hsl(var(--base));
         }
 
         &:focus-within {
-            background-color: hsl(var(--percent-5) / 20);
-            color: hsl(var(--default-font));
+            background-color: hsl(var(--lighter) / 20);
+            color: hsl(var(--base-font));
 
             .label {
-                color: hsl(var(--default));
+                color: hsl(var(--base));
             }
         }
     }
@@ -139,6 +139,7 @@
     width: 100%;
     z-index: 2;
     padding-inline: px-to-rem(5);
+    color: inherit;
 
     &:not(:placeholder-shown)+.label {
         transform: translate(px-to-rem(7), -50%);

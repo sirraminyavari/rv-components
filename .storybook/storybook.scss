@@ -5,10 +5,10 @@
 
 html,
 body {
-  font-family:Roboto,IRANSans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+  font-family: Roboto, IRANSans, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
     'Helvetica Neue', Arial, 'Noto Sans', 'Liberation Sans', sans-serif,
     'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji',
     Vazir;
-    background-color: hsl(var(--bg-color));
-    color: hsl(var(--fg-color));
+  background-color: hsl(var(--white));
+  color: hsl(var(--black));
 }

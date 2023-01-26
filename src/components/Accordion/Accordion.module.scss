@@ -30,8 +30,8 @@
     z-index: 2;
   }
 
-  & > svg {
-    color: hsl(var(--default));
+  &>svg {
+    color: hsl(var(--base));
     margin-inline-start: px-to-rem(14);
     margin-inline-end: px-to-rem(8);
     font-size: px-to-rem(32);
@@ -48,9 +48,9 @@
 
 .accordionPanel[data-open='true'] {
   .triggerButton {
-    > svg {
+    >svg {
       transform: rotate(90deg);
-      color: hsl(var(--percent-90) / 90%);
+      color: hsl(var(--dark) / 90%);
     }
   }
 
@@ -61,7 +61,7 @@
 
 @include on-rtl {
   .triggerButton {
-    & > svg {
+    &>svg {
       transform: scale(-1);
     }
   }
