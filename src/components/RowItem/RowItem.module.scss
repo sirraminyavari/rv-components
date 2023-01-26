@@ -15,6 +15,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  row-gap: px-to-rem(16);
   flex-wrap: wrap;
 
   &.large {
@@ -56,7 +57,7 @@
     align-items: center;
     flex-wrap: wrap;
 
-    & > svg {
+    &>svg {
       font-size: px-to-rem(32);
       margin-inline-end: px-to-rem(24);
     }
@@ -64,27 +65,27 @@
 }
 
 .primary {
-  background-color: hsl(var(--default));
+  background-color: hsl(var(--base));
 
   &:hover {
-    background-color: hsl(var(--percent-90));
+    background-color: hsl(var(--dark));
   }
 
   &:active {
-    background-color: hsl(var(--percent-90));
+    background-color: hsl(var(--dark));
   }
 }
 
 .outline {
-  border-color: hsl(var(--default) / 15%);
+  border-color: hsl(var(--base) / 15%);
   background-color: transparent;
 
   &:hover {
-    border-color: hsl(var(--default) / 60%);
+    border-color: hsl(var(--base) / 60%);
   }
 
   &:active {
-    background-color: hsl(var(--default) / 25%);
+    background-color: hsl(var(--base) / 25%);
   }
 }
 
@@ -92,11 +93,11 @@
   background-color: hsl(var(--white));
 
   &:hover {
-    background-color: hsl(var(--default) / 5%);
+    background-color: hsl(var(--base) / 5%);
   }
 }
 
 .disabled {
-  background-color: hsl(var(--default));
+  background-color: hsl(var(--base));
   filter: contrast(0.5);
 }

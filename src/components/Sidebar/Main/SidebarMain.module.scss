@@ -1,7 +1,7 @@
 @import '../../../scss/modules/default';
 
 .baseSidebarMain {
-  background: hsl(var(--default));
+  background: hsl(var(--base));
   display: inline-block;
 
   padding-block: px-to-rem(12);
@@ -18,7 +18,7 @@
   position: absolute;
   top: 0%;
   inset-inline-start: 0;
-  background-color: hsl(var(--default));
+  background-color: hsl(var(--base));
   width: px-to-rem(5);
   height: 0;
   transition: top 0.25s ease-in-out, height 0.25s ease-in-out;
@@ -36,7 +36,7 @@
   height: auto;
   margin-block-end: px-to-rem(16);
 
-  > svg {
+  >svg {
     font-size: px-to-rem(48);
   }
 }

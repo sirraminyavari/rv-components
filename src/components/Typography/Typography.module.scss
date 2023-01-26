@@ -1,7 +1,7 @@
 @import '../../scss/modules/default';
 
 .baseHeading {
-  color: hsl(var(--default));
+  color: hsl(var(--base));
   transition: all 0.3s ease-out;
 
   &.H1 {
@@ -10,42 +10,49 @@
     font-style: normal;
     font-weight: 700;
   }
+
   &.H2 {
     font-size: px-to-rem(20);
     line-height: px-to-rem(31);
     font-style: normal;
     font-weight: 700;
   }
+
   &.H3 {
     font-size: px-to-rem(18);
     line-height: px-to-rem(28);
     font-style: normal;
     font-weight: 700;
   }
+
   &.H4 {
     font-size: px-to-rem(16);
     line-height: px-to-rem(25);
     font-style: normal;
     font-weight: 700;
   }
+
   &.H5 {
     font-size: px-to-rem(14);
     line-height: px-to-rem(22);
     font-style: normal;
     font-weight: 500;
   }
+
   &.H6 {
     font-size: px-to-rem(14);
     line-height: px-to-rem(22);
     font-style: normal;
     font-weight: 400;
   }
+
   &.p {
     font-size: px-to-rem(16);
     line-height: px-to-rem(25);
     font-style: normal;
     font-weight: 400;
   }
+
   &.sub {
     font-size: px-to-rem(12);
     line-height: px-to-rem(19);
@@ -53,6 +60,7 @@
     font-weight: 300;
   }
 }
+
 .muted {
-  color: hsl(var(--default) / 50%);
+  color: hsl(var(--base) / 50%);
 }

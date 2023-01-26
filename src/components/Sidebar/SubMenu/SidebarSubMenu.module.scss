@@ -12,13 +12,13 @@
 
 .sidebarContainer {
   box-sizing: border-box;
-  background: hsl(var(--default));
+  background: hsl(var(--base));
   display: inline-block;
   padding-block: px-to-rem(12);
   position: relative;
   padding-inline-start: px-to-rem(24);
   width: px-to-rem(350);
-  color: hsl(var(--default-font));
+  color: hsl(var(--base-font));
   height: 100%;
 }
 
@@ -45,7 +45,7 @@
   all: unset;
   padding-block: px-to-rem(0);
   padding-inline: px-to-rem(10);
-  color: hsl(var(--default-font) / 100%);
+  color: hsl(var(--base-font) / 100%);
   background-color: transparent;
   cursor: pointer;
   min-height: px-to-rem(24);
@@ -58,7 +58,7 @@
   position: relative;
   width: calc(100% - px-to-rem(24));
 
-  & > * {
+  &>* {
     margin-block: 0;
     color: inherit;
   }
@@ -84,7 +84,7 @@
   }
 
   &:focus {
-    color: hsl(var(--default-font) / 80%);
+    color: hsl(var(--base-font) / 80%);
 
     .menuTileIcon {
       animation: pulse 0.4s;
@@ -94,17 +94,17 @@
 
   &:hover {
     // background-color: hsl(var(--background) / 10%);
-    color: hsl(var(--default-font) / 80%);
+    color: hsl(var(--base-font) / 80%);
   }
 
   &[class*='active'] {
-    color: hsl(var(--fg-color));
+    color: hsl(var(--black));
     animation-name: pulse 0.4s;
     animation-iteration-count: 2;
 
     .menuTileTitle {
       .menuTileTitleContent {
-        // text-shadow: .2px .2px 0 hsl(var(--default-font));
+        // text-shadow: .2px .2px 0 hsl(var(--base-font));
         font-weight: 500;
       }
 
@@ -125,8 +125,8 @@
 .triggerCollapse {
   margin-inline-start: auto;
 
-  > svg {
-    color: hsl(var(--default-font));
+  >svg {
+    color: hsl(var(--base-font));
     font-size: px-to-rem(24);
   }
 }
@@ -136,9 +136,9 @@
   position: absolute;
   top: 0%;
   inset-inline-end: px-to-rem(-0.4);
-  background-color: hsl(var(--bg-color));
+  background-color: hsl(var(--white));
   width: px-to-rem(5);
-  color: hsl(var(--bg-color));
+  color: hsl(var(--white));
   height: 0;
   transition: top 0.25s ease-in-out, height 0.25s ease-in-out,
     width 0.25s ease-in-out;
@@ -146,6 +146,7 @@
   border-start-start-radius: px-to-rem(13);
   border-end-start-radius: px-to-rem(13);
   width: calc(100% - px-to-rem(24));
+  filter: invert(1);
 
   .svgCurved {
     position: absolute;

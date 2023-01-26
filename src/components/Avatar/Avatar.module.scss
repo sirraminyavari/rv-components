@@ -80,28 +80,28 @@
 }
 
 .primary {
-  background-color: hsl(var(--default));
+  background-color: hsl(var(--base));
 
   &:hover {
-    background-color: hsl(var(--percent-10));
+    background-color: hsl(var(--light));
   }
 
   &:active {
-    background-color: hsl(var(--percent-10));
+    background-color: hsl(var(--light));
   }
 }
 
 .outline {
-  border-color: hsl(var(--default));
+  border-color: hsl(var(--base));
   background-color: transparent;
   padding: px-to-rem(2);
 
   &:hover {
-    background-color: hsl(var(--default) / 15%);
+    background-color: hsl(var(--base) / 15%);
   }
 
   &:active {
-    background-color: hsl(var(--default) / 25%);
+    background-color: hsl(var(--base) / 25%);
   }
 }
 
@@ -109,12 +109,12 @@
   background-color: hsl(var(--white));
 
   &:hover {
-    background-color: hsl(var(--default) / 100%);
+    background-color: hsl(var(--base) / 100%);
   }
 }
 
 .disabled {
-  background-color: hsl(var(--default));
+  background-color: hsl(var(--base));
   filter: contrast(0.5);
 }
 

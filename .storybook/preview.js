@@ -16,21 +16,36 @@ export const parameters = {
     options: {
       storySort: {
         order: [
+          'Intro',
           'Install',
           'Usage',
           'ColorPalettes',
           'Iconography',
           'Components',
+          'Demo',
         ],
       },
     },
   },
-  darkMode: {
-    darkClass: 'dark',
-    lightClass: 'light',
-    stylePreview: true,
-    classTarget: 'html',
-    current: 'light',
+  // darkMode: {
+  //   darkClass: 'dark',
+  //   lightClass: 'default',
+  //   stylePreview: true,
+  //   classTarget: 'html',
+  //   current: 'default',
+  // },
+  themes: {
+    default: 'twitter',
+    list: [
+      {
+        name: 'default',
+        class: 'default',
+        color: 'hsla(198, 63%, 38%, 1)',
+        default: true,
+      },
+      { name: 'dark', class: 'dark', color: 'hsla(213, 24%, 16%, 1)' },
+      { name: 'amoled', class: 'amoled', color: 'hsla(0, 0%, 0%, 1)' },
+    ],
   },
   // layout: 'fullscreen',
 };

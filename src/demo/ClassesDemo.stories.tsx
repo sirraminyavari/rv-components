@@ -197,7 +197,9 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
             alignItems: 'center',
           }}
         >
-          <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div
+            style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}
+          >
             <FileTrayFullSvg
               style={{ fontSize: '1.6rem', marginInlineEnd: '1rem' }}
             />
@@ -214,7 +216,7 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
               </Button>
             </ButtonGroup>
           </div>
-          <div style={{ width: 490 }}>
+          <div style={{ width: '100%', maxWidth: 490 }}>
             <TextInput
               label="Search in Researchers team"
               variant={RVVariantProp.outline}
@@ -228,6 +230,7 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'center',
+            flexWrap: 'wrap',
           }}
         >
           <div

@@ -12,7 +12,7 @@
   column-gap: px-to-rem(13);
   display: flex;
 
-  & > svg {
+  &>svg {
     vertical-align: middle;
     font-size: 1em;
     color: inherit;
@@ -48,7 +48,7 @@
     padding-inline: px-to-rem(4);
     font-size: px-to-rem(20);
 
-    & > svg {
+    &>svg {
       margin-inline-end: 0;
       padding: px-to-rem(8);
     }
@@ -64,36 +64,37 @@
 }
 
 .primary {
-  background-color: hsl(var(--default));
-  color: hsl(var(--default-font));
+  background-color: hsl(var(--base));
+  color: hsl(var(--base-font));
 
   &:hover {
-    background-color: hsl(var(--percent-90));
-    color: hsl(var(--percent-90-font));
+    background-color: hsl(var(--dark));
+    color: hsl(var(--dark-font));
   }
 
   &:focus {
-    background-color: hsl(var(--percent-95));
-    color: hsl(var(--percent-95-font));
+    background-color: hsl(var(--darker));
+    color: hsl(var(--darker-font));
   }
 
   &:focus,
   &.active {
-    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--default) / 25%);
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--base) / 25%);
   }
 
   &:active {
-    background-color: hsl(var(--percent-90));
-    color: hsl(var(--percent-90-font));
-    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--default) / 25%);
+    background-color: hsl(var(--dark));
+    color: hsl(var(--dark-font));
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--base) / 25%);
   }
 
   &.badge {
+
     &:hover,
     &:active,
     &:focus {
-      background-color: hsl(var(--default));
-      color: hsl(var(--default-font));
+      background-color: hsl(var(--base));
+      color: hsl(var(--base-font));
       box-shadow: unset;
       cursor: default;
     }
@@ -101,32 +102,33 @@
 }
 
 .outline {
-  border-color: hsl(var(--default));
-  color: hsl(var(--default));
+  border-color: hsl(var(--base));
+  color: hsl(var(--base));
   background-color: transparent;
 
   &:hover {
-    background-color: hsl(var(--default) / 15%);
-    color: hsl(var(--default));
+    background-color: hsl(var(--base) / 15%);
+    color: hsl(var(--base));
   }
 
   &:focus,
   &.active {
-    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--default) / 25%);
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--base) / 25%);
   }
 
   &:active {
-    background-color: hsl(var(--default) / 25%);
-    color: hsl(var(--default));
-    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--default) / 25%);
+    background-color: hsl(var(--base) / 25%);
+    color: hsl(var(--base));
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--base) / 25%);
   }
 
   &.badge {
+
     &:hover,
     &:active,
     &:focus {
-      border-color: hsl(var(--default));
-      color: hsl(var(--default));
+      border-color: hsl(var(--base));
+      color: hsl(var(--base));
       background-color: transparent;
       box-shadow: unset;
       cursor: default;
@@ -135,30 +137,31 @@
 }
 
 .white {
-  color: hsl(var(--default));
+  color: hsl(var(--base));
   background-color: hsl(var(--white));
 
   &:hover {
-    background-color: hsl(var(--default) / 5%);
-    color: hsl(var(--default));
+    background-color: hsl(var(--base) / 5%);
+    color: hsl(var(--base));
   }
 
   &:focus,
   &.active {
-    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--default) / 15%);
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--base) / 15%);
   }
 
   &:active {
-    background-color: hsl(var(--default) / 15%);
-    color: hsl(var(--default));
-    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--default) / 15%);
+    background-color: hsl(var(--base) / 15%);
+    color: hsl(var(--base));
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--base) / 15%);
   }
 
   &.badge {
+
     &:hover,
     &:active,
     &:focus {
-      color: hsl(var(--default));
+      color: hsl(var(--base));
       background-color: hsl(var(--white));
       box-shadow: unset;
       cursor: default;
@@ -167,8 +170,8 @@
 }
 
 .disabled {
-  color: hsl(var(--default) / 20%);
-  background-color: hsl(var(--default) / 10%);
+  color: hsl(var(--base) / 20%);
+  background-color: hsl(var(--base) / 10%);
 
   &:hover,
   &:active,
