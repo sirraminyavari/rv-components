@@ -141,19 +141,19 @@
   background-color: hsl(var(--white));
 
   &:hover {
-    background-color: hsl(var(--base) / 5%);
+    background-color: hsl(var(--base) / 25%);
     color: hsl(var(--base));
   }
 
   &:focus,
   &.active {
-    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--base) / 15%);
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--base) / 35%);
   }
 
   &:active {
     background-color: hsl(var(--base) / 15%);
     color: hsl(var(--base));
-    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--base) / 15%);
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--base) / 35%);
   }
 
   &.badge {

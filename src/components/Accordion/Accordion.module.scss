@@ -28,6 +28,7 @@
     padding-inline-end: px-to-rem(16);
     margin-inline-start: px-to-rem(16);
     z-index: 2;
+    color: hsl(var(--base-font));
   }
 
   &>svg {
