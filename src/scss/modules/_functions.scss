@@ -291,15 +291,15 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675 0.000910580
 }
 
 @function black-or-white-color($color,
-  $custom-black, $custom-white) {
+  $custom-black: $black, $custom-white: $white) {
   $color-lod: light-or-dark($color, $custom-black, $custom-white);
 
   @if ($color-lod =='dark') {
-    @return $white;
+    @return $custom-white;
   }
 
   @else {
-    @return $black;
+    @return $custom-black;
   }
 }
 

@@ -82,6 +82,7 @@ const SidebarMain = forwardRef<HTMLDivElement, RVSidebarMain>(
                 if (!noIndicator) onActiveClick(e);
                 if (onClick) onClick(e);
               }}
+              color={color}
               className={clsx(noIndicator && styles.cmLogo)}
             >
               {Icon && (

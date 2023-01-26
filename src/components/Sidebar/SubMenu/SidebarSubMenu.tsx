@@ -96,7 +96,7 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
               <Accordion
                 key={JSON.stringify(link)}
                 label={link.title}
-                color={RVColorProp.inherit}
+                color={color}
                 onLabelClick={(e) => {
                   onActiveClick(e);
                   link.onClick && link.onClick(e);
