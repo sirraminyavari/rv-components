@@ -2,155 +2,155 @@
 @import '../../scss/modules/default';
 
 .textInputContainer {
-  border-color: transparent;
-  border-style: solid;
-  min-width: px-to-rem(280);
-  display: inline-flex;
-  position: relative;
-  padding-inline: px-to-rem(7);
-  align-items: center;
-  box-sizing: border-box;
-
-  .trailingIcon {
-    font-size: px-to-rem(20);
-    transition: color 0.2s;
-  }
-
-  .label {
-    position: absolute;
-    padding-block: px-to-rem(5);
-    padding-inline: px-to-rem(14);
-    position: absolute;
-    inset-block-start: 50%;
-    inset-inline-start: px-to-rem(1);
-    transform: translate(0, -50%);
-    transition: transform 0.2s ease-out, inset 0.2s ease-out,
-      background-color 0.1s ease-out, color 0.2s ease-out,
-      font-size 0.2s ease-out;
-    color: hsl(var(--percent-10));
-    z-index: 1;
-
-    &:before {
-      content: '';
-      z-index: -1;
-      height: px-to-rem(5);
-      width: 0;
-      position: absolute;
-      inset-block-start: 50%;
-      inset-inline-start: 50%;
-      transform: translateX(0) translateY(-50%);
-      background-color: transparent;
-      transition: transform 0.2s ease-out, inset 0.2s ease-out,
-        background-color 0.2s ease-out, width 0.4s ease-out;
-    }
-  }
-
-  &.primary {
-    border-width: 0;
-    border-bottom-width: px-to-rem(2);
-    padding-block: px-to-rem(7);
-    border-color: hsl(var(--percent-10));
-    transition: border 0.2s ease-out;
+    border-color: transparent;
+    border-style: solid;
+    min-width: px-to-rem(280);
+    display: inline-flex;
+    position: relative;
+    padding-inline: px-to-rem(7);
+    align-items: center;
+    box-sizing: border-box;
 
     .trailingIcon {
-      color: hsl(var(--percent-10));
+        font-size: px-to-rem(20);
+        transition: color 0.2s;
     }
 
-    &:focus-within {
-      border-color: hsl(var(--default));
-
-      .trailingIcon {
-        color: hsl(var(--default));
-      }
-
-      .label {
-        color: hsl(var(--default));
-      }
-    }
-  }
-
-  &.outline {
-    border-width: px-to-rem(2);
-    padding-block: px-to-rem(7);
-    border-radius: $borderRadiusQuarter;
-    border-color: hsl(var(--percent-10));
-    transition: border 0.2s ease-out;
-
-    .trailingIcon {
-      color: hsl(var(--percent-10));
-    }
-
-    &:focus-within {
-      border-color: hsl(var(--default));
-
-      .trailingIcon {
-        color: hsl(var(--default));
-      }
-
-      .label {
-        color: hsl(var(--default));
+    .label {
+        position: absolute;
+        padding-block: px-to-rem(5);
+        padding-inline: px-to-rem(14);
+        position: absolute;
+        inset-block-start: 50%;
+        inset-inline-start: px-to-rem(1);
+        transform: translate(0, -50%);
+        transition: transform 0.2s ease-out, inset 0.2s ease-out,
+            background-color 0.1s ease-out, color 0.2s ease-out,
+            font-size 0.2s ease-out;
+        color: hsl(var(--percent-10));
+        z-index: 1;
 
         &:before {
-          background-color: hsl(var(--bg-color));
+            content: '';
+            z-index: -1;
+            height: px-to-rem(5);
+            width: 0;
+            position: absolute;
+            inset-block-start: 50%;
+            inset-inline-start: 50%;
+            transform: translateX(0) translateY(-50%);
+            background-color: transparent;
+            transition: transform 0.2s ease-out, inset 0.2s ease-out,
+                background-color 0.2s ease-out, width 0.4s ease-out;
         }
-      }
     }
 
-    .baseTextInput:not(:placeholder-shown) + .label {
-      transform: translate(px-to-rem(-7), -50%);
-      font-size: 0.5em;
+    &.primary {
+        border-width: 0;
+        border-bottom-width: px-to-rem(2);
+        padding-block: px-to-rem(7);
+        border-color: hsl(var(--percent-10));
+        transition: border 0.2s ease-out;
 
-      &:before {
-        background-color: hsl(var(--bg-color));
-      }
+        .trailingIcon {
+            color: hsl(var(--percent-10));
+        }
+
+        &:focus-within {
+            border-color: hsl(var(--default));
+
+            .trailingIcon {
+                color: hsl(var(--default));
+            }
+
+            .label {
+                color: hsl(var(--default));
+            }
+        }
     }
-  }
 
-  &.white {
-    border-width: px-to-rem(2);
-    padding-block: px-to-rem(7);
-    border-radius: $borderRadiusHalf;
-    background-color: hsl(var(--percent-5) / 10);
-    color: hsl(var(--percent-5-font));
-    transition: color 0.2s ease-out;
+    &.outline {
+        border-width: px-to-rem(2);
+        padding-block: px-to-rem(7);
+        border-radius: $borderRadiusQuarter;
+        border-color: hsl(var(--percent-10));
+        transition: border 0.2s ease-out;
 
-    .trailingIcon,
-    .label {
-      color: hsl(var(--default));
+        .trailingIcon {
+            color: hsl(var(--percent-10));
+        }
+
+        &:focus-within {
+            border-color: hsl(var(--default));
+
+            .trailingIcon {
+                color: hsl(var(--default));
+            }
+
+            .label {
+                color: hsl(var(--default));
+
+                &:before {
+                    background-color: hsl(var(--bg-color));
+                }
+            }
+        }
+
+        .baseTextInput:not(:placeholder-shown)+.label {
+            transform: translate(px-to-rem(7), -50%);
+            font-size: 0.5em;
+
+            &:before {
+                background-color: hsl(var(--bg-color));
+            }
+        }
     }
 
-    &:focus-within {
-      background-color: hsl(var(--percent-5) / 20);
-      color: hsl(var(--default-font));
+    &.white {
+        border-width: px-to-rem(2);
+        padding-block: px-to-rem(7);
+        border-radius: $borderRadiusHalf;
+        background-color: hsl(var(--percent-5) / 10);
+        color: hsl(var(--percent-5-font));
+        transition: color 0.2s ease-out;
 
-      .label {
-        color: hsl(var(--default));
-      }
+        .trailingIcon,
+        .label {
+            color: hsl(var(--default));
+        }
+
+        &:focus-within {
+            background-color: hsl(var(--percent-5) / 20);
+            color: hsl(var(--default-font));
+
+            .label {
+                color: hsl(var(--default));
+            }
+        }
     }
-  }
 
-  @include full-width;
+    @include full-width;
 }
 
 .baseTextInput {
-  border-color: transparent;
-  background-color: transparent;
-  outline: none;
-  width: 100%;
-  z-index: 2;
-  padding-inline: px-to-rem(5);
+    border-color: transparent;
+    background-color: transparent;
+    outline: none;
+    width: 100%;
+    z-index: 2;
+    padding-inline: px-to-rem(5);
 
-  &:not(:placeholder-shown) + .label {
-    transform: translate(px-to-rem(-7), -50%);
-    inset-block-start: 0;
-    inset-inline-start: 0;
-    padding-inline: px-to-rem(7);
-    font-size: 0.5em;
+    &:not(:placeholder-shown)+.label {
+        transform: translate(px-to-rem(7), -50%);
+        inset-block-start: 0;
+        inset-inline-start: 0;
+        padding-inline: px-to-rem(7);
+        font-size: 0.5em;
 
-    &:before {
-      inset-inline-start: 0;
-      width: calc(100%);
-      transform: translateY(-70%) translateX(0%);
+        &:before {
+            inset-inline-start: 0;
+            width: calc(100%);
+            transform: translateY(-70%) translateX(0%);
+        }
     }
-  }
 }
