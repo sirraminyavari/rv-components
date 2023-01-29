@@ -27,6 +27,7 @@ export interface RVTextInput
   label?: string;
   fullWidth?: boolean;
   Icon?: FunctionComponent<RVSvgProps>;
+  IconPosition?: 'leading' | 'trailing';
 }
 
 const TextInput = forwardRef<HTMLInputElement, RVTextInput>(
@@ -42,6 +43,7 @@ const TextInput = forwardRef<HTMLInputElement, RVTextInput>(
       placeholder = ' ',
       fullWidth,
       Icon,
+      IconPosition = 'trailing',
       ...props
     },
     ref
@@ -57,6 +59,9 @@ const TextInput = forwardRef<HTMLInputElement, RVTextInput>(
           className
         )}
       >
+        {Icon && IconPosition === 'leading' && (
+          <Icon className={styles.trailingIcon} />
+        )}
         <input
           ref={ref}
           type={type}
@@ -64,8 +69,19 @@ const TextInput = forwardRef<HTMLInputElement, RVTextInput>(
           className={styles.baseTextInput}
           {...props}
         />
-        {label && <label className={styles.label}>{label}</label>}
-        {Icon && <Icon className={styles.trailingIcon} />}
+        {label && (
+          <label
+          className={clsx(
+            styles.label,
+            IconPosition === 'leading' && styles.labelWithLeadingIcon
+            )}
+            >
+            {label}
+          </label>
+        )}
+        {Icon && IconPosition === 'trailing' && (
+          <Icon className={styles.trailingIcon} />
+        )}
       </div>
     );
   }

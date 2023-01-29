@@ -16,6 +16,7 @@ import { RVColorProp, RVSvgProps, RVVariantProp } from '../../../types';
 import { isRTL } from '../../../utils/isRtl';
 import { Accordion } from '../../Accordion';
 import { Button } from '../../Button';
+import { TextInput } from '../../TextInput';
 import { Typography } from '../../Typography';
 import SidebarSubMenuIndicator from './SidebarIndicator';
 import styles from './SidebarSubMenu.module.scss';
@@ -35,6 +36,9 @@ export interface RVSidebarSubMenu
     title?: string;
     badge?: string | number;
     onClick?: (event?: MouseEvent<HTMLButtonElement>) => void;
+    onChange?: (event?: MouseEvent<HTMLButtonElement>) => void;
+    input?: boolean;
+    color?: RVColorProp;
     childItems?: {
       Icon?: FunctionComponent<RVSvgProps>;
       title?: string;
@@ -91,6 +95,17 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
     const linkButtonGenerator = useCallback(
       (links: RVSidebarSubMenu['links']) => {
         return links.map((link) => {
+          if (link.input)
+            return (
+              <TextInput
+                key={JSON.stringify(link)}
+                label={link.title}
+                color={link.color || color}
+                Icon={link.Icon}
+                IconPosition="leading"
+                className={styles.menuInput}
+              />
+            );
           if (link.childItems && link.childItems.length)
             return (
               <Accordion
@@ -184,7 +199,6 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
                     console.log(prev);
                     return !prev;
                   });
-                  console.log();
                 }}
               >
                 <ChevronSvg direction={isRTL() === 'ltr' ? 'left' : 'right'} />

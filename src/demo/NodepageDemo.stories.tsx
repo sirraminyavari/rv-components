@@ -28,6 +28,9 @@ import {
   ShapesSvg,
   SocialSvg,
   AlbumsSvg,
+  ReaderSvg,
+  ChatBubbleSvg,
+  ArrowCircleSvg,
 } from '../icons';
 import {
   Avatar,
@@ -43,7 +46,7 @@ import {
 } from '..';
 
 export default {
-  title: 'Demo/Classes',
+  title: 'Demo/NodePage',
   argTypes: {
     color: {
       control: {
@@ -69,7 +72,7 @@ export default {
   },
 } as ComponentMeta<typeof SidebarSubMenuComponent>;
 
-export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
+export const NodePage: ComponentStory<FunctionComponent> = ({ ...args }) => {
   const [isActionBarOpen, setIsActionBarOpen] = useState<boolean>(false);
   return (
     <div style={{ display: 'flex', minHeight: '100vh', width: '100%' }}>
@@ -177,7 +180,12 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
             { badge: 1265, title: 'Everything', Icon: GridSvg },
             { badge: 23, title: 'Bookmarked', Icon: BookmarkSvg },
             { badge: 11, title: 'Drafts', Icon: FileTrayFullSvg },
-            { input: true,color:RVColorProp.distant, title: 'Drafts', Icon: FunnelSvg },
+            {
+              input: true,
+              color: RVColorProp.distant,
+              title: 'Drafts',
+              Icon: FunnelSvg,
+            },
             {
               title: 'Documents',
               Icon: HomeSvg,
@@ -223,15 +231,6 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
             <Typography type="H2" style={{ marginInlineEnd: '1rem' }}>
               Citations
             </Typography>
-            <ButtonGroup>
-              <Button size={RVSizeProp.small}>
-                <PlusSvg />
-                New item
-              </Button>
-              <Button size={RVSizeProp.small}>
-                <FlashSvg />
-              </Button>
-            </ButtonGroup>
           </div>
           <div style={{ width: '100%', maxWidth: 490 }}>
             <TextInput
@@ -248,101 +247,75 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
             justifyContent: 'space-between',
             alignItems: 'center',
             flexWrap: 'wrap',
+            marginBlock: '1rem',
+          }}
+        >
+          <RowItem
+            size={RVSizeProp.small}
+            ActionsComponent={
+              <div
+                style={{
+                  display: 'flex',
+                  columnGap: '.5rem',
+                }}
+              >
+                <Button variant={RVVariantProp.white}>back</Button>
+                <Button fullWidth noWrap style={{ width: 200 }}>
+                  <ArrowCircleSvg width="1.3em" height="1.3em" direction="up" />
+                  publish
+                </Button>
+              </div>
+            }
+          >
+            <Typography type="H1">
+              CliqMind UX writing improvement and other correction
+            </Typography>
+          </RowItem>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            justifyContent: 'space-between',
+            alignItems: 'center',
+            flexWrap: 'wrap',
           }}
         >
           <div
             style={{
               width: 490,
-              marginBlock: '40px 23px',
+              marginBlock: '',
               display: 'flex',
               alignItems: 'center',
+              columnGap: '1rem',
+              paddingInlineStart: '2rem',
             }}
           >
-            <TextInput
-              label="Find in item names and keywords"
-              variant={RVVariantProp.outline}
-              Icon={SearchSvg}
-              fullWidth
+            <Avatar
+              src="https://i.pravatar.cc/300"
+              fullCircle
+              variant={RVVariantProp.white}
+              size={RVSizeProp.medium}
             />
-            <Typography
-              type="sub"
-              style={{ whiteSpace: 'nowrap', marginInlineStart: '1rem' }}
-            >
-              1129 items
-            </Typography>
           </div>
           <div
             style={{
-              marginBlock: '40px 23px',
+              marginBlock: '',
               display: 'flex',
               alignItems: 'center',
               columnGap: '1rem',
             }}
           >
-            <Button rounded="half" variant={RVVariantProp.white}>
-              <FunnelSvg />
-              Advanced
-            </Button>
-            <Button rounded="half" fullCircle variant={RVVariantProp.white}>
-              <AtSvg outline />
-            </Button>
             <Button rounded="half" fullCircle variant={RVVariantProp.white}>
               <BookmarkSvg outline />
             </Button>
             <Button rounded="half" fullCircle variant={RVVariantProp.white}>
-              <CalendarClearSvg outline />
+              <ChatBubbleSvg outline />
             </Button>
             <Button rounded="half" fullCircle variant={RVVariantProp.white}>
-              <PersonCircleSvg outline />
+              <ReaderSvg outline />
             </Button>
           </div>
         </div>
-        {new Array(20).fill(0).map(() => {
-          return (
-            <RowItem
-              ActionsComponent={
-                <div
-                  style={{
-                    display: 'flex',
-                    alignItems: 'center',
-                    columnGap: '1rem',
-                  }}
-                >
-                  <Button
-                    rounded="half"
-                    fullCircle
-                    variant={RVVariantProp.white}
-                  >
-                    <BookmarkSvg outline />
-                  </Button>
-                  <Button
-                    noWrap
-                    badge
-                    rounded="half"
-                    variant={RVVariantProp.white}
-                  >
-                    <BookmarkSvg outline /> 29 may
-                  </Button>
-                  <AvatarGroup>
-                    {new Array(3).fill(0).map((_, idx) => {
-                      return (
-                        <Avatar
-                          rounded="full"
-                          size={RVSizeProp.small}
-                          variant={RVVariantProp.white}
-                          stacked
-                          src={`https://i.pravatar.cc/150?u=${idx}`}
-                        />
-                      );
-                    })}
-                  </AvatarGroup>
-                </div>
-              }
-            >
-              <GridSvg /> Find faculty mentor
-            </RowItem>
-          );
-        })}
       </div>
     </div>
   );
