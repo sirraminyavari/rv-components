@@ -27,6 +27,12 @@
 
   &.noWrap {
     white-space: nowrap;
+    align-items: center;
+  }
+
+  &.fullWidth {
+    justify-content: center;
+    width: 100%;
   }
 
   &.medium {

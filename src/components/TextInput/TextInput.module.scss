@@ -30,6 +30,11 @@
         color: hsl(var(--base));
         z-index: 1;
 
+
+        &.labelWithLeadingIcon {
+            transform: translate(px-to-rem(17), -50%);
+        }
+
         &:before {
             content: '';
             z-index: -1;
@@ -53,7 +58,7 @@
         transition: border 0.2s ease-out;
 
         .trailingIcon {
-            color: hsl(var(--light));
+            color: hsl(var(--base));
         }
 
         &:focus-within {

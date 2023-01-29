@@ -22,6 +22,7 @@ export interface RVButton
   color?: RVColorProp;
   size?: RVSizeProp;
   fullCircle?: boolean;
+  fullWidth?: boolean;
   badge?: boolean;
   rounded?: 'full' | 'half';
   active?: boolean;
@@ -41,6 +42,7 @@ const Button = forwardRef<HTMLButtonElement, RVButton>(
       active,
       fullCircle,
       rounded,
+      fullWidth,
       badge,
       noWrap,
       ...props
@@ -59,6 +61,7 @@ const Button = forwardRef<HTMLButtonElement, RVButton>(
           rounded === 'full' && styles.roundedFull,
           rounded === 'half' && styles.roundedHalf,
           fullCircle && styles.fullCircle,
+          fullWidth && styles.fullWidth,
           badge && styles.badge,
           noWrap && styles.noWrap,
           active && styles.active,
