@@ -41,6 +41,12 @@ object-assign
  * Released under the MIT License.
  */
 
+/*!
+ * perfect-scrollbar v1.5.3
+ * Copyright 2021 Hyunje Jun, MDBootstrap and Contributors
+ * Licensed under MIT
+ */
+
 /*! *****************************************************************************
 Copyright (c) Microsoft Corporation.
 
