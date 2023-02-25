@@ -8,8 +8,7 @@ import {
   PropsWithoutRef,
   SetStateAction,
 } from 'react';
-import { RVColorProp, RVSvgProps, RVVariantProp } from '../../types';
-import { isRTL } from '../../utils/isRtl';
+import { RVColorProp } from '../../types';
 import styles from './SideMenu.module.scss';
 
 export interface RVSideMenu

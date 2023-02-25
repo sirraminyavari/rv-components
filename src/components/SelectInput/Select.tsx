@@ -9,6 +9,7 @@ import { GroupBase, OptionsOrGroups } from 'react-select';
 import ReactSelect from 'react-select';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types';
 import styles from './Select.module.scss';
+import type SelectType from 'react-select/dist/declarations/src/Select';
 
 interface RVSelectOptions
   extends OptionsOrGroups<string | number, GroupBase<string | number>> {}
@@ -30,7 +31,10 @@ export interface RVSelect
   options: { label: string | number; value: string | number }[];
 }
 
-const Select = forwardRef<HTMLDivElement, RVSelect>(
+const Select = forwardRef<
+  SelectType<string | number, boolean, GroupBase<string | number>>,
+  RVSelect
+>(
   (
     {
       className,
@@ -50,7 +54,7 @@ const Select = forwardRef<HTMLDivElement, RVSelect>(
       <>
         <ReactSelect
           isMulti={isMulti}
-          // menuIsOpen
+          ref={ref}
           isDisabled={disabled}
           className={clsx(
             styles.selectContainer,
