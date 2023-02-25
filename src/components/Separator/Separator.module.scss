@@ -1,0 +1,108 @@
+@import '../../scss/modules/default';
+
+.separatorContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .horizontalLine {
+        width: 100%;
+        border-style: solid;
+        border-radius: $borderRadiusQuarter;
+        border-color: transparent;
+    }
+
+    .content {
+        text-align: center;
+        margin-block: 0;
+        padding-inline: px-to-rem(16);
+        padding-block: px-to-rem(4);
+        border-radius: $borderRadiusHalf;
+        border-style: solid;
+        border-width: px-to-rem(1);
+        border-color: transparent;
+
+    }
+
+    &.nowrap {
+        .content {
+            white-space: nowrap;
+            max-width: 90%;
+        }
+    }
+
+    &.ellipsis {
+        .content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+    }
+
+    &.small {
+        font-size: px-to-rem(14);
+        column-gap: px-to-rem(14);
+
+        .horizontalLine {
+            height: px-to-rem(1);
+        }
+    }
+
+    &.medium {
+        font-size: px-to-rem(16);
+        column-gap: px-to-rem(16);
+
+        .horizontalLine {
+            height: px-to-rem(2);
+        }
+    }
+
+    &.large {
+        font-size: px-to-rem(18);
+        column-gap: px-to-rem(18);
+
+        .horizontalLine {
+            height: px-to-rem(3);
+        }
+    }
+
+
+
+    &.primary {
+        .horizontalLine {
+            background-color: hsl(var(--base));
+        }
+
+        .content {
+            color: hsl(var(--base));
+        }
+    }
+
+    &.outline {
+        .horizontalLine {
+            border-color: hsl(var(--base));
+        }
+
+        .content {
+            color: hsl(var(--base));
+        }
+    }
+
+    &.white {
+        .horizontalLine {
+            background-color: hsl(var(--base) / 30%);
+        }
+
+        .content {
+            color: hsl(var(--base) / 50%);
+        }
+
+    }
+
+    &.disabled {
+        .horizontalLine {
+            border-color: hsl(var(--lighter)/ 10%);
+            color: hsl(var(--base) / 40%);
+            border-color: hsl(var(--base) / 20%);
+        }
+    }
+}

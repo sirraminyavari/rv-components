@@ -63,17 +63,19 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
     ref
   ) => {
     const activeIndicatorRef = useRef<HTMLDivElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
     const activeTile = useRef<HTMLButtonElement | HTMLSpanElement | null>(null);
 
     const onActiveClick = useCallback(
       (event: MouseEvent<HTMLButtonElement | HTMLSpanElement>) => {
-        if (!activeIndicatorRef.current) return;
+        if (!activeIndicatorRef.current || !containerRef.current) return;
         const tile = event.currentTarget;
+        const containerScrolledWidth = containerRef.current.scrollTop;
 
         const tileBoundingRect = tile.getBoundingClientRect();
         const tileDirection = isRTL(tile);
         activeIndicatorRef.current.style.top = String(
-          `${tileBoundingRect.top}px`
+          `${tileBoundingRect.y + containerScrolledWidth}px`
         );
         activeIndicatorRef.current.style.height = `${tileBoundingRect.height}px`;
         const elementWidthOffset =
@@ -171,7 +173,7 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
           <SidebarSubMenuIndicator ref={activeIndicatorRef} color={color} />
           <div className={styles.titleBlock}>
             <PeopleCircleSvg className={styles.titleIcon} outline />
-            <div>
+            <div ref={containerRef}>
               <Typography
                 color={RVColorProp.inherit}
                 type="sub"

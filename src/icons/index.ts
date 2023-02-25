@@ -30,6 +30,7 @@ export { default as CloseSvg } from './close.svg';
 export { default as CloseCircleSvg } from './closeCircle.svg';
 export { default as SocialSvg } from './social.svg';
 export { default as HelpCircleSvg } from './helpCircle.svg';
+export { default as CalendarSvg } from './calendar.svg';
 export { default as CalendarClearSvg } from './calendarClear.svg';
 export { default as AtSvg } from './at.svg';
 export { default as FunnelSvg } from './funnel.svg';
