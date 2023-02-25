@@ -3,16 +3,13 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { SidebarMain as SidebarMainComponent } from '../components/Sidebar/Main';
 import { SidebarSubMenu as SidebarSubMenuComponent } from '../components/Sidebar/SubMenu';
 import {
-  AtSvg,
   BookmarkSvg,
   BriefcaseSvg,
-  CalendarClearSvg,
   ChartColumnBarSvg,
   ChatBubblesSvg,
   CMLogoSvg,
   DashboardSvg,
   FileTrayFullSvg,
-  FlashSvg,
   FunnelSvg,
   GridSvg,
   HammerWrenchSvg,
@@ -21,8 +18,6 @@ import {
   MenuSvg,
   NotificationSvg,
   PeopleCircleSvg,
-  PersonCircleSvg,
-  PlusSvg,
   SearchSvg,
   SettingsSvg,
   ShapesSvg,
@@ -31,19 +26,23 @@ import {
   ReaderSvg,
   ChatBubbleSvg,
   ArrowCircleSvg,
+  CalendarSvg,
 } from '../icons';
 import {
   Avatar,
-  AvatarGroup,
   Button,
-  ButtonGroup,
   RowItem,
   RVColorProp,
   RVSizeProp,
   RVVariantProp,
+  TextAreaInput,
   TextInput,
   Typography,
 } from '..';
+import { Breadcrumb } from '../components/Breadcrumb';
+import { Select } from '../components/SelectInput';
+import { DatePicker } from '../components/DatePicker';
+import { SideMenu } from '../components/SideMenu';
 
 export default {
   title: 'Demo/NodePage',
@@ -73,6 +72,7 @@ export default {
 } as ComponentMeta<typeof SidebarSubMenuComponent>;
 
 export const NodePage: ComponentStory<FunctionComponent> = ({ ...args }) => {
+  const [sideMenuStatus, setSideMenuStatus] = useState<boolean>(true);
   const [isActionBarOpen, setIsActionBarOpen] = useState<boolean>(false);
   return (
     <div style={{ display: 'flex', minHeight: '100vh', width: '100%' }}>
@@ -225,17 +225,29 @@ export const NodePage: ComponentStory<FunctionComponent> = ({ ...args }) => {
           <div
             style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}
           >
-            <FileTrayFullSvg
-              style={{ fontSize: '1.6rem', marginInlineEnd: '1rem' }}
+            <Breadcrumb
+              Icon={FileTrayFullSvg}
+              variant={RVVariantProp.white}
+              size={RVSizeProp.medium}
+              routeLinks={[
+                { label: 'Citations', path: '' },
+                {
+                  label: 'NodePage',
+                  path: '',
+                  adjacentPaths: [
+                    { label: 'Citations', path: '' },
+                    { label: 'Citations', path: '' },
+                    { label: 'Citations', path: '' },
+                  ],
+                },
+              ]}
             />
-            <Typography type="H2" style={{ marginInlineEnd: '1rem' }}>
-              Citations
-            </Typography>
           </div>
           <div style={{ width: '100%', maxWidth: 490 }}>
             <TextInput
               label="Search in Researchers team"
               variant={RVVariantProp.outline}
+              color={RVColorProp.distant}
               Icon={SearchSvg}
               fullWidth
             />
@@ -311,10 +323,221 @@ export const NodePage: ComponentStory<FunctionComponent> = ({ ...args }) => {
             <Button rounded="half" fullCircle variant={RVVariantProp.white}>
               <ChatBubbleSvg outline />
             </Button>
-            <Button rounded="half" fullCircle variant={RVVariantProp.white}>
+            <Button
+              rounded="half"
+              fullCircle
+              variant={RVVariantProp.white}
+              active={sideMenuStatus}
+              onClick={() => {
+                setSideMenuStatus((prev) => !prev);
+              }}
+            >
               <ReaderSvg outline />
             </Button>
           </div>
+        </div>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: 'row',
+            gap: '1rem',
+          }}
+        >
+          <div
+            style={{
+              marginBlock: '4rem',
+              display: 'flex',
+              flexDirection: 'column',
+              gap: '2rem',
+              width: '100%',
+            }}
+          >
+            <div style={{ display: 'flex', width: '100%' }}>
+              <div
+                style={{
+                  flexBasis: '20%',
+                }}
+              >
+                <span
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '1rem',
+                  }}
+                >
+                  <AlbumsSvg style={{ fontSize: '1.5rem' }} />
+                  Text Area component
+                </span>
+              </div>
+              <>
+                <TextAreaInput
+                  rows={6}
+                  fullWidth
+                  label="placeholder ..."
+                  color={RVColorProp.distant}
+                  variant={RVVariantProp.outline}
+                />
+              </>
+            </div>
+            <div style={{ display: 'flex', width: '100%' }}>
+              <div
+                style={{
+                  flexBasis: '20%',
+                }}
+              >
+                <span
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '1rem',
+                  }}
+                >
+                  <AlbumsSvg style={{ fontSize: '1.5rem' }} />
+                  Text Area component
+                </span>
+              </div>
+              <>
+                <TextInput
+                  fullWidth
+                  label="placeholder ..."
+                  color={RVColorProp.distant}
+                  variant={RVVariantProp.outline}
+                />
+              </>
+            </div>
+            <div style={{ display: 'flex', width: '100%' }}>
+              <div
+                style={{
+                  flexBasis: '20%',
+                }}
+              >
+                <span
+                  style={{
+                    width: '100%',
+                    display: 'flex',
+                    alignItems: 'center',
+                    gap: '1rem',
+                  }}
+                >
+                  <CalendarSvg style={{ fontSize: '1.5rem' }} />
+                  Date picker component
+                </span>
+              </div>
+              <>
+                <DatePicker
+                  fullWidth
+                  label="placeholder ..."
+                  color={RVColorProp.distant}
+                  variant={RVVariantProp.outline}
+                />
+              </>
+            </div>
+            <div
+              style={{
+                marginBlock: '2rem',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '2rem',
+              }}
+            >
+              <div style={{ display: 'flex', width: '100%' }}>
+                <div
+                  style={{
+                    flexBasis: '20%',
+                  }}
+                >
+                  <span
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '1rem',
+                    }}
+                  >
+                    <AlbumsSvg style={{ fontSize: '1.5rem' }} />
+                    select component
+                  </span>
+                </div>
+                <>
+                  <Select
+                    options={[
+                      { label: 'test', value: 'test' },
+                      { label: 'test1', value: 'test' },
+                      { label: 'test2', value: 'test' },
+                      { label: 'test3', value: 'test' },
+                    ]}
+                    placeholder="placeholder ..."
+                    color={RVColorProp.distant}
+                    variant={RVVariantProp.outline}
+                  />
+                </>
+              </div>
+            </div>
+            <div
+              style={{
+                marginBlock: '2rem',
+                display: 'flex',
+                flexDirection: 'column',
+                gap: '2rem',
+              }}
+            >
+              <div style={{ display: 'flex', width: '100%' }}>
+                <div
+                  style={{
+                    flexBasis: '20%',
+                  }}
+                >
+                  <span
+                    style={{
+                      width: '100%',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: '1rem',
+                    }}
+                  >
+                    <AlbumsSvg style={{ fontSize: '1.5rem' }} />
+                    multiselect component
+                  </span>
+                </div>
+                <>
+                  <Select
+                    style={{ width: '100%' }}
+                    isMulti
+                    isClearable
+                    options={[
+                      { label: 'test', value: 'test' },
+                      { label: 'test1', value: 'test' },
+                      { label: 'test2', value: 'test' },
+                      { label: 'test3', value: 'test' },
+                    ]}
+                    placeholder="placeholder ..."
+                    color={RVColorProp.distant}
+                    variant={RVVariantProp.outline}
+                  />
+                </>
+              </div>
+            </div>
+          </div>
+
+          <SideMenu height="100%" width="350px" open={sideMenuStatus}>
+            <div
+              style={{
+                height: '80vh',
+                width: 350,
+                padding: 12,
+                overflow: 'hidden',
+              }}
+            >
+              <p style={{ overflow: 'hidden' }}>
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel
+                ipsum maiores veritatis neque quas minus voluptas beatae
+                corporis, est molestias veniam, blanditiis fugiat commodi in!
+                Repudiandae mollitia accusamus assumenda obcaecati?
+              </p>
+            </div>
+          </SideMenu>
         </div>
       </div>
     </div>

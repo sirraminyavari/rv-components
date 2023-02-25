@@ -1,0 +1,55 @@
+@use 'sass:math';
+@import '../../scss/modules/default';
+
+.dropdownContainer {
+    position: relative;
+    display: inline-flex;
+    min-width: px-to-rem(180);
+
+
+    svg.chevron {
+        transition: transform .3s ease-in-out;
+    }
+
+    .label {
+        padding-inline: px-to-rem(14.5) !important;
+        width: 100%;
+    }
+
+    .dropdownMenu {
+        position: absolute;
+        inset-block-start: 50%;
+        inset-inline-start: px-to-rem(-2);
+        min-height: px-to-rem(12);
+        max-height: 40vh;
+        padding-block: px-to-rem(6);
+        padding-inline: px-to-rem(4);
+        background-color: hsl(var(--white));
+        box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--black)/ 15%);
+        transition: background-color .3s ease-in-out, opacity .3s ease-in-out, inset .3s ease-in-out;
+        transform: scale(0);
+        opacity: 0;
+        z-index: 0;
+        overflow-y: auto;
+        padding-inline: px-to-rem(4);
+        margin-block-start: px-to-rem(4);
+        border-radius: px-to-rem(7);
+        display: flex;
+        flex-direction: column;
+        row-gap: px-to-rem(7);
+    }
+
+    &.toggled {
+        svg.chevron {
+            transform: scale3d(-1, -1, 1);
+        }
+
+        .dropdownMenu {
+            inset-block-start: 100%;
+            transform: scale(1) scaleZ(10);
+            opacity: 1;
+        }
+    }
+
+
+}

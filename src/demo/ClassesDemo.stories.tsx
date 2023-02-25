@@ -41,6 +41,7 @@ import {
   TextInput,
   Typography,
 } from '..';
+import { Breadcrumb } from '../components/Breadcrumb';
 
 export default {
   title: 'Demo/Classes',
@@ -71,6 +72,10 @@ export default {
 
 export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
   const [isActionBarOpen, setIsActionBarOpen] = useState<boolean>(false);
+  const [isBookmarkChecked, setIsBookmarkChecked] = useState<boolean>(false);
+  const toggleBookmark = () => {
+    setIsBookmarkChecked((prev) => !prev);
+  };
   return (
     <div style={{ display: 'flex', minHeight: '100vh', width: '100%' }}>
       <div
@@ -177,7 +182,12 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
             { badge: 1265, title: 'Everything', Icon: GridSvg },
             { badge: 23, title: 'Bookmarked', Icon: BookmarkSvg },
             { badge: 11, title: 'Drafts', Icon: FileTrayFullSvg },
-            { input: true,color:RVColorProp.distant, title: 'Drafts', Icon: FunnelSvg },
+            {
+              input: true,
+              color: RVColorProp.distant,
+              title: 'Drafts',
+              Icon: FunnelSvg,
+            },
             {
               title: 'Documents',
               Icon: HomeSvg,
@@ -217,12 +227,14 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
           <div
             style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}
           >
-            <FileTrayFullSvg
-              style={{ fontSize: '1.6rem', marginInlineEnd: '1rem' }}
+            <Breadcrumb
+              // color={RVColorProp.grayDark}
+              Icon={FileTrayFullSvg}
+              variant={RVVariantProp.white}
+              size={RVSizeProp.medium}
+              routeLinks={[{ label: 'Citations', path: '' }]}
             />
-            <Typography type="H2" style={{ marginInlineEnd: '1rem' }}>
-              Citations
-            </Typography>
+
             <ButtonGroup>
               <Button size={RVSizeProp.small}>
                 <PlusSvg />
@@ -238,6 +250,7 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
               label="Search in Researchers team"
               variant={RVVariantProp.outline}
               Icon={SearchSvg}
+              color={RVColorProp.distant}
               fullWidth
             />
           </div>
@@ -262,6 +275,7 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
               label="Find in item names and keywords"
               variant={RVVariantProp.outline}
               Icon={SearchSvg}
+              color={RVColorProp.distant}
               fullWidth
             />
             <Typography
@@ -286,8 +300,14 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
             <Button rounded="half" fullCircle variant={RVVariantProp.white}>
               <AtSvg outline />
             </Button>
-            <Button rounded="half" fullCircle variant={RVVariantProp.white}>
-              <BookmarkSvg outline />
+            <Button
+              active={!isBookmarkChecked}
+              rounded="half"
+              fullCircle
+              variant={RVVariantProp.white}
+              onClick={toggleBookmark}
+            >
+              <BookmarkSvg outline={isBookmarkChecked} />
             </Button>
             <Button rounded="half" fullCircle variant={RVVariantProp.white}>
               <CalendarClearSvg outline />
@@ -312,6 +332,7 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
                     rounded="half"
                     fullCircle
                     variant={RVVariantProp.white}
+                    badge
                   >
                     <BookmarkSvg outline />
                   </Button>
@@ -319,6 +340,7 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
                     noWrap
                     badge
                     rounded="half"
+                    color={RVColorProp.distant}
                     variant={RVVariantProp.white}
                   >
                     <BookmarkSvg outline /> 29 may

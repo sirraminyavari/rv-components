@@ -138,8 +138,6 @@
 
       @each $paletteSwatch,
       $color in map.get($theme-variants, $themeName, $localPaletteName) {
-
-        @debug "localPaletteName : #{$localPaletteName}";
         --#{$paletteSwatch}: #{color-hsl-args($color)};
         --#{$paletteSwatch}-font: #{color-hsl-args(black-or-white-color(
  $color,

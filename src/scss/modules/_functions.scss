@@ -57,7 +57,7 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675 0.000910580
   $red: nth($linear-channel-values, red($color) + 1);
   $green: nth($linear-channel-values, green($color) + 1);
   $blue: nth($linear-channel-values, blue($color) + 1);
-  $calculation: 0.2126 * $red +0.7152 * $green +0.0722 * $blue;
+  $calculation: (0.2126 * $red)+(0.7152 * $green)+(0.0722 * $blue);
   @return $calculation;
 }
 

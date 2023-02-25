@@ -13,12 +13,22 @@ export interface RVButtonGroup
       DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
     >,
     'color'
-  > {}
+  > {
+  fullWidth?: boolean;
+}
 
 const ButtonGroup = forwardRef<HTMLDivElement, RVButtonGroup>(
-  ({ children, className, ...props }, ref) => {
+  ({ children, className, fullWidth, ...props }, ref) => {
     return (
-      <div ref={ref} className={clsx(styles.buttonGroup, className)} {...props}>
+      <div
+        ref={ref}
+        className={clsx(
+          styles.buttonGroup,
+          fullWidth && 'fullWidth',
+          className
+        )}
+        {...props}
+      >
         {children}
       </div>
     );
