@@ -17,7 +17,10 @@ import styles from './TextInput.module.scss';
 export interface RVTextInput
   extends Omit<
     PropsWithoutRef<
-      DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>
+      DetailedHTMLProps<
+        InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>,
+        HTMLInputElement | HTMLTextAreaElement
+      >
     >,
     'color' | 'size'
   > {
@@ -71,11 +74,11 @@ const TextInput = forwardRef<HTMLInputElement, RVTextInput>(
         />
         {label && (
           <label
-          className={clsx(
-            styles.label,
-            IconPosition === 'leading' && styles.labelWithLeadingIcon
+            className={clsx(
+              styles.label,
+              IconPosition === 'leading' && styles.labelWithLeadingIcon
             )}
-            >
+          >
             {label}
           </label>
         )}

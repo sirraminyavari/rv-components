@@ -27,6 +27,7 @@
   will-change: top, height;
   border-start-end-radius: 0.3rem;
   border-end-end-radius: 0.3rem;
+  direction: ltr;
   // backface-visibility: hidden;
 }
 
@@ -34,6 +35,36 @@
   overflow-y: auto;
   height: 100%;
   position: relative;
+
+  /* width */
+  &::-webkit-scrollbar {
+    width: 5px;
+  }
+
+  /* Track */
+  &::-webkit-scrollbar-track {
+    background: hsl(var(--dark) / 5%);
+  }
+
+  /* Handle */
+  &::-webkit-scrollbar-thumb {
+    background: hsl(var(--base) /0%);
+    border-radius: 10px;
+    transition: background-color .24s;
+  }
+
+  &:hover {
+
+    &::-webkit-scrollbar-thumb {
+      background: hsl(var(--base) /25%);
+      border-radius: 10px;
+      transition: background-color .24s;
+
+      &:hover {
+        background: hsl(var(--base) /50%);
+      }
+    }
+  }
 }
 
 .menuSecondaryList {

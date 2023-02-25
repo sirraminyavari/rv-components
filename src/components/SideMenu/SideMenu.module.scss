@@ -1,0 +1,39 @@
+@import '../../scss/modules/default';
+
+.baseSideMenu {
+  transition: width 0.3s ease-out, padding 0.3s ease-out;
+  width: var(--sideMenu-width, 100%);
+  height: var(--sideMenu-height, 100%);
+  padding-block: px-to-rem(12);
+  padding-inline: px-to-rem(12);
+  overflow: hidden;
+  flex-shrink: 0;
+
+  &.sideMenuClose {
+    width: 0;
+    padding: 0;
+  }
+
+}
+
+.sideMenuContainer {
+  box-sizing: border-box;
+  // padding: px-to-rem(12);
+  border-radius: $borderRadiusHalf;
+  background-color: hsl(var(--base));
+  display: inline-block;
+  position: relative;
+  width: 100%;
+  color: hsl(var(--base-font));
+  height: 100%;
+}
+
+@include on-rtl {
+  .svgCurved {
+    transform: scaleX(-1);
+
+    &.end {
+      transform: scaleX(-1) scaleY(-1);
+    }
+  }
+}

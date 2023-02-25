@@ -12,6 +12,10 @@
   column-gap: px-to-rem(13);
   display: flex;
 
+  &:focus {
+    outline-width: 0;
+  }
+
   &>svg {
     vertical-align: middle;
     font-size: 1em;
@@ -151,7 +155,9 @@
     color: hsl(var(--base));
   }
 
-  &:focus,
+  &:focus{
+    box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(3) hsl(var(--black) / 15%);
+  }
   &.active {
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--base) / 35%);
   }

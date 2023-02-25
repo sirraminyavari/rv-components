@@ -1,0 +1,212 @@
+@use 'sass:math';
+@import '../../scss/modules/default';
+
+
+
+
+.label {
+    position: relative;
+    margin-block: px-to-rem(4);
+    margin-inline: px-to-rem(6);
+    align-items: center;
+    transition: color 250ms ease-out;
+    display: inline-flex;
+    cursor: pointer;
+    user-select: none;
+
+
+
+    .input {
+        height: 0;
+        width: 0;
+    }
+
+    &>.SwitchIndicator {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-inline-end: px-to-rem(8);
+        // padding-block: px-to-rem(8);
+        width: 2.1em;
+        height: 1.2em;
+        background: transparent;
+        border-radius: px-to-rem(100);
+        cursor: pointer;
+        transition: all 250ms ease-out;
+        position: relative;
+        cursor: pointer;
+        border-width: px-to-rem(1);
+        border-style: solid;
+
+        &:before {
+            content: "";
+            position: absolute;
+            border-radius: 100%;
+            aspect-ratio: 1;
+            height: 90%;
+            inset-block-start: 5%;
+            inset-inline-start: calc(100% - 1.2em);
+            transition: background-color .2s, inset .2s;
+            box-shadow: -2px 0px 4px rgba(0, 0, 0, 0.3);
+        }
+    }
+
+
+    &.toggled {
+        &>.SwitchIndicator {
+
+            &:before {
+                content: "";
+                inset-inline-start: 5%;
+            }
+        }
+    }
+
+    &.small {
+        font-size: px-to-rem(16);
+    }
+
+    &.medium {
+        font-size: px-to-rem(18);
+    }
+
+    &.large {
+        font-size: px-to-rem(20);
+    }
+
+    &.primary {
+        color: hsl(var(--base));
+
+        &>.SwitchIndicator {
+            border-color: hsl(var(--base));
+            background-color: hsl(var(--base));
+
+            &::before {
+                background-color: hsl(var(--light));
+            }
+
+        }
+
+        &:hover {
+            color: hsl(var(--base));
+
+            .SwitchIndicator {
+                // background-color: hsl(var(--light));
+
+                &::before {
+
+                    background-color: hsl(var(--lighter));
+                }
+            }
+        }
+
+        &.toggled {
+            .SwitchIndicator {
+                background-color: hsl(var(--light));
+
+            }
+        }
+
+        &:focus-within {
+            color: hsl(var(--darker));
+
+            .SwitchIndicator {
+                background-color: hsl(var(--darker));
+
+                &::before {
+                    background-color: hsl(var(--light));
+                }
+            }
+        }
+    }
+
+    &.outline {
+        color: hsl(var(--base));
+
+        &>.SwitchIndicator {
+            border-color: hsl(var(--base));
+
+            &::before {
+                background-color: hsl(var(--base));
+            }
+
+        }
+
+        &:hover,
+        &.toggled {
+            color: hsl(var(--dark));
+
+            .SwitchIndicator {
+                &::before {
+
+                    background-color: hsl(var(--dark));
+                }
+            }
+        }
+
+        &:focus-within {
+            color: hsl(var(--darker));
+
+            .SwitchIndicator {
+                background-color: hsl(var(--light));
+
+                &::before {
+                    background-color: hsl(var(--darker));
+                }
+            }
+        }
+    }
+
+    &.white {
+        color: hsl(var(--base));
+
+        &>.SwitchIndicator {
+            border-color: hsl(var(--light) / 20%);
+            box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 0.3);
+
+            &::before {
+                background-color: hsl(var(--base));
+                box-shadow: none;
+            }
+
+        }
+
+        &:hover,
+        &.toggled {
+            color: hsl(var(--dark));
+
+            .SwitchIndicator {
+                &::before {
+
+                    background-color: hsl(var(--dark));
+                }
+            }
+        }
+
+        &:focus-within {
+            color: hsl(var(--darker));
+
+            .SwitchIndicator {
+                background-color: hsl(var(--light) / 20%);
+
+                &::before {
+                    background-color: hsl(var(--darker));
+                }
+            }
+        }
+    }
+
+    &.disabled {
+        color: hsl(var(--base) / 40%) !important;
+
+        &>.SwitchIndicator {
+            border-color: hsl(var(--base) / 50%) !important;
+            background-color: hsl(var(--base) / 30%) !important;
+
+            &::before {
+                background-color: hsl(var(--base) / 40%) !important;
+            }
+
+        }
+    }
+}

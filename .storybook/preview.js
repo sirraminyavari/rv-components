@@ -35,7 +35,7 @@ export const parameters = {
   //   current: 'default',
   // },
   themes: {
-    default: 'twitter',
+    default: 'default',
     list: [
       {
         name: 'default',

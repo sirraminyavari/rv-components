@@ -1,7 +1,12 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { TextInput as TextInputComponent, RVTextInput } from '.';
+import {
+  TextInput as TextInputComponent,
+  RVTextInput,
+  RVTextAreaInput,
+  TextAreaInput as TextAreaInputComponent,
+} from '.';
 import HomeSvg from '../../icons/home.svg';
 import { ShapesSvg } from '../../icons';
 
@@ -18,9 +23,15 @@ const Template: ComponentStory<typeof TextInputComponent> = ({
   label = 'label',
   ...args
 }) => <TextInputComponent label={label} {...args} />;
+const TemplateTextArea: ComponentStory<typeof TextAreaInputComponent> = ({
+  label = 'label',
+  ...args
+}) => <TextAreaInputComponent label={label} {...args} />;
 
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 export const TextInput = Template.bind({});
+
+export const TextAreaInput = TemplateTextArea.bind({});
 
 export const primary = Template.bind({});
 primary.args = { variant: 'primary' };
