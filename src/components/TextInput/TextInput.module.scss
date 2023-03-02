@@ -2,168 +2,213 @@
 @import '../../scss/modules/default';
 
 .textInputContainer {
-    border-color: transparent;
-    border-style: solid;
-    min-width: px-to-rem(280);
-    display: inline-flex;
-    position: relative;
-    padding-inline: px-to-rem(7);
-    align-items: center;
-    box-sizing: border-box;
+  border-color: transparent;
+  border-style: solid;
+  min-width: px-to-rem(280);
+  display: inline-flex;
+  position: relative;
+  padding-inline: px-to-rem(7);
+  align-items: center;
+  box-sizing: border-box;
+
+  .trailingIcon {
+    font-size: px-to-rem(20);
+    transition: color 0.2s;
+  }
+
+  .baseTextInput {
+    cursor: initial;
+  }
+
+  .label {
+    position: absolute;
+    padding-block: px-to-rem(5);
+    padding-inline: px-to-rem(14);
+    position: absolute;
+    inset-block-start: 50%;
+    inset-inline-start: px-to-rem(1);
+    transform: translate(0, -50%);
+    transition: transform 0.2s ease-out, inset 0.2s ease-out,
+      background-color 0.1s ease-out, color 0.2s ease-out,
+      font-size 0.2s ease-out;
+    color: hsl(var(--base));
+    z-index: 1;
+
+    &.TextAreaLabel {
+      inset-block-start: px-to-rem(16);
+    }
+
+    &.labelWithLeadingIcon {
+      transform: translate(px-to-rem(17), -50%);
+    }
+
+    &:before {
+      content: '';
+      z-index: -1;
+      height: px-to-rem(5);
+      width: 0;
+      position: absolute;
+      inset-block-start: 50%;
+      inset-inline-start: 50%;
+      transform: translateX(0) translateY(-50%);
+      background-color: transparent;
+      transition: transform 0.2s ease-out, inset 0.2s ease-out,
+        background-color 0.2s ease-out, width 0.4s ease-out;
+    }
+  }
+
+  &.primary {
+    border-width: 0;
+    border-bottom-width: px-to-rem(2);
+    padding-block: px-to-rem(7);
+    border-color: hsl(var(--base));
+    transition: border 0.2s ease-out;
 
     .trailingIcon {
-        font-size: px-to-rem(20);
-        transition: color 0.2s;
-    }
-    .baseTextInput{
-        cursor: initial;
+      color: hsl(var(--base));
     }
 
-    .label {
-        position: absolute;
-        padding-block: px-to-rem(5);
-        padding-inline: px-to-rem(14);
-        position: absolute;
-        inset-block-start: 50%;
-        inset-inline-start: px-to-rem(1);
-        transform: translate(0, -50%);
-        transition: transform 0.2s ease-out, inset 0.2s ease-out,
-            background-color 0.1s ease-out, color 0.2s ease-out,
-            font-size 0.2s ease-out;
+    &:focus-within {
+      border-color: hsl(var(--base));
+
+      .trailingIcon {
         color: hsl(var(--base));
-        z-index: 1;
+      }
 
-        &.TextAreaLabel {
-            inset-block-start: px-to-rem(16);
+      .label {
+        color: hsl(var(--base));
+      }
+    }
 
-        }
+    &.disabled {
+      border-color: hsl(var(--base) / 50%);
 
-        &.labelWithLeadingIcon {
-            transform: translate(px-to-rem(17), -50%);
-        }
+      .baseTextInput {
+        color: hsl(var(--black) / 50%);
+      }
+
+      .trailingIcon {
+        color: hsl(var(--base) / 50%);
+      }
+
+      .label {
+        color: hsl(var(--base) / 50%);
+      }
+    }
+  }
+
+  &.outline {
+    border-width: px-to-rem(2);
+    padding-block: px-to-rem(7);
+    border-radius: $borderRadiusQuarter;
+    border-color: hsl(var(--base));
+    transition: border 0.2s ease-out;
+
+    .trailingIcon {
+      color: hsl(var(--base));
+    }
+
+    &:focus-within {
+      border-color: hsl(var(--dark));
+
+      .trailingIcon {
+        color: hsl(var(--dark));
+      }
+
+      .label {
+        color: hsl(var(--dark));
 
         &:before {
-            content: '';
-            z-index: -1;
-            height: px-to-rem(5);
-            width: 0;
-            position: absolute;
-            inset-block-start: 50%;
-            inset-inline-start: 50%;
-            transform: translateX(0) translateY(-50%);
-            background-color: transparent;
-            transition: transform 0.2s ease-out, inset 0.2s ease-out,
-                background-color 0.2s ease-out, width 0.4s ease-out;
+          background-color: hsl(var(--white));
         }
+      }
     }
 
-    &.primary {
-        border-width: 0;
-        border-bottom-width: px-to-rem(2);
-        padding-block: px-to-rem(7);
-        border-color: hsl(var(--base));
-        transition: border 0.2s ease-out;
+    .baseTextInput:not(:placeholder-shown) + .label {
+      transform: translate(px-to-rem(7), -50%);
+      font-size: 0.5em;
 
-        .trailingIcon {
-            color: hsl(var(--base));
-        }
-
-        &:focus-within {
-            border-color: hsl(var(--base));
-
-            .trailingIcon {
-                color: hsl(var(--base));
-            }
-
-            .label {
-                color: hsl(var(--base));
-            }
-        }
+      &:before {
+        background-color: hsl(var(--white));
+      }
     }
 
-    &.outline {
-        border-width: px-to-rem(2);
-        padding-block: px-to-rem(7);
-        border-radius: $borderRadiusQuarter;
-        border-color: hsl(var(--base));
-        transition: border 0.2s ease-out;
+    &.disabled {
+      border-color: hsl(var(--base) / 50%);
+      color: hsl(var(--base) / 50%);
 
-        .trailingIcon {
-            color: hsl(var(--base));
-        }
+      .trailingIcon {
+        color: hsl(var(--base) / 50%);
+      }
 
-        &:focus-within {
-            border-color: hsl(var(--dark));
+      .label {
+        color: hsl(var(--base) / 50%);
+      }
+    }
+  }
 
-            .trailingIcon {
-                color: hsl(var(--dark));
-            }
+  &.white {
+    border-width: px-to-rem(2);
+    padding-block: px-to-rem(7);
+    border-radius: $borderRadiusHalf;
+    background-color: hsl(var(--white));
+    color: hsl(var(--lighter-font));
+    transition: color 0.2s ease-out, background 0.2s ease-out;
 
-            .label {
-                color: hsl(var(--dark));
-
-                &:before {
-                    background-color: hsl(var(--white));
-                }
-            }
-        }
-
-        .baseTextInput:not(:placeholder-shown)+.label {
-            transform: translate(px-to-rem(7), -50%);
-            font-size: 0.5em;
-
-            &:before {
-                background-color: hsl(var(--white));
-            }
-        }
+    .trailingIcon,
+    .label {
+      color: hsl(var(--base));
     }
 
-    &.white {
-        border-width: px-to-rem(2);
-        padding-block: px-to-rem(7);
-        border-radius: $borderRadiusHalf;
-        background-color: hsl(var(--lighter) / 10);
-        color: hsl(var(--lighter-font));
-        transition: color 0.2s ease-out;
+    &:focus-within {
+      background-color: hsl(var(--lighter) / 20);
+      color: hsl(var(--base-font));
 
-        .trailingIcon,
-        .label {
-            color: hsl(var(--base));
-        }
-
-        &:focus-within {
-            background-color: hsl(var(--lighter) / 20);
-            color: hsl(var(--base-font));
-
-            .label {
-                color: hsl(var(--base));
-            }
-        }
+      .label {
+        color: hsl(var(--base));
+      }
     }
 
-    @include full-width;
+    &.disabled {
+      color: hsl(var(--base-font) / 50%);
+
+      .baseTextInput {
+        color: hsl(var(--black) / 50%);
+      }
+
+      .trailingIcon {
+        color: hsl(var(--base) / 50%);
+      }
+
+      .label {
+        color: hsl(var(--base-font) / 50%);
+      }
+    }
+  }
+
+  @include full-width;
 }
 
 .baseTextInput {
-    border-color: transparent;
-    background-color: transparent;
-    outline: none;
-    width: 100%;
-    z-index: 2;
-    padding-inline: px-to-rem(5);
-    color: inherit;
+  border-color: transparent;
+  background-color: transparent;
+  outline: none;
+  width: 100%;
+  z-index: 2;
+  padding-inline: px-to-rem(5);
+  color: inherit;
 
-    &:not(:placeholder-shown)+.label {
-        transform: translate(px-to-rem(7), -50%);
-        inset-block-start: 0;
-        inset-inline-start: 0;
-        padding-inline: px-to-rem(7);
-        font-size: 0.5em;
+  &:not(:placeholder-shown) + .label {
+    transform: translate(px-to-rem(7), -50%);
+    inset-block-start: 0;
+    inset-inline-start: 0;
+    padding-inline: px-to-rem(7);
+    font-size: 0.5em;
 
-        &:before {
-            inset-inline-start: 0;
-            width: calc(100%);
-            transform: translateY(-70%) translateX(0%);
-        }
+    &:before {
+      inset-inline-start: 0;
+      width: calc(100%);
+      transform: translateY(-70%) translateX(0%);
     }
+  }
 }

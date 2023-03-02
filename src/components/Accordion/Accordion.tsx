@@ -3,6 +3,7 @@ import {
   DetailedHTMLProps,
   forwardRef,
   HTMLAttributes,
+  MouseEvent,
   MouseEventHandler,
   PropsWithoutRef,
   ReactNode,
@@ -26,6 +27,10 @@ export interface RVAccordion
   open?: boolean;
   defaultOpen?: boolean;
   onLabelClick?: MouseEventHandler<HTMLButtonElement>;
+  onAccordionStatusChange?: (
+    event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
+    status: 'open' | 'closed'
+  ) => void;
   labelClassName?: string;
 }
 
@@ -40,6 +45,7 @@ const Accordion = forwardRef<HTMLDivElement, RVAccordion>(
       dir,
       defaultOpen = false,
       onLabelClick,
+      onAccordionStatusChange,
       labelClassName,
       ...props
     },
@@ -48,8 +54,11 @@ const Accordion = forwardRef<HTMLDivElement, RVAccordion>(
     const [isOpen, setIsOpen] = useState(open || defaultOpen);
     const triggerAccordion: MouseEventHandler<HTMLButtonElement> = useCallback(
       (event) => {
-        setIsOpen((prevState) => (open !== undefined ? open : !prevState));
-        if (onLabelClick) onLabelClick(event);
+        setIsOpen((prevState) => {
+          onAccordionStatusChange &&
+            onAccordionStatusChange(event, prevState ? 'closed' : 'open');
+          return open !== undefined ? open : !prevState;
+        });
       },
       [open, onLabelClick]
     );
@@ -67,7 +76,10 @@ const Accordion = forwardRef<HTMLDivElement, RVAccordion>(
           aria-label="accordion-trigger"
         >
           <CaretSvg direction={'right'} />
-          <span className={styles.triggerButtonLabel}> {label}</span>
+          <span className={styles.triggerButtonLabel} onClick={onLabelClick}>
+            {' '}
+            {label}
+          </span>
         </button>
         <AnimateHeight
           duration={300}

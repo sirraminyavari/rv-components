@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { DatePicker as DatePickerComponent, RVDatePicker } from '.';
@@ -16,11 +16,21 @@ export default {
 const Template: ComponentStory<typeof DatePickerComponent> = ({
   label = 'label',
   ...args
-}) => (
-  <div style={{ minHeight: '100vh' ,display:"flex",alignItems:"center" }}>
-    <DatePickerComponent label={label} {...args} />
-  </div>
-);
+}) => {
+  const first = useRef<HTMLInputElement>(null);
+  return (
+    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
+      <DatePickerComponent
+        ref={first}
+        label={label}
+        {...args}
+        onClick={() => {
+          console.log(first);
+        }}
+      />
+    </div>
+  );
+};
 
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 export const DatePicker = Template.bind({});

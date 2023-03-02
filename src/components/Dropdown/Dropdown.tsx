@@ -6,10 +6,9 @@ import {
   PropsWithoutRef,
   useState,
 } from 'react';
-import { ChevronSvg } from '../../icons';
+import { CaretSvg } from '../../icons';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types';
 import { Button } from '../Button';
-import { ButtonGroup } from '../ButtonGroup';
 import styles from './Dropdown.module.scss';
 
 export interface RVDropdown
@@ -56,27 +55,20 @@ const Dropdown = forwardRef<HTMLDivElement, RVDropdown>(
         ref={ref}
         {...props}
       >
-        <ButtonGroup fullWidth>
+        <>
           <Button
             variant={variant}
             color={color}
             size={size}
             className={styles.label}
+            onClick={toggleDropdown}
             badge
             noWrap
           >
             {label}
+            <CaretSvg direction="down" className={styles.chevron} />
           </Button>
-          <Button
-            variant={variant}
-            color={color}
-            size={size}
-            active={isToggled}
-            onClick={toggleDropdown}
-          >
-            <ChevronSvg direction="down" className={styles.chevron} />
-          </Button>
-        </ButtonGroup>
+        </>
         <div className={clsx('fullWidth', styles.dropdownMenu)}>{children}</div>
       </div>
     );

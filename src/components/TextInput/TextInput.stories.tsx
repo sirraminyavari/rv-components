@@ -42,5 +42,8 @@ outline.args = { variant: 'outline' };
 export const white = Template.bind({});
 white.args = { variant: 'white' };
 
+export const disabled = Template.bind({});
+disabled.args = { disabled: true, variant: 'white' };
+
 export const withIcon = Template.bind({});
 withIcon.args = { Icon: ShapesSvg };

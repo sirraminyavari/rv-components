@@ -279,7 +279,7 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
               fullWidth
             />
             <Typography
-              type="sub"
+              type="caption"
               style={{ whiteSpace: 'nowrap', marginInlineStart: '1rem' }}
             >
               1129 items

@@ -17,7 +17,7 @@ export default {
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof SideMenuComponent> = ({
   children = (
-    <div style={{height:50,overflow:'hidden'}}>
+    <div style={{ height: 50, overflow: 'hidden' }}>
       'Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum et
       repellendus corrupti eaque odit quidem voluptates voluptate dignissimos
       facere illo corporis facilis pariatur dolore reiciendis repudiandae ipsa,

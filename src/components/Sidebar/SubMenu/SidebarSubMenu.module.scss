@@ -38,6 +38,7 @@
     margin-block: 0;
     color: inherit;
     padding-inline-end: px-to-rem(24);
+    white-space: nowrap;
   }
 }
 
@@ -45,7 +46,7 @@
   all: unset;
   padding-block: px-to-rem(0);
   padding-inline: px-to-rem(10);
-  // color: hsl(var(--base-font) / 100%);
+  color: hsl(var(--base-font) / 100%);
   background-color: transparent;
   cursor: pointer;
   min-height: px-to-rem(24);
@@ -59,7 +60,7 @@
   width: calc(100% - px-to-rem(24));
   cursor: pointer;
 
-  &>* {
+  & > * {
     margin-block: 0;
     color: inherit;
   }
@@ -126,7 +127,7 @@
 .triggerCollapse {
   margin-inline-start: auto;
 
-  >svg {
+  > svg {
     color: hsl(var(--base-font));
     font-size: px-to-rem(24);
   }

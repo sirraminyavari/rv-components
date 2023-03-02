@@ -1,30 +1,30 @@
 import React, { FunctionComponent } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { ButtonGroup as ButtonGroupComponent } from '.';
+import { ButtonGroup as ButtonGroupComponent, RVButtonGroup } from '.';
 import HomeSvg from '../../icons/home.svg';
 import ButtonComponent, { RVButton } from '../Button/Button';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types';
 
 export default {
   title: 'Components/ButtonGroup',
-  component: ButtonComponent,
-  argTypes: {},
-} as ComponentMeta<typeof ButtonComponent>;
+  component: ButtonGroupComponent,
+  argTypes: {} as RVButtonGroup,
+} as ComponentMeta<typeof ButtonGroupComponent>;
 
-const Template: ComponentStory<
-  FunctionComponent<{
-    color?: RVColorProp;
-    variant?: RVVariantProp;
-    size?: RVSizeProp;
-  }>
-> = ({ color, variant, size = RVSizeProp.small }) => (
-  <ButtonGroupComponent>
-    <ButtonComponent color={color} variant={variant} size={size}>
+const Template: ComponentStory<FunctionComponent<RVButton>> = ({
+  color,
+  variant,
+  size = RVSizeProp.small,
+  rounded = 'half',
+  ...props
+}) => (
+  <ButtonGroupComponent rounded={rounded}>
+    <ButtonComponent color={color} variant={variant} size={size} {...props}>
       <HomeSvg />
       some content
     </ButtonComponent>
-    <ButtonComponent color={color} variant={variant} size={size}>
+    <ButtonComponent color={color} variant={variant} size={size} {...props}>
       <HomeSvg />
     </ButtonComponent>
   </ButtonGroupComponent>
@@ -38,3 +38,6 @@ outline.args = { variant: 'outline' };
 
 export const white = Template.bind({});
 white.args = { variant: 'white' };
+
+export const disabled = Template.bind({});
+disabled.args = { variant: 'disabled' };

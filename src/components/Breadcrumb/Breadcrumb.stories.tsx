@@ -32,7 +32,7 @@ const Template: ComponentStory<typeof BreadcrumbComponent> = ({
   size = RVSizeProp.small,
   ...args
 }) => (
-  <div style={{minHeight:"100vh"}}>
+  <div style={{ minHeight: '100vh' }}>
     <BreadcrumbComponent
       routeLinks={routeLinks}
       size={size}
@@ -55,4 +55,4 @@ export const white = Template.bind({});
 white.args = { variant: 'white' };
 
 export const disabled = Template.bind({});
-disabled.args = { disabled: true };
+disabled.args = { variant: 'disabled' };

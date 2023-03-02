@@ -1,197 +1,185 @@
 @use 'sass:math';
 @import '../../scss/modules/default';
 
-
-
-
 .label {
-    position: relative;
-    margin-block: px-to-rem(4);
-    margin-inline: px-to-rem(6);
+  position: relative;
+  margin-block: px-to-rem(4);
+  margin-inline: px-to-rem(6);
+  align-items: center;
+  transition: color 250ms ease-out;
+  display: inline-flex;
+  cursor: pointer;
+  user-select: none;
+
+  .input {
+    height: 0;
+    width: 0;
+  }
+
+  & > .checkboxIndicator {
+    display: flex;
+    justify-content: center;
     align-items: center;
-    transition: color 250ms ease-out;
-    display: inline-flex;
+    margin-inline-end: px-to-rem(8);
+    width: 1.2em;
+    height: 1.2em;
+    background: transparent;
+    border-radius: px-to-rem(5);
     cursor: pointer;
-    user-select: none;
+    transition: all 250ms ease-out;
+  }
 
+  &.toggled {
+    & > .checkboxIndicator {
+      position: relative;
 
+      &:before {
+        content: '';
+        position: absolute;
+        inset-block: 50%;
+        inset-inline: 50%;
+        border-right: 0.1em solid transparent;
+        border-bottom: 0.1em solid transparent;
+        transform: rotate(45deg) translate(-50%, -50%);
+        transform-origin: 0% 100%;
+        border-radius: px-to-rem(1);
+        animation: checkbox-check 125ms ease-out forwards;
+      }
+    }
+  }
 
-    .input {
-        height: 0;
-        width: 0;
+  &.small {
+    font-size: px-to-rem(16);
+  }
+
+  &.medium {
+    font-size: px-to-rem(18);
+  }
+
+  &.large {
+    font-size: px-to-rem(20);
+  }
+
+  &.primary {
+    color: hsl(var(--base));
+
+    & > .checkboxIndicator {
+      border: 0.1em solid hsl(var(--base));
+      background-color: hsl(var(--base));
+
+      &::before {
+        border-color: hsl(var(--light));
+      }
     }
 
-    &>.checkboxIndicator {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-inline-end: px-to-rem(8);
-        width: 1.2em;
-        height: 1.2em;
-        background: transparent;
-        border-radius: px-to-rem(5);
-        cursor: pointer;
-        transition: all 250ms ease-out;
-    }
-
-
+    &:hover,
     &.toggled {
-        &>.checkboxIndicator {
-            position: relative;
+      color: hsl(var(--base));
 
-            &:before {
-                content: "";
-                position: absolute;
-                inset-block: 50%;
-                inset-inline: 50%;
-                border-right: .1em solid transparent;
-                border-bottom: .1em solid transparent;
-                transform: rotate(45deg) translate(-50%, -50%);
-                transform-origin: 0% 100%;
-                border-radius: px-to-rem(1);
-                animation: checkbox-check 125ms ease-out forwards;
-            }
+      .checkboxIndicator {
+        // background-color: hsl(var(--light));
+
+        &::before {
+          border-color: hsl(var(--lighter));
         }
+      }
     }
 
-    &.small {
-        font-size: px-to-rem(16);
+    &:focus-within {
+      color: hsl(var(--darker));
+
+      .checkboxIndicator {
+        background-color: hsl(var(--darker));
+
+        &::before {
+          border-color: hsl(var(--light));
+        }
+      }
+    }
+  }
+
+  &.outline {
+    color: hsl(var(--base));
+
+    & > .checkboxIndicator {
+      border: 0.1em solid hsl(var(--base));
+
+      &::before {
+        border-color: hsl(var(--base));
+      }
     }
 
-    &.medium {
-        font-size: px-to-rem(18);
+    &:hover,
+    &.toggled {
+      color: hsl(var(--dark));
+
+      .checkboxIndicator {
+        &::before {
+          border-color: hsl(var(--dark));
+        }
+      }
     }
 
-    &.large {
-        font-size: px-to-rem(20);
+    &:focus-within {
+      color: hsl(var(--darker));
+
+      .checkboxIndicator {
+        background-color: hsl(var(--light));
+
+        &::before {
+          border-color: hsl(var(--darker));
+        }
+      }
+    }
+  }
+
+  &.white {
+    color: hsl(var(--base));
+
+    & > .checkboxIndicator {
+      border: 0.1em solid transparent;
+
+      &::before {
+        border-color: hsl(var(--base));
+      }
     }
 
-    &.primary {
-        color: hsl(var(--base));
+    &:hover,
+    &.toggled {
+      color: hsl(var(--base));
 
-        &>.checkboxIndicator {
-            border: .1em solid hsl(var(--base));
-            background-color: hsl(var(--base));
+      .checkboxIndicator {
+        background-color: hsl(var(--base));
 
-            &::before {
-                border-color: hsl(var(--light));
-            }
-
+        &::before {
+          border-color: hsl(var(--dark));
         }
-
-        &:hover,
-        &.toggled {
-            color: hsl(var(--base));
-
-            .checkboxIndicator {
-                // background-color: hsl(var(--light));
-
-                &::before {
-
-                    border-color: hsl(var(--lighter));
-                }
-            }
-        }
-
-        &:focus-within {
-            color: hsl(var(--darker));
-
-            .checkboxIndicator {
-                background-color: hsl(var(--darker));
-
-                &::before {
-                    border-color: hsl(var(--light));
-                }
-            }
-        }
+      }
     }
 
-    &.outline {
-        color: hsl(var(--base));
+    &:focus-within {
+      color: hsl(var(--base));
 
-        &>.checkboxIndicator {
-            border: .1em solid hsl(var(--base));
+      .checkboxIndicator {
+        background-color: hsl(var(--light) / 20%);
 
-            &::before {
-                border-color: hsl(var(--base));
-            }
-
+        &::before {
+          border-color: hsl(var(--base));
         }
-
-        &:hover,
-        &.toggled {
-            color: hsl(var(--dark));
-
-            .checkboxIndicator {
-                &::before {
-
-                    border-color: hsl(var(--dark));
-                }
-            }
-        }
-
-        &:focus-within {
-            color: hsl(var(--darker));
-
-            .checkboxIndicator {
-                background-color: hsl(var(--light));
-
-                &::before {
-                    border-color: hsl(var(--darker));
-                }
-            }
-        }
+      }
     }
+  }
 
-    &.white {
-        color: hsl(var(--base));
+  &.disabled {
+    color: hsl(var(--base) / 40%) !important;
 
-        &>.checkboxIndicator {
-            border: .1em solid transparent;
+    & > .checkboxIndicator {
+      border: 0.1em solid hsl(var(--base) / 50%) !important;
+      background-color: hsl(var(--base) / 30%) !important;
 
-            &::before {
-                border-color: hsl(var(--base));
-            }
-
-        }
-
-        &:hover,
-        &.toggled {
-            color: hsl(var(--base));
-
-            .checkboxIndicator {
-                background-color: hsl(var(--base));
-
-                &::before {
-                    border-color: hsl(var(--dark));
-                }
-            }
-        }
-
-        &:focus-within {
-            color: hsl(var(--base));
-
-            .checkboxIndicator {
-                background-color: hsl(var(--light) / 20%);
-
-                &::before {
-                    border-color: hsl(var(--base));
-                }
-            }
-        }
+      &::before {
+        border-color: hsl(var(--base) / 40%) !important;
+      }
     }
-
-    &.disabled {
-        color: hsl(var(--base) / 40%) !important;
-
-        &>.checkboxIndicator {
-            border: .1em solid hsl(var(--base) / 50%) !important;
-            background-color: hsl(var(--base) / 30%) !important;
-
-            &::before {
-                border-color: hsl(var(--base) / 40%) !important;
-            }
-
-        }
-    }
+  }
 }

@@ -24,7 +24,7 @@ export interface RVBreadcrumb
     >,
     'color' | 'size'
   > {
-  variant?: Exclude<RVVariantProp, RVVariantProp.disabled>;
+  variant?: RVVariantProp;
   color?: RVColorProp;
   size?: RVSizeProp;
   label?: string;

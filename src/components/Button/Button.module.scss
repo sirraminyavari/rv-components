@@ -16,7 +16,7 @@
     outline-width: 0;
   }
 
-  &>svg {
+  & > svg {
     vertical-align: middle;
     font-size: 1em;
     color: inherit;
@@ -58,7 +58,7 @@
     padding-inline: px-to-rem(4);
     font-size: px-to-rem(20);
 
-    &>svg {
+    & > svg {
       margin-inline-end: 0;
       padding: px-to-rem(8);
     }
@@ -99,7 +99,6 @@
   }
 
   &.badge {
-
     &:hover,
     &:active,
     &:focus {
@@ -133,7 +132,6 @@
   }
 
   &.badge {
-
     &:hover,
     &:active,
     &:focus {
@@ -155,7 +153,7 @@
     color: hsl(var(--base));
   }
 
-  &:focus{
+  &:focus {
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(3) hsl(var(--black) / 15%);
   }
   &.active {
@@ -169,7 +167,6 @@
   }
 
   &.badge {
-
     &:hover,
     &:active,
     &:focus {

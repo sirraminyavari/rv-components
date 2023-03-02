@@ -15,16 +15,18 @@ export interface RVButtonGroup
     'color'
   > {
   fullWidth?: boolean;
+  rounded?: 'full' | 'half';
 }
 
 const ButtonGroup = forwardRef<HTMLDivElement, RVButtonGroup>(
-  ({ children, className, fullWidth, ...props }, ref) => {
+  ({ children, className, fullWidth, rounded = 'half', ...props }, ref) => {
     return (
       <div
         ref={ref}
         className={clsx(
           styles.buttonGroup,
           fullWidth && 'fullWidth',
+          styles[rounded],
           className
         )}
         {...props}
