@@ -6,7 +6,7 @@ import DatePickerPanel, { DayValue } from 'ramin-modern-calendar-datepicker';
 import 'ramin-modern-calendar-datepicker/lib/DatePicker.css';
 
 import styles from './DatePicker.module.scss';
-import { RVColorProp, RVSvgProps } from '../../types';
+import { RVColorProp } from '../../types';
 export interface RVDatePicker extends RVTextInput {
   disabled?: boolean;
 }
