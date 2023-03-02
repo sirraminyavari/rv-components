@@ -5,7 +5,9 @@ import {
   FunctionComponent,
   InputHTMLAttributes,
   PropsWithoutRef,
+  useRef,
 } from 'react';
+import useCombinedRefs from '../../hooks/useCombinedRef';
 import {
   RVColorProp,
   RVSizeProp,
@@ -51,6 +53,8 @@ const TextInput = forwardRef<HTMLInputElement, RVTextInput>(
     },
     ref
   ) => {
+    const inputRef = useRef(null);
+    const combinedRef = useCombinedRefs(ref, inputRef);
     return (
       <div
         className={clsx(
@@ -58,18 +62,25 @@ const TextInput = forwardRef<HTMLInputElement, RVTextInput>(
           color,
           size,
           styles[variant],
+          disabled && styles.disabled,
           fullWidth && 'fullWidth',
           className
         )}
       >
         {Icon && IconPosition === 'leading' && (
-          <Icon className={styles.trailingIcon} />
+          <Icon
+            className={styles.trailingIcon}
+            onClick={() => {
+              combinedRef.current?.focus();
+            }}
+          />
         )}
         <input
-          ref={ref}
+          ref={combinedRef}
           type={type}
           placeholder={placeholder}
           className={styles.baseTextInput}
+          disabled={disabled}
           {...props}
         />
         {label && (
@@ -83,7 +94,12 @@ const TextInput = forwardRef<HTMLInputElement, RVTextInput>(
           </label>
         )}
         {Icon && IconPosition === 'trailing' && (
-          <Icon className={styles.trailingIcon} />
+          <Icon
+            className={styles.trailingIcon}
+            onClick={() => {
+              combinedRef.current?.focus();
+            }}
+          />
         )}
       </div>
     );

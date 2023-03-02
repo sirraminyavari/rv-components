@@ -2,277 +2,285 @@
 @import '../../scss/modules/default';
 
 .BreadcrumbContainer {
+  display: inline-flex;
+  // flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  padding-inline: px-to-rem(5);
+  padding-inline: px-to-rem(4);
+
+  .icon {
+    margin-inline-end: px-to-rem(1);
+  }
+
+  .BreadcrumbItemsContainer {
     display: inline-flex;
-    // flex-wrap: wrap;
-    justify-content: flex-start;
     align-items: center;
-    padding-inline: px-to-rem(5);
-    padding-inline: px-to-rem(4);
+  }
 
+  .BreadcrumbItem {
+    text-decoration: none;
+    color: inherit;
+    display: inline-flex;
+    align-items: center;
 
+    .label {
+      position: relative;
+      max-width: 20ch;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      transition: color 0.3s ease-out;
+      font-weight: 400;
+    }
+  }
+
+  .separatorSvg {
+    all: unset;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+
+    svg {
+      border-radius: px-to-rem(3);
+      transition: transform 0.3s;
+    }
+
+    .adjacentPathsContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding-inline: px-to-rem(9);
+      padding-block: px-to-rem(5);
+      border-radius: px-to-rem(5);
+      position: absolute;
+      gap: px-to-rem(4);
+      inset-block-start: 100%;
+      inset-inline-start: 0;
+      visibility: hidden;
+      transform: translateX(-25%);
+      margin-block-start: px-to-rem(12);
+      opacity: 0;
+      border-style: solid;
+      border-width: px-to-rem(1);
+      border-color: transparent;
+      border-radius: px-to-rem(5);
+      transition: background-color 0.24s, opacity 0.2s;
+
+      .adjacentPathItem {
+        margin-block: px-to-rem(4);
+        min-width: px-to-rem(95);
+      }
+    }
+
+    &.showAdjacentPaths {
+      svg {
+        transform: rotate(90deg);
+      }
+
+      .adjacentPathsContainer {
+        visibility: visible;
+        opacity: 1;
+      }
+    }
+  }
+
+  &.primary {
+    border-width: px-to-rem(1);
+    border-color: hsl(var(--base) / 20%);
+    border-style: solid;
+    border-radius: px-to-rem(5);
+    padding-block: px-to-rem(2);
+    padding-inline: px-to-rem(12);
+    transition: border-color 0.3s;
+    background-color: hsl(var(--lighter) / 20%);
+
+    &:hover {
+      border-color: hsl(var(--base) / 10%);
+    }
 
     .icon {
-        margin-inline-end: px-to-rem(1);
-    }
-
-    .BreadcrumbItemsContainer {
-        display: inline-flex;
-        align-items: center;
-    }
-
-    .BreadcrumbItem {
-        text-decoration: none;
-        color: inherit;
-        display: inline-flex;
-        align-items: center;
-
-
-        .label {
-            position: relative;
-            max-width: 20ch;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            overflow: hidden;
-            transition: color .3s ease-out;
-            font-weight: 400;
-        }
+      color: hsl(var(--base));
     }
 
     .separatorSvg {
-        all: unset;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-        position: relative;
+      color: hsl(var(--base));
+      border-style: solid;
+      border-width: px-to-rem(1);
+      border-color: transparent;
+      border-radius: px-to-rem(5);
+      transition: border-color 0.3s;
+      margin-inline: px-to-rem(4);
 
-        svg {
-            border-radius: px-to-rem(3);
-            transition: transform .3s;
-        }
-
-
-        .adjacentPathsContainer {
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            padding-inline: px-to-rem(9);
-            padding-block: px-to-rem(5);
-            border-radius: px-to-rem(5);
-            position: absolute;
-            gap: px-to-rem(4);
-            inset-block-start: 100%;
-            inset-inline-start: 0;
-            visibility: hidden;
-            transform: translateX(-25%);
-            margin-block-start: px-to-rem(12);
-            opacity: 0;
-            border-style: solid;
-            border-width: px-to-rem(1);
-            border-color: transparent;
-            border-radius: px-to-rem(5);
-            transition: background-color .24s, opacity .2s;
-
-            .adjacentPathItem {
-                margin-block: px-to-rem(4);
-                min-width: px-to-rem(95);
-            }
-
-        }
-
-        &.showAdjacentPaths {
-            svg {
-                transform: rotate(90deg);
-            }
-
-            .adjacentPathsContainer {
-                visibility: visible;
-                opacity: 1;
-            }
-        }
-
+      &:hover {
+        border-color: hsl(var(--base));
+      }
     }
 
-    &.primary {
-        border-width: px-to-rem(1);
-        border-color: hsl(var(--base) / 20%);
-        border-style: solid;
-        border-radius: px-to-rem(5);
-        padding-block: px-to-rem(2);
-        padding-inline: px-to-rem(12);
-        transition: border-color .3s;
-        background-color: hsl(var(--lighter) / 20%);
+    .showAdjacentPaths {
+      .adjacentPathsContainer {
+        background-color: hsl(var(--lighter) / 100%);
+        box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7)
+          hsl(var(--black) / 15%);
+      }
+    }
+
+    .BreadcrumbItemsContainer {
+    }
+
+    .BreadcrumbItem {
+      color: hsl(var(--dark));
+
+      .label {
+        display: inline-block;
 
         &:hover {
-            border-color: hsl(var(--base) / 10%);
+          color: hsl(var(--darker));
         }
+      }
+    }
+  }
 
-        .icon {
-            color: hsl(var(--base));
-        }
-
-        .separatorSvg {
-            color: hsl(var(--base));
-            border-style: solid;
-            border-width: px-to-rem(1);
-            border-color: transparent;
-            border-radius: px-to-rem(5);
-            transition: border-color .3s;
-            margin-inline: px-to-rem(4);
-
-            &:hover {
-                border-color: hsl(var(--base));
-
-            }
-        }
-
-        .showAdjacentPaths {
-            .adjacentPathsContainer {
-                background-color: hsl(var(--lighter) / 100%);
-                box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--black)/ 15%);
-            }
-        }
-
-        .BreadcrumbItemsContainer {}
-
-        .BreadcrumbItem {
-            color: hsl(var(--dark));
-
-            .label {
-                display: inline-block;
-
-                &:hover {
-                    color: hsl(var(--darker));
-
-                }
-            }
-
-        }
+  &.outline {
+    .icon {
+      color: hsl(var(--base));
     }
 
-    &.outline {
-        .icon {
-            color: hsl(var(--base));
-        }
+    .separatorSvg {
+      color: hsl(var(--base));
+      border-style: solid;
+      border-width: px-to-rem(1);
+      border-color: transparent;
+      border-radius: px-to-rem(5);
+      transition: border-color 0.3s;
+      margin-inline: px-to-rem(4);
 
-        .separatorSvg {
-            color: hsl(var(--base));
-            border-style: solid;
-            border-width: px-to-rem(1);
-            border-color: transparent;
-            border-radius: px-to-rem(5);
-            transition: border-color .3s;
-            margin-inline: px-to-rem(4);
-
-            &:hover {
-                border-color: hsl(var(--base));
-
-            }
-        }
-
-        .showAdjacentPaths {
-            .adjacentPathsContainer {
-                background-color: hsl(var(--lighter) / 100%);
-                border-color: hsl(var(--base));
-                box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--black)/ 15%);
-            }
-        }
-
-        .BreadcrumbItemsContainer {
-            border-width: px-to-rem(1);
-            border-color: hsl(var(--base));
-            border-style: solid;
-            border-radius: px-to-rem(5);
-            padding-block: px-to-rem(2);
-            padding-inline: px-to-rem(12);
-            transition: border-color .3s;
-
-            &:hover {
-                border-color: hsl(var(--base) / 10%);
-            }
-        }
-
-        .BreadcrumbItem {
-            color: hsl(var(--dark));
-
-            .label {
-                display: inline-block;
-            }
-
-            &:hover {
-                color: hsl(var(--base));
-            }
-        }
+      &:hover {
+        border-color: hsl(var(--base));
+      }
     }
 
-    &.white {
+    .showAdjacentPaths {
+      .adjacentPathsContainer {
+        background-color: hsl(var(--lighter) / 100%);
+        border-color: hsl(var(--base));
+        box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7)
+          hsl(var(--black) / 15%);
+      }
+    }
+
+    .BreadcrumbItemsContainer {
+      border-width: px-to-rem(1);
+      border-color: hsl(var(--base));
+      border-style: solid;
+      border-radius: px-to-rem(5);
+      padding-block: px-to-rem(2);
+      padding-inline: px-to-rem(12);
+      transition: border-color 0.3s;
+
+      &:hover {
+        border-color: hsl(var(--base) / 10%);
+      }
+    }
+
+    .BreadcrumbItem {
+      color: hsl(var(--dark));
+
+      .label {
+        display: inline-block;
+      }
+
+      &:hover {
         color: hsl(var(--base));
+      }
+    }
+  }
 
-        .adjacentPathsContainer {
-            background-color: hsl(var(--white));
-            // border-color: hsl(var(--dark));
-            box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--black)/ 15%);
-        }
+  &.white {
+    color: hsl(var(--base));
 
-        .BreadcrumbItem {
-            &:hover {
-                color: hsl(var(--dark));
-            }
-        }
+    .adjacentPathsContainer {
+      background-color: hsl(var(--white));
+      // border-color: hsl(var(--dark));
+      box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--black) / 15%);
     }
 
-    &.small {
-        .icon {
-            font-size: px-to-rem(20);
-            margin-inline-end: px-to-rem(4);
-        }
+    .BreadcrumbItem {
+      &:hover {
+        color: hsl(var(--dark));
+      }
+    }
+  }
 
-        .separatorSvg {
-            font-size: px-to-rem(15);
-            padding-inline: px-to-rem(5);
-            padding-block: px-to-rem(3);
-        }
+  &.disabled {
+    color: hsl(var(--base) / 50%);
 
-        .label {
-            padding-inline: px-to-rem(2);
-            font-size: px-to-rem(18);
-        }
+    .adjacentPathsContainer {
+      background-color: hsl(var(--white));
+      box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--black) / 15%);
     }
 
-    &.medium {
-        .icon {
-            font-size: px-to-rem(28);
-            margin-inline-end: px-to-rem(6);
-        }
+    .BreadcrumbItem {
+      &:hover {
+        color: hsl(var(--dark));
+      }
+    }
+  }
 
-        .separatorSvg {
-            font-size: px-to-rem(17);
-            padding-inline: px-to-rem(8);
-            padding-block: px-to-rem(4);
-        }
-
-        .label {
-            padding-inline: px-to-rem(4);
-            padding-block: px-to-rem(2);
-            font-size: px-to-rem(20);
-        }
+  &.small {
+    .icon {
+      font-size: px-to-rem(20);
+      margin-inline-end: px-to-rem(4);
     }
 
-    &.large {
-        .icon {
-            font-size: px-to-rem(32);
-            margin-inline-end: px-to-rem(10);
-        }
-
-        .separatorSvg {
-            font-size: px-to-rem(18);
-            padding-inline: px-to-rem(8);
-            padding-block: px-to-rem(4);
-        }
-
-        .label {
-            padding-inline: px-to-rem(6);
-            padding-block: px-to-rem(4);
-            font-size: px-to-rem(24);
-        }
+    .separatorSvg {
+      font-size: px-to-rem(15);
+      padding-inline: px-to-rem(5);
+      padding-block: px-to-rem(3);
     }
+
+    .label {
+      padding-inline: px-to-rem(2);
+      font-size: px-to-rem(18);
+    }
+  }
+
+  &.medium {
+    .icon {
+      font-size: px-to-rem(28);
+      margin-inline-end: px-to-rem(6);
+    }
+
+    .separatorSvg {
+      font-size: px-to-rem(17);
+      padding-inline: px-to-rem(8);
+      padding-block: px-to-rem(4);
+    }
+
+    .label {
+      padding-inline: px-to-rem(4);
+      padding-block: px-to-rem(2);
+      font-size: px-to-rem(20);
+    }
+  }
+
+  &.large {
+    .icon {
+      font-size: px-to-rem(32);
+      margin-inline-end: px-to-rem(10);
+    }
+
+    .separatorSvg {
+      font-size: px-to-rem(18);
+      padding-inline: px-to-rem(8);
+      padding-block: px-to-rem(4);
+    }
+
+    .label {
+      padding-inline: px-to-rem(6);
+      padding-block: px-to-rem(4);
+      font-size: px-to-rem(24);
+    }
+  }
 }

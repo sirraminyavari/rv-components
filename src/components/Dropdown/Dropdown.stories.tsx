@@ -4,7 +4,7 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { Dropdown as DropdownComponent, RVDropdown } from '.';
 import { ShapesSvg } from '../../icons';
 import { Button } from '../Button';
-import { RVSizeProp } from '../../types';
+import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -22,13 +22,25 @@ const Template: ComponentStory<typeof DropdownComponent> = ({
 }) => (
   <div style={{ minHeight: '100vh' }}>
     <DropdownComponent label={label} size={size} {...args}>
-      <Button size={size} color={args.color} variant={args.variant}>
+      <Button
+        size={size}
+        color={RVColorProp.cgBlue}
+        variant={RVVariantProp.white}
+      >
         some link/button
       </Button>
-      <Button size={size} color={args.color} variant={args.variant}>
+      <Button
+        size={size}
+        color={RVColorProp.cgBlue}
+        variant={RVVariantProp.white}
+      >
         some link/button
       </Button>
-      <Button size={size} color={args.color} variant={args.variant}>
+      <Button
+        size={size}
+        color={RVColorProp.cgBlue}
+        variant={RVVariantProp.white}
+      >
         some link/button
       </Button>
     </DropdownComponent>

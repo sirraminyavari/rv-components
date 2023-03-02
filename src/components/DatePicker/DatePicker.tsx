@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { forwardRef, LegacyRef, useCallback, useState } from 'react';
+import { forwardRef, useCallback, useState } from 'react';
 import { CalendarSvg } from '../../icons';
 import { RVTextInput, TextInput } from '../TextInput';
 import DatePickerPanel, { DayValue } from 'ramin-modern-calendar-datepicker';
@@ -7,14 +7,17 @@ import 'ramin-modern-calendar-datepicker/lib/DatePicker.css';
 
 import styles from './DatePicker.module.scss';
 import { RVColorProp, RVSvgProps } from '../../types';
-export interface RVDatePicker extends RVTextInput {}
+export interface RVDatePicker extends RVTextInput {
+  disabled?: boolean;
+}
 
 const DatePicker = forwardRef<HTMLInputElement, RVDatePicker>(
   (
     { className, disabled, onChange, color = RVColorProp.cgBlue, ...props },
     ref
   ) => {
-    // const [isToggled, setIsToggled] = useState<boolean>(true);
+    // const inputRef = useRef<HTMLInputElement>(null);
+    // const combinedRefs = useCombinedRefs(ref, inputRef);
 
     const [selectedDay, setSelectedDay] = useState<DayValue>();
 
@@ -33,19 +36,12 @@ const DatePicker = forwardRef<HTMLInputElement, RVDatePicker>(
     };
     const CustomDatePickerInput = useCallback(
       ({ ...dateProps }: RVTextInput) => {
-        const VSGICON = (props: RVSvgProps) => (
-          <CalendarSvg
-            ref={ref as LegacyRef<SVGSVGElement> | undefined}
-            {...props}
-          />
-        );
         return (
           <TextInput
             className={clsx(styles.datePicker)}
-            Icon={VSGICON}
+            Icon={CalendarSvg}
             defaultValue={formatInputValue()}
             disabled={disabled}
-            ref={ref}
             color={color}
             {...props}
             {...dateProps}

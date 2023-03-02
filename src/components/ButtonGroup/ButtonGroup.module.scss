@@ -3,21 +3,39 @@
 .buttonGroup {
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: stretch;
 
   & > button {
     border-radius: 0;
     margin-inline: px-to-rem(1);
     height: 100%;
+  }
 
+  &.half > button {
     &:first-of-type {
-      border-start-start-radius: 10px;
-      border-end-start-radius: 10px;
+      border-start-start-radius: calc($borderRadiusHalf / 2);
+      border-end-start-radius: calc($borderRadiusHalf / 2);
     }
 
     &:last-of-type {
-      border-start-end-radius: 10px;
-      border-end-end-radius: 10px;
+      border-start-end-radius: calc($borderRadiusHalf / 2);
+      border-end-end-radius: calc($borderRadiusHalf / 2);
+    }
+
+    &:last-child {
+      padding-inline: px-to-rem(12);
+    }
+  }
+
+  &.full > button {
+    &:first-of-type {
+      border-start-start-radius: $borderRadiusFull;
+      border-end-start-radius: $borderRadiusFull;
+    }
+
+    &:last-of-type {
+      border-start-end-radius: $borderRadiusFull;
+      border-end-end-radius: $borderRadiusFull;
     }
 
     &:last-child {

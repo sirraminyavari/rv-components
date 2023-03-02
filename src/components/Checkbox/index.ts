@@ -1,3 +1,3 @@
-import { default as Checkbox,RVCheckbox } from './Checkbox';
+import { default as Checkbox, RVCheckbox } from './Checkbox';
 export type { RVCheckbox };
 export { Checkbox };

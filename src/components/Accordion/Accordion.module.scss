@@ -26,16 +26,16 @@
     width: 100%;
     padding-block: px-to-rem(12);
     padding-inline-end: px-to-rem(16);
-    margin-inline-start: px-to-rem(16);
+    padding-inline-start: px-to-rem(16);
     z-index: 2;
-    color: hsl(var(--base-font));
+    color: hsl(var(--light-font));
   }
 
-  &>svg {
+  & > svg {
     color: hsl(var(--base));
     margin-inline-start: px-to-rem(14);
     margin-inline-end: px-to-rem(8);
-    font-size: px-to-rem(32);
+    font-size: px-to-rem(24);
     transition: transform 0.32s ease-out, color 0.32s;
     filter: brightness(0.8);
   }
@@ -49,7 +49,7 @@
 
 .accordionPanel[data-open='true'] {
   .triggerButton {
-    >svg {
+    > svg {
       transform: rotate(90deg);
       color: hsl(var(--dark) / 90%);
     }
@@ -62,7 +62,7 @@
 
 @include on-rtl {
   .triggerButton {
-    &>svg {
+    & > svg {
       transform: scale(-1);
     }
   }

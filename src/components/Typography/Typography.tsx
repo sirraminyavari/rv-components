@@ -17,7 +17,7 @@ export interface RVTypography
     'color'
   > {
   color?: RVColorProp;
-  type?: 'H1' | 'H2' | 'H3' | 'H4' | 'H5' | 'H6' | 'p' | 'sub';
+  type?: 'H1' | 'H2' | 'H3' | 'H4' | 'H5' | 'H6' | 'p' | 'caption';
   muted?: boolean;
 }
 

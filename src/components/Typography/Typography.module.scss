@@ -53,11 +53,12 @@
     font-weight: 400;
   }
 
-  &.sub {
+  &.caption {
     font-size: px-to-rem(12);
     line-height: px-to-rem(19);
     font-style: normal;
     font-weight: 300;
+    text-align: inherit;
   }
 }
 

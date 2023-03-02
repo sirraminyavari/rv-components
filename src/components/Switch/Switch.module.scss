@@ -1,212 +1,245 @@
 @use 'sass:math';
 @import '../../scss/modules/default';
 
-
-
-
 .label {
-    position: relative;
-    margin-block: px-to-rem(4);
-    margin-inline: px-to-rem(6);
+  position: relative;
+  margin-block: px-to-rem(4);
+  margin-inline: px-to-rem(6);
+  align-items: center;
+  transition: color 250ms ease-out;
+  display: inline-flex;
+  cursor: pointer;
+  user-select: none;
+
+  .input {
+    height: 0;
+    width: 0;
+  }
+
+  & > .SwitchIndicator {
+    display: flex;
+    justify-content: center;
     align-items: center;
-    transition: color 250ms ease-out;
-    display: inline-flex;
+    margin-inline-end: px-to-rem(8);
+    // padding-block: px-to-rem(8);
+    width: 2.1em;
+    height: 1.2em;
+    background: transparent;
+    border-radius: px-to-rem(100);
     cursor: pointer;
-    user-select: none;
+    transition: all 250ms ease-out;
+    position: relative;
+    cursor: pointer;
+    border-width: px-to-rem(1);
+    border-style: solid;
 
+    &:before {
+      content: '';
+      position: absolute;
+      border-radius: 100%;
+      aspect-ratio: 1;
+      height: 80%;
+      inset-block-start: 10%;
+      inset-inline-start: calc(100% - 1.1em);
+      transition: background-color 0.2s, inset 0.2s, border 0.2s;
+      box-shadow: -2px 0px 4px rgba(0, 0, 0, 0.3);
+      border-width: px-to-rem(1);
+      border-style: solid;
+      border-color: transparent;
+      box-sizing: border-box;
+    }
+  }
 
+  &.toggled {
+    & > .SwitchIndicator {
+      &:before {
+        content: '';
+        inset-inline-start: 5%;
+      }
+    }
+  }
 
-    .input {
-        height: 0;
-        width: 0;
+  &.small {
+    font-size: px-to-rem(16);
+  }
+
+  &.medium {
+    font-size: px-to-rem(18);
+  }
+
+  &.large {
+    font-size: px-to-rem(20);
+  }
+
+  &.primary {
+    color: hsl(var(--base));
+
+    & > .SwitchIndicator {
+      border-color: hsl(var(--base));
+      background-color: hsl(var(--base));
+
+      &::before {
+        background-color: hsl(var(--white));
+      }
     }
 
-    &>.SwitchIndicator {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-inline-end: px-to-rem(8);
-        // padding-block: px-to-rem(8);
-        width: 2.1em;
-        height: 1.2em;
-        background: transparent;
-        border-radius: px-to-rem(100);
-        cursor: pointer;
-        transition: all 250ms ease-out;
-        position: relative;
-        cursor: pointer;
-        border-width: px-to-rem(1);
-        border-style: solid;
+    &:hover {
+      color: hsl(var(--base));
 
-        &:before {
-            content: "";
-            position: absolute;
-            border-radius: 100%;
-            aspect-ratio: 1;
-            height: 90%;
-            inset-block-start: 5%;
-            inset-inline-start: calc(100% - 1.2em);
-            transition: background-color .2s, inset .2s;
-            box-shadow: -2px 0px 4px rgba(0, 0, 0, 0.3);
+      .SwitchIndicator {
+        &::before {
+          background-color: hsl(var(--lighter));
         }
+      }
     }
-
 
     &.toggled {
-        &>.SwitchIndicator {
+      .SwitchIndicator {
+        background-color: hsl(var(--light));
 
-            &:before {
-                content: "";
-                inset-inline-start: 5%;
-            }
+        &::before {
+          box-shadow: none;
         }
+      }
     }
 
-    &.small {
-        font-size: px-to-rem(16);
+    &:focus-within {
+      color: hsl(var(--darker));
+
+      .SwitchIndicator {
+        border-color: hsl(var(--base));
+      }
+
+      &.toggled {
+        .SwitchIndicator {
+          background-color: hsl(var(--darker));
+          border-color: hsl(var(--darker));
+
+          &::before {
+            background-color: hsl(var(--light));
+          }
+        }
+      }
+    }
+  }
+
+  &.outline {
+    color: hsl(var(--base));
+
+    & > .SwitchIndicator {
+      border-color: hsl(var(--base));
+
+      &::before {
+        background-color: hsl(var(--base));
+      }
     }
 
-    &.medium {
-        font-size: px-to-rem(18);
+    &.toggled {
+      & > .SwitchIndicator {
+        border-color: hsl(var(--base));
+
+        &::before {
+          border-color: hsl(var(--base));
+          background-color: hsl(var(--white));
+        }
+      }
     }
 
-    &.large {
-        font-size: px-to-rem(20);
+    &:focus-within {
+      color: hsl(var(--darker));
+
+      .SwitchIndicator {
+        background-color: hsl(var(--light));
+
+        &::before {
+          background-color: hsl(var(--darker));
+        }
+      }
+    }
+  }
+
+  &.white {
+    color: hsl(var(--base));
+
+    & > .SwitchIndicator {
+      border-color: hsl(var(--base));
+      background-color: hsl(var(--base));
+
+      &::before {
+        background-color: hsl(var(--white));
+        border-color: hsl(var(--white));
+      }
     }
 
-    &.primary {
-        color: hsl(var(--base));
+    &.toggled {
+      .SwitchIndicator {
+        border-color: hsl(var(--light) / 80%);
+        background-color: hsl(var(--light) / 80%);
 
-        &>.SwitchIndicator {
-            border-color: hsl(var(--base));
-            background-color: hsl(var(--base));
-
-            &::before {
-                background-color: hsl(var(--light));
-            }
-
+        &::before {
+          border-color: hsl(var(--white));
+          box-shadow: none;
         }
-
-        &:hover {
-            color: hsl(var(--base));
-
-            .SwitchIndicator {
-                // background-color: hsl(var(--light));
-
-                &::before {
-
-                    background-color: hsl(var(--lighter));
-                }
-            }
-        }
-
-        &.toggled {
-            .SwitchIndicator {
-                background-color: hsl(var(--light));
-
-            }
-        }
-
-        &:focus-within {
-            color: hsl(var(--darker));
-
-            .SwitchIndicator {
-                background-color: hsl(var(--darker));
-
-                &::before {
-                    background-color: hsl(var(--light));
-                }
-            }
-        }
+      }
     }
 
-    &.outline {
-        color: hsl(var(--base));
+    &:hover {
+      color: hsl(var(--dark));
 
-        &>.SwitchIndicator {
-            border-color: hsl(var(--base));
-
-            &::before {
-                background-color: hsl(var(--base));
-            }
-
+      .SwitchIndicator {
+        &::before {
+          background-color: hsl(var(--light));
+          border-color: hsl(var(--light));
         }
+      }
 
-        &:hover,
-        &.toggled {
-            color: hsl(var(--dark));
-
-            .SwitchIndicator {
-                &::before {
-
-                    background-color: hsl(var(--dark));
-                }
-            }
+      &.toggled {
+        .SwitchIndicator {
+          &::before {
+            background-color: hsl(var(--dark));
+            border-color: hsl(var(--dark));
+          }
         }
-
-        &:focus-within {
-            color: hsl(var(--darker));
-
-            .SwitchIndicator {
-                background-color: hsl(var(--light));
-
-                &::before {
-                    background-color: hsl(var(--darker));
-                }
-            }
-        }
+      }
     }
 
-    &.white {
-        color: hsl(var(--base));
+    // &:focus-within {
+    //     color: hsl(var(--darker));
 
-        &>.SwitchIndicator {
-            border-color: hsl(var(--light) / 20%);
-            box-shadow: inset 0px 0px 1px rgba(0, 0, 0, 0.3);
+    //     .SwitchIndicator {
+    //         background-color: hsl(var(--light) / 20%);
 
-            &::before {
-                background-color: hsl(var(--base));
-                box-shadow: none;
-            }
+    //         &::before {
+    //             background-color: hsl(var(--darker));
+    //         }
+    //     }
+    // }
+  }
 
-        }
+  &.disabled {
+    color: hsl(var(--base) / 40%) !important;
 
-        &:hover,
-        &.toggled {
-            color: hsl(var(--dark));
+    & > .SwitchIndicator {
+      border-color: hsl(var(--light) / 50%) !important;
+      background-color: hsl(var(--light) / 90%) !important;
 
-            .SwitchIndicator {
-                &::before {
-
-                    background-color: hsl(var(--dark));
-                }
-            }
-        }
-
-        &:focus-within {
-            color: hsl(var(--darker));
-
-            .SwitchIndicator {
-                background-color: hsl(var(--light) / 20%);
-
-                &::before {
-                    background-color: hsl(var(--darker));
-                }
-            }
-        }
+      &::before {
+        border-color: hsl(var(--white)) !important;
+        background-color: hsl(var(--white)) !important;
+      }
     }
 
-    &.disabled {
-        color: hsl(var(--base) / 40%) !important;
+    &.toggled {
+      & > .SwitchIndicator {
+        border-color: hsl(var(--light) / 50%) !important;
+        background-color: hsl(var(--white)) !important;
 
-        &>.SwitchIndicator {
-            border-color: hsl(var(--base) / 50%) !important;
-            background-color: hsl(var(--base) / 30%) !important;
-
-            &::before {
-                background-color: hsl(var(--base) / 40%) !important;
-            }
-
+        &::before {
+          border-color: transparent !important;
+          background-color: hsl(var(--darker) / 50%) !important;
+          box-shadow: none;
         }
+      }
     }
+  }
 }

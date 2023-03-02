@@ -253,281 +253,289 @@ export const NodePage: ComponentStory<FunctionComponent> = ({ ...args }) => {
             />
           </div>
         </div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-            marginBlock: '1rem',
-          }}
-        >
-          <RowItem
-            size={RVSizeProp.small}
-            ActionsComponent={
+        <div style={{ display: 'flex', position: 'relative' }}>
+          <div style={{ width: '100%' }}>
+            <div
+              style={{
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+                marginBlock: '1rem',
+              }}
+            >
+              <RowItem
+                size={RVSizeProp.small}
+                ActionsComponent={
+                  <div
+                    style={{
+                      display: 'flex',
+                      columnGap: '.5rem',
+                    }}
+                  >
+                    <Button variant={RVVariantProp.white}>back</Button>
+                    <Button fullWidth noWrap style={{ width: 200 }}>
+                      <ArrowCircleSvg
+                        width="1.3em"
+                        height="1.3em"
+                        direction="up"
+                      />
+                      publish
+                    </Button>
+                  </div>
+                }
+              >
+                <Typography type="H1">
+                  CliqMind UX writing improvement and other correction
+                </Typography>
+              </RowItem>
+            </div>
+            <div
+              style={{
+                display: 'flex',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                flexWrap: 'wrap',
+              }}
+            >
               <div
                 style={{
+                  width: 490,
+                  marginBlock: '',
                   display: 'flex',
-                  columnGap: '.5rem',
+                  alignItems: 'center',
+                  columnGap: '1rem',
+                  paddingInlineStart: '2rem',
                 }}
               >
-                <Button variant={RVVariantProp.white}>back</Button>
-                <Button fullWidth noWrap style={{ width: 200 }}>
-                  <ArrowCircleSvg width="1.3em" height="1.3em" direction="up" />
-                  publish
+                <Avatar
+                  src="https://i.pravatar.cc/300"
+                  fullCircle
+                  variant={RVVariantProp.white}
+                  size={RVSizeProp.medium}
+                />
+              </div>
+              <div
+                style={{
+                  marginBlock: '',
+                  display: 'flex',
+                  alignItems: 'center',
+                  columnGap: '1rem',
+                }}
+              >
+                <Button rounded="half" fullCircle variant={RVVariantProp.white}>
+                  <BookmarkSvg outline />
+                </Button>
+                <Button rounded="half" fullCircle variant={RVVariantProp.white}>
+                  <ChatBubbleSvg outline />
+                </Button>
+                <Button
+                  rounded="half"
+                  fullCircle
+                  variant={RVVariantProp.white}
+                  active={sideMenuStatus}
+                  onClick={() => {
+                    setSideMenuStatus((prev) => !prev);
+                  }}
+                >
+                  <ReaderSvg outline />
                 </Button>
               </div>
-            }
-          >
-            <Typography type="H1">
-              CliqMind UX writing improvement and other correction
-            </Typography>
-          </RowItem>
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            flexWrap: 'wrap',
-          }}
-        >
-          <div
-            style={{
-              width: 490,
-              marginBlock: '',
-              display: 'flex',
-              alignItems: 'center',
-              columnGap: '1rem',
-              paddingInlineStart: '2rem',
-            }}
-          >
-            <Avatar
-              src="https://i.pravatar.cc/300"
-              fullCircle
-              variant={RVVariantProp.white}
-              size={RVSizeProp.medium}
-            />
-          </div>
-          <div
-            style={{
-              marginBlock: '',
-              display: 'flex',
-              alignItems: 'center',
-              columnGap: '1rem',
-            }}
-          >
-            <Button rounded="half" fullCircle variant={RVVariantProp.white}>
-              <BookmarkSvg outline />
-            </Button>
-            <Button rounded="half" fullCircle variant={RVVariantProp.white}>
-              <ChatBubbleSvg outline />
-            </Button>
-            <Button
-              rounded="half"
-              fullCircle
-              variant={RVVariantProp.white}
-              active={sideMenuStatus}
-              onClick={() => {
-                setSideMenuStatus((prev) => !prev);
-              }}
-            >
-              <ReaderSvg outline />
-            </Button>
-          </div>
-        </div>
-        <div
-          style={{
-            display: 'flex',
-            flexDirection: 'row',
-            gap: '1rem',
-          }}
-        >
-          <div
-            style={{
-              marginBlock: '4rem',
-              display: 'flex',
-              flexDirection: 'column',
-              gap: '2rem',
-              width: '100%',
-            }}
-          >
-            <div style={{ display: 'flex', width: '100%' }}>
-              <div
-                style={{
-                  flexBasis: '20%',
-                }}
-              >
-                <span
-                  style={{
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '1rem',
-                  }}
-                >
-                  <AlbumsSvg style={{ fontSize: '1.5rem' }} />
-                  Text Area component
-                </span>
-              </div>
-              <>
-                <TextAreaInput
-                  rows={6}
-                  fullWidth
-                  label="placeholder ..."
-                  color={RVColorProp.distant}
-                  variant={RVVariantProp.outline}
-                />
-              </>
-            </div>
-            <div style={{ display: 'flex', width: '100%' }}>
-              <div
-                style={{
-                  flexBasis: '20%',
-                }}
-              >
-                <span
-                  style={{
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '1rem',
-                  }}
-                >
-                  <AlbumsSvg style={{ fontSize: '1.5rem' }} />
-                  Text Area component
-                </span>
-              </div>
-              <>
-                <TextInput
-                  fullWidth
-                  label="placeholder ..."
-                  color={RVColorProp.distant}
-                  variant={RVVariantProp.outline}
-                />
-              </>
-            </div>
-            <div style={{ display: 'flex', width: '100%' }}>
-              <div
-                style={{
-                  flexBasis: '20%',
-                }}
-              >
-                <span
-                  style={{
-                    width: '100%',
-                    display: 'flex',
-                    alignItems: 'center',
-                    gap: '1rem',
-                  }}
-                >
-                  <CalendarSvg style={{ fontSize: '1.5rem' }} />
-                  Date picker component
-                </span>
-              </div>
-              <>
-                <DatePicker
-                  fullWidth
-                  label="placeholder ..."
-                  color={RVColorProp.distant}
-                  variant={RVVariantProp.outline}
-                />
-              </>
             </div>
             <div
               style={{
-                marginBlock: '2rem',
                 display: 'flex',
-                flexDirection: 'column',
-                gap: '2rem',
+                flexDirection: 'row',
+                gap: '1rem',
               }}
             >
-              <div style={{ display: 'flex', width: '100%' }}>
-                <div
-                  style={{
-                    flexBasis: '20%',
-                  }}
-                >
-                  <span
+              <div
+                style={{
+                  marginBlock: '4rem',
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: '2rem',
+                  width: '100%',
+                }}
+              >
+                <div style={{ display: 'flex', width: '100%' }}>
+                  <div
                     style={{
-                      width: '100%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '1rem',
+                      flexBasis: '20%',
                     }}
                   >
-                    <AlbumsSvg style={{ fontSize: '1.5rem' }} />
-                    select component
-                  </span>
+                    <span
+                      style={{
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '1rem',
+                      }}
+                    >
+                      <AlbumsSvg style={{ fontSize: '1.5rem' }} />
+                      Text Area component
+                    </span>
+                  </div>
+                  <>
+                    <TextAreaInput
+                      rows={6}
+                      fullWidth
+                      label="placeholder ..."
+                      color={RVColorProp.distant}
+                      variant={RVVariantProp.outline}
+                    />
+                  </>
                 </div>
-                <>
-                  <Select
-                    options={[
-                      { label: 'test', value: 'test' },
-                      { label: 'test1', value: 'test' },
-                      { label: 'test2', value: 'test' },
-                      { label: 'test3', value: 'test' },
-                    ]}
-                    placeholder="placeholder ..."
-                    color={RVColorProp.distant}
-                    variant={RVVariantProp.outline}
-                  />
-                </>
-              </div>
-            </div>
-            <div
-              style={{
-                marginBlock: '2rem',
-                display: 'flex',
-                flexDirection: 'column',
-                gap: '2rem',
-              }}
-            >
-              <div style={{ display: 'flex', width: '100%' }}>
-                <div
-                  style={{
-                    flexBasis: '20%',
-                  }}
-                >
-                  <span
+                <div style={{ display: 'flex', width: '100%' }}>
+                  <div
                     style={{
-                      width: '100%',
-                      display: 'flex',
-                      alignItems: 'center',
-                      gap: '1rem',
+                      flexBasis: '20%',
                     }}
                   >
-                    <AlbumsSvg style={{ fontSize: '1.5rem' }} />
-                    multiselect component
-                  </span>
+                    <span
+                      style={{
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '1rem',
+                      }}
+                    >
+                      <AlbumsSvg style={{ fontSize: '1.5rem' }} />
+                      Text Area component
+                    </span>
+                  </div>
+                  <>
+                    <TextInput
+                      fullWidth
+                      label="placeholder ..."
+                      color={RVColorProp.distant}
+                      variant={RVVariantProp.outline}
+                    />
+                  </>
                 </div>
-                <>
-                  <Select
-                    style={{ width: '100%' }}
-                    isMulti
-                    isClearable
-                    options={[
-                      { label: 'test', value: 'test' },
-                      { label: 'test1', value: 'test' },
-                      { label: 'test2', value: 'test' },
-                      { label: 'test3', value: 'test' },
-                    ]}
-                    placeholder="placeholder ..."
-                    color={RVColorProp.distant}
-                    variant={RVVariantProp.outline}
-                  />
-                </>
+                <div style={{ display: 'flex', width: '100%' }}>
+                  <div
+                    style={{
+                      flexBasis: '20%',
+                    }}
+                  >
+                    <span
+                      style={{
+                        width: '100%',
+                        display: 'flex',
+                        alignItems: 'center',
+                        gap: '1rem',
+                      }}
+                    >
+                      <CalendarSvg style={{ fontSize: '1.5rem' }} />
+                      Date picker component
+                    </span>
+                  </div>
+                  <>
+                    <DatePicker
+                      fullWidth
+                      label="placeholder ..."
+                      color={RVColorProp.distant}
+                      variant={RVVariantProp.outline}
+                    />
+                  </>
+                </div>
+                <div
+                  style={{
+                    marginBlock: '2rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '2rem',
+                  }}
+                >
+                  <div style={{ display: 'flex', width: '100%' }}>
+                    <div
+                      style={{
+                        flexBasis: '20%',
+                      }}
+                    >
+                      <span
+                        style={{
+                          width: '100%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '1rem',
+                        }}
+                      >
+                        <AlbumsSvg style={{ fontSize: '1.5rem' }} />
+                        select component
+                      </span>
+                    </div>
+                    <>
+                      <Select
+                        options={[
+                          { label: 'test', value: 'test' },
+                          { label: 'test1', value: 'test' },
+                          { label: 'test2', value: 'test' },
+                          { label: 'test3', value: 'test' },
+                        ]}
+                        placeholder="placeholder ..."
+                        color={RVColorProp.distant}
+                        variant={RVVariantProp.outline}
+                      />
+                    </>
+                  </div>
+                </div>
+                <div
+                  style={{
+                    marginBlock: '2rem',
+                    display: 'flex',
+                    flexDirection: 'column',
+                    gap: '2rem',
+                  }}
+                >
+                  <div style={{ display: 'flex', width: '100%' }}>
+                    <div
+                      style={{
+                        flexBasis: '20%',
+                      }}
+                    >
+                      <span
+                        style={{
+                          width: '100%',
+                          display: 'flex',
+                          alignItems: 'center',
+                          gap: '1rem',
+                        }}
+                      >
+                        <AlbumsSvg style={{ fontSize: '1.5rem' }} />
+                        multiselect component
+                      </span>
+                    </div>
+                    <>
+                      <Select
+                        style={{ width: '100%' }}
+                        isMulti
+                        isClearable
+                        options={[
+                          { label: 'test', value: 'test' },
+                          { label: 'test1', value: 'test' },
+                          { label: 'test2', value: 'test' },
+                          { label: 'test3', value: 'test' },
+                        ]}
+                        placeholder="placeholder ..."
+                        color={RVColorProp.distant}
+                        variant={RVVariantProp.outline}
+                      />
+                    </>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
           <SideMenu height="100%" width="350px" open={sideMenuStatus}>
             <div
               style={{
-                height: '80vh',
+                height: '90vh',
                 width: 350,
                 padding: 12,
                 overflow: 'hidden',
+                position: 'sticky',
+                top: 0,
               }}
             >
               <p style={{ overflow: 'hidden' }}>

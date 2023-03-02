@@ -26,6 +26,7 @@ export interface RVSelect
   size?: RVSizeProp;
   label?: string;
   disabled?: boolean;
+  fullWidth?: boolean;
   isMulti?: boolean;
   isClearable?: boolean;
   options: { label: string | number; value: string | number }[];
@@ -44,22 +45,25 @@ const Select = forwardRef<
       disabled,
       onChange,
       options,
+      fullWidth,
       isMulti,
       ...props
     },
     ref
   ) => {
-    // const [isToggled, setIsToggled] = useState<boolean>(true);
     return (
       <>
         <ReactSelect
           isMulti={isMulti}
+          isSearchable
           ref={ref}
           isDisabled={disabled}
+          closeMenuOnSelect={!isMulti}
           className={clsx(
             styles.selectContainer,
             isMulti && styles.selectMulti,
             disabled && styles.disabled,
+            fullWidth && styles.fullWidth,
             color
             // styles[size],
             // styles[variant]

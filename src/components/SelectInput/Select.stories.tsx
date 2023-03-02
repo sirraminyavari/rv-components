@@ -22,8 +22,19 @@ const Template: ComponentStory<typeof SelectComponent> = ({
     <SelectComponent
       label={label}
       options={[
-        { value: 'strawberry', label: 'Strawberry' },
-        { value: 'vanilla', label: 'Vanilla' },
+        { label: 'John Wick', value: 'John Wick' },
+        { label: 'Frank Castle', value: 'Frank Castle' },
+        { label: 'John Constantine', value: 'John Constantine' },
+        { label: 'Charlie Wax', value: 'Charlie Wax' },
+        { label: 'Lucifer Morningstar', value: 'Lucifer Morningstar' },
+        { label: 'Mike McLusky', value: 'Mike McLusky' },
+        { label: 'Kayce Dutton', value: 'Kayce Dutton' },
+        { label: 'Alfie Solomons', value: 'Alfie Solomons' },
+        { label: 'Tyler Durden', value: 'Tyler Durden' },
+        {
+          label: 'Rhoshandiatellyneshiaunneveshenk Koyaanisquatsiuth Williams ',
+          value: 'Rhoshandiatellyneshiaunneveshenk Koyaanisquatsiuth Williams ',
+        },
       ]}
       {...args}
     />

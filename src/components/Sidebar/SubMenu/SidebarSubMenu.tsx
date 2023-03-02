@@ -118,6 +118,10 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
                   onActiveClick(e);
                   link.onClick && link.onClick(e);
                 }}
+                onAccordionStatusChange={(event, status) => {
+                  if (activeTile.current?.isEqualNode(event.currentTarget))
+                    status === 'closed' && onActiveClick(event);
+                }}
               >
                 {linkButtonGenerator(link.childItems)}
               </Accordion>
@@ -176,7 +180,7 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
             <div ref={containerRef}>
               <Typography
                 color={RVColorProp.inherit}
-                type="sub"
+                type="caption"
                 className={styles.titleTypography}
               >
                 Amir's workspace

@@ -27,7 +27,7 @@ const Separator = forwardRef<HTMLDivElement, RVSeparator>(
     {
       children,
       className,
-      color = RVColorProp.cgBlue,
+      color = RVColorProp.platinum,
       variant = RVVariantProp.primary,
       size = RVSizeProp.medium,
       nowrap,

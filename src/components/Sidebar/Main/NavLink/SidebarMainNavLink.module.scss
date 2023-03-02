@@ -18,7 +18,7 @@
   align-items: center;
   text-align: center;
 
-  &>svg {
+  & > svg {
     padding-block: px-to-rem(4);
     font-size: px-to-rem(32);
   }
@@ -27,7 +27,7 @@
     background-color: hsl(var(--dark-font) / 15%);
     color: hsl(var(--dark-font) / 80%);
 
-    &>svg {
+    & > svg {
       animation: pulse 0.4s;
       animation-iteration-count: 1;
     }
@@ -43,10 +43,9 @@
     background-color: hsl(var(--darker));
     margin-inline-start: 0;
 
-    >svg {
+    > svg {
       animation: pulse 0.4s;
       animation-iteration-count: 2;
-
     }
   }
 }
