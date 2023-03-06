@@ -1,0 +1,110 @@
+@use 'sass:math';
+@import '../../scss/modules/default';
+
+.scrollbarContainer {
+  overflow: hidden;
+  position: relative;
+  height: 100%;
+
+  .scrollbarContent {
+    height: 100%;
+    -ms-overflow-style: none;
+    overflow: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .scrollbar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: sticky;
+    z-index: 10;
+    height: 95%;
+    inset-block: 2.5%;
+    inset-inline-start: px-to-rem(-15);
+    opacity: 0%;
+    transition: opacity 0.2s, inset 0.2s;
+
+    &.scrolling {
+      transition: opacity 0.4s, inset 0.2s;
+      inset-inline-start: px-to-rem(1);
+      opacity: 1;
+    }
+
+    .scrollbarTrackAndThumb {
+      display: block;
+      height: 100%;
+      position: relative;
+      // width: px-to-rem(12);
+
+      .scrollbarTrack {
+        background-color: hsl(var(--light) / 50%);
+        border-radius: $borderRadiusHalf;
+        bottom: 0;
+        cursor: pointer;
+        position: absolute;
+        top: 0;
+        // width: px-to-rem(12);
+      }
+
+      .scrollbarThumb {
+        border-radius: $borderRadiusHalf;
+        background-color: hsl(var(--base) / 50%);
+        position: absolute;
+        // width: px-to-rem(12);
+      }
+    }
+
+    &.small {
+      width: px-to-rem(3);
+
+      .scrollbarTrackAndThumb {
+        width: px-to-rem(3);
+
+        .scrollbarTrack {
+          width: px-to-rem(3);
+        }
+
+        .scrollbarThumb {
+          width: px-to-rem(3);
+        }
+      }
+    }
+
+    &.medium {
+      width: px-to-rem(6);
+
+      .scrollbarTrackAndThumb {
+        width: px-to-rem(6);
+
+        .scrollbarTrack {
+          width: px-to-rem(6);
+        }
+
+        .scrollbarThumb {
+          width: px-to-rem(6);
+        }
+      }
+    }
+
+    &.large {
+      width: px-to-rem(12);
+
+      .scrollbarTrackAndThumb {
+        width: px-to-rem(12);
+
+        .scrollbarTrack {
+          width: px-to-rem(12);
+        }
+
+        .scrollbarThumb {
+          width: px-to-rem(12);
+        }
+      }
+    }
+  }
+}

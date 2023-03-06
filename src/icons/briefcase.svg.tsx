@@ -5,31 +5,23 @@ const BriefcaseSvg = ({ size, outline, ...props }: RVSvgProps) => {
     <svg
       width={size || '1em'}
       height={size || '1em'}
-      viewBox="0 0 512 512"
+      viewBox={outline ? '0 0 30 26' : '0 0 512 512'}
       xmlns="http://www.w3.org/2000/svg"
       {...props}
     >
       {outline ? (
         <>
-          <rect
-            width="448"
-            height="320"
-            x="32"
-            y="128"
-            fill="none"
-            stroke="currentColor"
-            strokeLinejoin="round"
-            strokeWidth="32"
-            rx="48"
-            ry="48"
+          <path
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M4 6C2.89543 6 2 6.89543 2 8V22C2 23.1046 2.89543 24 4 24H26C27.1046 24 28 23.1046 28 22V8C28 6.89543 27.1046 6 26 6H4ZM0 8C0 5.79086 1.79086 4 4 4H26C28.2091 4 30 5.79086 30 8V22C30 24.2091 28.2091 26 26 26H4C1.79086 26 0 24.2091 0 22V8Z"
+            fill="currentColor"
           />
           <path
-            fill="none"
-            stroke="currentColor"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="32"
-            d="M144 128V96a32 32 0 0 1 32-32h160a32 32 0 0 1 32 32v32m112 112H32m288 0v24a8 8 0 0 1-8 8H200a8 8 0 0 1-8-8v-24"
+            fillRule="evenodd"
+            clipRule="evenodd"
+            d="M10 2C9.73478 2 9.48043 2.10536 9.29289 2.29289C9.10536 2.48043 9 2.73478 9 3V4C8 4 8.55228 4 8 4C7.44772 4 8 4 7 4V3C7 2.20435 7.31607 1.44129 7.87868 0.87868C8.44129 0.31607 9.20435 0 10 0H20C20.7957 0 21.5587 0.31607 22.1213 0.87868C22.6839 1.44129 23 2.20435 23 3V4C22.5 4 22.5523 4 22 4C21.4477 4 21.5 4 21 4V3C21 2.73478 20.8946 2.48043 20.7071 2.29289C20.5196 2.10536 20.2652 2 20 2H10ZM2 12C2 11.4477 2 11.5 2 11H28C28 11.5 28 11.4477 28 12C28 12.5523 28 12.5 28 13H20V13.5C20 13.8978 19.842 14.2794 19.5607 14.5607C19.2794 14.842 18.8978 15 18.5 15H11.5C11.1022 15 10.7206 14.842 10.4393 14.5607C10.158 14.2794 10 13.8978 10 13.5V13H2C2 12.5 2 12.5523 2 12Z"
+            fill="currentColor"
           />
         </>
       ) : (
