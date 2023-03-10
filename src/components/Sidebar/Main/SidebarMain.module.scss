@@ -8,6 +8,7 @@
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
+  justify-content: space-between;
 }
 
 .menuTileIcon {
@@ -35,35 +36,6 @@
   overflow-y: auto;
   height: 100%;
   position: relative;
-
-  /* width */
-  &::-webkit-scrollbar {
-    width: 5px;
-  }
-
-  /* Track */
-  &::-webkit-scrollbar-track {
-    background: hsl(var(--dark) / 5%);
-  }
-
-  /* Handle */
-  &::-webkit-scrollbar-thumb {
-    background: hsl(var(--base) / 0%);
-    border-radius: 10px;
-    transition: background-color 0.24s;
-  }
-
-  &:hover {
-    &::-webkit-scrollbar-thumb {
-      background: hsl(var(--base) / 25%);
-      border-radius: 10px;
-      transition: background-color 0.24s;
-
-      &:hover {
-        background: hsl(var(--base) / 50%);
-      }
-    }
-  }
 }
 
 .menuSecondaryList {

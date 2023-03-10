@@ -95,8 +95,8 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
     );
 
     const linkButtonGenerator = useCallback(
-      (links: RVSidebarSubMenu['links']) => {
-        return links.map((link) => {
+      (sidebarLinks: RVSidebarSubMenu['links']) => {
+        return sidebarLinks.map((link) => {
           if (link.input)
             return (
               <TextInput

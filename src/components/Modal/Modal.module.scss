@@ -1,0 +1,64 @@
+@use 'sass:math';
+@import '../../scss/modules/default';
+
+.modalOverlay {
+  position: fixed;
+  z-index: 100;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: transparent;
+  transition: backdrop-filter var(--modal-transition-duration, 250ms) ease-in,
+    background-color var(--modal-transition-duration, 250ms) ease-in;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(px-to-rem(2));
+
+  &[class*='ReactModal__Overlay--after-open'] {
+    background-color: hsl(var(--base) / 20%);
+  }
+
+  &[class*='ReactModal__Overlay--before-close'] {
+    background-color: transparent;
+  }
+}
+
+.modalContent {
+  max-height: 80vh;
+  overflow: hidden;
+  background-color: hsl(var(--white) / 100%);
+  transform: scale(0.9);
+  opacity: 0;
+  border-radius: $borderRadiusHalf;
+  transition: transform var(--modal-transition-duration, 250ms) ease-in-out,
+    opacity var(--modal-transition-duration, 250ms) ease-in-out;
+
+  &[class*='ReactModal__Content--after-open'] {
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  &[class*='ReactModal__Content--before-close'] {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+
+  &.small {
+    max-width: calc(100vw - px-to-rem(40));
+    width: 40%;
+    min-width: px-to-rem(200);
+  }
+
+  &.medium {
+    width: 60%;
+    max-width: calc(100vw - px-to-rem(20));
+    min-width: px-to-rem(250);
+  }
+
+  &.large {
+    max-width: calc(100vw - px-to-rem(10));
+    width: 80%;
+    min-width: px-to-rem(320);
+  }
+}

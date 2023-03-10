@@ -9,13 +9,15 @@ import {
   MouseEvent,
   MouseEventHandler,
   PropsWithoutRef,
+  UIEventHandler,
   useCallback,
   useRef,
   useState,
 } from 'react';
-import { RVColorProp, RVSvgProps } from '../../../types';
+import { RVColorProp, RVSizeProp, RVSvgProps } from '../../../types';
 import { SidebarMainNavLink } from './NavLink';
 import styles from './SidebarMain.module.scss';
+import { Scrollbar } from '../../Scrollbar';
 
 export interface RVSidebarMain
   extends Omit<
@@ -62,15 +64,12 @@ const SidebarMain = forwardRef<HTMLDivElement, RVSidebarMain>(
     const onActiveClick: MouseEventHandler<HTMLButtonElement> = useCallback(
       (event) => {
         const tile = event.currentTarget;
+
         const tileBoundingRect = tile.getBoundingClientRect();
-        console.table(tileBoundingRect);
         if (!activePrimaryIndicatorRef.current || !primaryContainerRef.current)
           return;
-
-        const primaryContainerScrolledWidth =
-          primaryContainerRef.current.scrollTop;
         activePrimaryIndicatorRef.current.style.top = String(
-          `${tileBoundingRect.y + primaryContainerScrolledWidth - 5}px`
+          `${tileBoundingRect.y - 5}px`
         );
         activePrimaryIndicatorRef.current.style.height = `${
           tileBoundingRect.height - 15
@@ -114,27 +113,35 @@ const SidebarMain = forwardRef<HTMLDivElement, RVSidebarMain>(
         },
         [activeTile]
       );
-    const onPrimarySectionScroll = useCallback(() => {
-      if (!activeTile.current || !primaryContainerRef.current || !isPrimary)
-        return;
-      const tileBoundingRect = activeTile.current.getBoundingClientRect();
-      const primaryContainerScrolledWidth =
-        primaryContainerRef.current.scrollTop;
-      if (
-        !activePrimaryIndicatorRef.current ||
-        !activeSecondaryIndicatorRef.current
-      )
-        return;
-      activePrimaryIndicatorRef.current.style.top = String(
-        `${tileBoundingRect.y - 5 + primaryContainerScrolledWidth}px`
-      );
-      activePrimaryIndicatorRef.current.style.height = `${
-        tileBoundingRect.height - 15
-      }px`;
+    const onPrimarySectionScroll: UIEventHandler<HTMLDivElement> = useCallback(
+      (event) => {
+        if (!activeTile.current || !primaryContainerRef.current || !isPrimary)
+          return;
+        const tileBoundingRect = activeTile.current.getBoundingClientRect();
+        const primaryContainerScrolledWidth =
+          primaryContainerRef.current.scrollTop;
+        if (
+          !activePrimaryIndicatorRef.current ||
+          !activeSecondaryIndicatorRef.current
+        )
+          return;
+        activePrimaryIndicatorRef.current.style.top = String(
+          `${
+            tileBoundingRect.y -
+            5 +
+            primaryContainerScrolledWidth -
+            (event.target as HTMLDivElement).scrollTop
+          }px`
+        );
+        activePrimaryIndicatorRef.current.style.height = `${
+          tileBoundingRect.height - 15
+        }px`;
 
-      activeSecondaryIndicatorRef.current.style.top = '';
-      activeSecondaryIndicatorRef.current.style.height = '';
-    }, [activeTile, activePrimaryIndicatorRef, isPrimary]);
+        activeSecondaryIndicatorRef.current.style.top = '';
+        activeSecondaryIndicatorRef.current.style.height = '';
+      },
+      [activeTile, activePrimaryIndicatorRef, isPrimary]
+    );
 
     return (
       <div
@@ -142,23 +149,21 @@ const SidebarMain = forwardRef<HTMLDivElement, RVSidebarMain>(
         className={clsx(styles.baseSidebarMain, color, className)}
         {...props}
       >
-        <div
-          className={clsx(
-            RVColorProp.crayola,
-            styles.menuPrimaryList,
-            'direction-rtl'
-          )}
+        <Scrollbar
+          className={clsx(RVColorProp.crayola, styles.menuPrimaryList)}
           onScroll={throttle(
             debounce(onPrimarySectionScroll, 100, {
               trailing: true,
-              maxWait: 150,
+              maxWait: 10,
             }),
             50,
             {
-              // leading: true,
-              // trailing: true,
+              leading: true,
+              trailing: true,
             }
           )}
+          size={RVSizeProp.small}
+          color={RVColorProp.crayola}
           ref={primaryContainerRef}
         >
           <div
@@ -189,7 +194,7 @@ const SidebarMain = forwardRef<HTMLDivElement, RVSidebarMain>(
               </SidebarMainNavLink>
             )
           )}
-        </div>
+        </Scrollbar>
         {Boolean(secondaryLinks.length) && (
           <div className={styles.menuSecondaryList}>
             <div

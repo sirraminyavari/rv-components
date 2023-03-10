@@ -67,6 +67,7 @@
       border-color: transparent;
       border-radius: px-to-rem(5);
       transition: background-color 0.24s, opacity 0.2s;
+      z-index: 1;
 
       .adjacentPathItem {
         margin-block: px-to-rem(4);
@@ -126,8 +127,7 @@
       }
     }
 
-    .BreadcrumbItemsContainer {
-    }
+    // .BreadcrumbItemsContainer {}
 
     .BreadcrumbItem {
       color: hsl(var(--dark));

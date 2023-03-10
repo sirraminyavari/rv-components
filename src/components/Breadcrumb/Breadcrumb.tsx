@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import {
   DetailedHTMLProps,
   forwardRef,
+  Fragment,
   FunctionComponent,
   HTMLAttributes,
   PropsWithoutRef,
@@ -77,7 +78,7 @@ const Breadcrumb = forwardRef<HTMLDivElement, RVBreadcrumb>(
         {Icon && <Icon className={styles.icon} />}
         <div className={styles.BreadcrumbItemsContainer}>
           {routeLinks.map(({ label, path, adjacentPaths }, idx) => (
-            <>
+            <Fragment key={`breadcrumb-${path}-${idx}`}>
               {Boolean(idx) && routeLinks.length - idx > 0 && (
                 <>
                   <button
@@ -97,10 +98,11 @@ const Breadcrumb = forwardRef<HTMLDivElement, RVBreadcrumb>(
                     {adjacentPaths?.length ? (
                       <>
                         <div className={styles.adjacentPathsContainer}>
-                          {adjacentPaths?.map((item) => {
+                          {adjacentPaths?.map((item, jdx) => {
                             return (
                               <a
                                 href={item.path}
+                                key={`breadcrumb-link-${item.path}-${idx}-${jdx}`}
                                 className={clsx(
                                   styles.BreadcrumbItem,
                                   styles.adjacentPathItem
@@ -121,7 +123,7 @@ const Breadcrumb = forwardRef<HTMLDivElement, RVBreadcrumb>(
               <a href={path} className={styles.BreadcrumbItem}>
                 <span className={styles.label}>{label}</span>
               </a>
-            </>
+            </Fragment>
           ))}
         </div>
       </div>
