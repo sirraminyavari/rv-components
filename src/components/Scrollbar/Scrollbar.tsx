@@ -168,9 +168,10 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
     useEffect(() => {
       if (!contentRef.current || !scrollTrackRef.current) return;
       const contentElement = contentRef.current;
+      const scrollTrackElement = scrollTrackRef.current;
       const resizeObserver = () =>
         new ResizeObserver(() => {
-          handleResize(contentElement, scrollTrackRef.current);
+          handleResize(contentElement, scrollTrackElement);
         });
       const scrollFunction = () => {
         handleThumbPosition();
