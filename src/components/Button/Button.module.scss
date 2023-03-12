@@ -16,9 +16,9 @@
     outline-width: 0;
   }
 
-  & > svg {
+  &>svg {
     vertical-align: middle;
-    font-size: 1em;
+    font-size: 1.0335em;
     color: inherit;
     padding-block: px-to-rem(1);
   }
@@ -58,7 +58,7 @@
     padding-inline: px-to-rem(4);
     font-size: px-to-rem(20);
 
-    & > svg {
+    &>svg {
       margin-inline-end: 0;
       padding: px-to-rem(8);
     }
@@ -99,6 +99,7 @@
   }
 
   &.badge {
+
     &:hover,
     &:active,
     &:focus {
@@ -132,6 +133,7 @@
   }
 
   &.badge {
+
     &:hover,
     &:active,
     &:focus {
@@ -156,6 +158,7 @@
   &:focus {
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(3) hsl(var(--black) / 15%);
   }
+
   &.active {
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--base) / 35%);
   }
@@ -167,6 +170,7 @@
   }
 
   &.badge {
+
     &:hover,
     &:active,
     &:focus {
