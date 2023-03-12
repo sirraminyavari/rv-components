@@ -75,13 +75,20 @@ $theme-variants: (
   'dark': (
     'black': $white,
     'white': hsla(213, 24%, 16%, 1),
-    'color-cgBlue': (
-      'lighter': hsla(214, 77%, 96%, 1),
-      'light': hsla(214, 77%, 93%, 1),
-      'base': hsla(214, 77%, 53%, 1),
-      'dark': hsla(214, 77%, 29%, 1),
-      'darker': hsla(214, 77%, 20%, 1),
-    ),
+    // 'color-cgBlue': ('lighter': hsla(214, 77%, 96%, 1),
+    //   'light': hsla(214, 77%, 93%, 1),
+    //   'base': hsla(214, 77%, 53%, 1),
+    //   'dark': hsla(214, 77%, 29%, 1),
+    //   'darker': hsla(214, 77%, 20%, 1),
+    // ),
+    'color-cgBlue':
+      (
+        'lighter': hsla(197, 33%, 96%, 1),
+        'light': hsla(201, 39%, 93%, 1),
+        'base': hsla(198, 63%, 38%, 1),
+        'dark': hsla(198, 63%, 29%, 1),
+        'darker': hsla(198, 63%, 20%, 1),
+      ),
     'color-oxford': (
       'lighter': lighten(hsla(221, 51%, 16%, 1), 30%),
       'light': lighten(hsla(221, 51%, 16%, 1), 32%),
@@ -142,13 +149,20 @@ $theme-variants: (
   'amoled': (
     'black': $white,
     'white': black,
-    'color-cgBlue': (
-      'lighter': hsla(214, 77%, 96%, 1),
-      'light': hsla(214, 77%, 93%, 1),
-      'base': hsla(214, 77%, 53%, 1),
-      'dark': hsla(214, 77%, 29%, 1),
-      'darker': hsla(214, 77%, 20%, 1),
-    ),
+    // 'color-cgBlue': ('lighter': hsla(214, 77%, 96%, 1),
+    //   'light': hsla(214, 77%, 93%, 1),
+    //   'base': hsla(214, 77%, 53%, 1),
+    //   'dark': hsla(214, 77%, 29%, 1),
+    //   'darker': hsla(214, 77%, 20%, 1),
+    // ),
+    'color-cgBlue':
+      (
+        'lighter': hsla(197, 33%, 96%, 1),
+        'light': hsla(201, 39%, 93%, 1),
+        'base': hsla(198, 63%, 38%, 1),
+        'dark': hsla(198, 63%, 29%, 1),
+        'darker': hsla(198, 63%, 20%, 1),
+      ),
     'color-oxford': (
       'lighter': lighten(hsla(0, 0%, 12%, 1), 30%),
       'light': lighten(hsla(0, 0%, 12%, 1), 32%),
