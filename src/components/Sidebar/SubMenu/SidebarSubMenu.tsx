@@ -16,6 +16,7 @@ import { RVColorProp, RVSvgProps, RVVariantProp } from '../../../types';
 import { isRTL } from '../../../utils/isRtl';
 import { Accordion } from '../../Accordion';
 import { Button } from '../../Button';
+import { Scrollbar } from '../../Scrollbar';
 import { TextInput } from '../../TextInput';
 import { Typography } from '../../Typography';
 import SidebarSubMenuIndicator from './SidebarIndicator';
@@ -31,6 +32,9 @@ export interface RVSidebarSubMenu
   color?: RVColorProp;
   open?: boolean;
   CloseTrigger?: Dispatch<SetStateAction<boolean>>;
+  menuTitle?: string;
+  menuSubTitle?: string;
+  MenuIcon?: FunctionComponent<RVSvgProps>;
   links: {
     Icon?: FunctionComponent<RVSvgProps>;
     title?: string;
@@ -58,6 +62,9 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
       links,
       open = true,
       CloseTrigger,
+      menuTitle,
+      menuSubTitle,
+      MenuIcon,
       ...props
     },
     ref
@@ -67,9 +74,12 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
     const activeTile = useRef<HTMLButtonElement | HTMLSpanElement | null>(null);
 
     const onActiveClick = useCallback(
-      (event: MouseEvent<HTMLButtonElement | HTMLSpanElement>) => {
+      (event?: MouseEvent<HTMLButtonElement | HTMLSpanElement>) => {
         if (!activeIndicatorRef.current || !containerRef.current) return;
-        const tile = event.currentTarget;
+        if (!event && !activeTile.current) return;
+        const tile = event ? event.currentTarget : activeTile.current;
+        if (!tile) return;
+
         const containerScrolledWidth = containerRef.current.scrollTop;
 
         const tileBoundingRect = tile.getBoundingClientRect();
@@ -171,26 +181,27 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
           !open && styles.sidebarClose,
           className
         )}
+        onScroll={() => onActiveClick()}
         {...props}
       >
         <div className={styles.sidebarContainer}>
           <SidebarSubMenuIndicator ref={activeIndicatorRef} color={color} />
           <div className={styles.titleBlock}>
-            <PeopleCircleSvg className={styles.titleIcon} outline />
+            {MenuIcon && <MenuIcon className={styles.titleIcon} outline />}
             <div ref={containerRef}>
               <Typography
                 color={RVColorProp.inherit}
                 type="caption"
                 className={styles.titleTypography}
               >
-                Amir's workspace
+                {menuTitle}
               </Typography>
               <Typography
                 color={RVColorProp.inherit}
                 type="H3"
                 className={styles.titleTypography}
               >
-                Researchers team
+                {menuSubTitle}
               </Typography>
             </div>
             {CloseTrigger && (
@@ -213,6 +224,7 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
           </div>
 
           {links && linkButtonGenerator(links)}
+
           {children}
         </div>
       </div>
