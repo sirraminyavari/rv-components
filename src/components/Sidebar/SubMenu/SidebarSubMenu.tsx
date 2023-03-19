@@ -11,12 +11,11 @@ import {
   useCallback,
   useRef,
 } from 'react';
-import { ChevronSvg, PeopleCircleSvg } from '../../../icons';
+import { ChevronSvg } from '../../../icons';
 import { RVColorProp, RVSvgProps, RVVariantProp } from '../../../types';
 import { isRTL } from '../../../utils/isRtl';
 import { Accordion } from '../../Accordion';
 import { Button } from '../../Button';
-import { Scrollbar } from '../../Scrollbar';
 import { TextInput } from '../../TextInput';
 import { Typography } from '../../Typography';
 import SidebarSubMenuIndicator from './SidebarIndicator';
