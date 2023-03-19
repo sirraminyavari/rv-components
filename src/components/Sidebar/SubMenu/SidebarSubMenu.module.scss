@@ -20,6 +20,7 @@
   width: px-to-rem(350);
   color: hsl(var(--base-font));
   height: 100%;
+  max-height: 100vh;
 }
 
 .titleBlock {
@@ -60,7 +61,7 @@
   width: calc(100% - px-to-rem(24));
   cursor: pointer;
 
-  & > * {
+  &>* {
     margin-block: 0;
     color: inherit;
   }
@@ -127,7 +128,7 @@
 .triggerCollapse {
   margin-inline-start: auto;
 
-  > svg {
+  >svg {
     color: hsl(var(--base-font));
     font-size: px-to-rem(24);
   }

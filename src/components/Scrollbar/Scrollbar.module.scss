@@ -6,7 +6,7 @@
   position: relative;
   height: 100%;
   display: flex;
-  column-gap: px-to-rem(2);
+  // padding-inline: px-to-rem(5);
 
   .scrollbarContent {
     max-height: 100%;
@@ -24,17 +24,17 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    position: sticky;
+    position: absolute;
     z-index: 10;
     height: 95%;
     inset-block: 2.5%;
-    inset-inline-start: px-to-rem(-15);
+    inset-inline-end: px-to-rem(0);
     opacity: 0%;
     transition: opacity 0.2s, inset 0.2s;
 
     &.scrolling {
       transition: opacity 0.4s, inset 0.2s;
-      inset-inline-start: px-to-rem(1);
+      inset-inline-end: px-to-rem(1);
       opacity: 1;
     }
 
