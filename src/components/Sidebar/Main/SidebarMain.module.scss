@@ -33,9 +33,10 @@
 }
 
 .menuPrimaryList {
-  overflow-y: auto;
+  overflow-y: hidden;
   height: 100%;
   position: relative;
+  padding-inline: 0;
 }
 
 .menuSecondaryList {

@@ -84,7 +84,7 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
         const tileBoundingRect = tile.getBoundingClientRect();
         const tileDirection = isRTL(tile);
         activeIndicatorRef.current.style.top = String(
-          `${tileBoundingRect.y + containerScrolledWidth}px`
+          `${Math.abs(tileBoundingRect.top) + containerScrolledWidth}px`
         );
         activeIndicatorRef.current.style.height = `${tileBoundingRect.height}px`;
         const elementWidthOffset =
@@ -183,11 +183,11 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
         onScroll={() => onActiveClick()}
         {...props}
       >
-        <div className={styles.sidebarContainer}>
+        <div className={styles.sidebarContainer} ref={containerRef}>
           <SidebarSubMenuIndicator ref={activeIndicatorRef} color={color} />
           <div className={styles.titleBlock}>
             {MenuIcon && <MenuIcon className={styles.titleIcon} outline />}
-            <div ref={containerRef}>
+            <div>
               <Typography
                 color={RVColorProp.inherit}
                 type="caption"

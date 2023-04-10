@@ -11,11 +11,12 @@ export default {
   // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {
     children: { control: 'jsx' },
+    currentPath: 'test',
   } as RVSidebarMain,
   parameters: {
     layout: 'fullscreen',
   },
-} as ComponentMeta<typeof SidebarMainComponent>;
+} as unknown as ComponentMeta<typeof SidebarMainComponent>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof SidebarMainComponent> = ({
@@ -48,30 +49,35 @@ Main.args = {
       title: '',
       onClick: () => {},
       noIndicator: true,
+      path: 'test6',
     },
     {
       Icon: HomeSvg,
       title: 'خونه',
       onClick: () => {},
       noIndicator: false,
+      path: 'test4',
     },
     {
       Icon: PeopleCircleSvg,
       title: '',
       onClick: () => {},
       noIndicator: false,
+      path: 'test3',
     },
     {
       Icon: PeopleCircleSvg,
       title: '',
       onClick: () => {},
       noIndicator: false,
+      path: 'test2',
     },
     {
       Icon: PeopleCircleSvg,
       title: '',
       onClick: () => {},
       noIndicator: false,
+      path: 'test1',
     },
   ],
 };
