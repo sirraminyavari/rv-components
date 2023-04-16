@@ -7,10 +7,10 @@ import {
   FunctionComponent,
   HTMLAttributes,
   MouseEvent,
-  MouseEventHandler,
   PropsWithoutRef,
   UIEventHandler,
   useCallback,
+  useEffect,
   useRef,
   useState,
 } from 'react';
@@ -33,6 +33,7 @@ export interface RVSidebarMain
     onClick?: (event?: MouseEvent<HTMLButtonElement>) => void;
     noIndicator?: boolean;
     menuTrigger?: boolean;
+    path: string;
   }[];
   secondaryLinks: {
     Icon?: FunctionComponent<RVSvgProps>;
@@ -40,7 +41,9 @@ export interface RVSidebarMain
     onClick?: (event?: MouseEvent<HTMLButtonElement>) => void;
     noIndicator?: boolean;
     menuTrigger?: boolean;
+    path: string;
   }[];
+  currentPath: string;
 }
 
 const SidebarMain = forwardRef<HTMLDivElement, RVSidebarMain>(
@@ -51,6 +54,7 @@ const SidebarMain = forwardRef<HTMLDivElement, RVSidebarMain>(
       secondaryLinks = [],
       color = RVColorProp.oxford,
       className,
+      currentPath = '',
       ...props
     },
     ref
@@ -58,25 +62,35 @@ const SidebarMain = forwardRef<HTMLDivElement, RVSidebarMain>(
     const activePrimaryIndicatorRef = useRef<HTMLDivElement>(null);
     const activeSecondaryIndicatorRef = useRef<HTMLDivElement>(null);
     const primaryContainerRef = useRef<HTMLDivElement>(null);
+    const linkRefs = useRef<{
+      [key: string]: {
+        element: HTMLButtonElement;
+        type: 'primary' | 'secondary';
+      };
+    }>({});
     const activeTile = useRef<HTMLButtonElement | null>(null);
     const [isPrimary, setIsPrimary] = useState<boolean>(false);
 
-    const onActiveClick: MouseEventHandler<HTMLButtonElement> = useCallback(
-      (event) => {
-        const tile = event.currentTarget;
-
-        const tileBoundingRect = tile.getBoundingClientRect();
+    const onActiveClick = useCallback(
+      (event?: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
         if (!activePrimaryIndicatorRef.current || !primaryContainerRef.current)
           return;
+        if (!activeTile.current) {
+          activePrimaryIndicatorRef.current.style.top = String(`${0}px`);
+          activePrimaryIndicatorRef.current.style.height = String(`${0}px`);
+          return;
+        }
+        const tile = event?.currentTarget || activeTile.current!;
+
+        const tileBoundingRect = tile.getBoundingClientRect();
+
         activePrimaryIndicatorRef.current.style.top = String(
           `${tileBoundingRect.y - 5}px`
         );
         activePrimaryIndicatorRef.current.style.height = `${
           tileBoundingRect.height - 15
         }px`;
-        if (activeTile.current) activeTile.current.classList.remove('active');
-        tile.classList.add('active');
-        activeTile.current = event.currentTarget;
+        if (event?.currentTarget) activeTile.current = event.currentTarget;
 
         setIsPrimary(true);
         if (!activeSecondaryIndicatorRef.current) return;
@@ -86,33 +100,35 @@ const SidebarMain = forwardRef<HTMLDivElement, RVSidebarMain>(
       [activeTile]
     );
 
-    const onSecondaryActiveClick: MouseEventHandler<HTMLButtonElement> =
-      useCallback(
-        (event) => {
-          const tile = event.currentTarget;
-          const tileBoundingRect = tile.getBoundingClientRect();
-          console.table(tileBoundingRect);
-          if (
-            !activePrimaryIndicatorRef.current ||
-            !activeSecondaryIndicatorRef.current
-          )
-            return;
+    const onSecondaryActiveClick = useCallback(
+      (event?: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
+        if (
+          !activePrimaryIndicatorRef.current ||
+          !activeSecondaryIndicatorRef.current
+        )
+          return;
+        if (!activeTile.current) {
+          activeSecondaryIndicatorRef.current.style.top = String(`${0}px`);
+          activeSecondaryIndicatorRef.current.style.height = String(`${0}px`);
+          return;
+        }
+        const tile = event?.currentTarget || activeTile.current!;
+        const tileBoundingRect = tile.getBoundingClientRect();
+        console.table(tileBoundingRect);
 
-          activeSecondaryIndicatorRef.current.style.top = String(
-            `${tileBoundingRect.y + 7.5}px`
-          );
-          activeSecondaryIndicatorRef.current.style.height = `${
-            tileBoundingRect.height - 15
-          }px`;
-          if (activeTile.current) activeTile.current.classList.remove('active');
-          tile.classList.add('active');
-          setIsPrimary(false);
-          activePrimaryIndicatorRef.current.style.top = '110vh';
-          activePrimaryIndicatorRef.current.style.height = '';
-          activeTile.current = event.currentTarget;
-        },
-        [activeTile]
-      );
+        activeSecondaryIndicatorRef.current.style.top = String(
+          `${tileBoundingRect.y + 7.5}px`
+        );
+        activeSecondaryIndicatorRef.current.style.height = `${
+          tileBoundingRect.height - 15
+        }px`;
+        setIsPrimary(false);
+        activePrimaryIndicatorRef.current.style.top = '110vh';
+        activePrimaryIndicatorRef.current.style.height = '';
+        if (event?.currentTarget) activeTile.current = event.currentTarget;
+      },
+      [activeTile]
+    );
     const onPrimarySectionScroll: UIEventHandler<HTMLDivElement> = useCallback(
       (event) => {
         if (!activeTile.current || !primaryContainerRef.current || !isPrimary)
@@ -143,6 +159,24 @@ const SidebarMain = forwardRef<HTMLDivElement, RVSidebarMain>(
       [activeTile, activePrimaryIndicatorRef, isPrimary]
     );
 
+    useEffect(() => {
+      if (Object.values(linkRefs.current).length === 0) return;
+      const menuLinks = linkRefs.current;
+      for (const path in menuLinks) {
+        if (currentPath.startsWith(path)) {
+          const menuItem = menuLinks[path];
+          activeTile.current = menuItem.element;
+          if (menuItem.type === 'secondary') onSecondaryActiveClick();
+          if (menuItem.type === 'primary') onActiveClick();
+
+          return;
+        }
+        activeTile.current = null;
+        onSecondaryActiveClick();
+        onActiveClick();
+      }
+    }, [currentPath]);
+
     return (
       <div
         ref={ref}
@@ -150,7 +184,7 @@ const SidebarMain = forwardRef<HTMLDivElement, RVSidebarMain>(
         {...props}
       >
         <Scrollbar
-          className={clsx(RVColorProp.crayola, styles.menuPrimaryList)}
+          className={clsx(styles.menuPrimaryList)}
           onScroll={throttle(
             debounce(onPrimarySectionScroll, 100, {
               trailing: true,
@@ -171,15 +205,26 @@ const SidebarMain = forwardRef<HTMLDivElement, RVSidebarMain>(
             className={clsx(styles.menuActiveIndicator, RVColorProp.crayola)}
           />
           {primaryLinks.map(
-            ({ onClick, noIndicator, menuTrigger, Icon, title }, idx) => (
+            ({ onClick, noIndicator, menuTrigger, Icon, title, path }, idx) => (
               <SidebarMainNavLink
+                ref={(elementRef) => {
+                  if (elementRef)
+                    linkRefs.current[path] = {
+                      type: 'primary',
+                      element: elementRef,
+                    };
+                }}
                 key={`sidebarMenu-primary-${idx}`}
                 onClick={(e) => {
                   if (!noIndicator) onActiveClick(e);
                   if (onClick) onClick(e);
                 }}
                 color={color}
-                className={clsx(noIndicator && styles.cmLogo, color)}
+                className={clsx(
+                  noIndicator && styles.cmLogo,
+                  color,
+                  currentPath.startsWith(path) && 'active'
+                )}
               >
                 {Icon && (
                   <Icon
@@ -202,15 +247,28 @@ const SidebarMain = forwardRef<HTMLDivElement, RVSidebarMain>(
               className={clsx(styles.menuActiveIndicator, RVColorProp.crayola)}
             />
             {secondaryLinks.map(
-              ({ onClick, noIndicator, menuTrigger, Icon, title }, idx) => (
+              (
+                { onClick, noIndicator, menuTrigger, Icon, title, path },
+                idx
+              ) => (
                 <SidebarMainNavLink
+                  ref={(elementRef) => {
+                    if (elementRef)
+                      linkRefs.current[path] = {
+                        type: 'secondary',
+                        element: elementRef,
+                      };
+                  }}
                   key={`sidebarMenu-primary-${idx}`}
                   onClick={(e) => {
                     if (!noIndicator) onSecondaryActiveClick(e);
                     if (onClick) onClick(e);
                   }}
                   color={color}
-                  className={clsx(noIndicator && styles.cmLogo)}
+                  className={clsx(
+                    noIndicator && styles.cmLogo,
+                    currentPath.startsWith(path) && 'active'
+                  )}
                 >
                   {Icon && (
                     <Icon

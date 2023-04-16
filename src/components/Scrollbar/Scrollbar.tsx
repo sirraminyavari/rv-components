@@ -36,8 +36,9 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
     },
     ref
   ) => {
+    const contentPointerRef = useRef<HTMLDivElement>(null);
+    const contentRef = useCombinedRefs(contentPointerRef, ref);
     const contentInnerRef = useRef<HTMLDivElement>(null);
-    const contentRef = useCombinedRefs(contentInnerRef, ref);
     const scrollTrackRef = useRef<HTMLDivElement>(null);
     const scrollingTimeoutRef = useRef<NodeJS.Timer>();
     const scrollThumbRef = useRef<HTMLDivElement>(null);
@@ -166,21 +167,30 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
 
     // If the content and the scrollbar track exist, use a ResizeObserver to adjust height of thumb and listen for scroll event to move the thumb
     useEffect(() => {
-      if (!contentRef.current || !scrollTrackRef.current) return;
+      if (
+        !contentRef.current ||
+        !scrollTrackRef.current ||
+        !contentInnerRef.current
+      )
+        return;
       const contentElement = contentRef.current;
+      const contentInnerElement = contentInnerRef.current;
       const scrollTrackElement = scrollTrackRef.current;
       const resizeObserver = () =>
         new ResizeObserver(() => {
           handleResize(contentElement, scrollTrackElement);
+          handleThumbPosition();
         });
       const scrollFunction = () => {
         handleThumbPosition();
       };
       observer.current = resizeObserver();
+      observer.current.observe(contentInnerElement);
       observer.current.observe(contentElement);
       contentElement.addEventListener('scroll', scrollFunction);
       contentElement.addEventListener('resize', handleThumbPosition);
       return () => {
+        observer.current?.unobserve(contentInnerElement);
         observer.current?.unobserve(contentElement);
         contentElement.removeEventListener('scroll', scrollFunction);
         contentElement.removeEventListener('resize', handleThumbPosition);
@@ -200,9 +210,9 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
     }, [handleThumbMousemove, handleThumbMouseup]);
 
     return (
-      <div className={clsx(styles.scrollbarContainer)}>
+      <div className={clsx(styles.scrollbarContainer, className)}>
         <div className={styles.scrollbarContent} ref={contentRef} {...props}>
-          {children}
+          <div ref={contentInnerRef}>{children}</div>
         </div>
         <div
           className={clsx(

@@ -13,7 +13,7 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof ScrollbarComponent> = ({ ...args }) => (
-  <div style={{ height: '98vh', overflow: 'hidden' }}>
+  <div style={{ height: '100vh', overflow: 'hidden' }}>
     <ScrollbarComponent {...args}>
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Phasellus
@@ -297,3 +297,6 @@ const Template: ComponentStory<typeof ScrollbarComponent> = ({ ...args }) => (
 
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 export const Scrollbar = Template.bind({});
+Scrollbar.parameters = {
+  layout: 'fullscreen',
+};
