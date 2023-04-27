@@ -29,12 +29,14 @@ export interface RVSidebarSubMenu
     'color'
   > {
   color?: RVColorProp;
+  activeLink?: string;
   open?: boolean;
   CloseTrigger?: Dispatch<SetStateAction<boolean>>;
   menuTitle?: string;
   menuSubTitle?: string;
   MenuIcon?: FunctionComponent<RVSvgProps>;
   links: {
+    id?: string;
     Icon?: FunctionComponent<RVSvgProps>;
     title?: string;
     badge?: string | number;
@@ -43,6 +45,7 @@ export interface RVSidebarSubMenu
     input?: boolean;
     color?: RVColorProp;
     childItems?: {
+      id?: string;
       Icon?: FunctionComponent<RVSvgProps>;
       title?: string;
       badge?: string | number;
@@ -59,6 +62,7 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
       color = RVColorProp.grayLight,
       className,
       links,
+      activeLink,
       open = true,
       CloseTrigger,
       menuTitle,
@@ -109,7 +113,7 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
           if (link.input)
             return (
               <TextInput
-                key={JSON.stringify(link)}
+                key={link.id || JSON.stringify(link)}
                 label={link.title}
                 color={link.color || color}
                 Icon={link.Icon}
@@ -117,16 +121,28 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
                 className={styles.menuInput}
               />
             );
-          if (link.childItems && link.childItems.length)
+          if (link.childItems && link.childItems.length) {
             return (
               <Accordion
-                key={JSON.stringify(link)}
+                key={link.id || JSON.stringify(link)}
+                id={link.id || JSON.stringify(link)}
                 label={link.title}
                 color={color}
                 onLabelClick={(e) => {
                   onActiveClick(e);
                   link.onClick && link.onClick(e);
                 }}
+                onTriggerButtonLoad={(buttonElement) => {
+                  console.log();
+                  if (buttonElement.dataset.id === activeLink) {
+                    activeTile.current = buttonElement;
+                    onActiveClick();
+                  }
+                }}
+                activeLabel={[link.id, JSON.stringify(link)].includes(
+                  activeLink
+                )}
+                // defaultOpen={}
                 onAccordionStatusChange={(event, status) => {
                   if (activeTile.current?.isEqualNode(event.currentTarget))
                     status === 'closed' && onActiveClick(event);
@@ -135,10 +151,10 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
                 {linkButtonGenerator(link.childItems)}
               </Accordion>
             );
-          else
+          } else
             return (
               <button
-                key={JSON.stringify(link)}
+                key={link.id || JSON.stringify(link)}
                 className={styles.menuTile}
                 onClick={(e) => {
                   onActiveClick(e);

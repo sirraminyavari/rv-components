@@ -35,6 +35,7 @@ const Template: ComponentStory<typeof SidebarSubMenuComponent> = ({
   <div style={{ display: 'flex', minHeight: '100vh', width: '100%' }}>
     <SidebarSubMenuComponent
       open={open}
+      activeLink="testid"
       links={
         links || [
           { badge: 1265, title: 'Everything', Icon: GridSvg },
@@ -42,6 +43,40 @@ const Template: ComponentStory<typeof SidebarSubMenuComponent> = ({
           { badge: 11, title: 'Drafts', Icon: FileTrayFullSvg },
           {
             title: 'Documents',
+            Icon: HomeSvg,
+            badge: 22,
+            id: 'testid',
+            childItems: [
+              { badge: 123, title: 'Diagrams', Icon: NotificationSvg },
+              { badge: 123, title: 'Diagrams', Icon: PeopleCircleSvg },
+              { title: 'Reports1', Icon: ShapesSvg },
+              { badge: 123, title: 'Diagrams2' },
+            ],
+          },
+          {
+            title: 'Files',
+            Icon: HomeSvg,
+            badge: 22,
+            childItems: [
+              { badge: 123, title: 'Diagrams', Icon: NotificationSvg },
+              { badge: 123, title: 'Diagrams', Icon: PeopleCircleSvg },
+              { title: 'Reports1', Icon: ShapesSvg },
+              { badge: 123, title: 'Diagrams2' },
+            ],
+          },
+          {
+            title: 'Files',
+            Icon: HomeSvg,
+            badge: 22,
+            childItems: [
+              { badge: 123, title: 'Diagrams', Icon: NotificationSvg },
+              { badge: 123, title: 'Diagrams', Icon: PeopleCircleSvg },
+              { title: 'Reports1', Icon: ShapesSvg },
+              { badge: 123, title: 'Diagrams2' },
+            ],
+          },
+          {
+            title: 'Files',
             Icon: HomeSvg,
             badge: 22,
             childItems: [
