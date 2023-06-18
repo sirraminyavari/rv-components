@@ -9,6 +9,7 @@
   transition: all 0.24s ease-out;
   display: inline;
   aspect-ratio: 1;
+  box-sizing: border-box;
 
   &.large {
     width: px-to-rem(68);

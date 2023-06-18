@@ -1,0 +1,45 @@
+@import '../../scss/modules/default';
+
+.advancedSearchMenuBoxContainer {
+  width: px-to-rem(360);
+  height: 100%;
+  padding: px-to-rem(12);
+  background-color: #FCFCFC;
+  border-color: hsl(var(--base));
+  border-width: px-to-rem(1);
+  border-style: solid;
+  border-radius: px-to-rem(13);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: px-to-rem(16);
+}
+
+.advancedSearchMenuBoxTitleContainer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-block-start: px-to-rem(8);
+  gap: px-to-rem(12);
+
+  .advancedSearchMenuBoxCloseButton {
+    background-color: transparent;
+    border-color: transparent;
+    color: hsl(var(--base));
+    font-size: px-to-rem(24);
+    aspect-ratio: 1;
+    flex-shrink: 0;
+    box-sizing: border-box;
+    padding: 0;
+  }
+
+  .advancedSearchMenuBoxTitle {
+    margin-block: px-to-rem(0);
+  }
+}
+
+.advancedSearchMenuBoxActionsContainer {
+  display: flex;
+  margin-block-start: px-to-rem(12);
+  gap: px-to-rem(12);
+}

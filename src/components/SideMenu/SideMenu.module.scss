@@ -8,6 +8,7 @@
   padding-inline: px-to-rem(12);
   overflow: hidden;
   flex-shrink: 0;
+  box-sizing: border-box;
 
   &.sideMenuClose {
     width: 0;

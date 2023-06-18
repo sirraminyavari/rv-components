@@ -26,9 +26,9 @@
   height: 0;
   transition: top 0.25s ease-in-out, height 0.25s ease-in-out;
   will-change: top, height;
-  border-start-end-radius: 0.3rem;
-  border-end-end-radius: 0.3rem;
-  direction: ltr;
+  border-start-end-radius: px-to-rem(4.8);
+  border-end-end-radius:  px-to-rem(4.8);
+  // direction: ltr;
   // backface-visibility: hidden;
 }
 
@@ -42,7 +42,7 @@
 .menuSecondaryList {
   box-shadow: 0px -8px 14px rgba(0, 0, 0, 0.25);
   padding-block-start: px-to-rem(7);
-  padding-block-end: px-to-rem(24);
+  padding-block-end: px-to-rem(8);
 }
 
 .cmLogo {
@@ -53,7 +53,7 @@
   height: auto;
   margin-block-end: px-to-rem(16);
 
-  > svg {
+  >svg {
     font-size: px-to-rem(48);
   }
 }

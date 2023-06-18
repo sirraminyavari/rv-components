@@ -1,6 +1,6 @@
 {
   "name": "@cliqmind/rv-components",
-  "version": "0.4.0-dev",
+  "version": "0.4.1-dev-1",
   "license": "UNLICENSED",
   "typings": "index.d.ts",
   "type": "module",
@@ -22,11 +22,13 @@
     "storybook:build": "build-storybook"
   },
   "peerDependencies": {
+    "@popperjs/core": "^2.11.8",
     "clsx": "^1.2.1",
     "ramin-modern-calendar-datepicker": "^3.1.10",
     "react": ">=17.0.2",
     "react-dom": ">=17.0.2",
     "react-modal": "^3.16.1",
+    "react-popper": "^2.3.0",
     "react-select": "^5.7.0",
     "sass": "^1.57.0"
   },
@@ -88,6 +90,7 @@
     "typescript-plugin-css-modules": "^4.1.1"
   },
   "dependencies": {
+    "@popperjs/core": "^2.11.8",
     "clsx": "^1.2.1",
     "lodash": "^4.17.21",
     "ramin-modern-calendar-datepicker": "^3.1.10",
@@ -96,6 +99,7 @@
     "react-dom": "^17.0.2",
     "react-modal": "^3.16.1",
     "react-perfect-scrollbar": "^1.5.8",
+    "react-popper": "^2.3.0",
     "react-select": "^5.7.0"
   }
 }

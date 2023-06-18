@@ -155,7 +155,14 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
             return (
               <button
                 key={link.id || JSON.stringify(link)}
+                ref={(buttonRef) => {
+                  if (buttonRef && buttonRef?.dataset.id === activeLink) {
+                    activeTile.current = buttonRef;
+                    onActiveClick();
+                  }
+                }}
                 className={styles.menuTile}
+                data-id={link.id || JSON.stringify(link)}
                 onClick={(e) => {
                   onActiveClick(e);
                   link.onClick && link.onClick(e);
@@ -184,7 +191,7 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
             );
         });
       },
-      [links]
+      [links, activeLink]
     );
 
     return (
@@ -228,7 +235,6 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
                 fullCircle
                 onClick={() => {
                   CloseTrigger((prev) => {
-                    console.log(prev);
                     return !prev;
                   });
                 }}

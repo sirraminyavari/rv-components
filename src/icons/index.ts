@@ -43,3 +43,6 @@ export { default as ReaderSvg } from './reader.svg';
 export { default as PriceTagsSvg } from './priceTags.svg';
 export { default as CalculatorSvg } from './calculator.svg';
 export { default as MenuSvg } from './menu.svg';
+export { default as LogOutSvg } from './logout.svg';
+export { default as ReloadSvg } from './reload.svg';
+

@@ -38,14 +38,14 @@ const Template: ComponentStory<typeof SidebarSubMenuComponent> = ({
       activeLink="testid"
       links={
         links || [
-          { badge: 1265, title: 'Everything', Icon: GridSvg },
+          { badge: 1265, id: 'testid', title: 'Everything', Icon: GridSvg },
           { badge: 23, title: 'Bookmarked', Icon: BookmarkSvg },
           { badge: 11, title: 'Drafts', Icon: FileTrayFullSvg },
           {
             title: 'Documents',
             Icon: HomeSvg,
             badge: 22,
-            id: 'testid',
+            id: 'docs',
             childItems: [
               { badge: 123, title: 'Diagrams', Icon: NotificationSvg },
               { badge: 123, title: 'Diagrams', Icon: PeopleCircleSvg },
@@ -57,6 +57,7 @@ const Template: ComponentStory<typeof SidebarSubMenuComponent> = ({
             title: 'Files',
             Icon: HomeSvg,
             badge: 22,
+            id: 'files',
             childItems: [
               { badge: 123, title: 'Diagrams', Icon: NotificationSvg },
               { badge: 123, title: 'Diagrams', Icon: PeopleCircleSvg },
@@ -65,9 +66,10 @@ const Template: ComponentStory<typeof SidebarSubMenuComponent> = ({
             ],
           },
           {
-            title: 'Files',
+            title: 'Files2',
             Icon: HomeSvg,
             badge: 22,
+            id: 'files2',
             childItems: [
               { badge: 123, title: 'Diagrams', Icon: NotificationSvg },
               { badge: 123, title: 'Diagrams', Icon: PeopleCircleSvg },

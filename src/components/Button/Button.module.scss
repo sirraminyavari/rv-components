@@ -11,16 +11,18 @@
   transition: all 0.3s ease-out;
   column-gap: px-to-rem(13);
   display: flex;
+  align-items: center;
 
   &:focus {
     outline-width: 0;
   }
 
-  & > svg {
+  &>svg {
     vertical-align: middle;
-    font-size: 1.0335em;
+    font-size: 1.3335em;
     color: inherit;
     padding-block: px-to-rem(1);
+    box-sizing: border-box;
   }
 
   &.large {
@@ -58,9 +60,10 @@
     padding-inline: px-to-rem(4);
     font-size: px-to-rem(20);
 
-    & > svg {
+    &>svg {
       margin-inline-end: 0;
-      padding: px-to-rem(8);
+      padding: px-to-rem(0);
+      margin: px-to-rem(5.7);
     }
   }
 
@@ -99,6 +102,7 @@
   }
 
   &.badge {
+
     &:hover,
     &:active,
     &:focus {
@@ -132,6 +136,7 @@
   }
 
   &.badge {
+
     &:hover,
     &:active,
     &:focus {
@@ -168,6 +173,7 @@
   }
 
   &.badge {
+
     &:hover,
     &:active,
     &:focus {
@@ -187,5 +193,11 @@
   &:active,
   &:focus {
     cursor: default;
+  }
+
+  &:focus {
+    outline-style: dashed;
+    outline-width: px-to-rem(2);
+    outline-color: hsl(var(--base) / 20%);
   }
 }

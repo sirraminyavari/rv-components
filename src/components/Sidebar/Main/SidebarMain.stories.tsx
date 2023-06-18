@@ -80,6 +80,22 @@ Main.args = {
       path: 'test1',
     },
   ],
+  secondaryLinks: [
+    {
+      Icon: PeopleCircleSvg,
+      title: '',
+      onClick: () => {},
+      noIndicator: false,
+      path: 'test2',
+    },
+    {
+      Icon: PeopleCircleSvg,
+      title: '',
+      onClick: () => {},
+      noIndicator: false,
+      path: 'test1',
+    },
+  ],
 };
 
 export const MainRTL = TemplateRTL.bind({});

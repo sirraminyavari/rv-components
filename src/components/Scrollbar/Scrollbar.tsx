@@ -23,15 +23,22 @@ export interface RVScrollbar
   variant?: Exclude<RVVariantProp, RVVariantProp.disabled>;
   color?: RVColorProp;
   size?: RVSizeProp;
+  onScrollEnd?: () => void;
+  scrollEndThreshold?: number;
+  alwaysShowScrollbar?: boolean;
+  contentContainerClassName?: string;
 }
 const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
   (
     {
       children,
-      className,
+      className,contentContainerClassName,
       color = RVColorProp.cgBlue,
       variant = RVVariantProp.primary,
       size = RVSizeProp.medium,
+      onScrollEnd,
+      scrollEndThreshold,
+      alwaysShowScrollbar,
       ...props
     },
     ref
@@ -88,6 +95,17 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
       [thumbHeight]
     );
 
+    const handleOnScrollEnd = useCallback(() => {
+      if (contentRef?.current && contentInnerRef?.current)
+        if (scrollEndThreshold !== undefined && onScrollEnd)
+          if (
+            contentInnerRef?.current.getBoundingClientRect().bottom -
+              contentRef?.current.getBoundingClientRect().height <=
+            200
+          ) {
+            onScrollEnd();
+          }
+    }, [onScrollEnd, scrollEndThreshold]);
     const handleThumbPosition = useCallback(() => {
       if (
         !contentRef.current ||
@@ -105,6 +123,7 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
         clearTimeout(scrollingTimeoutRef.current);
       }
       setIsScrolling(true);
+      handleOnScrollEnd();
       scrollingTimeoutRef.current = setTimeout(() => {
         setIsScrolling(false);
       }, 1000);
@@ -179,21 +198,21 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
       const resizeObserver = () =>
         new ResizeObserver(() => {
           handleResize(contentElement, scrollTrackElement);
-          handleThumbPosition();
+          scrollFunction();
         });
       const scrollFunction = () => {
-        handleThumbPosition();
+        requestAnimationFrame(handleThumbPosition);
       };
       observer.current = resizeObserver();
       observer.current.observe(contentInnerElement);
       observer.current.observe(contentElement);
-      contentElement.addEventListener('scroll', scrollFunction);
-      contentElement.addEventListener('resize', handleThumbPosition);
+      contentElement.addEventListener('wheel', scrollFunction);
+      contentElement.addEventListener('resize', scrollFunction);
       return () => {
         observer.current?.unobserve(contentInnerElement);
         observer.current?.unobserve(contentElement);
-        contentElement.removeEventListener('scroll', scrollFunction);
-        contentElement.removeEventListener('resize', handleThumbPosition);
+        contentElement.removeEventListener('wheel', scrollFunction);
+        contentElement.removeEventListener('resize', scrollFunction);
       };
     }, []);
 
@@ -212,7 +231,7 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
     return (
       <div className={clsx(styles.scrollbarContainer, className)}>
         <div className={styles.scrollbarContent} ref={contentRef} {...props}>
-          <div ref={contentInnerRef}>{children}</div>
+          <div ref={contentInnerRef} className={contentContainerClassName}>{children}</div>
         </div>
         <div
           className={clsx(
@@ -220,7 +239,7 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
             color,
             // variant,
             styles[size],
-            isScrolling && styles.scrolling
+            (isScrolling || alwaysShowScrollbar) && styles.scrolling
           )}
         >
           <div className={styles.scrollbarTrackAndThumb}>

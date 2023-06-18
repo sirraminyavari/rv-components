@@ -1,0 +1,70 @@
+@import '../../scss/modules/default';
+
+.peoplePickerBoxContainer {
+  width: px-to-rem(320);
+  height: px-to-rem(320);
+  background-color: hsl(var(--white));
+  box-shadow: 0 px-to-rem(2) px-to-rem(15) hsl(var(--black)/10%);
+  border-radius: px-to-rem(13);
+  margin-inline: px-to-rem(0);
+  margin-block: px-to-rem(8);
+  padding: px-to-rem(16);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: px-to-rem(15);
+  box-sizing: border-box;
+}
+
+.peoplePickerBoxItemContainer {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  overflow: overlay;
+}
+
+.peoplePickerBoxItem {
+  background-color: transparent;
+  border-color: transparent;
+  width: calc(100% - px-to-rem(10));
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  gap: px-to-rem(12);
+  border-radius: px-to-rem(13);
+  padding-inline: px-to-rem(6);
+  margin-inline-end: auto;
+  margin-block: px-to-rem(6);
+  box-sizing: border-box;
+  transition: background-color .25s;
+
+  .peoplePickerBoxItemAvatar {
+    width: px-to-rem(40);
+  }
+  .peoplePickerBoxItemNoAvatar {
+    font-size: px-to-rem(40);
+    color: hsl(var(--black) / 50%);
+  }
+
+  .peoplePickerBoxItemTitle {
+    text-align: start;
+    font-style: normal;
+    font-weight: 400;
+    font-size: px-to-rem(16);
+    line-height: px-to-rem(24);
+    color: hsl(var(--base));
+  }
+
+  &:hover {
+    background-color: hsl(var(--base) / 10%);
+  }
+
+  &.active {
+    .peoplePickerBoxItemTitle {
+      color: hsl(var(--black)/90%);
+      font-weight: 600;
+    }
+  }
+
+}
