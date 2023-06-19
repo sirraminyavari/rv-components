@@ -3,34 +3,27 @@
 @use 'sass:list';
 @use 'sass:meta';
 @use 'sass:map';
+@use './variables';
 
 @mixin for-size($size) {
   @if $size ==phone-only {
-    @media (max-width: 599px) {
+    @media (max-width: $screenSizePhoneMax) {
       @content;
     }
-  }
-
-  @else if $size ==tablet-portrait-up {
-    @media (min-width: 600px) {
+  } @else if $size ==tablet-portrait-up {
+    @media (min-width: $screenSizeTabletPortraitMin) {
       @content;
     }
-  }
-
-  @else if $size ==tablet-landscape-up {
-    @media (min-width: 900px) {
+  } @else if $size ==tablet-landscape-up {
+    @media (min-width: $screenSizeTabletLandscapeMin) {
       @content;
     }
-  }
-
-  @else if $size ==desktop-up {
-    @media (min-width: 1200px) {
+  } @else if $size ==desktop-up {
+    @media (min-width: $screenSizeDesktopMin) {
       @content;
     }
-  }
-
-  @else if $size ==big-desktop-up {
-    @media (min-width: 1800px) {
+  } @else if $size ==big-desktop-up {
+    @media (min-width: $screenSizeLargeDesktopMin) {
       @content;
     }
   }
@@ -53,7 +46,10 @@
 }
 
 @mixin dir {
-  @if not global-variable-exists(exclude-rtl-from-bundle) or not $exclude-rtl-from-bundle {
+  @if not
+    global-variable-exists(exclude-rtl-from-bundle) or not
+    $exclude-rtl-from-bundle
+  {
     .direction-ltr {
       direction: ltr;
     }
@@ -73,31 +69,25 @@
 @mixin bundle-partial($component-name, $component-variant: null) {
   @if not global-variable-exists(exclude-from-bundle) {
     @content;
-  }
-
-  @else {
+  } @else {
     @if $component-variant ==null {
       $bundleStatus: map.get($exclude-from-bundle, $component-name, 'base');
 
       @if $bundleStatus {
         // @debug 'excluding styles for component "#{$component-name}" from css bundle';
-      }
-
-      @else {
+      } @else {
         @content;
       }
-    }
-
-    @else {
-      $bundleStatus: map.get($exclude-from-bundle,
+    } @else {
+      $bundleStatus: map.get(
+        $exclude-from-bundle,
         $component-name,
-        $component-variant );
+        $component-variant
+      );
 
       @if $bundleStatus {
         // @debug 'excluding styles for component "#{$component-name}" (#{$component-variant}) from css bundle';
-      }
-
-      @else {
+      } @else {
         @content;
       }
     }
@@ -105,27 +95,25 @@
 }
 
 @mixin rtl-bundle($component-name: null) {
-  @if not global-variable-exists(exclude-rtl-from-bundle) or not $exclude-rtl-from-bundle {
+  @if not
+    global-variable-exists(exclude-rtl-from-bundle) or not
+    $exclude-rtl-from-bundle
+  {
     @content;
-  }
-
-  @else if global-variable-exists(exclude-rtl-from-bundle) and $exclude-rtl-from-bundle {
+  } @else if
+    global-variable-exists(exclude-rtl-from-bundle) and
+    $exclude-rtl-from-bundle
+  {
     // @debug 'excluding RTL styles for all components from css bundle';
-  }
-
-  @else if $component-name {
+  } @else if $component-name {
     @if not global-variable-exists(exclude-from-bundle) {
       @content;
-    }
-
-    @else {
+    } @else {
       $rtlBundleStatus: map.get($exclude-from-bundle, $component-name, 'rtl');
 
       @if $rtlBundleStatus {
         // @debug 'excluding styles for component "#{$component-name}" (RTL) from css bundle';
-      }
-
-      @else {
+      } @else {
         @content;
       }
     }
@@ -133,48 +121,48 @@
 }
 
 @mixin palette-class-variables($themeName, $localPaletteName) {
-  @if $localPaletteName !='black' and $localPaletteName !='white' {
-
+  @if $localPaletteName != 'black' and $localPaletteName != 'white' {
     @each $paletteSwatch,
-    $color in map.get($theme-variants, $themeName, $localPaletteName) {
-      --#{$themeName}-#{$localPaletteName}-#{$paletteSwatch}: #{color-hsl-args($color)};
+      $color in map.get($theme-variants, $themeName, $localPaletteName)
+    {
+      --#{$themeName}-#{$localPaletteName}-#{$paletteSwatch}: #{color-hsl-args(
+          $color
+        )};
       --#{$themeName}-#{$localPaletteName}-#{$paletteSwatch}-font: #{color-hsl-args(
- black-or-white-color($color,
-        map.get($theme-variants, $themeName, 'black'),
-        map.get($theme-variants, $themeName, 'white')))
+          black-or-white-color(
+            $color,
+            map.get($theme-variants, $themeName, 'black'),
+            map.get($theme-variants, $themeName, 'white')
+          )
+        )};
     }
 
-    ;
-  }
-
     .#{$localPaletteName} {
-        @each $paletteSwatch,
-        $color in map.get($theme-variants, $themeName, $localPaletteName) {
-          --#{$paletteSwatch}: #{color-hsl-args($color)};
-          --#{$paletteSwatch}-font: #{color-hsl-args(
-              black-or-white-color($color,
+      @each $paletteSwatch,
+        $color in map.get($theme-variants, $themeName, $localPaletteName)
+      {
+        --#{$paletteSwatch}: #{color-hsl-args($color)};
+        --#{$paletteSwatch}-font: #{color-hsl-args(
+            black-or-white-color(
+              $color,
               map.get($theme-variants, $themeName, 'black'),
-              map.get($theme-variants, $themeName, 'white'))
+              map.get($theme-variants, $themeName, 'white')
             )
-        }
-
-        ;
+          )};
       }
     }
   }
 }
 
 @mixin palette-theme-class-generator-loop {
-
-  @each $themeName,
-  $localPaletteName in $theme-variants {
+  @each $themeName, $localPaletteName in $theme-variants {
     .#{$themeName} {
       --white: #{color-hsl-args(map.get($theme-variants, $themeName, 'white'))};
       --black: #{color-hsl-args(map.get($theme-variants, $themeName, 'black'))};
 
-      @each $localPaletteName,
-      $color in map.get($theme-variants, $themeName) {
-        @include palette-class-variables('#{$themeName}',
+      @each $localPaletteName, $color in map.get($theme-variants, $themeName) {
+        @include palette-class-variables(
+          '#{$themeName}',
           '#{$localPaletteName}'
         );
       }
