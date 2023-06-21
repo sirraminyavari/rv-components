@@ -62,7 +62,7 @@
   width: calc(100% - px-to-rem(24));
   cursor: pointer;
 
-  &>* {
+  & > * {
     margin-block: 0;
     color: inherit;
   }
@@ -115,7 +115,7 @@
 }
 
 .menuInput {
-  margin-block-start:  px-to-rem(19.2);
+  margin-block-start: px-to-rem(19.2);
   margin-inline-start: px-to-rem(19.2);
 }
 
@@ -129,7 +129,7 @@
 .triggerCollapse {
   margin-inline-start: auto;
 
-  >svg {
+  > svg {
     color: hsl(var(--base-font));
     font-size: px-to-rem(24);
   }

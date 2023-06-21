@@ -125,10 +125,8 @@
     @each $paletteSwatch,
       $color in map.get($theme-variants, $themeName, $localPaletteName)
     {
-      --#{$themeName}-#{$localPaletteName}-#{$paletteSwatch}: #{color-hsl-args(
-          $color
-        )};
-      --#{$themeName}-#{$localPaletteName}-#{$paletteSwatch}-font: #{color-hsl-args(
+      --#{$localPaletteName}-#{$paletteSwatch}: #{color-hsl-args($color)};
+      --#{$localPaletteName}-#{$paletteSwatch}-font: #{color-hsl-args(
           black-or-white-color(
             $color,
             map.get($theme-variants, $themeName, 'black'),

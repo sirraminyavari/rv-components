@@ -45,4 +45,8 @@ export { default as CalculatorSvg } from './calculator.svg';
 export { default as MenuSvg } from './menu.svg';
 export { default as LogOutSvg } from './logout.svg';
 export { default as ReloadSvg } from './reload.svg';
-
+export { default as CheckboxSvg } from './checkbox.svg';
+export { default as PenSvg } from './pen.svg';
+export { default as RadioButtonSvg } from './radioButton.svg';
+export { default as CheckedCircleSvg } from './checkedCircle.svg';
+export { default as ChevronCircleSvg } from './chevronCircle.svg';

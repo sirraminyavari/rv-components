@@ -219,7 +219,6 @@ mark {
 
 // Addresses margins set differently in IE6/7
 @if $var-legacy-support-for-ie {
-
   p,
   pre {
     margin: 1em 0;
@@ -253,7 +252,7 @@ pre {
 // Set consistent quote types.
 
 q {
-  quotes: '\201C' '\201D' '\2018' '\2019';
+  quotes: '\201C''\201D''\2018''\2019';
 
   //  Addresses quote property not supported in S4
   &::before,
@@ -299,7 +298,6 @@ sub {
 
 // Addresses margins set differently in IE6/7
 @if $var-legacy-support-for-ie {
-
   dl,
   menu,
   ol,
@@ -316,7 +314,6 @@ sub {
 
 // Addresses paddings set differently in IE6/7
 @if $var-legacy-support-for-ie {
-
   menu,
   ol,
   ul {
@@ -327,7 +324,6 @@ sub {
 // Corrects list images handled incorrectly in IE7
 
 nav {
-
   ul,
   ol {
     @if $var-legacy-support-for-ie {
@@ -424,7 +420,6 @@ textarea {
 }
 
 input {
-
   // 1. Addresses appearance set to searchfield in S5, Chrome
   // 2. Addresses box-sizing set to border-box in S5, Chrome (include -moz to future-proof)
   &[type='search'] {

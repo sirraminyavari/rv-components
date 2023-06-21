@@ -45,7 +45,7 @@ List of all icons used and available in the package
 >
   {Object.entries(icons).map(([name, Icon]) => {
     if (name.startsWith('CM')) return;
-    if (['CaretSvg', 'ChevronSvg', 'ArrowCircleSvg'].includes(name))
+    if (['CaretSvg', 'ChevronSvg', 'ChevronCircleSvg', 'ArrowCircleSvg'].includes(name))
       return ['right', 'up', 'left', 'down'].map((direction) => (
         <Fragment key={name + direction}>
           <IconItem name={`${name.replace('Svg', '')}-${direction}`}>

@@ -1,7 +1,10 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { AdvancedSearchMenu as AdvancedSearchMenuComponent, RVAdvancedSearchMenu } from '.';
+import {
+  AdvancedSearchMenu as AdvancedSearchMenuComponent,
+  RVAdvancedSearchMenu,
+} from '.';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -13,16 +16,14 @@ export default {
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof AdvancedSearchMenuComponent> = ({
-  label = 'label',
   color,
   variant,
   ...args
 }) => {
   return (
-      <AdvancedSearchMenuComponent
-        label={label}
-        {...{ ...args, color, variant }}
-      />
+    <AdvancedSearchMenuComponent
+      {...{ ...args, color, variant }}
+    />
   );
 };
 

@@ -4,8 +4,8 @@
   width: px-to-rem(320);
   height: px-to-rem(320);
   background-color: hsl(var(--white));
-  box-shadow: 0 px-to-rem(2) px-to-rem(15) hsl(var(--black)/10%);
-  border-radius: px-to-rem(13);
+  box-shadow: 0 px-to-rem(2) px-to-rem(15) hsl(var(--black) / 10%);
+  border-radius: $borderRadiusHalf;
   margin-inline: px-to-rem(0);
   margin-block: px-to-rem(8);
   padding: px-to-rem(16);
@@ -32,12 +32,12 @@
   justify-content: flex-start;
   align-items: center;
   gap: px-to-rem(12);
-  border-radius: px-to-rem(13);
+  border-radius: $borderRadiusHalf;
   padding-inline: px-to-rem(6);
   margin-inline-end: auto;
   margin-block: px-to-rem(6);
   box-sizing: border-box;
-  transition: background-color .25s;
+  transition: background-color 0.25s;
 
   .peoplePickerBoxItemAvatar {
     width: px-to-rem(40);
@@ -62,9 +62,8 @@
 
   &.active {
     .peoplePickerBoxItemTitle {
-      color: hsl(var(--black)/90%);
+      color: hsl(var(--black) / 90%);
       font-weight: 600;
     }
   }
-
 }

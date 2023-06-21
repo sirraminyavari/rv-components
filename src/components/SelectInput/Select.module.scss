@@ -8,7 +8,7 @@
   [class*='-control'] {
     background-color: transparent;
     border-color: hsl(var(--base));
-    border-radius: px-to-rem(7);
+    border-radius: $borderRadiusQuarter;;
     outline: transparent;
     box-shadow: none;
     background-color: hsl(var(--white));
@@ -36,7 +36,7 @@
   }
 
   [class*='-multiValue'] {
-    border-radius: px-to-rem(7);
+    border-radius: $borderRadiusQuarter;;
     background-color: hsl(var(--base) / 30%);
     color: hsl(var(--light-font));
   }
@@ -52,19 +52,19 @@
   [class*='-MultiValueRemove'] {
     background-color: hsl(var(--lighter));
     color: hsl(var(--lighter-font));
-    border-radius: px-to-rem(6);
+    border-radius: $borderRadiusQuarter;
     margin-inline-start: px-to-rem(4);
     cursor: pointer;
   }
 
   [class*='-menu'] {
-    border-radius: px-to-rem(7);
+    border-radius: $borderRadiusQuarter;;
     background-color: hsl(var(--lighter) / 100%);
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--black) / 15%);
     padding-inline: px-to-rem(3);
 
     [class*='-option'] {
-      border-radius: px-to-rem(7);
+      border-radius: $borderRadiusQuarter;;
       transition: background-color 0.2s, color 0.2s;
       color: hsl(var(--light-font));
       background-color: transparent;

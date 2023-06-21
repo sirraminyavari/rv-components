@@ -32,7 +32,8 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
   (
     {
       children,
-      className,contentContainerClassName,
+      className,
+      contentContainerClassName,
       color = RVColorProp.cgBlue,
       variant = RVVariantProp.primary,
       size = RVSizeProp.medium,
@@ -231,7 +232,9 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
     return (
       <div className={clsx(styles.scrollbarContainer, className)}>
         <div className={styles.scrollbarContent} ref={contentRef} {...props}>
-          <div ref={contentInnerRef} className={contentContainerClassName}>{children}</div>
+          <div ref={contentInnerRef} className={contentContainerClassName}>
+            {children}
+          </div>
         </div>
         <div
           className={clsx(

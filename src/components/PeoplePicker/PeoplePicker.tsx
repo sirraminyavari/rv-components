@@ -90,7 +90,6 @@ const PeoplePicker = forwardRef<HTMLInputElement, RVPeoplePicker>(
                   {...props}
                   onChange={(e) => {
                     if (onSearch) onSearch(e.currentTarget.value);
-                    
                   }}
                 />
                 <div className={styles.peoplePickerBoxItemContainer}>
@@ -125,7 +124,12 @@ const PeoplePicker = forwardRef<HTMLInputElement, RVPeoplePicker>(
                               className={styles.peoplePickerBoxItemNoAvatar}
                             />
                           )}
-                          <span className={clsx(RVColorProp.distant,styles.peoplePickerBoxItemTitle)}>
+                          <span
+                            className={clsx(
+                              RVColorProp.distant,
+                              styles.peoplePickerBoxItemTitle
+                            )}
+                          >
                             {item.label || '----'}
                           </span>
                         </button>
