@@ -37,6 +37,7 @@ export interface RVAccordion
     status: 'open' | 'closed'
   ) => void;
   labelClassName?: string;
+  contentClassName?: string;
 }
 
 const Accordion = forwardRef<HTMLDivElement, RVAccordion>(
@@ -54,6 +55,7 @@ const Accordion = forwardRef<HTMLDivElement, RVAccordion>(
       onTriggerButtonLoad,
       onAccordionStatusChange,
       labelClassName,
+      contentClassName,
       activeLabel,
       ...props
     },
@@ -79,7 +81,7 @@ const Accordion = forwardRef<HTMLDivElement, RVAccordion>(
     return (
       <div
         ref={ref}
-        className={clsx(styles.accordionPanel, color)}
+        className={clsx(styles.accordionPanel, color, className)}
         data-open={isOpen}
         {...props}
       >
@@ -107,7 +109,9 @@ const Accordion = forwardRef<HTMLDivElement, RVAccordion>(
           easing="ease"
           height={isOpen ? 'auto' : 0}
         >
-          <div className={styles.content}>{children}</div>
+          <div className={clsx(styles.content, contentClassName)}>
+            {children}
+          </div>
         </AnimateHeight>
       </div>
     );

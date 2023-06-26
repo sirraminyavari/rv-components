@@ -21,9 +21,12 @@ const Template: ComponentStory<typeof AdvancedSearchMenuComponent> = ({
   ...args
 }) => {
   return (
-    <AdvancedSearchMenuComponent
-      {...{ ...args, color, variant }}
-    />
+    <>
+      <AdvancedSearchMenuComponent
+        style={{ maxHeight: '90vh' }}
+        {...{ ...args, color, variant }}
+      />
+    </>
   );
 };
 
