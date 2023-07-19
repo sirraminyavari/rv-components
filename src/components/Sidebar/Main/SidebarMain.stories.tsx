@@ -19,22 +19,13 @@ export default {
 } as unknown as ComponentMeta<typeof SidebarMainComponent>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof SidebarMainComponent> = ({
-  children,
-  ...args
-}) => (
+const Template: ComponentStory<typeof SidebarMainComponent> = ({ children, ...args }) => (
   <div style={{ display: 'flex', height: '100vh', width: '100%' }}>
     <SidebarMainComponent {...args}>{children}</SidebarMainComponent>
   </div>
 );
-const TemplateRTL: ComponentStory<typeof SidebarMainComponent> = ({
-  children,
-  ...args
-}) => (
-  <div
-    style={{ display: 'flex', minHeight: '100vh', width: '100%' }}
-    className="direction-rtl"
-  >
+const TemplateRTL: ComponentStory<typeof SidebarMainComponent> = ({ children, ...args }) => (
+  <div style={{ display: 'flex', minHeight: '100vh', width: '100%' }} className="direction-rtl">
     <SidebarMainComponent {...args}>{children}</SidebarMainComponent>
   </div>
 );

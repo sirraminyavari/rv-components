@@ -1,24 +1,16 @@
 import clsx from 'clsx';
-import {
-  DetailedHTMLProps,
-  forwardRef,
-  HTMLAttributes,
-  PropsWithoutRef,
-} from 'react';
+import { DetailedHTMLProps, forwardRef, HTMLAttributes, PropsWithoutRef } from 'react';
 import { GroupBase, OptionsOrGroups } from 'react-select';
 import ReactSelect from 'react-select';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types';
 import styles from './Select.module.scss';
 import type SelectType from 'react-select/dist/declarations/src/Select';
 
-interface RVSelectOptions
-  extends OptionsOrGroups<string | number, GroupBase<string | number>> {}
+interface RVSelectOptions extends OptionsOrGroups<string | number, GroupBase<string | number>> {}
 
 export interface RVSelect
   extends Omit<
-    PropsWithoutRef<
-      DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-    >,
+    PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color' | 'size'
   > {
   variant?: Exclude<RVVariantProp, RVVariantProp.disabled>;

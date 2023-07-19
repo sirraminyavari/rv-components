@@ -28,15 +28,14 @@
     padding-inline: px-to-rem(4);
     background-color: hsl(var(--white));
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--black) / 15%);
-    transition: background-color 0.3s ease-in-out, opacity 0.3s ease-in-out,
-      inset 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out, opacity 0.3s ease-in-out, inset 0.3s ease-in-out;
     transform: scale(0);
     opacity: 0;
     z-index: 0;
     overflow-y: auto;
     padding-inline: px-to-rem(4);
     margin-block-start: px-to-rem(4);
-    border-radius: $borderRadiusQuarter;;
+    border-radius: $borderRadiusQuarter;
     display: flex;
     flex-direction: column;
     row-gap: px-to-rem(7);

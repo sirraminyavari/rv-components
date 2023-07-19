@@ -22,25 +22,13 @@ const Template: ComponentStory<typeof DropdownComponent> = ({
 }) => (
   <div style={{ minHeight: '100vh' }}>
     <DropdownComponent label={label} size={size} {...args}>
-      <Button
-        size={size}
-        color={RVColorProp.cgBlue}
-        variant={RVVariantProp.white}
-      >
+      <Button size={size} color={RVColorProp.cgBlue} variant={RVVariantProp.white}>
         some link/button
       </Button>
-      <Button
-        size={size}
-        color={RVColorProp.cgBlue}
-        variant={RVVariantProp.white}
-      >
+      <Button size={size} color={RVColorProp.cgBlue} variant={RVVariantProp.white}>
         some link/button
       </Button>
-      <Button
-        size={size}
-        color={RVColorProp.cgBlue}
-        variant={RVVariantProp.white}
-      >
+      <Button size={size} color={RVColorProp.cgBlue} variant={RVVariantProp.white}>
         some link/button
       </Button>
     </DropdownComponent>

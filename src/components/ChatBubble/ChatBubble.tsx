@@ -1,18 +1,11 @@
 import clsx from 'clsx';
-import {
-  DetailedHTMLProps,
-  forwardRef,
-  HTMLAttributes,
-  PropsWithoutRef,
-} from 'react';
+import { DetailedHTMLProps, forwardRef, HTMLAttributes, PropsWithoutRef } from 'react';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types/global';
 import styles from './ChatBubble.module.scss';
 
 export interface RVChatBubble
   extends Omit<
-    PropsWithoutRef<
-      DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-    >,
+    PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color'
   > {
   variant?: RVVariantProp;

@@ -8,12 +8,7 @@ import {
   useRef,
 } from 'react';
 import useCombinedRefs from '../../hooks/useCombinedRef';
-import {
-  RVColorProp,
-  RVSizeProp,
-  RVSvgProps,
-  RVVariantProp,
-} from '../../types';
+import { RVColorProp, RVSizeProp, RVSvgProps, RVVariantProp } from '../../types';
 import styles from './TextInput.module.scss';
 
 export interface RVTextInput

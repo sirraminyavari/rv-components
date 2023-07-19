@@ -83,9 +83,7 @@ const Template: ComponentStory<typeof PeoplePickerComponent> = ({
   const memoizedPeopleList = useMemo(
     () =>
       peopleList.filter((item) =>
-        String(item.label)
-          .toLocaleLowerCase()
-          ?.includes(searchInput.toLocaleLowerCase())
+        String(item.label).toLocaleLowerCase()?.includes(searchInput.toLocaleLowerCase())
       ),
     [searchInput]
   );
@@ -100,9 +98,7 @@ const Template: ComponentStory<typeof PeoplePickerComponent> = ({
     >
       <PeoplePickerComponent
         label={label}
-        TriggerButtonElement={
-          TriggerButtonElement || TriggerButton({ color, variant })
-        }
+        TriggerButtonElement={TriggerButtonElement || TriggerButton({ color, variant })}
         peopleList={memoizedPeopleList}
         onSearch={setSearchInput}
         {...{ ...args, color, variant }}

@@ -13,10 +13,7 @@ export default {
 } as ComponentMeta<typeof DatePickerComponent>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof DatePickerComponent> = ({
-  label = 'label',
-  ...args
-}) => {
+const Template: ComponentStory<typeof DatePickerComponent> = ({ label = 'label', ...args }) => {
   const first = useRef<HTMLInputElement>(null);
   return (
     <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center' }}>

@@ -1,8 +1,6 @@
 import { ForwardedRef, MutableRefObject, useEffect, useRef } from 'react';
 
-const useCombinedRefs = <T,>(
-  ...refs: (ForwardedRef<T> | MutableRefObject<T>)[]
-) => {
+const useCombinedRefs = <T,>(...refs: (ForwardedRef<T> | MutableRefObject<T>)[]) => {
   const targetRef = useRef<T>(null);
 
   useEffect(() => {

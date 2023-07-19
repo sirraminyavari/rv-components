@@ -6,21 +6,13 @@ import {
   InputHTMLAttributes,
   PropsWithoutRef,
 } from 'react';
-import {
-  RVColorProp,
-  RVSizeProp,
-  RVSvgProps,
-  RVVariantProp,
-} from '../../types';
+import { RVColorProp, RVSizeProp, RVSvgProps, RVVariantProp } from '../../types';
 import styles from './TextInput.module.scss';
 
 export interface RVTextAreaInput
   extends Omit<
     PropsWithoutRef<
-      DetailedHTMLProps<
-        InputHTMLAttributes<HTMLTextAreaElement>,
-        HTMLTextAreaElement
-      >
+      DetailedHTMLProps<InputHTMLAttributes<HTMLTextAreaElement>, HTMLTextAreaElement>
     >,
     'color' | 'size'
   > {
@@ -63,15 +55,8 @@ const TextAreaInput = forwardRef<HTMLTextAreaElement, RVTextAreaInput>(
           className
         )}
       >
-        {Icon && IconPosition === 'leading' && (
-          <Icon className={styles.trailingIcon} />
-        )}
-        <textarea
-          ref={ref}
-          placeholder={placeholder}
-          className={styles.baseTextInput}
-          {...props}
-        />
+        {Icon && IconPosition === 'leading' && <Icon className={styles.trailingIcon} />}
+        <textarea ref={ref} placeholder={placeholder} className={styles.baseTextInput} {...props} />
         {label && (
           <label
             className={clsx(
@@ -83,9 +68,7 @@ const TextAreaInput = forwardRef<HTMLTextAreaElement, RVTextAreaInput>(
             {label}
           </label>
         )}
-        {Icon && IconPosition === 'trailing' && (
-          <Icon className={styles.trailingIcon} />
-        )}
+        {Icon && IconPosition === 'trailing' && <Icon className={styles.trailingIcon} />}
       </div>
     );
   }
