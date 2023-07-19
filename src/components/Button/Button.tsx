@@ -1,21 +1,11 @@
 import clsx from 'clsx';
-import {
-  ButtonHTMLAttributes,
-  DetailedHTMLProps,
-  forwardRef,
-  PropsWithoutRef,
-} from 'react';
+import { ButtonHTMLAttributes, DetailedHTMLProps, forwardRef, PropsWithoutRef } from 'react';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types/global';
 import styles from './Button.module.scss';
 
 export interface RVButton
   extends Omit<
-    PropsWithoutRef<
-      DetailedHTMLProps<
-        ButtonHTMLAttributes<HTMLButtonElement>,
-        HTMLButtonElement
-      >
-    >,
+    PropsWithoutRef<DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonElement>, HTMLButtonElement>>,
     'color'
   > {
   variant?: RVVariantProp;

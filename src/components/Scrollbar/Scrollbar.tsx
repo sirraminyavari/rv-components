@@ -15,9 +15,7 @@ import styles from './Scrollbar.module.scss';
 
 export interface RVScrollbar
   extends Omit<
-    PropsWithoutRef<
-      DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-    >,
+    PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color' | 'size'
   > {
   variant?: Exclude<RVVariantProp, RVVariantProp.disabled>;
@@ -52,9 +50,7 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
     const scrollThumbRef = useRef<HTMLDivElement>(null);
     const observer = useRef<ResizeObserver | null>(null);
     const [thumbHeight, setThumbHeight] = useState(20);
-    const [scrollStartPosition, setScrollStartPosition] = useState<
-      number | null
-    >(null);
+    const [scrollStartPosition, setScrollStartPosition] = useState<number | null>(null);
     const [initialScrollTop, setInitialScrollTop] = useState<number>(0);
     const [isDragging, setIsDragging] = useState(false);
     const [isScrolling, setIsScrolling] = useState(false);
@@ -82,18 +78,15 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
           const rect = target.getBoundingClientRect();
           const trackTop = rect.top;
           const thumbOffset = -(thumbHeight / 2);
-          const clickRatio =
-            (clientY - trackTop + thumbOffset) / trackCurrent.clientHeight;
-          const scrollAmount = Math.floor(
-            clickRatio * contentCurrent.scrollHeight
-          );
+          const clickRatio = (clientY - trackTop + thumbOffset) / trackCurrent.clientHeight;
+          const scrollAmount = Math.floor(clickRatio * contentCurrent.scrollHeight);
           contentCurrent.scrollTo({
             top: scrollAmount,
             behavior: 'smooth',
           });
         }
       },
-      [thumbHeight]
+      [thumbHeight, contentRef]
     );
 
     const handleOnScrollEnd = useCallback(() => {
@@ -106,18 +99,13 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
           ) {
             onScrollEnd();
           }
-    }, [onScrollEnd, scrollEndThreshold]);
+    }, [onScrollEnd, scrollEndThreshold, contentRef]);
     const handleThumbPosition = useCallback(() => {
-      if (
-        !contentRef.current ||
-        !scrollTrackRef.current ||
-        !scrollThumbRef.current
-      ) {
+      if (!contentRef.current || !scrollTrackRef.current || !scrollThumbRef.current) {
         return;
       }
 
-      const { scrollTop: contentTop, scrollHeight: contentHeight } =
-        contentRef.current;
+      const { scrollTop: contentTop, scrollHeight: contentHeight } = contentRef.current;
       const { clientHeight: trackHeight } = scrollTrackRef.current;
 
       if (scrollingTimeoutRef.current) {
@@ -133,15 +121,18 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
       newTop = Math.min(newTop, trackHeight - thumbHeight);
       const thumb = scrollThumbRef.current;
       thumb.style.top = `${newTop}px`;
-    }, []);
+    }, [contentRef, thumbHeight, handleOnScrollEnd]);
 
-    const handleThumbMousedown = useCallback((e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      setScrollStartPosition(e.clientY);
-      if (contentRef.current) setInitialScrollTop(contentRef.current.scrollTop);
-      setIsDragging(true);
-    }, []);
+    const handleThumbMousedown = useCallback(
+      (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        setScrollStartPosition(e.clientY);
+        if (contentRef.current) setInitialScrollTop(contentRef.current.scrollTop);
+        setIsDragging(true);
+      },
+      [contentRef]
+    );
 
     const handleThumbMouseup = useCallback(
       (e) => {
@@ -158,22 +149,15 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
       (e) => {
         e.preventDefault();
         e.stopPropagation();
-        if (
-          !contentRef.current ||
-          !scrollTrackRef.current ||
-          !scrollThumbRef.current
-        ) {
+        if (!contentRef.current || !scrollTrackRef.current || !scrollThumbRef.current) {
           return;
         }
         if (isDragging) {
-          const {
-            scrollHeight: contentScrollHeight,
-            offsetHeight: contentOffsetHeight,
-          } = contentRef.current;
+          const { scrollHeight: contentScrollHeight, offsetHeight: contentOffsetHeight } =
+            contentRef.current;
 
           const deltaY =
-            (e.clientY - Number(scrollStartPosition)) *
-            (contentOffsetHeight / thumbHeight);
+            (e.clientY - Number(scrollStartPosition)) * (contentOffsetHeight / thumbHeight);
           const newScrollTop = Math.min(
             initialScrollTop + deltaY,
             contentScrollHeight - contentOffsetHeight
@@ -182,17 +166,12 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
           contentRef.current.scrollTop = newScrollTop;
         }
       },
-      [isDragging, scrollStartPosition, thumbHeight]
+      [isDragging, scrollStartPosition, thumbHeight, contentRef, initialScrollTop]
     );
 
     // If the content and the scrollbar track exist, use a ResizeObserver to adjust height of thumb and listen for scroll event to move the thumb
     useEffect(() => {
-      if (
-        !contentRef.current ||
-        !scrollTrackRef.current ||
-        !contentInnerRef.current
-      )
-        return;
+      if (!contentRef.current || !scrollTrackRef.current || !contentInnerRef.current) return;
       const contentElement = contentRef.current;
       const contentInnerElement = contentInnerRef.current;
       const scrollTrackElement = scrollTrackRef.current;
@@ -215,7 +194,7 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
         contentElement.removeEventListener('wheel', scrollFunction);
         contentElement.removeEventListener('resize', scrollFunction);
       };
-    }, []);
+    }, [contentRef, handleThumbPosition]);
 
     // Listen for mouse events to handle scrolling by dragging the thumb
     useEffect(() => {

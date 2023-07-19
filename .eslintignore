@@ -1,7 +1,12 @@
 node_modules
 .storybook
+.idea
+.vscode
+.github
+
 scripts
 dist
+build
 storybook-static
 
 **/*.stories.@(ts|tsx|js|jsx|mdx)

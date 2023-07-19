@@ -78,9 +78,7 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
   };
   return (
     <div style={{ display: 'flex', minHeight: '100vh', width: '100%' }}>
-      <div
-        style={{ display: 'flex', height: '100vh', position: 'sticky', top: 0 }}
-      >
+      <div style={{ display: 'flex', height: '100vh', position: 'sticky', top: 0 }}>
         <SidebarMainComponent
           primaryLinks={[
             !isActionBarOpen
@@ -224,9 +222,7 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
             alignItems: 'center',
           }}
         >
-          <div
-            style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}
-          >
+          <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
             <Breadcrumb
               // color={RVColorProp.grayDark}
               Icon={FileTrayFullSvg}
@@ -278,10 +274,7 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
               color={RVColorProp.distant}
               fullWidth
             />
-            <Typography
-              type="caption"
-              style={{ whiteSpace: 'nowrap', marginInlineStart: '1rem' }}
-            >
+            <Typography type="caption" style={{ whiteSpace: 'nowrap', marginInlineStart: '1rem' }}>
               1129 items
             </Typography>
           </div>
@@ -328,12 +321,7 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
                     columnGap: '1rem',
                   }}
                 >
-                  <Button
-                    rounded="half"
-                    fullCircle
-                    variant={RVVariantProp.white}
-                    badge
-                  >
+                  <Button rounded="half" fullCircle variant={RVVariantProp.white} badge>
                     <BookmarkSvg outline />
                   </Button>
                   <Button

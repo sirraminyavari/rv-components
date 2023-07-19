@@ -33,12 +33,7 @@ const Template: ComponentStory<typeof BreadcrumbComponent> = ({
   ...args
 }) => (
   <div style={{ minHeight: '100vh' }}>
-    <BreadcrumbComponent
-      routeLinks={routeLinks}
-      size={size}
-      Icon={Icon}
-      {...args}
-    />
+    <BreadcrumbComponent routeLinks={routeLinks} size={size} Icon={Icon} {...args} />
   </div>
 );
 

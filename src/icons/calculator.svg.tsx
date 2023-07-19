@@ -39,15 +39,7 @@ const CalculatorSvg = ({ size, outline, ...props }: RVSvgProps) => {
           <circle cx="256" cy="328" r="24" fill="currentColor" />
           <circle cx="168" cy="408" r="24" fill="currentColor" />
           <circle cx="256" cy="408" r="24" fill="currentColor" />
-          <rect
-            width="48"
-            height="128"
-            x="320"
-            y="304"
-            fill="currentColor"
-            rx="24"
-            ry="24"
-          />
+          <rect width="48" height="128" x="320" y="304" fill="currentColor" rx="24" ry="24" />
         </>
       ) : (
         <>

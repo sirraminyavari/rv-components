@@ -18,10 +18,9 @@ export default {
 const Template: ComponentStory<typeof SideMenuComponent> = ({
   children = (
     <div style={{ height: 50, overflow: 'hidden' }}>
-      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum et
-      repellendus corrupti eaque odit quidem voluptates voluptate dignissimos
-      facere illo corporis facilis pariatur dolore reiciendis repudiandae ipsa,
-      quam sequi aliquid.'
+      'Lorem ipsum dolor sit amet consectetur adipisicing elit. Harum et repellendus corrupti eaque
+      odit quidem voluptates voluptate dignissimos facere illo corporis facilis pariatur dolore
+      reiciendis repudiandae ipsa, quam sequi aliquid.'
     </div>
   ),
   open = true,
@@ -38,10 +37,7 @@ const TemplateRTL: ComponentStory<typeof SideMenuComponent> = ({
   open = true,
   ...args
 }) => (
-  <div
-    style={{ display: 'flex', minHeight: '100vh', width: '100%' }}
-    className="direction-rtl"
-  >
+  <div style={{ display: 'flex', minHeight: '100vh', width: '100%' }} className="direction-rtl">
     <SideMenuComponent open={open} {...args}>
       {children}
     </SideMenuComponent>

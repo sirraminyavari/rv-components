@@ -1,11 +1,5 @@
 import clsx from 'clsx';
-import {
-  DetailedHTMLProps,
-  forwardRef,
-  HTMLAttributes,
-  PropsWithoutRef,
-  useState,
-} from 'react';
+import { DetailedHTMLProps, forwardRef, HTMLAttributes, PropsWithoutRef, useState } from 'react';
 import { CaretSvg } from '../../icons';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types';
 import { Button } from '../Button';
@@ -13,9 +7,7 @@ import styles from './Dropdown.module.scss';
 
 export interface RVDropdown
   extends Omit<
-    PropsWithoutRef<
-      DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-    >,
+    PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color' | 'size'
   > {
   variant?: Exclude<RVVariantProp, RVVariantProp.disabled>;
@@ -46,12 +38,7 @@ const Dropdown = forwardRef<HTMLDivElement, RVDropdown>(
     };
     return (
       <div
-        className={clsx(
-          styles.dropdownContainer,
-          isToggled && styles.toggled,
-          color,
-          className
-        )}
+        className={clsx(styles.dropdownContainer, isToggled && styles.toggled, color, className)}
         ref={ref}
         {...props}
       >

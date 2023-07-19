@@ -46,10 +46,7 @@
 }
 
 @mixin dir {
-  @if not
-    global-variable-exists(exclude-rtl-from-bundle) or not
-    $exclude-rtl-from-bundle
-  {
+  @if not global-variable-exists(exclude-rtl-from-bundle) or not $exclude-rtl-from-bundle {
     .direction-ltr {
       direction: ltr;
     }
@@ -79,11 +76,7 @@
         @content;
       }
     } @else {
-      $bundleStatus: map.get(
-        $exclude-from-bundle,
-        $component-name,
-        $component-variant
-      );
+      $bundleStatus: map.get($exclude-from-bundle, $component-name, $component-variant);
 
       @if $bundleStatus {
         // @debug 'excluding styles for component "#{$component-name}" (#{$component-variant}) from css bundle';
@@ -95,15 +88,9 @@
 }
 
 @mixin rtl-bundle($component-name: null) {
-  @if not
-    global-variable-exists(exclude-rtl-from-bundle) or not
-    $exclude-rtl-from-bundle
-  {
+  @if not global-variable-exists(exclude-rtl-from-bundle) or not $exclude-rtl-from-bundle {
     @content;
-  } @else if
-    global-variable-exists(exclude-rtl-from-bundle) and
-    $exclude-rtl-from-bundle
-  {
+  } @else if global-variable-exists(exclude-rtl-from-bundle) and $exclude-rtl-from-bundle {
     // @debug 'excluding RTL styles for all components from css bundle';
   } @else if $component-name {
     @if not global-variable-exists(exclude-from-bundle) {
@@ -122,9 +109,7 @@
 
 @mixin palette-class-variables($themeName, $localPaletteName) {
   @if $localPaletteName != 'black' and $localPaletteName != 'white' {
-    @each $paletteSwatch,
-      $color in map.get($theme-variants, $themeName, $localPaletteName)
-    {
+    @each $paletteSwatch, $color in map.get($theme-variants, $themeName, $localPaletteName) {
       --#{$localPaletteName}-#{$paletteSwatch}: #{color-hsl-args($color)};
       --#{$localPaletteName}-#{$paletteSwatch}-font: #{color-hsl-args(
           black-or-white-color(
@@ -136,9 +121,7 @@
     }
 
     .#{$localPaletteName} {
-      @each $paletteSwatch,
-        $color in map.get($theme-variants, $themeName, $localPaletteName)
-      {
+      @each $paletteSwatch, $color in map.get($theme-variants, $themeName, $localPaletteName) {
         --#{$paletteSwatch}: #{color-hsl-args($color)};
         --#{$paletteSwatch}-font: #{color-hsl-args(
             black-or-white-color(
@@ -159,10 +142,7 @@
       --black: #{color-hsl-args(map.get($theme-variants, $themeName, 'black'))};
 
       @each $localPaletteName, $color in map.get($theme-variants, $themeName) {
-        @include palette-class-variables(
-          '#{$themeName}',
-          '#{$localPaletteName}'
-        );
+        @include palette-class-variables('#{$themeName}', '#{$localPaletteName}');
       }
     }
   }

@@ -11,9 +11,7 @@ import styles from './Typography.module.scss';
 
 export interface RVTypography
   extends Omit<
-    PropsWithoutRef<
-      DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>
-    >,
+    PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLHeadingElement>, HTMLHeadingElement>>,
     'color'
   > {
   color?: RVColorProp;
@@ -28,27 +26,11 @@ const TypographyTag = forwardRef<HTMLHeadingElement, RVTypography>(
 );
 
 const Typography = forwardRef<HTMLHeadingElement, RVTypography>(
-  (
-    {
-      children,
-      className,
-      color = RVColorProp.grayDark,
-      type = 'H6',
-      muted,
-      ...props
-    },
-    ref
-  ) => {
+  ({ children, className, color = RVColorProp.grayDark, type = 'H6', muted, ...props }, ref) => {
     return (
       <TypographyTag
         ref={ref}
-        className={clsx(
-          color,
-          styles.baseHeading,
-          styles[type],
-          muted && styles.muted,
-          className
-        )}
+        className={clsx(color, styles.baseHeading, styles[type], muted && styles.muted, className)}
         {...{ type, ...props }}
       >
         {children}

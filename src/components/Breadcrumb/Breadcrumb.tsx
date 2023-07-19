@@ -9,20 +9,13 @@ import {
   useState,
 } from 'react';
 import { CaretSvg } from '../../icons';
-import {
-  RVColorProp,
-  RVSizeProp,
-  RVSvgProps,
-  RVVariantProp,
-} from '../../types';
+import { RVColorProp, RVSizeProp, RVSvgProps, RVVariantProp } from '../../types';
 import { isRTL } from '../../utils';
 import styles from './Breadcrumb.module.scss';
 
 export interface RVBreadcrumb
   extends Omit<
-    PropsWithoutRef<
-      DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-    >,
+    PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color' | 'size'
   > {
   variant?: RVVariantProp;
@@ -53,8 +46,9 @@ const Breadcrumb = forwardRef<HTMLDivElement, RVBreadcrumb>(
     },
     ref
   ) => {
-    const [adjacentPathsContainerStatus, setadjacentPathsContainerStatus] =
-      useState<boolean[]>(routeLinks.map(() => false));
+    const [adjacentPathsContainerStatus, setadjacentPathsContainerStatus] = useState<boolean[]>(
+      routeLinks.map(() => false)
+    );
     const toggleAdjacentPaths = (idx: number) => {
       setadjacentPathsContainerStatus((prev) => {
         return prev.map((status, prevIdx) => {
@@ -92,9 +86,7 @@ const Breadcrumb = forwardRef<HTMLDivElement, RVBreadcrumb>(
                         styles.showAdjacentPaths
                     )}
                   >
-                    <CaretSvg
-                      direction={isRTL() === 'rtl' ? 'left' : 'right'}
-                    />
+                    <CaretSvg direction={isRTL() === 'rtl' ? 'left' : 'right'} />
                     {adjacentPaths?.length ? (
                       <>
                         <div className={styles.adjacentPathsContainer}>
@@ -103,14 +95,9 @@ const Breadcrumb = forwardRef<HTMLDivElement, RVBreadcrumb>(
                               <a
                                 href={item.path}
                                 key={`breadcrumb-link-${item.path}-${idx}-${jdx}`}
-                                className={clsx(
-                                  styles.BreadcrumbItem,
-                                  styles.adjacentPathItem
-                                )}
+                                className={clsx(styles.BreadcrumbItem, styles.adjacentPathItem)}
                               >
-                                <span className={styles.label}>
-                                  {item.label}
-                                </span>
+                                <span className={styles.label}>{item.label}</span>
                               </a>
                             );
                           })}

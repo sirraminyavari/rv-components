@@ -1,19 +1,11 @@
 import clsx from 'clsx';
-import {
-  HTMLAttributes,
-  DetailedHTMLProps,
-  forwardRef,
-  PropsWithoutRef,
-  ReactNode,
-} from 'react';
+import { HTMLAttributes, DetailedHTMLProps, forwardRef, PropsWithoutRef, ReactNode } from 'react';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types/global';
 import styles from './RowItem.module.scss';
 
 export interface RVRowItem
   extends Omit<
-    PropsWithoutRef<
-      DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-    >,
+    PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color'
   > {
   variant?: RVVariantProp;

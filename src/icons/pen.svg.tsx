@@ -39,12 +39,7 @@ const PenSvg = ({ size, outline, ...props }: RVSvgProps) => {
           </g>
           <defs>
             <clipPath id="clip0_2311_1853">
-              <rect
-                width="20"
-                height="20"
-                fill="white"
-                transform="matrix(-1 0 0 1 20 0)"
-              />
+              <rect width="20" height="20" fill="white" transform="matrix(-1 0 0 1 20 0)" />
             </clipPath>
           </defs>
         </>
@@ -78,12 +73,7 @@ const PenSvg = ({ size, outline, ...props }: RVSvgProps) => {
           </g>
           <defs>
             <clipPath id="clip0_2311_1853">
-              <rect
-                width="20"
-                height="20"
-                fill="white"
-                transform="matrix(-1 0 0 1 20 0)"
-              />
+              <rect width="20" height="20" fill="white" transform="matrix(-1 0 0 1 20 0)" />
             </clipPath>
           </defs>
         </>
