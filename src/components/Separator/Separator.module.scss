@@ -96,7 +96,6 @@
 
   &.disabled {
     .horizontalLine {
-      border-color: hsl(var(--lighter) / 10%);
       color: hsl(var(--base) / 40%);
       border-color: hsl(var(--base) / 20%);
     }

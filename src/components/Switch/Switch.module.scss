@@ -21,19 +21,19 @@
     justify-content: center;
     align-items: center;
     margin-inline-end: px-to-rem(8);
+
     // padding-block: px-to-rem(8);
     width: 2.1em;
     height: 1.2em;
     background: transparent;
     border-radius: px-to-rem(100);
-    cursor: pointer;
     transition: all 250ms ease-out;
     position: relative;
     cursor: pointer;
     border-width: px-to-rem(1);
     border-style: solid;
 
-    &:before {
+    &::before {
       content: '';
       position: absolute;
       border-radius: 100%;
@@ -42,7 +42,7 @@
       inset-block-start: 10%;
       inset-inline-start: calc(100% - 1.1em);
       transition: background-color 0.2s, inset 0.2s, border 0.2s;
-      box-shadow: -2px 0px 4px rgba(0, 0, 0, 0.3);
+      box-shadow: -2px 0 4px rgb(0 0 0 / 30%);
       border-width: px-to-rem(1);
       border-style: solid;
       border-color: transparent;
@@ -52,7 +52,7 @@
 
   &.toggled {
     & > .SwitchIndicator {
-      &:before {
+      &::before {
         content: '';
         inset-inline-start: 5%;
       }

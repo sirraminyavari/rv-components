@@ -1,4 +1,5 @@
 @import 'colors';
+
 // =============================================================================
 // Normalize.scss based on Nicolas Gallagher and Jonathan Neal's
 // normalize.css v2.1.3 | MIT License | git.io/normalize
@@ -14,21 +15,18 @@
 $var-legacy-support-for-ie: false !default; // Used also in Compass
 
 $var-normalize-headings: true !default;
-
 $var-h1-font-size: 2em !default;
 $var-h2-font-size: 1.5em !default;
 $var-h3-font-size: 1.17em !default;
 $var-h4-font-size: 1em !default;
 $var-h5-font-size: 0.83em !default;
 $var-h6-font-size: 0.75em !default;
-
 $var-h1-margin: 0.67em 0 !default;
 $var-h2-margin: 0.83em 0 !default;
 $var-h3-margin: 1em 0 !default;
 $var-h4-margin: 1.33em 0 !default;
 $var-h5-margin: 1.67em 0 !default;
 $var-h6-margin: 2.33em 0 !default;
-
 $var-background: $white !default;
 $var-color: $black !default;
 
@@ -73,10 +71,9 @@ audio:not([controls]) {
   height: 0; // 2
 }
 
-//
 // Address `[hidden]` styling not present in IE 8/9.
 // Hide the `template` element in IE, Safari, and Firefox < 22.
-//
+
 
 [hidden],
 template {
@@ -116,6 +113,18 @@ textarea {
 
 body {
   margin: 0;
+}
+
+// =============================================================================
+// Touch tap highlight color
+// =============================================================================
+
+input,
+textarea,
+button,
+select,
+a {
+  -webkit-tap-highlight-color: transparent;
 }
 
 // =============================================================================
@@ -252,7 +261,7 @@ pre {
 // Set consistent quote types.
 
 q {
-  quotes: '\201C''\201D''\2018''\2019';
+  quotes: '\201C' '\201D' '\2018' '\2019';
 
   //  Addresses quote property not supported in S4
   &::before,
@@ -344,7 +353,7 @@ img {
   border: 0; // 1
 
   @if $var-legacy-support-for-ie {
-    //2
+    // 2
     -ms-interpolation-mode: bicubic;
     /* stylelint-disable-line property-no-vendor-prefix */
   }
@@ -529,16 +538,4 @@ textarea {
 table {
   border-collapse: collapse;
   border-spacing: 0;
-}
-
-// =============================================================================
-// Touch tap highlight color
-// =============================================================================
-
-input,
-textarea,
-button,
-select,
-a {
-  -webkit-tap-highlight-color: transparent;
 }

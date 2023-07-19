@@ -3,10 +3,10 @@
 
 .BreadcrumbContainer {
   display: inline-flex;
+
   // flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
-  padding-inline: px-to-rem(5);
   padding-inline: px-to-rem(4);
 
   .icon {
@@ -53,7 +53,6 @@
       justify-content: center;
       padding-inline: px-to-rem(9);
       padding-block: px-to-rem(5);
-      border-radius: px-to-rem(5);
       position: absolute;
       gap: px-to-rem(4);
       inset-block-start: 100%;
@@ -202,6 +201,7 @@
 
     .adjacentPathsContainer {
       background-color: hsl(var(--white));
+
       // border-color: hsl(var(--dark));
       box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--black) / 15%);
     }

@@ -33,7 +33,7 @@
     & > .checkboxIndicator {
       position: relative;
 
-      &:before {
+      &::before {
         content: '';
         position: absolute;
         inset-block: 50%;

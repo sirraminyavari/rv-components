@@ -29,7 +29,7 @@
     height: 95%;
     inset-block: 2.5%;
     inset-inline-end: px-to-rem(0);
-    opacity: 0%;
+    opacity: 0;
     transition: opacity 0.2s, inset 0.2s;
 
     &.scrolling {
@@ -42,6 +42,7 @@
       display: block;
       height: 100%;
       position: relative;
+
       // width: px-to-rem(12);
 
       .scrollbarTrack {
@@ -51,6 +52,7 @@
         cursor: pointer;
         position: absolute;
         top: 0;
+
         // width: px-to-rem(12);
       }
 
@@ -58,6 +60,7 @@
         border-radius: $borderRadiusHalf;
         background-color: hsl(var(--base) / 50%);
         position: absolute;
+
         // width: px-to-rem(12);
       }
     }

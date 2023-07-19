@@ -21,7 +21,6 @@
   }
 
   .label {
-    position: absolute;
     padding-block: px-to-rem(5);
     padding-inline: px-to-rem(14);
     position: absolute;
@@ -42,7 +41,7 @@
       transform: translate(px-to-rem(17), -50%);
     }
 
-    &:before {
+    &::before {
       content: '';
       z-index: -1;
       height: px-to-rem(5);
@@ -118,7 +117,7 @@
       .label {
         color: hsl(var(--dark));
 
-        &:before {
+        &::before {
           background-color: hsl(var(--white));
         }
       }
@@ -128,7 +127,7 @@
       transform: translate(px-to-rem(7), -50%);
       font-size: 0.5em;
 
-      &:before {
+      &::before {
         background-color: hsl(var(--white));
       }
     }
@@ -161,7 +160,7 @@
     }
 
     &:focus-within {
-      background-color: hsl(var(--lighter) / 20);
+      background-color: hsl(var(--lighter) / 2000%);
       color: hsl(var(--base-font));
 
       .label {
@@ -205,7 +204,7 @@
     padding-inline: px-to-rem(7);
     font-size: 0.5em;
 
-    &:before {
+    &::before {
       inset-inline-start: 0;
       width: calc(100%);
       transform: translateY(-70%) translateX(0%);

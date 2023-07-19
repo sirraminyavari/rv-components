@@ -1,9 +1,8 @@
-@import 'modules/default.scss';
+@import 'modules/default';
 
 :export {
   white: $white;
   black: $black;
-
   screenSizePhoneMax: $screenSizePhoneMax;
   screenSizeTabletPortraitMin: $screenSizeTabletPortraitMin;
   screenSizeTabletLandscapeMin: $screenSizeTabletLandscapeMin;
