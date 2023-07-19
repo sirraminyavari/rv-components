@@ -17,7 +17,11 @@ const Template: ComponentStory<typeof AdvancedSearchMenuComponent> = ({
   variant,
   ...args
 }) => {
-  return <AdvancedSearchMenuComponent {...{ ...args, color, variant }} />;
+  return (
+    <>
+      <AdvancedSearchMenuComponent style={{ maxHeight: '90vh' }} {...{ ...args, color, variant }} />
+    </>
+  );
 };
 
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
