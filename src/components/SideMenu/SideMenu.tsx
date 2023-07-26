@@ -13,9 +13,7 @@ import styles from './SideMenu.module.scss';
 
 export interface RVSideMenu
   extends Omit<
-    PropsWithoutRef<
-      DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-    >,
+    PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color'
   > {
   color?: RVColorProp;
@@ -43,12 +41,7 @@ const SideMenu = forwardRef<HTMLDivElement, RVSideMenu>(
     return (
       <div
         ref={ref}
-        className={clsx(
-          styles.baseSideMenu,
-          color,
-          !open && styles.sideMenuClose,
-          className
-        )}
+        className={clsx(styles.baseSideMenu, color, !open && styles.sideMenuClose, className)}
         style={
           {
             '--side-menu-width': width,

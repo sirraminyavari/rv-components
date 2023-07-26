@@ -1,12 +1,5 @@
 import clsx from 'clsx';
-import {
-  forwardRef,
-  FunctionComponent,
-  HTMLAttributes,
-  Ref,
-  useEffect,
-  useState,
-} from 'react';
+import { forwardRef, FunctionComponent, HTMLAttributes, Ref, useEffect, useState } from 'react';
 
 import { usePopper } from 'react-popper';
 
@@ -49,11 +42,8 @@ const PeoplePicker = forwardRef<HTMLInputElement, RVPeoplePicker>(
     },
     ref
   ) => {
-    const [referenceElement, setReferenceElement] =
-      useState<HTMLButtonElement | null>(null);
-    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(
-      null
-    );
+    const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
+    const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
     const [isOpen, setIsOpen] = useState(false);
     const { styles: popperStyles, attributes: popperAttributes } = usePopper(
       referenceElement,
@@ -113,22 +103,15 @@ const PeoplePicker = forwardRef<HTMLInputElement, RVPeoplePicker>(
                               src={item.avatarSrc}
                               size={RVSizeProp.small}
                               rounded="full"
-                              color={
-                                item.selected ? color : RVColorProp.distant
-                              }
+                              color={item.selected ? color : RVColorProp.distant}
                               variant={variant}
                               className={styles.peoplePickerBoxItemAvatar}
                             />
                           ) : (
-                            <PersonCircleSvg
-                              className={styles.peoplePickerBoxItemNoAvatar}
-                            />
+                            <PersonCircleSvg className={styles.peoplePickerBoxItemNoAvatar} />
                           )}
                           <span
-                            className={clsx(
-                              RVColorProp.distant,
-                              styles.peoplePickerBoxItemTitle
-                            )}
+                            className={clsx(RVColorProp.distant, styles.peoplePickerBoxItemTitle)}
                           >
                             {item.label || '----'}
                           </span>

@@ -113,10 +113,7 @@ const TemplateRTL: ComponentStory<typeof SidebarSubMenuComponent> = ({
   open = true,
   ...args
 }) => (
-  <div
-    style={{ display: 'flex', minHeight: '100vh', width: '100%' }}
-    className="direction-rtl"
-  >
+  <div style={{ display: 'flex', minHeight: '100vh', width: '100%' }} className="direction-rtl">
     <SidebarSubMenuComponent
       open={open}
       links={

@@ -19,10 +19,9 @@ export default {
 } as ComponentMeta<typeof TextInputComponent>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof TextInputComponent> = ({
-  label = 'label',
-  ...args
-}) => <TextInputComponent label={label} {...args} />;
+const Template: ComponentStory<typeof TextInputComponent> = ({ label = 'label', ...args }) => (
+  <TextInputComponent label={label} {...args} />
+);
 const TemplateTextArea: ComponentStory<typeof TextAreaInputComponent> = ({
   label = 'label',
   ...args

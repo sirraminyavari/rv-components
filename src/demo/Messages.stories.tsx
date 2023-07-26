@@ -81,9 +81,7 @@ export const Messages: ComponentStory<FunctionComponent> = ({ ...args }) => {
   };
   return (
     <div style={{ display: 'flex', minHeight: '100vh', width: '100%' }}>
-      <div
-        style={{ display: 'flex', height: '100vh', position: 'sticky', top: 0 }}
-      >
+      <div style={{ display: 'flex', height: '100vh', position: 'sticky', top: 0 }}>
         <SidebarMainComponent
           primaryLinks={[
             !isActionBarOpen
@@ -227,9 +225,7 @@ export const Messages: ComponentStory<FunctionComponent> = ({ ...args }) => {
             alignItems: 'center',
           }}
         >
-          <div
-            style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}
-          >
+          <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
             <Breadcrumb
               // color={RVColorProp.grayDark}
               Icon={ChatBubbleSvg}
@@ -271,10 +267,7 @@ export const Messages: ComponentStory<FunctionComponent> = ({ ...args }) => {
               variant={RVVariantProp.white}
               size={RVSizeProp.small}
             />
-            <Typography
-              type="H4"
-              style={{ whiteSpace: 'nowrap', marginInlineStart: '1rem' }}
-            >
+            <Typography type="H4" style={{ whiteSpace: 'nowrap', marginInlineStart: '1rem' }}>
               Alonzo Gerhold
             </Typography>
           </div>
@@ -332,11 +325,10 @@ export const Messages: ComponentStory<FunctionComponent> = ({ ...args }) => {
           additionalInfo="12:32"
           style={{ maxWidth: '450px' }}
         >
-          Asperiores ut est itaque mollitia quia fugit nihil. Lorem ipsum dolor
-          sit amet consectetur adipisicing elit. Suscipit ratione eligendi
-          facere iusto minus totam, eius, sequi rem nesciunt culpa expedita
-          minima reiciendis. Sapiente cumque consectetur, similique accusamus
-          adipisci nisi.
+          Asperiores ut est itaque mollitia quia fugit nihil. Lorem ipsum dolor sit amet consectetur
+          adipisicing elit. Suscipit ratione eligendi facere iusto minus totam, eius, sequi rem
+          nesciunt culpa expedita minima reiciendis. Sapiente cumque consectetur, similique
+          accusamus adipisci nisi.
         </ChatBubble>
         <ChatBubble
           bubbleType="sender"

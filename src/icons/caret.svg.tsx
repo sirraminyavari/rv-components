@@ -11,11 +11,7 @@ export const CaretLeftSvg = ({ size, outline, ...props }: RVSvgProps) => {
     >
       {outline ? (
         <>
-          <path
-            fill="currentColor"
-            d="m160 208l-80-80l80-80v160z"
-            opacity=".1"
-          />
+          <path fill="currentColor" d="m160 208l-80-80l80-80v160z" opacity=".1" />
           <path
             fill="currentColor"
             d="M160 216a8.3 8.3 0 0 1-5.7-2.3l-80-80a8.1 8.1 0 0 1 0-11.4l80-80a8.4 8.4 0 0 1 8.8-1.7A8 8 0 0 1 168 48v160a8 8 0 0 1-4.9 7.4a8.5 8.5 0 0 1-3.1.6Zm-68.7-88l60.7 60.7V67.3Z"
@@ -99,11 +95,7 @@ export const CaretDownSvg = ({ size, outline, ...props }: RVSvgProps) => {
     >
       {outline ? (
         <>
-          <path
-            fill="currentColor"
-            d="m208 96l-80 80l-80-80h160z"
-            opacity=".2"
-          />
+          <path fill="currentColor" d="m208 96l-80 80l-80-80h160z" opacity=".2" />
           <path
             fill="currentColor"
             d="M128 184a8.5 8.5 0 0 1-5.7-2.3l-80-80a8.4 8.4 0 0 1-1.7-8.8A8 8 0 0 1 48 88h160a8 8 0 0 1 7.4 4.9a8.4 8.4 0 0 1-1.7 8.8l-80 80a8.5 8.5 0 0 1-5.7 2.3Zm-60.7-80l60.7 60.7l60.7-60.7Z"

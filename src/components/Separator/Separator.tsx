@@ -1,18 +1,11 @@
 import clsx from 'clsx';
-import {
-  DetailedHTMLProps,
-  forwardRef,
-  HTMLAttributes,
-  PropsWithoutRef,
-} from 'react';
+import { DetailedHTMLProps, forwardRef, HTMLAttributes, PropsWithoutRef } from 'react';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types/global';
 import styles from './Separator.module.scss';
 
 export interface RVSeparator
   extends Omit<
-    PropsWithoutRef<
-      DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-    >,
+    PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color'
   > {
   variant?: RVVariantProp;

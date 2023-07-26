@@ -27,9 +27,7 @@ import { TextInput } from '../TextInput';
 
 export interface RVAdvancedSearchMenu
   extends Omit<
-    PropsWithoutRef<
-      DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-    >,
+    PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color'
   > {
   variant?: RVVariantProp;
@@ -54,11 +52,7 @@ const AdvancedSearchMenu = forwardRef<HTMLDivElement, RVAdvancedSearchMenu>(
   ) => {
     return (
       <>
-        <div
-          ref={ref}
-          className={clsx(color, styles.advancedSearchMenuBoxContainer)}
-          {...props}
-        >
+        <div ref={ref} className={clsx(color, styles.advancedSearchMenuBoxContainer)} {...props}>
           <div className={styles.advancedSearchMenuBoxTitleContainer}>
             <Typography type="H3" className={styles.advancedSearchMenuBoxTitle}>
               Advanced filters
@@ -70,15 +64,8 @@ const AdvancedSearchMenu = forwardRef<HTMLDivElement, RVAdvancedSearchMenu>(
               <CloseSvg />
             </button>
           </div>
-          <Scrollbar
-            color={RVColorProp.distant}
-            className={styles.advancedSearchMenuItemContainer}
-          >
-            <SingleSearchItemMenu
-              Icon={PenSvg}
-              label="Short text field"
-              isActive
-            >
+          <Scrollbar color={RVColorProp.distant} className={styles.advancedSearchMenuItemContainer}>
+            <SingleSearchItemMenu Icon={PenSvg} label="Short text field" isActive>
               <TextInput
                 label="search query ...."
                 variant={RVVariantProp.outline}
@@ -95,19 +82,9 @@ const AdvancedSearchMenu = forwardRef<HTMLDivElement, RVAdvancedSearchMenu>(
                 color={RVColorProp.distant}
               />
             </SingleSearchItemMenu>
-            <SingleSearchItemMenu
-              Icon={RadioButtonSvg}
-              label="Single choice field"
-            />
-            <SingleSearchItemMenu
-              Icon={CheckboxSvg}
-              label="Multiple choice field"
-              isActive
-            />
-            <SingleSearchItemMenu
-              Icon={RadioButtonSvg}
-              label="single choice field"
-            />
+            <SingleSearchItemMenu Icon={RadioButtonSvg} label="Single choice field" />
+            <SingleSearchItemMenu Icon={CheckboxSvg} label="Multiple choice field" isActive />
+            <SingleSearchItemMenu Icon={RadioButtonSvg} label="single choice field" />
           </Scrollbar>
           <div className={styles.advancedSearchMenuBoxActionsContainer}>
             <Button
@@ -155,12 +132,7 @@ const SingleSearchItemMenu = ({
           setIsMenuOpen(status === 'closed' ? false : true);
         }}
         label={
-          <div
-            className={clsx(
-              !isActive && RVColorProp.gray,
-              styles.advancedSearchMenuItemLabel
-            )}
-          >
+          <div className={clsx(!isActive && RVColorProp.gray, styles.advancedSearchMenuItemLabel)}>
             <Typography
               type={isActive ? 'H4' : 'p'}
               color={isActive ? RVColorProp.cgBlue : RVColorProp.gray}
@@ -172,10 +144,7 @@ const SingleSearchItemMenu = ({
             <span className={styles.advancedSearchMenuItemLabelIndicators}>
               {isActive && (
                 <CheckedCircleSvg
-                  className={clsx(
-                    RVColorProp.orange,
-                    styles.advancedSearchMenuItemLabelActiveIcon
-                  )}
+                  className={clsx(RVColorProp.orange, styles.advancedSearchMenuItemLabelActiveIcon)}
                 />
               )}
               <ChevronCircleSvg

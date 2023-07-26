@@ -74,7 +74,6 @@ audio:not([controls]) {
 // Address `[hidden]` styling not present in IE 8/9.
 // Hide the `template` element in IE, Safari, and Firefox < 22.
 
-
 [hidden],
 template {
   display: none;
@@ -261,7 +260,7 @@ pre {
 // Set consistent quote types.
 
 q {
-  quotes: '\201C' '\201D' '\2018' '\2019';
+  quotes: '\201C''\201D''\2018''\2019';
 
   //  Addresses quote property not supported in S4
   &::before,

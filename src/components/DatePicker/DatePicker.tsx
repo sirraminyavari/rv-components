@@ -12,28 +12,22 @@ export interface RVDatePicker extends RVTextInput {
 }
 
 const DatePicker = forwardRef<HTMLInputElement, RVDatePicker>(
-  (
-    { className, disabled, onChange, color = RVColorProp.cgBlue, ...props },
-    ref
-  ) => {
+  ({ className, disabled, onChange, color = RVColorProp.cgBlue, ...props }, ref) => {
     // const inputRef = useRef<HTMLInputElement>(null);
     // const combinedRefs = useCombinedRefs(ref, inputRef);
 
     const [selectedDay, setSelectedDay] = useState<DayValue>();
 
-    const formatInputValue = () => {
+    const formatInputValue = useCallback(() => {
       if (!selectedDay) return '';
-      return `${selectedDay.year}-${selectedDay.month.toLocaleString(
-        undefined,
-        {
-          minimumIntegerDigits: 2,
-          useGrouping: false,
-        }
-      )}-${selectedDay.day.toLocaleString(undefined, {
+      return `${selectedDay.year}-${selectedDay.month.toLocaleString(undefined, {
+        minimumIntegerDigits: 2,
+        useGrouping: false,
+      })}-${selectedDay.day.toLocaleString(undefined, {
         minimumIntegerDigits: 2,
         useGrouping: false,
       })}`;
-    };
+    }, [selectedDay]);
     const CustomDatePickerInput = useCallback(
       ({ ...dateProps }: RVTextInput) => {
         return (
@@ -43,12 +37,13 @@ const DatePicker = forwardRef<HTMLInputElement, RVDatePicker>(
             defaultValue={formatInputValue()}
             disabled={disabled}
             color={color}
+            ref={ref}
             {...props}
             {...dateProps}
           />
         );
       },
-      [props, color, ref]
+      [props, color, disabled, formatInputValue, ref]
     );
 
     return (

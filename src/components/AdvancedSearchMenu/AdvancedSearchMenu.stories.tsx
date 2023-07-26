@@ -1,10 +1,7 @@
 import React from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import {
-  AdvancedSearchMenu as AdvancedSearchMenuComponent,
-  RVAdvancedSearchMenu,
-} from '.';
+import { AdvancedSearchMenu as AdvancedSearchMenuComponent, RVAdvancedSearchMenu } from '.';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
@@ -22,10 +19,7 @@ const Template: ComponentStory<typeof AdvancedSearchMenuComponent> = ({
 }) => {
   return (
     <>
-      <AdvancedSearchMenuComponent
-        style={{ maxHeight: '90vh' }}
-        {...{ ...args, color, variant }}
-      />
+      <AdvancedSearchMenuComponent style={{ maxHeight: '90vh' }} {...{ ...args, color, variant }} />
     </>
   );
 };

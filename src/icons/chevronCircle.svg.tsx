@@ -1,10 +1,6 @@
 import { RVSvgProps } from '../types';
 
-export const ChevronCircleLeftSvg = ({
-  size,
-  outline,
-  ...props
-}: RVSvgProps) => {
+export const ChevronCircleLeftSvg = ({ size, outline, ...props }: RVSvgProps) => {
   return (
     <svg
       width={size || '1em'}
@@ -31,11 +27,7 @@ export const ChevronCircleLeftSvg = ({
     </svg>
   );
 };
-export const ChevronCircleRightSvg = ({
-  size,
-  outline,
-  ...props
-}: RVSvgProps) => {
+export const ChevronCircleRightSvg = ({ size, outline, ...props }: RVSvgProps) => {
   return (
     <svg
       width={size || '1em'}
@@ -89,11 +81,7 @@ export const ChevronCircleUpSvg = ({ size, outline, ...props }: RVSvgProps) => {
     </svg>
   );
 };
-export const ChevronCircleDownSvg = ({
-  size,
-  outline,
-  ...props
-}: RVSvgProps) => {
+export const ChevronCircleDownSvg = ({ size, outline, ...props }: RVSvgProps) => {
   return (
     <svg
       width={size || '1em'}

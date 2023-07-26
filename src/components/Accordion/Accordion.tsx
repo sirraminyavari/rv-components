@@ -19,9 +19,7 @@ import styles from './Accordion.module.scss';
 
 export interface RVAccordion
   extends Omit<
-    PropsWithoutRef<
-      DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-    >,
+    PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color'
   > {
   id?: string;
@@ -66,12 +64,11 @@ const Accordion = forwardRef<HTMLDivElement, RVAccordion>(
     const triggerAccordion: MouseEventHandler<HTMLButtonElement> = useCallback(
       (event) => {
         setIsOpen((prevState) => {
-          onAccordionStatusChange &&
-            onAccordionStatusChange(event, prevState ? 'closed' : 'open');
+          onAccordionStatusChange && onAccordionStatusChange(event, prevState ? 'closed' : 'open');
           return open !== undefined ? open : !prevState;
         });
       },
-      [open, onLabelClick]
+      [open, onAccordionStatusChange]
     );
     useEffect(() => {
       if (!onTriggerButtonLoad || !accordionTriggerButtonRef.current) return;
@@ -104,14 +101,8 @@ const Accordion = forwardRef<HTMLDivElement, RVAccordion>(
             {label}
           </span>
         </button>
-        <AnimateHeight
-          duration={300}
-          easing="ease"
-          height={isOpen ? 'auto' : 0}
-        >
-          <div className={clsx(styles.content, contentClassName)}>
-            {children}
-          </div>
+        <AnimateHeight duration={300} easing="ease" height={isOpen ? 'auto' : 0}>
+          <div className={clsx(styles.content, contentClassName)}>{children}</div>
         </AnimateHeight>
       </div>
     );

@@ -76,9 +76,7 @@ export const NodePage: ComponentStory<FunctionComponent> = ({ ...args }) => {
   const [isActionBarOpen, setIsActionBarOpen] = useState<boolean>(false);
   return (
     <div style={{ display: 'flex', minHeight: '100vh', width: '100%' }}>
-      <div
-        style={{ display: 'flex', height: '100vh', position: 'sticky', top: 0 }}
-      >
+      <div style={{ display: 'flex', height: '100vh', position: 'sticky', top: 0 }}>
         <SidebarMainComponent
           primaryLinks={[
             !isActionBarOpen
@@ -222,9 +220,7 @@ export const NodePage: ComponentStory<FunctionComponent> = ({ ...args }) => {
             alignItems: 'center',
           }}
         >
-          <div
-            style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}
-          >
+          <div style={{ display: 'flex', alignItems: 'center', flexWrap: 'wrap' }}>
             <Breadcrumb
               Icon={FileTrayFullSvg}
               variant={RVVariantProp.white}
@@ -274,11 +270,7 @@ export const NodePage: ComponentStory<FunctionComponent> = ({ ...args }) => {
                   >
                     <Button variant={RVVariantProp.white}>back</Button>
                     <Button fullWidth noWrap style={{ width: 200 }}>
-                      <ArrowCircleSvg
-                        width="1.3em"
-                        height="1.3em"
-                        direction="up"
-                      />
+                      <ArrowCircleSvg width="1.3em" height="1.3em" direction="up" />
                       publish
                     </Button>
                   </div>
@@ -539,10 +531,9 @@ export const NodePage: ComponentStory<FunctionComponent> = ({ ...args }) => {
               }}
             >
               <p style={{ overflow: 'hidden' }}>
-                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel
-                ipsum maiores veritatis neque quas minus voluptas beatae
-                corporis, est molestias veniam, blanditiis fugiat commodi in!
-                Repudiandae mollitia accusamus assumenda obcaecati?
+                Lorem ipsum dolor, sit amet consectetur adipisicing elit. Vel ipsum maiores
+                veritatis neque quas minus voluptas beatae corporis, est molestias veniam,
+                blanditiis fugiat commodi in! Repudiandae mollitia accusamus assumenda obcaecati?
               </p>
             </div>
           </SideMenu>

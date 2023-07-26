@@ -1,18 +1,11 @@
 import clsx from 'clsx';
-import {
-  HTMLAttributes,
-  DetailedHTMLProps,
-  forwardRef,
-  PropsWithoutRef,
-} from 'react';
+import { HTMLAttributes, DetailedHTMLProps, forwardRef, PropsWithoutRef } from 'react';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types/global';
 import styles from './Avatar.module.scss';
 
 export interface RVAvatar
   extends Omit<
-    PropsWithoutRef<
-      DetailedHTMLProps<HTMLAttributes<HTMLImageElement>, HTMLImageElement>
-    >,
+    PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLImageElement>, HTMLImageElement>>,
     'color'
   > {
   variant?: RVVariantProp;

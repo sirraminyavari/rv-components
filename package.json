@@ -16,10 +16,11 @@
     "build:tsc": "tsc -p ./tsconfig.json",
     "build:scss": "cpx 'src/**/*.{scss,css,ttf,eot,woff,woff2,svg}' dist",
     "postbuild": "cpx './package.json' dist",
-    "lint": "eslint src --color",
+    "lint": "eslint src --color --fix",
     "format": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}'",
     "storybook": "start-storybook -p 6006  --no-manager-cache",
-    "storybook:build": "build-storybook"
+    "storybook:build": "build-storybook",
+    "prepare": "husky install"
   },
   "peerDependencies": {
     "@popperjs/core": "^2.11.8",
@@ -67,7 +68,7 @@
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0",
     "eslint-webpack-plugin": "^3.2.0",
-    "husky": "^8.0.2",
+    "husky": "^8.0.0",
     "postcss": "^8.4.21",
     "prettier": "^2.8.1",
     "prettier-eslint": "^15.0.1",

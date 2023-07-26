@@ -8,8 +8,8 @@
   color: hsl(var(--dark-font) / 50%);
   font-size: px-to-rem(14);
   cursor: pointer;
-  transition: background-color 0.35s, color 0.35s, border-radius 0.35s,
-    border 0.35s;
+  transition: background-color 0.35s, color 0.35s, border-radius 0.35s, border 0.35s;
+
   position: relative;
   z-index: 2;
   display: grid;

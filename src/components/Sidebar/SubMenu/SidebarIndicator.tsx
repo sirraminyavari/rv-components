@@ -1,48 +1,30 @@
 import clsx from 'clsx';
-import {
-  DetailedHTMLProps,
-  forwardRef,
-  HTMLAttributes,
-  PropsWithoutRef,
-} from 'react';
+import { DetailedHTMLProps, forwardRef, HTMLAttributes, PropsWithoutRef } from 'react';
 import { RVColorProp, RVSvgProps } from '../../../types';
 import styles from './SidebarSubMenu.module.scss';
 
 export interface RVSidebarSubMenuIndicator
   extends Omit<
-    PropsWithoutRef<
-      DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-    >,
+    PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color'
   > {
   color?: RVColorProp;
 }
 
-const SidebarSubMenuIndicator = forwardRef<
-  HTMLDivElement,
-  RVSidebarSubMenuIndicator
->(({ className, color, ...props }, ref) => {
-  return (
-    <div
-      ref={ref}
-      className={clsx(styles.menuActiveIndicator, color, className)}
-      {...props}
-    >
-      <SidebarSubMenuIndicatorCurvedCornerSvg
-        className={clsx(styles.svgCurved, styles.start)}
-      />
-      <SidebarSubMenuIndicatorCurvedCornerSvg
-        className={clsx(styles.svgCurved, styles.end)}
-      />
-    </div>
-  );
-});
+const SidebarSubMenuIndicator = forwardRef<HTMLDivElement, RVSidebarSubMenuIndicator>(
+  ({ className, color, ...props }, ref) => {
+    return (
+      <div ref={ref} className={clsx(styles.menuActiveIndicator, color, className)} {...props}>
+        <SidebarSubMenuIndicatorCurvedCornerSvg className={clsx(styles.svgCurved, styles.start)} />
+        <SidebarSubMenuIndicatorCurvedCornerSvg className={clsx(styles.svgCurved, styles.end)} />
+      </div>
+    );
+  }
+);
 
 export default SidebarSubMenuIndicator;
 
-const SidebarSubMenuIndicatorCurvedCornerSvg = (
-  props: Omit<RVSvgProps, 'outline'>
-) => {
+const SidebarSubMenuIndicatorCurvedCornerSvg = (props: Omit<RVSvgProps, 'outline'>) => {
   return (
     <svg
       width="1em"

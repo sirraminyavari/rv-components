@@ -51,8 +51,7 @@
   color: hsl(var(--base-font) / 100%);
   background-color: transparent;
   min-height: px-to-rem(24);
-  transition: background-color 0.2s, color 0.2s, border-radius 0.35s,
-    border 0.35s;
+  transition: background-color 0.2s, color 0.2s, border-radius 0.35s, border 0.35s;
   display: flex;
   align-items: center;
   column-gap: px-to-rem(13.5);
@@ -142,8 +141,7 @@
   background-color: hsl(var(--white));
   color: hsl(var(--white));
   height: 0;
-  transition: top 0.25s ease-in-out, height 0.25s ease-in-out,
-    width 0.25s ease-in-out;
+  transition: top 0.25s ease-in-out, height 0.25s ease-in-out, width 0.25s ease-in-out;
   will-change: top, height, width;
   border-start-start-radius: px-to-rem(13);
   border-end-start-radius: px-to-rem(13);

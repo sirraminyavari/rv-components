@@ -13,10 +13,9 @@ export default {
 } as ComponentMeta<typeof CheckboxComponent>;
 
 // More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof CheckboxComponent> = ({
-  label = 'label',
-  ...args
-}) => <CheckboxComponent label={label} {...args} />;
+const Template: ComponentStory<typeof CheckboxComponent> = ({ label = 'label', ...args }) => (
+  <CheckboxComponent label={label} {...args} />
+);
 
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 export const Checkbox = Template.bind({});

@@ -45,7 +45,7 @@
     "max-len": [
       "warn",
       {
-        "code": 80,
+        "code": 100,
         "ignoreStrings": true,
         "ignoreTemplateLiterals": true,
         "ignoreComments": true
@@ -77,6 +77,17 @@
     "react/no-unescaped-entities": "off",
     "react/jsx-one-expression-per-line": "off",
     "react/jsx-wrap-multilines": "off",
-    "react/destructuring-assignment": "off"
-  }
+    "react/destructuring-assignment": "off",
+    "no-extra-boolean-cast": "error",
+    "jsx-quotes": ["error", "prefer-double"],
+    "func-style": ["error", "expression"]
+  },
+  "overrides": [
+    {
+      "files": ["*.stories.*"],
+      "rules": {
+        "@typescript-eslint/explicit-module-boundary-types": "off"
+      }
+    }
+  ]
 }

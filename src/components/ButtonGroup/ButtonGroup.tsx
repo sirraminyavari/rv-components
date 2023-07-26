@@ -1,17 +1,10 @@
 import clsx from 'clsx';
-import {
-  HTMLAttributes,
-  DetailedHTMLProps,
-  forwardRef,
-  PropsWithoutRef,
-} from 'react';
+import { HTMLAttributes, DetailedHTMLProps, forwardRef, PropsWithoutRef } from 'react';
 import styles from './ButtonGroup.module.scss';
 
 export interface RVButtonGroup
   extends Omit<
-    PropsWithoutRef<
-      DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-    >,
+    PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color'
   > {
   fullWidth?: boolean;
@@ -23,12 +16,7 @@ const ButtonGroup = forwardRef<HTMLDivElement, RVButtonGroup>(
     return (
       <div
         ref={ref}
-        className={clsx(
-          styles.buttonGroup,
-          fullWidth && 'fullWidth',
-          styles[rounded],
-          className
-        )}
+        className={clsx(styles.buttonGroup, fullWidth && 'fullWidth', styles[rounded], className)}
         {...props}
       >
         {children}

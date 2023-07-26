@@ -121,8 +121,7 @@
     .showAdjacentPaths {
       .adjacentPathsContainer {
         background-color: hsl(var(--lighter) / 100%);
-        box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7)
-          hsl(var(--black) / 15%);
+        box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--black) / 15%);
       }
     }
 
@@ -164,8 +163,7 @@
       .adjacentPathsContainer {
         background-color: hsl(var(--lighter) / 100%);
         border-color: hsl(var(--base));
-        box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7)
-          hsl(var(--black) / 15%);
+        box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--black) / 15%);
       }
     }
 

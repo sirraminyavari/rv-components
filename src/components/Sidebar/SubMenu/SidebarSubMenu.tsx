@@ -23,9 +23,7 @@ import styles from './SidebarSubMenu.module.scss';
 
 export interface RVSidebarSubMenu
   extends Omit<
-    PropsWithoutRef<
-      DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>
-    >,
+    PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color'
   > {
   color?: RVColorProp;
@@ -91,15 +89,10 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
           `${Math.abs(tileBoundingRect.top) + containerScrolledWidth}px`
         );
         activeIndicatorRef.current.style.height = `${tileBoundingRect.height}px`;
-        const elementWidthOffset =
-          tile.ariaLabel === 'accordion-trigger' ? -52 : 0;
-        activeIndicatorRef.current.style.width = `${
-          tileBoundingRect.width + elementWidthOffset
-        }px`;
-        if (tileDirection === 'rtl')
-          activeIndicatorRef.current.style.left = `-0.1px`;
-        else if (tileDirection === 'ltr')
-          activeIndicatorRef.current.style.right = `-0.1px`;
+        const elementWidthOffset = tile.ariaLabel === 'accordion-trigger' ? -52 : 0;
+        activeIndicatorRef.current.style.width = `${tileBoundingRect.width + elementWidthOffset}px`;
+        if (tileDirection === 'rtl') activeIndicatorRef.current.style.left = `-0.1px`;
+        else if (tileDirection === 'ltr') activeIndicatorRef.current.style.right = `-0.1px`;
         if (activeTile.current) activeTile.current.classList.remove('active');
         tile.classList.add('active');
         if (event) activeTile.current = event.currentTarget;
@@ -139,9 +132,7 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
                     onActiveClick();
                   }
                 }}
-                activeLabel={[link.id, JSON.stringify(link)].includes(
-                  activeLink
-                )}
+                activeLabel={[link.id, JSON.stringify(link)].includes(activeLink)}
                 // defaultOpen={}
                 onAccordionStatusChange={(event, status) => {
                   if (activeTile.current?.isEqualNode(event.currentTarget))
@@ -168,41 +159,22 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
                   link.onClick && link.onClick(e);
                 }}
               >
-                {link.Icon && (
-                  <link.Icon className={styles.menuTileIcon} outline />
-                )}
-                <Typography
-                  className={styles.menuTileTitle}
-                  color={RVColorProp.inherit}
-                  type="H4"
-                >
-                  {link.title && (
-                    <span className={styles.menuTileTitleContent}>
-                      {link.title}
-                    </span>
-                  )}
-                  {link.badge && (
-                    <span className={styles.menuTileTitleBadge}>
-                      {link.badge}
-                    </span>
-                  )}
+                {link.Icon && <link.Icon className={styles.menuTileIcon} outline />}
+                <Typography className={styles.menuTileTitle} color={RVColorProp.inherit} type="H4">
+                  {link.title && <span className={styles.menuTileTitleContent}>{link.title}</span>}
+                  {link.badge && <span className={styles.menuTileTitleBadge}>{link.badge}</span>}
                 </Typography>
               </button>
             );
         });
       },
-      [links, activeLink]
+      [activeLink, onActiveClick, color]
     );
 
     return (
       <div
         ref={ref}
-        className={clsx(
-          styles.baseSidebarMain,
-          color,
-          !open && styles.sidebarClose,
-          className
-        )}
+        className={clsx(styles.baseSidebarMain, color, !open && styles.sidebarClose, className)}
         onScroll={() => onActiveClick()}
         {...props}
       >
@@ -218,11 +190,7 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
               >
                 {menuTitle}
               </Typography>
-              <Typography
-                color={RVColorProp.inherit}
-                type="H3"
-                className={styles.titleTypography}
-              >
+              <Typography color={RVColorProp.inherit} type="H3" className={styles.titleTypography}>
                 {menuSubTitle}
               </Typography>
             </div>
