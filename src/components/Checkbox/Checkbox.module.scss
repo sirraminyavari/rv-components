@@ -102,9 +102,11 @@
   &.outline {
     color: hsl(var(--base));
 
+    /* stylelint-disable-next-line no-descending-specificity */
     & > .checkboxIndicator {
       border: 0.1em solid hsl(var(--base));
 
+      /* stylelint-disable-next-line no-descending-specificity */
       &::before {
         border-color: hsl(var(--base));
       }
@@ -137,9 +139,11 @@
   &.white {
     color: hsl(var(--base));
 
+    /* stylelint-disable-next-line no-descending-specificity */
     & > .checkboxIndicator {
       border: 0.1em solid transparent;
 
+      /* stylelint-disable-next-line no-descending-specificity */
       &::before {
         border-color: hsl(var(--base));
       }
@@ -174,10 +178,12 @@
   &.disabled {
     color: hsl(var(--base) / 40%) !important;
 
+    /* stylelint-disable-next-line no-descending-specificity */
     & > .checkboxIndicator {
       border: 0.1em solid hsl(var(--base) / 50%) !important;
       background-color: hsl(var(--base) / 30%) !important;
 
+      /* stylelint-disable-next-line no-descending-specificity */
       &::before {
         border-color: hsl(var(--base) / 40%) !important;
       }

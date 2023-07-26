@@ -94,6 +94,7 @@ html {
   }
 
   color: $var-color;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%; // 2
 }
@@ -353,8 +354,8 @@ img {
 
   @if $var-legacy-support-for-ie {
     // 2
+    /* stylelint-disable-next-line property-no-vendor-prefix */
     -ms-interpolation-mode: bicubic;
-    /* stylelint-disable-line property-no-vendor-prefix */
   }
 }
 
@@ -431,16 +432,23 @@ input {
   // 1. Addresses appearance set to searchfield in S5, Chrome
   // 2. Addresses box-sizing set to border-box in S5, Chrome (include -moz to future-proof)
   &[type='search'] {
+    /* stylelint-disable-next-line property-no-vendor-prefix */
     -moz-appearance: textfield;
+
+    /* stylelint-disable-next-line property-no-vendor-prefix */
     -webkit-appearance: textfield;
     appearance: textfield; // 1
     box-sizing: border-box;
 
     // Remove inner padding and search cancel button in Safari 5 and Chrome
     // on OS X.
+
     &::-webkit-search-cancel-button,
     &::-webkit-search-decoration {
+      /* stylelint-disable-next-line property-no-vendor-prefix */
       -moz-appearance: none;
+
+      /* stylelint-disable-next-line property-no-vendor-prefix */
       -webkit-appearance: none;
       appearance: none;
     }
@@ -466,7 +474,9 @@ input {
 
 button,
 input {
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -moz-appearance: button;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-appearance: button;
   appearance: button;
   cursor: pointer;
@@ -503,7 +513,9 @@ html input[type="button"],
 // 1
 input[type="reset"],
 input[type="submit"] {
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -moz-appearance: button;
+  /* stylelint-disable-next-line property-no-vendor-prefix */
   -webkit-appearance: button;
   appearance: button; // 2
   cursor: pointer; // 3

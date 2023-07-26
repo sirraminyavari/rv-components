@@ -145,6 +145,7 @@
       color: hsl(var(--base));
     }
 
+    /* stylelint-disable-next-line no-descending-specificity */
     .separatorSvg {
       color: hsl(var(--base));
       border-style: solid;
@@ -184,6 +185,7 @@
     .BreadcrumbItem {
       color: hsl(var(--dark));
 
+      /* stylelint-disable-next-line no-descending-specificity */
       .label {
         display: inline-block;
       }
@@ -197,13 +199,13 @@
   &.white {
     color: hsl(var(--base));
 
+    /* stylelint-disable-next-line no-descending-specificity */
     .adjacentPathsContainer {
       background-color: hsl(var(--white));
-
-      // border-color: hsl(var(--dark));
       box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--black) / 15%);
     }
 
+    /* stylelint-disable-next-line no-descending-specificity */
     .BreadcrumbItem {
       &:hover {
         color: hsl(var(--dark));
@@ -214,11 +216,13 @@
   &.disabled {
     color: hsl(var(--base) / 50%);
 
+    /* stylelint-disable-next-line no-descending-specificity */
     .adjacentPathsContainer {
       background-color: hsl(var(--white));
       box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--black) / 15%);
     }
 
+    /* stylelint-disable-next-line no-descending-specificity */
     .BreadcrumbItem {
       &:hover {
         color: hsl(var(--dark));
@@ -232,12 +236,14 @@
       margin-inline-end: px-to-rem(4);
     }
 
+    /* stylelint-disable-next-line no-descending-specificity */
     .separatorSvg {
       font-size: px-to-rem(15);
       padding-inline: px-to-rem(5);
       padding-block: px-to-rem(3);
     }
 
+    /* stylelint-disable-next-line no-descending-specificity */
     .label {
       padding-inline: px-to-rem(2);
       font-size: px-to-rem(18);
@@ -250,12 +256,14 @@
       margin-inline-end: px-to-rem(6);
     }
 
+    /* stylelint-disable-next-line no-descending-specificity */
     .separatorSvg {
       font-size: px-to-rem(17);
       padding-inline: px-to-rem(8);
       padding-block: px-to-rem(4);
     }
 
+    /* stylelint-disable-next-line no-descending-specificity */
     .label {
       padding-inline: px-to-rem(4);
       padding-block: px-to-rem(2);
@@ -269,12 +277,14 @@
       margin-inline-end: px-to-rem(10);
     }
 
+    /* stylelint-disable-next-line no-descending-specificity */
     .separatorSvg {
       font-size: px-to-rem(18);
       padding-inline: px-to-rem(8);
       padding-block: px-to-rem(4);
     }
 
+    /* stylelint-disable-next-line no-descending-specificity */
     .label {
       padding-inline: px-to-rem(6);
       padding-block: px-to-rem(4);

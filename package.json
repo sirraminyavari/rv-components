@@ -17,6 +17,7 @@
     "build:scss": "cpx 'src/**/*.{scss,css,ttf,eot,woff,woff2,svg}' dist",
     "postbuild": "cpx './package.json' dist",
     "lint": "eslint src --color --fix",
+    "stylint": "stylelint 'src/**/*.{scss,css}' --fix",
     "format": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}'",
     "storybook": "start-storybook -p 6006  --no-manager-cache",
     "storybook:build": "build-storybook",

@@ -1,5 +1,6 @@
 @import 'modules/default';
 
+/* stylelint-disable property-no-unknown */
 :export {
   white: $white;
   black: $black;
@@ -9,3 +10,5 @@
   screenSizeDesktopMin: $screenSizeDesktopMin;
   screenSizeLargeDesktopMin: $screenSizeLargeDesktopMin;
 }
+
+/* stylelint-enable property-no-unknown */

@@ -52,7 +52,9 @@
       }
     }
 
+    /* stylelint-disable-next-line no-descending-specificity */
     &:not(:last-of-type) {
+      /* stylelint-disable-next-line no-descending-specificity */
       &.large {
         margin-inline-end: px-to-rem(-34);
 
@@ -61,6 +63,7 @@
         }
       }
 
+      /* stylelint-disable-next-line no-descending-specificity */
       &.medium {
         margin-inline-end: px-to-rem(-28);
 
@@ -69,6 +72,7 @@
         }
       }
 
+      /* stylelint-disable-next-line no-descending-specificity */
       &.small {
         margin-inline-end: px-to-rem(-20);
 

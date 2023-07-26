@@ -17,7 +17,7 @@
       }
     ],
     "scss/operator-no-unspaced": [
-      false,
+      null,
       {
         "severity": "warning"
       }

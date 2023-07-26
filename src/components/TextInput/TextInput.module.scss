@@ -16,10 +16,6 @@
     transition: color 0.2s;
   }
 
-  .baseTextInput {
-    cursor: initial;
-  }
-
   .label {
     padding-block: px-to-rem(5);
     padding-inline: px-to-rem(14);
@@ -52,6 +48,31 @@
       background-color: transparent;
       transition: transform 0.2s ease-out, inset 0.2s ease-out, background-color 0.2s ease-out,
         width 0.4s ease-out;
+    }
+  }
+
+  .baseTextInput {
+    cursor: initial;
+    border-color: transparent;
+    background-color: transparent;
+    outline: none;
+    width: 100%;
+    z-index: 2;
+    padding-inline: px-to-rem(5);
+    color: inherit;
+
+    &:not(:placeholder-shown) + .label {
+      transform: translate(px-to-rem(7), -50%);
+      inset-block-start: 0;
+      inset-inline-start: 0;
+      padding-inline: px-to-rem(7);
+      font-size: 0.5em;
+
+      &::before {
+        inset-inline-start: 0;
+        width: calc(100%);
+        transform: translateY(-70%) translateX(0%);
+      }
     }
   }
 
@@ -102,6 +123,7 @@
     border-color: hsl(var(--base));
     transition: border 0.2s ease-out;
 
+    /* stylelint-disable-next-line no-descending-specificity */
     .trailingIcon {
       color: hsl(var(--base));
     }
@@ -139,6 +161,7 @@
         color: hsl(var(--base) / 50%);
       }
 
+      /* stylelint-disable-next-line no-descending-specificity */
       .label {
         color: hsl(var(--base) / 50%);
       }
@@ -153,6 +176,7 @@
     color: hsl(var(--lighter-font));
     transition: color 0.2s ease-out, background 0.2s ease-out;
 
+    /* stylelint-disable-next-line no-descending-specificity */
     .trailingIcon,
     .label {
       color: hsl(var(--base));
@@ -162,6 +186,7 @@
       background-color: hsl(var(--lighter) / 2000%);
       color: hsl(var(--base-font));
 
+      /* stylelint-disable-next-line no-descending-specificity */
       .label {
         color: hsl(var(--base));
       }
@@ -178,6 +203,7 @@
         color: hsl(var(--base) / 50%);
       }
 
+      /* stylelint-disable-next-line no-descending-specificity */
       .label {
         color: hsl(var(--base-font) / 50%);
       }
@@ -185,28 +211,4 @@
   }
 
   @include full-width;
-}
-
-.baseTextInput {
-  border-color: transparent;
-  background-color: transparent;
-  outline: none;
-  width: 100%;
-  z-index: 2;
-  padding-inline: px-to-rem(5);
-  color: inherit;
-
-  &:not(:placeholder-shown) + .label {
-    transform: translate(px-to-rem(7), -50%);
-    inset-block-start: 0;
-    inset-inline-start: 0;
-    padding-inline: px-to-rem(7);
-    font-size: 0.5em;
-
-    &::before {
-      inset-inline-start: 0;
-      width: calc(100%);
-      transform: translateY(-70%) translateX(0%);
-    }
-  }
 }
