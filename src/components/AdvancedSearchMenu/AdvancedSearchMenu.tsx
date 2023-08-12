@@ -2,29 +2,56 @@ import clsx from 'clsx';
 import {
   DetailedHTMLProps,
   forwardRef,
-  FunctionComponent,
   HTMLAttributes,
-  PropsWithChildren,
   PropsWithoutRef,
+  useCallback,
+  useEffect,
   useState,
 } from 'react';
-import { RVColorProp, RVSvgProps, RVVariantProp } from '../../types';
+import { RVColorProp, RVVariantProp } from '../../types';
 import { Scrollbar } from '../Scrollbar';
 import { Button } from '../Button';
-import {
-  CheckboxSvg,
-  CheckedCircleSvg,
-  ChevronCircleSvg,
-  CloseSvg,
-  PenSvg,
-  RadioButtonSvg,
-  ReloadSvg,
-} from '../../icons';
+import { CloseSvg, ReloadSvg } from '../../icons';
 import { Typography } from '../Typography';
-import { Accordion } from '../Accordion';
 import styles from './AdvancedSearchMenu.module.scss';
-import { TextInput } from '../TextInput';
+import { RVSelectOptionItem } from '../SelectInput';
+import { AdvancedSearchMenuInputFields } from './AdvancedSearchMenuInputFields';
 
+export type RVFormFieldValueTypes = {
+  placeholder?: string;
+  canHaveMultipleInputs?: boolean;
+  label?: string;
+  hasChanged?: boolean;
+  defaultValues?: { label: string; value?: boolean }[] | string[];
+  options?: { label: string; value: string | boolean }[];
+} & (
+  | {
+      dataType: 'shortText';
+      defaultValues?: string[];
+      options?: undefined;
+      canHaveMultipleInputs?: boolean;
+    }
+  | {
+      dataType: 'singleChoice';
+      defaultValues?: { label: string; value?: boolean }[];
+      options: { label: string; value: boolean }[];
+      canHaveMultipleInputs?: undefined;
+    }
+  | {
+      dataType: 'MultipleChoices';
+      defaultValues?: { label: string; value: string }[];
+      options: { label: string; value: string }[];
+      canHaveMultipleInputs?: undefined;
+    }
+  | {
+      dataType: 'date';
+      defaultValues: { label: string; value?: Date }[];
+      options?: undefined;
+      canHaveMultipleInputs?: undefined;
+    }
+);
+
+export type RVFormFieldTypes = Record<string, RVFormFieldValueTypes>;
 export interface RVAdvancedSearchMenu
   extends Omit<
     PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
@@ -34,7 +61,8 @@ export interface RVAdvancedSearchMenu
   color?: RVColorProp;
   onReset?: () => void;
   onClose?: () => void;
-  onFilterSubmit?: () => void;
+  onFilterSubmit?: (data: RVFormFieldTypes) => void;
+  formFieldTypes: RVFormFieldTypes;
 }
 const AdvancedSearchMenu = forwardRef<HTMLDivElement, RVAdvancedSearchMenu>(
   (
@@ -46,10 +74,175 @@ const AdvancedSearchMenu = forwardRef<HTMLDivElement, RVAdvancedSearchMenu>(
       onReset,
       onClose,
       onFilterSubmit,
+      formFieldTypes,
       ...props
     },
     ref
   ) => {
+    const [searchInputData, setSearchInputData] = useState<
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      Record<string, RVFormFieldValueTypes & { inputValues?: any }>
+    >({ ...formFieldTypes });
+
+    useEffect(() => {
+      let tempSearchInputDataState = { ...searchInputData };
+      Object.keys(tempSearchInputDataState).forEach((name) => {
+        if (searchInputData && searchInputData[name] !== undefined) {
+          switch (tempSearchInputDataState[name].dataType) {
+            case 'shortText':
+              if (!tempSearchInputDataState[name].inputValues) {
+                tempSearchInputDataState[name].inputValues = [''];
+              }
+              if (
+                searchInputData[name].defaultValues &&
+                !tempSearchInputDataState[name].inputValues
+              ) {
+                tempSearchInputDataState[name].inputValues = searchInputData[name].defaultValues;
+              }
+
+              tempSearchInputDataState[name].hasChanged = false;
+
+              break;
+            case 'singleChoice':
+              if (
+                !searchInputData[name].defaultValues &&
+                !tempSearchInputDataState[name].inputValues
+              ) {
+                tempSearchInputDataState[name].inputValues = [
+                  ...tempSearchInputDataState[name].options!,
+                ];
+              }
+              if (
+                searchInputData[name].defaultValues &&
+                !tempSearchInputDataState[name].inputValues
+              ) {
+                tempSearchInputDataState[name].inputValues = [
+                  ...searchInputData[name].defaultValues!,
+                ];
+              }
+
+              tempSearchInputDataState[name].hasChanged = false;
+
+              break;
+
+            case 'MultipleChoices':
+              tempSearchInputDataState[name].inputValues = tempSearchInputDataState[name].options;
+
+              tempSearchInputDataState[name].hasChanged = false;
+              break;
+
+            default:
+              break;
+          }
+        }
+      });
+    }, [formFieldTypes]);
+
+    const setSearchInputDataChange = useCallback(
+      (
+        name: string,
+        inputIdx: number | undefined,
+        newValue: string | RVSelectOptionItem[],
+        isChecked?: boolean
+      ) => {
+        if (searchInputData && searchInputData[name] !== undefined) {
+          let tempSearchInputDataState = { ...searchInputData };
+          if (tempSearchInputDataState[name] === undefined) {
+            return;
+          }
+          switch (tempSearchInputDataState[name].dataType) {
+            case 'shortText':
+              if (inputIdx === undefined) {
+                break;
+              }
+              if (
+                !searchInputData[name].defaultValues &&
+                !tempSearchInputDataState[name].inputValues
+              ) {
+                tempSearchInputDataState[name].inputValues = [''];
+              }
+              if (
+                searchInputData[name].defaultValues &&
+                !tempSearchInputDataState[name].inputValues
+              ) {
+                tempSearchInputDataState[name].inputValues = searchInputData[name].defaultValues;
+              }
+              if (searchInputData[name].inputValues[inputIdx] !== undefined) {
+                tempSearchInputDataState[name].inputValues[inputIdx] = newValue;
+              } else {
+                //@ts-expect-error-next-line
+                (tempSearchInputDataState[name].inputValues as string[]).push(newValue);
+              }
+              tempSearchInputDataState[name].inputValues?.forEach((value: string, idx: number) => {
+                if (value === '') {
+                  delete tempSearchInputDataState[name].inputValues[idx];
+                }
+              });
+              (tempSearchInputDataState[name].inputValues as string[]).push('');
+
+              tempSearchInputDataState[name].hasChanged =
+                JSON.stringify(formFieldTypes[name].defaultValues || []) !==
+                JSON.stringify(
+                  tempSearchInputDataState[name].inputValues.filter((item: string) => item !== '')
+                );
+
+              break;
+            case 'singleChoice':
+              if (
+                !searchInputData[name].defaultValues &&
+                !tempSearchInputDataState[name].inputValues
+              ) {
+                tempSearchInputDataState[name].inputValues = [
+                  ...tempSearchInputDataState[name].options!,
+                ];
+              }
+              if (
+                searchInputData[name].defaultValues &&
+                !tempSearchInputDataState[name].inputValues
+              ) {
+                tempSearchInputDataState[name].inputValues = [
+                  ...searchInputData[name].defaultValues!,
+                ];
+              }
+              //@ts-ignore-next-line
+              tempSearchInputDataState[name].inputValues[inputIdx].value = isChecked;
+              tempSearchInputDataState[name].hasChanged =
+                JSON.stringify(
+                  tempSearchInputDataState[name].options?.filter((item) => item.value)
+                ) !=
+                JSON.stringify(
+                  tempSearchInputDataState[name].inputValues?.filter(
+                    (item: Record<string, string | boolean>) => item.value
+                  )
+                );
+
+              break;
+
+            case 'MultipleChoices':
+              //@ts-ignore-next-line
+              tempSearchInputDataState[name].inputValues = newValue;
+
+              tempSearchInputDataState[name].hasChanged =
+                JSON.stringify(
+                  tempSearchInputDataState[name].options?.filter((item) => item.value)
+                ) !=
+                JSON.stringify(
+                  tempSearchInputDataState[name].inputValues?.filter(
+                    (item: Record<string, string | boolean>) => item.value
+                  )
+                );
+
+              break;
+
+            default:
+              break;
+          }
+          setSearchInputData(tempSearchInputDataState);
+        }
+      },
+      [searchInputData, formFieldTypes]
+    );
+
     return (
       <>
         <div ref={ref} className={clsx(color, styles.advancedSearchMenuBoxContainer)} {...props}>
@@ -65,26 +258,10 @@ const AdvancedSearchMenu = forwardRef<HTMLDivElement, RVAdvancedSearchMenu>(
             </button>
           </div>
           <Scrollbar color={RVColorProp.distant} className={styles.advancedSearchMenuItemContainer}>
-            <SingleSearchItemMenu Icon={PenSvg} label="Short text field" isActive>
-              <TextInput
-                label="search query ...."
-                variant={RVVariantProp.outline}
-                color={RVColorProp.distant}
-              />
-              <TextInput
-                label="search query ...."
-                variant={RVVariantProp.outline}
-                color={RVColorProp.distant}
-              />
-              <TextInput
-                label="search query ...."
-                variant={RVVariantProp.outline}
-                color={RVColorProp.distant}
-              />
-            </SingleSearchItemMenu>
-            <SingleSearchItemMenu Icon={RadioButtonSvg} label="Single choice field" />
-            <SingleSearchItemMenu Icon={CheckboxSvg} label="Multiple choice field" isActive />
-            <SingleSearchItemMenu Icon={RadioButtonSvg} label="single choice field" />
+            <AdvancedSearchMenuInputFields
+              searchInputData={searchInputData}
+              setSearchInputDataChange={setSearchInputDataChange}
+            />
           </Scrollbar>
           <div className={styles.advancedSearchMenuBoxActionsContainer}>
             <Button
@@ -95,7 +272,11 @@ const AdvancedSearchMenu = forwardRef<HTMLDivElement, RVAdvancedSearchMenu>(
             >
               <ReloadSvg />
             </Button>
-            <Button color={color} fullWidth onClick={onFilterSubmit}>
+            <Button
+              color={color}
+              fullWidth
+              onClick={() => onFilterSubmit && onFilterSubmit(searchInputData)}
+            >
               Filter items
             </Button>
           </div>
@@ -106,62 +287,3 @@ const AdvancedSearchMenu = forwardRef<HTMLDivElement, RVAdvancedSearchMenu>(
 );
 
 export default AdvancedSearchMenu;
-
-export interface RVAdvancedSearchMenuItem {
-  label: string;
-  Icon?: FunctionComponent<RVSvgProps>;
-  isActive?: boolean;
-}
-
-const SingleSearchItemMenu = ({
-  children,
-  label,
-  Icon,
-  isActive,
-}: PropsWithChildren<RVAdvancedSearchMenuItem>) => {
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  return (
-    <>
-      <Accordion
-        color={RVColorProp.cgBlue}
-        className={clsx(
-          styles.advancedSearchMenuItem,
-          isMenuOpen && styles.advancedSearchMenuItemOpen
-        )}
-        onAccordionStatusChange={(_, status) => {
-          setIsMenuOpen(status === 'closed' ? false : true);
-        }}
-        label={
-          <div className={clsx(!isActive && RVColorProp.gray, styles.advancedSearchMenuItemLabel)}>
-            <Typography
-              type={isActive ? 'H4' : 'p'}
-              color={isActive ? RVColorProp.cgBlue : RVColorProp.gray}
-              className={styles.advancedSearchMenuItemLabelTitle}
-            >
-              {Icon && <Icon />}
-              {label}
-            </Typography>
-            <span className={styles.advancedSearchMenuItemLabelIndicators}>
-              {isActive && (
-                <CheckedCircleSvg
-                  className={clsx(RVColorProp.orange, styles.advancedSearchMenuItemLabelActiveIcon)}
-                />
-              )}
-              <ChevronCircleSvg
-                className={clsx(
-                  !isMenuOpen && RVColorProp.gray,
-                  styles.advancedSearchMenuItemLabelChevron
-                )}
-                direction={'down'}
-              />
-            </span>
-          </div>
-        }
-        labelClassName={styles.advancedSearchMenuItemLabelButton}
-        contentClassName={styles.advancedSearchMenuItemContent}
-      >
-        {children}
-      </Accordion>
-    </>
-  );
-};

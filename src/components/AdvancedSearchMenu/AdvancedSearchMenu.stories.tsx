@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { AdvancedSearchMenu as AdvancedSearchMenuComponent, RVAdvancedSearchMenu } from '.';
@@ -15,11 +15,46 @@ export default {
 const Template: ComponentStory<typeof AdvancedSearchMenuComponent> = ({
   color,
   variant,
+  formFieldTypes,
   ...args
 }) => {
+  const data: typeof formFieldTypes = {
+    myName1: {
+      dataType: 'shortText',
+      label: 'some label for short',
+      canHaveMultipleInputs: true,
+      placeholder: 'some placeholder',
+    },
+    myName2: {
+      dataType: 'singleChoice',
+      label: 'some label for short',
+      placeholder: 'some placeholder',
+      options: [
+        { label: 'label1', value: false },
+        { label: 'label2', value: false },
+        { label: 'label3', value: false },
+      ],
+    },
+    myName3: {
+      dataType: 'MultipleChoices',
+      label: 'some label for short',
+      placeholder: 'some placeholder',
+      options: [
+        { label: 'label1', value: '123' },
+        { label: 'label2', value: '1234' },
+        { label: 'label3', value: '12345' },
+      ],
+    },
+  };
+  const [formData, setFormData] = useState(data);
+
   return (
     <>
-      <AdvancedSearchMenuComponent style={{ maxHeight: '90vh' }} {...{ ...args, color, variant }} />
+      <AdvancedSearchMenuComponent
+        formFieldTypes={formData || formFieldTypes}
+        style={{ maxHeight: '90vh' }}
+        {...{ ...args, color, variant }}
+      />
     </>
   );
 };
