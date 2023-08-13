@@ -17,6 +17,7 @@
     "build:scss": "cpx 'src/**/*.{scss,css,ttf,eot,woff,woff2,svg}' dist",
     "postbuild": "cpx './package.json' dist",
     "lint": "eslint src --color --fix",
+    "stylint": "stylelint 'src/**/*.{scss,css}' --fix",
     "format": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}'",
     "storybook": "start-storybook -p 6006  --no-manager-cache",
     "storybook:build": "build-storybook",
@@ -87,6 +88,9 @@
     "storybook-dark-mode": "^2.0.5",
     "storybook-readme": "^5.0.9",
     "style-loader": "2.0.0",
+    "stylelint": "^15.10.1",
+    "stylelint-config-prettier": "^9.0.5",
+    "stylelint-config-standard-scss": "^10.0.0",
     "typescript": "^4.5.4",
     "typescript-plugin-css-modules": "^4.1.1"
   },

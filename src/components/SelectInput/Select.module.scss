@@ -6,7 +6,6 @@
   }
 
   [class*='-control'] {
-    background-color: transparent;
     border-color: hsl(var(--base));
     border-radius: $borderRadiusQuarter;
     outline: transparent;

@@ -2,8 +2,8 @@
 
 .baseSideMenu {
   transition: width 0.3s ease-out, padding 0.3s ease-out;
-  width: var(--sideMenu-width, 100%);
-  height: var(--sideMenu-height, 100%);
+  width: var(--side-menu-width, 100%);
+  height: var(--side-menu-height, 100%);
   padding-block: px-to-rem(12);
   padding-inline: px-to-rem(12);
   overflow: hidden;
@@ -18,6 +18,7 @@
 
 .sideMenuContainer {
   box-sizing: border-box;
+
   // padding: px-to-rem(12);
   border-radius: $borderRadiusHalf;
   background-color: hsl(var(--base));

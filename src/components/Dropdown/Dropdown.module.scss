@@ -25,7 +25,6 @@
     min-height: px-to-rem(12);
     max-height: 40vh;
     padding-block: px-to-rem(6);
-    padding-inline: px-to-rem(4);
     background-color: hsl(var(--white));
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--black) / 15%);
     transition: background-color 0.3s ease-in-out, opacity 0.3s ease-in-out, inset 0.3s ease-in-out;

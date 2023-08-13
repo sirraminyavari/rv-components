@@ -10,6 +10,7 @@
     margin-inline: px-to-rem(1);
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
   &.half > button {
     &:first-of-type {
       border-start-start-radius: calc($borderRadiusHalf / 2);
@@ -26,6 +27,7 @@
     }
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
   &.full > button {
     &:first-of-type {
       border-start-start-radius: $borderRadiusFull;

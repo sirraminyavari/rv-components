@@ -193,8 +193,6 @@
   }
 
   &:focus {
-    outline-style: dashed;
-    outline-width: px-to-rem(2);
-    outline-color: hsl(var(--base) / 20%);
+    outline: hsl(var(--base) / 20%) dashed px-to-rem(2);
   }
 }
