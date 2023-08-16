@@ -12,12 +12,7 @@ import styles from './Switch.module.scss';
 
 export interface RVSwitch
   extends Omit<
-    PropsWithoutRef<
-      DetailedHTMLProps<
-        InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>,
-        HTMLInputElement | HTMLTextAreaElement
-      >
-    >,
+    PropsWithoutRef<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>>,
     'color' | 'size'
   > {
   variant?: Exclude<RVVariantProp, RVVariantProp.disabled>;

@@ -12,12 +12,7 @@ import styles from './Checkbox.module.scss';
 
 export interface RVCheckbox
   extends Omit<
-    PropsWithoutRef<
-      DetailedHTMLProps<
-        InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>,
-        HTMLInputElement | HTMLTextAreaElement
-      >
-    >,
+    PropsWithoutRef<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>>,
     'color' | 'size'
   > {
   variant?: Exclude<RVVariantProp, RVVariantProp.disabled>;
@@ -36,6 +31,7 @@ const Checkbox = forwardRef<HTMLInputElement, RVCheckbox>(
       size = RVSizeProp.small,
       disabled,
       label,
+      id = `${Date.now()}`,
       onChange,
       ...props
     },
@@ -50,7 +46,7 @@ const Checkbox = forwardRef<HTMLInputElement, RVCheckbox>(
     return (
       <>
         <label
-          htmlFor="two"
+          htmlFor={id}
           className={clsx(
             color,
             styles[size],
@@ -62,7 +58,7 @@ const Checkbox = forwardRef<HTMLInputElement, RVCheckbox>(
           )}
         >
           <input
-            id="two"
+            id={id}
             type="checkbox"
             ref={ref}
             {...props}
