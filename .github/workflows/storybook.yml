@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - demo
 
 jobs:
   code-structure-test:
@@ -22,7 +23,7 @@ jobs:
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
 
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           fetch-depth: '0'
 
@@ -31,6 +32,14 @@ jobs:
 
       - name: generate package assets (storybook-gh) ⚙️
         run: yarn run storybook:build
+
+      - uses: actions/checkout@v3
+        with:
+          path: demo
+          fetch-depth: '0'
+
+      - name: generate package assets (storybook-gh) ⚙️
+        run: yarn run storybook:build-demo
 
       - name: Deploy Storybook 🚀
         uses: JamesIves/github-pages-deploy-action@v4

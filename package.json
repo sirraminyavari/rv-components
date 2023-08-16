@@ -20,7 +20,8 @@
     "stylint": "stylelint 'src/**/*.{scss,css}' --fix",
     "format": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}'",
     "storybook": "start-storybook -p 6006  --no-manager-cache",
-    "storybook:build": "build-storybook",
+    "storybook:build": "build-storybook -o storybook-static",
+    "storybook:build-demo": "build-storybook -o storybook-static/demo",
     "prepare": "husky install"
   },
   "peerDependencies": {
