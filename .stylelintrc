@@ -1,0 +1,36 @@
+{
+  "extends": ["stylelint-config-standard-scss", "stylelint-config-prettier"],
+  "rules": {
+    "number-max-precision": null,
+    "selector-class-pattern": null,
+    "scss/dollar-variable-pattern": null,
+    "no-descending-specificity": [
+      true,
+      {
+        "severity": "warning"
+      }
+    ],
+    "property-no-unknown": [
+      true,
+      {
+        "severity": "warning"
+      }
+    ],
+    "scss/operator-no-unspaced": [
+      null,
+      {
+        "severity": "warning"
+      }
+    ],
+    "selector-pseudo-class-no-unknown": [
+      true,
+      { "ignorePseudoClasses": ["export", "placeholder", "input-placeholder"] }
+    ],
+    "property-no-vendor-prefix": [
+      true,
+      {
+        "severity": "warning"
+      }
+    ]
+  }
+}

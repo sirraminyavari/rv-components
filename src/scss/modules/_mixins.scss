@@ -30,10 +30,6 @@
 }
 
 @mixin selection {
-  ::-moz-selection {
-    @content;
-  }
-
   ::selection {
     @content;
   }
@@ -117,7 +113,20 @@
             map.get($theme-variants, $themeName, 'black'),
             map.get($theme-variants, $themeName, 'white')
           )
-        )};
+        )}
+        .#{$localPaletteName} {
+        @each $paletteSwatchName, $color in map.get($theme-variants, $themeName, $localPaletteName)
+        {
+          --#{$paletteSwatch}: #{color-hsl-args($color)};
+          --#{$paletteSwatch}-font: #{color-hsl-args(
+              black-or-white-color(
+                $color,
+                map.get($theme-variants, $themeName, 'black'),
+                map.get($theme-variants, $themeName, 'white')
+              )
+            )};
+        }
+      }
     }
 
     .#{$localPaletteName} {
@@ -170,28 +179,6 @@
   content: $content;
   display: $display;
   position: $pos;
-}
-
-@mixin input-placeholder {
-  &.placeholder {
-    @content;
-  }
-
-  &:-moz-placeholder {
-    @content;
-  }
-
-  &::-moz-placeholder {
-    @content;
-  }
-
-  &:-ms-input-placeholder {
-    @content;
-  }
-
-  &::-webkit-input-placeholder {
-    @content;
-  }
 }
 
 @mixin truncate($truncation-boundary: null) {

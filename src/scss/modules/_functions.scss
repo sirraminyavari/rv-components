@@ -1,5 +1,6 @@
 @use 'sass:math';
 @use 'sass:color';
+@use 'sass:list';
 @import './colors';
 
 @function strip-unit($value) {
@@ -7,19 +8,15 @@
 }
 
 // From https://github.com/material-components/material-components-web/blob/master/packages/mdc-theme/_constants.scss
-//
 // Copyright 2017 Google Inc.
-//
 // Permission is hereby granted, free of charge, to any person obtaining a copy
 // of this software and associated documentation files (the "Software"), to deal
 // in the Software without restriction, including without limitation the rights
 // to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 // copies of the Software, and to permit persons to whom the Software is
 // furnished to do so, subject to the following conditions:
-//
 // The above copyright notice and this permission notice shall be included in
 // all copies or substantial portions of the Software.
-//
 // THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
 // IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
 // FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
@@ -27,17 +24,14 @@
 // LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 // OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 // THE SOFTWARE.
-//
 
 // Precomputed linear color channel values, for use in contrast calculations.
 // See https://www.w3.org/TR/WCAG20-TECHS/G17.html#G17-tests
-//
 // Algorithm, for c in 0 to 255:
 // f(c) {
 //   c = c / 255;
 //   return c < 0.03928 ? c / 12.92 : Math.pow((c + 0.055) / 1.055, 2.4);
 // }
-//
 // This lookup table is needed since there is no `pow` in SASS.
 $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675 0.0009105809506465125
   0.00121410793419535 0.0015176349177441874 0.001821161901293025 0.0021246888848418626
@@ -105,13 +99,14 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675 0.000910580
 // .sample { luminance: luminance(#c00); }
 // Output:
 // .sample { luminance: 0.1283736922; }
-//
+
 @function luminance($color) {
   // $linear-channel-values are our Lookup Table of constants
-  $red: nth($linear-channel-values, red($color) + 1);
-  $green: nth($linear-channel-values, green($color) + 1);
-  $blue: nth($linear-channel-values, blue($color) + 1);
+  $red: list.nth($linear-channel-values, color.red($color) + 1);
+  $green: list.nth($linear-channel-values, color.green($color) + 1);
+  $blue: list.nth($linear-channel-values, color.blue($color) + 1);
   $calculation: (0.2126 * $red)+ (0.7152 * $green)+ (0.0722 * $blue);
+
   @return $calculation;
 }
 
@@ -124,7 +119,7 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675 0.000910580
 // .sample { color-contrast: color-contrast(#c00, #fff); }
 // Output:
 // .sample { color-contrast: 5.89; }
-//
+
 @function color-contrast($fg, $bg) {
   $luminance1: luminance($fg) + 0.05;
   $luminance2: luminance($bg) + 0.05;
@@ -135,7 +130,8 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675 0.000910580
   }
 
   // Round to a hundredth because 6.96 should not pass a ratio of 7.0
-  $ratio: math.div(round($ratio * 100), 100);
+  $ratio: math.div(math.round($ratio * 100), 100);
+
   @return $ratio;
 }
 
@@ -146,7 +142,7 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675 0.000910580
 // .sample { validate-font-size: validate-font-size(1em); }
 // Output:
 // .sample { validate-font-size: 16; }
-//
+
 @function validate-font-size($size) {
   @if unit($size) == 'em' or unit($size) == 'rem' or unit($size) == 'px' or unit($size) == '' {
     // Check if a flexible unit
@@ -175,7 +171,7 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675 0.000910580
 // .sample { get-ratio: get-ratio('AAA', 19, true); }
 // Output:
 // .sample { get-ratio: 4.5; }
-//
+
 @function get-ratio($level: 'AA', $size: 16, $bold: false) {
   // Default ratio
   $ratio: 4.5;
@@ -219,7 +215,7 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675 0.000910580
 // .sample { light-or-dark: light-or-dark(#c00); }
 // Output:
 // .sample { light-or-dark: "light"; }
-//
+
 @function light-or-dark($color, $custom-black: $black, $custom-white: $white) {
   $light-contrast: color-contrast($color, $custom-white);
   $dark-contrast: color-contrast($color, $custom-black);
@@ -247,7 +243,7 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675 0.000910580
 @function most-legible-color($color) {
   $color-lod: light-or-dark($color);
 
-  @if ($color-lod == 'dark') {
+  @if $color-lod == 'dark' {
     @return $white;
   } @else {
     @return $black;
@@ -266,12 +262,14 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675 0.000910580
 //   background-color: #000;
 //   color: #d200d2;
 // }
-//
+
 @function a11y-color($fg, $bg, $level: 'AA', $size: 16, $bold: false) {
   // Helper: make sure the font size value is acceptable
   $font-size: validate-font-size($size);
+
   // Helper: With the level, font size, and bold boolean, return the proper target ratio. 3.0, 4.5, or 7.0 expected
   $ratio: get-ratio($level, $font-size, $bold);
+
   // Calculate the first contrast ratio of the given pair
   $original-contrast: color-contrast($fg, $bg);
 
@@ -299,19 +297,19 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675 0.000910580
     }
 
     // Keeping the rest of the logic here, but our default values do not change, so this logic is not needed
-    //@else if $fg-lod == 'light' and $bg-lod == 'dark' {
+    // @else if $fg-lod == 'light' and $bg-lod == 'dark' {
     //  // bg is dark, fg is light but does not pass, lighten further
     //  $step: $step;
-    //} @else if $fg-lod == 'dark' and $bg-lod == 'dark' {
+    // } @else if $fg-lod == 'dark' and $bg-lod == 'dark' {
     //  // Both are dark, so lighten the fg
     //  $step: $step;
-    //}
+    // }
 
     // The magic happens here
     // Loop through with a @while statement until the color combination passes our required ratio. Scale the color by our step value until the expression is false
     // This might loop 100 times or more depending on the colors
     @while color-contrast($fg, $bg) < $ratio {
-      $fg: scale-color($fg, $lightness: $step, $saturation: math.div($step, 2));
+      $fg: color.scale($fg, $lightness: $step, $saturation: math.div($step, 2));
     }
 
     // @return $fg;
@@ -326,7 +324,7 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675 0.000910580
 @function black-or-white-color($color, $custom-black: $black, $custom-white: $white) {
   $color-lod: light-or-dark($color, $custom-black, $custom-white);
 
-  @if ($color-lod == 'dark') {
+  @if $color-lod == 'dark' {
     @return $custom-white;
   } @else {
     @return $custom-black;
@@ -337,6 +335,7 @@ $linear-channel-values: 0 0.0003035269835488375 0.000607053967097675 0.000910580
   $hue: color.hue($color);
   $saturation: color.saturation($color);
   $lightness: color.lightness($color);
+
   @return $hue $saturation $lightness;
 }
 

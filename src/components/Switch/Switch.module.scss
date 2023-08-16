@@ -17,24 +17,26 @@
     all: unset;
   }
 
+  /* stylelint-disable-next-line no-descending-specificity */
   & > .SwitchIndicator {
     display: flex;
     justify-content: center;
     align-items: center;
     margin-inline-end: px-to-rem(8);
+
     // padding-block: px-to-rem(8);
     width: 2.1em;
     height: 1.2em;
     background: transparent;
     border-radius: px-to-rem(100);
-    cursor: pointer;
     transition: all 250ms ease-out;
     position: relative;
     cursor: pointer;
     border-width: px-to-rem(1);
     border-style: solid;
 
-    &:before {
+    /* stylelint-disable-next-line no-descending-specificity */
+    &::before {
       content: '';
       position: absolute;
       border-radius: 100%;
@@ -43,7 +45,7 @@
       inset-block-start: 10%;
       inset-inline-start: calc(100% - 1.1em);
       transition: background-color 0.2s, inset 0.2s, border 0.2s;
-      box-shadow: -2px 0px 4px rgba(0, 0, 0, 0.3);
+      box-shadow: -2px 0 4px rgb(0 0 0 / 30%);
       border-width: px-to-rem(1);
       border-style: solid;
       border-color: transparent;
@@ -53,7 +55,7 @@
 
   &.toggled {
     & > .SwitchIndicator {
-      &:before {
+      &::before {
         content: '';
         inset-inline-start: 5%;
       }
@@ -127,18 +129,22 @@
   &.outline {
     color: hsl(var(--base));
 
+    /* stylelint-disable-next-line no-descending-specificity */
     & > .SwitchIndicator {
       border-color: hsl(var(--base));
 
+      /* stylelint-disable-next-line no-descending-specificity */
       &::before {
         background-color: hsl(var(--base));
       }
     }
 
     &.toggled {
+      /* stylelint-disable-next-line no-descending-specificity */
       & > .SwitchIndicator {
         border-color: hsl(var(--base));
 
+        /* stylelint-disable-next-line no-descending-specificity */
         &::before {
           border-color: hsl(var(--base));
           background-color: hsl(var(--white));
@@ -149,9 +155,11 @@
     &:focus-within {
       color: hsl(var(--darker));
 
+      /* stylelint-disable-next-line no-descending-specificity */
       .SwitchIndicator {
         background-color: hsl(var(--light));
 
+        /* stylelint-disable-next-line no-descending-specificity */
         &::before {
           background-color: hsl(var(--darker));
         }
@@ -162,10 +170,12 @@
   &.white {
     color: hsl(var(--base));
 
+    /* stylelint-disable-next-line no-descending-specificity */
     & > .SwitchIndicator {
       border-color: hsl(var(--base));
       background-color: hsl(var(--base));
 
+      /* stylelint-disable-next-line no-descending-specificity */
       &::before {
         background-color: hsl(var(--white));
         border-color: hsl(var(--white));
@@ -173,10 +183,12 @@
     }
 
     &.toggled {
+      /* stylelint-disable-next-line no-descending-specificity */
       .SwitchIndicator {
         border-color: hsl(var(--light) / 80%);
         background-color: hsl(var(--light) / 80%);
 
+        /* stylelint-disable-next-line no-descending-specificity */
         &::before {
           border-color: hsl(var(--white));
           box-shadow: none;
@@ -187,7 +199,9 @@
     &:hover {
       color: hsl(var(--dark));
 
+      /* stylelint-disable-next-line no-descending-specificity */
       .SwitchIndicator {
+        /* stylelint-disable-next-line no-descending-specificity */
         &::before {
           background-color: hsl(var(--light));
           border-color: hsl(var(--light));
@@ -195,7 +209,9 @@
       }
 
       &.toggled {
+        /* stylelint-disable-next-line no-descending-specificity */
         .SwitchIndicator {
+          /* stylelint-disable-next-line no-descending-specificity */
           &::before {
             background-color: hsl(var(--dark));
             border-color: hsl(var(--dark));
@@ -220,10 +236,12 @@
   &.disabled {
     color: hsl(var(--base) / 40%) !important;
 
+    /* stylelint-disable-next-line no-descending-specificity */
     & > .SwitchIndicator {
       border-color: hsl(var(--light) / 50%) !important;
       background-color: hsl(var(--light) / 90%) !important;
 
+      /* stylelint-disable-next-line no-descending-specificity */
       &::before {
         border-color: hsl(var(--white)) !important;
         background-color: hsl(var(--white)) !important;
@@ -231,10 +249,12 @@
     }
 
     &.toggled {
+      /* stylelint-disable-next-line no-descending-specificity */
       & > .SwitchIndicator {
         border-color: hsl(var(--light) / 50%) !important;
         background-color: hsl(var(--white)) !important;
 
+        /* stylelint-disable-next-line no-descending-specificity */
         &::before {
           border-color: transparent !important;
           background-color: hsl(var(--darker) / 50%) !important;

@@ -4,7 +4,6 @@
   border-radius: $borderRadiusQuarter;
   padding-block: px-to-rem(6);
   overflow: hidden;
-
   background-color: inherit;
   color: inherit;
 }
@@ -12,6 +11,7 @@
 .triggerButton {
   background-color: inherit;
   color: inherit;
+
   // padding-block: px-to-rem(12);
   // padding-inline: px-to-rem(16);
   width: 100%;

@@ -50,7 +50,6 @@
   padding-inline: px-to-rem(10);
   color: hsl(var(--base-font) / 100%);
   background-color: transparent;
-  cursor: pointer;
   min-height: px-to-rem(24);
   transition: background-color 0.2s, color 0.2s, border-radius 0.35s, border 0.35s;
   display: flex;
@@ -64,6 +63,13 @@
   & > * {
     margin-block: 0;
     color: inherit;
+  }
+
+  .menuTileIcon {
+    justify-self: center;
+    transition: transform 0.3s;
+    padding-inline: px-to-rem(10);
+    font-size: px-to-rem(32);
   }
 
   .menuTileTitle {
@@ -118,13 +124,6 @@
   margin-inline-start: px-to-rem(19.2);
 }
 
-.menuTileIcon {
-  justify-self: center;
-  transition: transform 0.3s;
-  padding-inline: px-to-rem(10);
-  font-size: px-to-rem(32);
-}
-
 .triggerCollapse {
   margin-inline-start: auto;
 
@@ -140,7 +139,6 @@
   top: 0%;
   inset-inline-end: px-to-rem(-0.4);
   background-color: hsl(var(--white));
-  width: px-to-rem(5);
   color: hsl(var(--white));
   height: 0;
   transition: top 0.25s ease-in-out, height 0.25s ease-in-out, width 0.25s ease-in-out;

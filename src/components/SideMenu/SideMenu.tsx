@@ -44,8 +44,8 @@ const SideMenu = forwardRef<HTMLDivElement, RVSideMenu>(
         className={clsx(styles.baseSideMenu, color, !open && styles.sideMenuClose, className)}
         style={
           {
-            '--sideMenu-width': width,
-            '--sideMenu-height': height,
+            '--side-menu-width': width,
+            '--side-menu-height': height,
             ...style,
           } as unknown as CSSProperties
         }

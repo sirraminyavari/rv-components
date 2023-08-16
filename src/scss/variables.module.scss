@@ -1,12 +1,14 @@
-@import 'modules/default.scss';
+@import 'modules/default';
 
+/* stylelint-disable property-no-unknown */
 :export {
   white: $white;
   black: $black;
-
   screenSizePhoneMax: $screenSizePhoneMax;
   screenSizeTabletPortraitMin: $screenSizeTabletPortraitMin;
   screenSizeTabletLandscapeMin: $screenSizeTabletLandscapeMin;
   screenSizeDesktopMin: $screenSizeDesktopMin;
   screenSizeLargeDesktopMin: $screenSizeLargeDesktopMin;
 }
+
+/* stylelint-enable property-no-unknown */
