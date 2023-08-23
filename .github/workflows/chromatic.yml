@@ -9,21 +9,23 @@ jobs:
     strategy:
       matrix:
         os: [ubuntu-latest]
-        node: [16]
+        node-version: [16.x]
         
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
+      - name: Specify Node Version
+        uses: actions/setup-node@v3
         with:
-          fetch-depth: 0
+          node-version: 16
+
+      - uses: actions/checkout@v1
+      
       - name: Install dependencies
         run: yarn
+
       - name: Publish to Chromatic
         uses: chromaui/action@v1
         with:
-          # https://www.chromatic.com/docs/github-actions#available-options
           projectToken: ${{ secrets.CHROMATIC_DEPLOY }}
           buildScriptName: storybook:build
-          storybookBuildDir: storybook-static
           storybookConfigDir: .storybook
           zip: true
