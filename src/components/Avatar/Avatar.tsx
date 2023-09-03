@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { HTMLAttributes, DetailedHTMLProps, forwardRef, PropsWithoutRef } from 'react';
-import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types/global';
+import { RVColorProp, RVSizeProp, RVSudoActionProp, RVVariantProp } from '../../types/global';
 import styles from './Avatar.module.scss';
 
 export interface RVAvatar
@@ -8,14 +8,24 @@ export interface RVAvatar
     PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLImageElement>, HTMLImageElement>>,
     'color'
   > {
+  /** set between the various designs of the component (default:RVVariantProp.primary) */
   variant?: RVVariantProp;
+  /** set the component color palette (default:RVColorProp.cgBlue) */
   color?: RVColorProp;
+  /** set the size of the component (default:RVSizeProp.large) */
   size?: RVSizeProp;
+  /** set to `True` to component be a isometric circle button (default:undefined) */
   fullCircle?: boolean;
+  /** set to stack multiple avatar components together (default:false) */
   stacked?: boolean;
+  /** set to change the roundness of the button corners (default:"small") */
   rounded?: 'full' | 'half';
+  /** set the component image source URL (required) */
   src: string;
+  /** set the image accessibility label */
   alt?: string;
+  /** set to programmatically change the css actions (hover,focus,active) (default:undefined)*/
+  sudoAction?: RVSudoActionProp;
 }
 
 const Avatar = forwardRef<HTMLImageElement, RVAvatar>(
@@ -29,6 +39,7 @@ const Avatar = forwardRef<HTMLImageElement, RVAvatar>(
       rounded,
       stacked,
       alt = '',
+      sudoAction,
       ...props
     },
     ref
@@ -48,6 +59,7 @@ const Avatar = forwardRef<HTMLImageElement, RVAvatar>(
           className
         )}
         alt={alt}
+        data-sudo={sudoAction}
         {...props}
       />
     );
