@@ -6,6 +6,12 @@ export enum RVVariantProp {
   outline = 'outline',
   disabled = 'disabled',
 }
+
+export enum RVSudoActionProp {
+  hover = 'hover',
+  active = 'active',
+  focus = 'focus',
+}
 export enum RVColorProp {
   cgBlue = 'color-cgBlue',
   oxford = 'color-oxford',
