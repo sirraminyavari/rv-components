@@ -16,7 +16,7 @@ export interface RVAvatar
   size?: RVSizeProp;
   /** set to `True` to component be a isometric circle button (default:undefined) */
   fullCircle?: boolean;
-  /** set to stack multiple avatar components together (default:false) */
+  /** set to stack multiple avatar components together. Stacked Avatar components needed to be wrapped with `AvatarGroup` component (default:false) */
   stacked?: boolean;
   /** set to change the roundness of the button corners (default:"small") */
   rounded?: 'full' | 'half';

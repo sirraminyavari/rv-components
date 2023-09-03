@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ThemeBlock } from '../../storybookComponents';
 import { Avatar as AvatarComponent, RVAvatar } from '.';
+import { AvatarGroup } from '../AvatarGroup';
 import { RVSizeProp, RVVariantProp } from '../../types';
 
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
@@ -89,3 +90,58 @@ RoundedHalf.args = { rounded: 'half' };
 
 export const RoundedFull = Template.bind({});
 RoundedFull.args = { rounded: 'full' };
+
+export const Stacked = ({
+  src = 'https://i.pravatar.cc/300',
+  stacked = true,
+  color,
+  variant,
+  ...args
+}) => {
+  const [colorClass, setColorClass] = useState(color);
+  useEffect(() => {
+    setColorClass(color);
+  }, [color]);
+
+  return (
+    <ThemeBlock onColorChange={setColorClass}>
+      <AvatarGroup>
+        <AvatarComponent
+          src={src}
+          stacked={stacked}
+          variant={variant || RVVariantProp.disabled}
+          color={colorClass}
+          {...args}
+        />
+        <AvatarComponent
+          src={src}
+          stacked={stacked}
+          variant={variant || RVVariantProp.disabled}
+          color={colorClass}
+          {...args}
+        />
+        <AvatarComponent
+          src={src}
+          stacked={stacked}
+          variant={variant || RVVariantProp.disabled}
+          color={colorClass}
+          {...args}
+        />
+        <AvatarComponent
+          src={src}
+          stacked={stacked}
+          variant={variant || RVVariantProp.disabled}
+          color={colorClass}
+          {...args}
+        />
+        <AvatarComponent
+          src={src}
+          stacked={stacked}
+          variant={variant || RVVariantProp.disabled}
+          color={colorClass}
+          {...args}
+        />
+      </AvatarGroup>
+    </ThemeBlock>
+  );
+};
