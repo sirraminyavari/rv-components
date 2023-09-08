@@ -86,7 +86,8 @@
       }
     }
 
-    &:hover {
+    &:hover,
+    &[data-sudo='hover'] {
       color: hsl(var(--base));
 
       .SwitchIndicator {
@@ -106,7 +107,8 @@
       }
     }
 
-    &:focus-within {
+    &:focus-within,
+    &[data-sudo='focus'] {
       color: hsl(var(--darker));
 
       .SwitchIndicator {
@@ -152,7 +154,8 @@
       }
     }
 
-    &:focus-within {
+    &:focus-within,
+    &[data-sudo='focus'] {
       color: hsl(var(--darker));
 
       /* stylelint-disable-next-line no-descending-specificity */
@@ -196,7 +199,8 @@
       }
     }
 
-    &:hover {
+    &:hover,
+    &[data-sudo='hover'] {
       color: hsl(var(--dark));
 
       /* stylelint-disable-next-line no-descending-specificity */
