@@ -26,7 +26,7 @@ const Template: ComponentStory<typeof BreadcrumbComponent> = ({
       ],
     },
   ],
-  Icon = FileTrayFullSvg,
+  Icon,
   size = RVSizeProp.small,
 
   color,
@@ -50,6 +50,36 @@ const Template: ComponentStory<typeof BreadcrumbComponent> = ({
           {...args}
         />
       </div>
+      <div style={{ minHeight: '10vh' }}>
+        <BreadcrumbComponent
+          routeLinks={routeLinks}
+          size={size}
+          Icon={Icon}
+          variant={variant || RVVariantProp.outline}
+          color={colorClass}
+          {...args}
+        />
+      </div>
+      <div style={{ minHeight: '10vh' }}>
+        <BreadcrumbComponent
+          routeLinks={routeLinks}
+          size={size}
+          Icon={Icon}
+          variant={variant || RVVariantProp.white}
+          color={colorClass}
+          {...args}
+        />
+      </div>
+      <div style={{ minHeight: '10vh' }}>
+        <BreadcrumbComponent
+          routeLinks={routeLinks}
+          size={size}
+          Icon={Icon}
+          variant={variant || RVVariantProp.disabled}
+          color={colorClass}
+          {...args}
+        />
+      </div>
     </ThemeBlock>
   );
 };
@@ -68,7 +98,7 @@ export const ShowCase = ({
       ],
     },
   ],
-  Icon = FileTrayFullSvg,
+  Icon,
   size = RVSizeProp.small,
   ...args
 }) => {
@@ -79,5 +109,16 @@ export const ShowCase = ({
   );
 };
 
-export const breadcrumb = Template.bind({});
-breadcrumb.args = { variant: 'primary' };
+export const WithoutIcon = Template.bind({});
+WithoutIcon.args = {};
+export const WithIcon = Template.bind({});
+WithIcon.args = { Icon: FileTrayFullSvg };
+
+export const SmallSized = Template.bind({});
+SmallSized.args = { size: RVSizeProp.small, Icon: FileTrayFullSvg };
+
+export const MediumSized = Template.bind({});
+MediumSized.args = { size: RVSizeProp.medium, Icon: FileTrayFullSvg };
+
+export const LargeSized = Template.bind({});
+LargeSized.args = { size: RVSizeProp.large, Icon: FileTrayFullSvg };
