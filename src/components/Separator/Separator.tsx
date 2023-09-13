@@ -44,7 +44,7 @@ const Separator = forwardRef<HTMLDivElement, RVSeparator>(
         {...props}
       >
         <hr className={styles.horizontalLine} />
-        <span className={styles.content}>{children}</span>
+        {Boolean(children) && <span className={styles.content}>{children}</span>}
         <hr className={styles.horizontalLine} />
       </div>
     );

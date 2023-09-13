@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Separator as SeparatorComponent, RVSeparator } from '.';
+import { ThemeBlock } from '../../storybookComponents';
+import { RVSizeProp, RVVariantProp } from '../../types';
 
 export default {
   title: 'Components/Separator',
@@ -13,14 +15,61 @@ export default {
 
 const Template: ComponentStory<typeof SeparatorComponent> = ({
   children = 'Separator',
+  color,
+  variant,
   ...args
-}) => <SeparatorComponent {...args}>{children}</SeparatorComponent>;
+}) => {
+  const [colorClass, setColorClass] = useState(color);
+  useEffect(() => {
+    setColorClass(color);
+  }, [color]);
 
-export const primary = Template.bind({});
-primary.args = { variant: 'primary' };
+  return (
+    <ThemeBlock onColorChange={setColorClass}>
+      <div>
+        <SeparatorComponent variant={variant || RVVariantProp.primary} color={colorClass} {...args}>
+          {children}
+        </SeparatorComponent>
+      </div>
+      <div>
+        <SeparatorComponent variant={variant || RVVariantProp.outline} color={colorClass} {...args}>
+          {children}
+        </SeparatorComponent>
+      </div>
+      <div>
+        <SeparatorComponent variant={variant || RVVariantProp.white} color={colorClass} {...args}>
+          {children}
+        </SeparatorComponent>
+      </div>
+      <div>
+        <SeparatorComponent
+          variant={variant || RVVariantProp.disabled}
+          color={colorClass}
+          {...args}
+        >
+          {children}
+        </SeparatorComponent>
+      </div>
+    </ThemeBlock>
+  );
+};
 
-export const outline = Template.bind({});
-outline.args = { variant: 'outline' };
+export const ShowCase = ({ children = 'SEPARATOR', ...args }) => {
+  return (
+    <>
+      <SeparatorComponent {...args}>{children}</SeparatorComponent>
+    </>
+  );
+};
 
-export const white = Template.bind({});
-white.args = { variant: 'white' };
+export const withoutLabel = Template.bind({});
+withoutLabel.args = { children: '' };
+
+export const SmallSized = Template.bind({});
+SmallSized.args = { size: RVSizeProp.small };
+
+export const MediumSized = Template.bind({});
+MediumSized.args = { size: RVSizeProp.medium };
+
+export const LargeSized = Template.bind({});
+LargeSized.args = { size: RVSizeProp.large };
