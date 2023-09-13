@@ -56,7 +56,9 @@ const Template: ComponentStory<typeof AvatarComponent> = ({
 export const ShowCase = ({ src = 'https://i.pravatar.cc/300', ...args }) => {
   return (
     <>
-      <AvatarComponent src={src} {...args} />
+      <div>
+        <AvatarComponent src={src} {...args} />
+      </div>
     </>
   );
 };

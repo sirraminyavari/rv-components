@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Button as ButtonComponent, RVButton } from '.';
+import { ButtonGroup as ButtonGroupComponent, RVButtonGroup } from '../ButtonGroup';
 import { ThemeBlock } from '../../storybookComponents';
 import HomeSvg from '../../icons/home.svg';
 import { RVSizeProp, RVVariantProp } from '../../types';
@@ -31,18 +32,26 @@ const Template: ComponentStory<typeof ButtonComponent> = ({
 
   return (
     <ThemeBlock onColorChange={setColorClass}>
-      <ButtonComponent variant={variant || RVVariantProp.primary} color={colorClass} {...args}>
-        {children}
-      </ButtonComponent>
-      <ButtonComponent variant={variant || RVVariantProp.outline} color={colorClass} {...args}>
-        {children}
-      </ButtonComponent>
-      <ButtonComponent variant={variant || RVVariantProp.white} color={colorClass} {...args}>
-        {children}
-      </ButtonComponent>
-      <ButtonComponent variant={variant || RVVariantProp.disabled} color={colorClass} {...args}>
-        {children}
-      </ButtonComponent>
+      <div>
+        <ButtonComponent variant={variant || RVVariantProp.primary} color={colorClass} {...args}>
+          {children}
+        </ButtonComponent>
+      </div>
+      <div>
+        <ButtonComponent variant={variant || RVVariantProp.outline} color={colorClass} {...args}>
+          {children}
+        </ButtonComponent>
+      </div>
+      <div>
+        <ButtonComponent variant={variant || RVVariantProp.white} color={colorClass} {...args}>
+          {children}
+        </ButtonComponent>
+      </div>
+      <div>
+        <ButtonComponent variant={variant || RVVariantProp.disabled} color={colorClass} {...args}>
+          {children}
+        </ButtonComponent>
+      </div>
     </ThemeBlock>
   );
 };
@@ -99,4 +108,98 @@ withIcon.args = {
       custom icon
     </>
   ),
+};
+export const Stacked = ({
+  children = 'some content',
+  color,
+  variant,
+  rounded,
+  size = RVSizeProp.small,
+  ...args
+}) => {
+  const [colorClass, setColorClass] = useState(color);
+  useEffect(() => {
+    setColorClass(color);
+  }, [color]);
+
+  return (
+    <ThemeBlock onColorChange={setColorClass}>
+      <ButtonGroupComponent rounded={rounded}>
+        <ButtonComponent
+          variant={variant || RVVariantProp.primary}
+          color={colorClass}
+          size={size}
+          {...args}
+        >
+          <HomeSvg />
+          {children}
+        </ButtonComponent>
+        <ButtonComponent
+          variant={variant || RVVariantProp.primary}
+          color={colorClass}
+          size={size}
+          {...args}
+        >
+          <HomeSvg />
+        </ButtonComponent>
+      </ButtonGroupComponent>
+      <ButtonGroupComponent rounded={rounded}>
+        <ButtonComponent
+          variant={variant || RVVariantProp.outline}
+          color={colorClass}
+          size={size}
+          {...args}
+        >
+          <HomeSvg />
+          {children}
+        </ButtonComponent>
+        <ButtonComponent
+          variant={variant || RVVariantProp.outline}
+          color={colorClass}
+          size={size}
+          {...args}
+        >
+          <HomeSvg />
+        </ButtonComponent>
+      </ButtonGroupComponent>
+      <ButtonGroupComponent rounded={rounded}>
+        <ButtonComponent
+          variant={variant || RVVariantProp.white}
+          color={colorClass}
+          size={size}
+          {...args}
+        >
+          <HomeSvg />
+          {children}
+        </ButtonComponent>
+        <ButtonComponent
+          variant={variant || RVVariantProp.white}
+          color={colorClass}
+          size={size}
+          {...args}
+        >
+          <HomeSvg />
+        </ButtonComponent>
+      </ButtonGroupComponent>
+      <ButtonGroupComponent rounded={rounded}>
+        <ButtonComponent
+          variant={variant || RVVariantProp.disabled}
+          color={colorClass}
+          size={size}
+          {...args}
+        >
+          <HomeSvg />
+          {children}
+        </ButtonComponent>
+        <ButtonComponent
+          variant={variant || RVVariantProp.disabled}
+          color={colorClass}
+          size={size}
+          {...args}
+        >
+          <HomeSvg />
+        </ButtonComponent>
+      </ButtonGroupComponent>
+    </ThemeBlock>
+  );
 };

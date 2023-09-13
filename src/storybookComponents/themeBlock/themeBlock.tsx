@@ -7,9 +7,15 @@ const themeClasses = ['default', 'dark', 'amoled'];
 export interface RVThemeBlock {
   onColorChange?: (color?: RVColorProp) => void;
   defaultColor?: RVColorProp;
+  withWindowFrame?: boolean;
 }
 
-const ThemeBlock = ({ children, defaultColor, onColorChange }: PropsWithChildren<RVThemeBlock>) => {
+const ThemeBlock = ({
+  children,
+  defaultColor,
+  onColorChange,
+  withWindowFrame = true,
+}: PropsWithChildren<RVThemeBlock>) => {
   const [selectedColorPalette, setSelectedColorPalette] = useState<RVColorProp | undefined>(
     defaultColor
   );
@@ -17,7 +23,7 @@ const ThemeBlock = ({ children, defaultColor, onColorChange }: PropsWithChildren
     if (onColorChange) onColorChange(selectedColorPalette);
   }, [selectedColorPalette, onColorChange]);
   return (
-    <div className={styles.themeBlock}>
+    <div className={clsx(styles.themeBlock, withWindowFrame && styles.withWindowFrame)}>
       {onColorChange && (
         <div className={styles.paletteContainer}>
           {Object.entries(RVColorProp).map(([colorName, colorClass]) => {
@@ -39,6 +45,13 @@ const ThemeBlock = ({ children, defaultColor, onColorChange }: PropsWithChildren
             className={clsx(themeClass, styles.themeBox)}
             title={themeClass}
           >
+            {withWindowFrame && (
+              <div className={styles.windowDots}>
+                <span className={styles.dot}></span>
+                <span className={styles.dot}></span>
+                <span className={styles.dot}></span>
+              </div>
+            )}
             <div className={styles.componentWrapper}>{children}</div>
           </div>
         );

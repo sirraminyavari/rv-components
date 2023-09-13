@@ -27,7 +27,7 @@ const Template: ComponentStory<typeof AccordionComponent> = ({
   return (
     <ThemeBlock onColorChange={setColorClass}>
       <AccordionComponent color={colorClass} {...{ label, colorClass, ...args }}>
-        {children}
+        <div>{children}</div>
       </AccordionComponent>
     </ThemeBlock>
   );
