@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { DetailedHTMLProps, forwardRef, HTMLAttributes, PropsWithoutRef } from 'react';
 import { GroupBase, OptionsOrGroups } from 'react-select';
 import ReactSelect from 'react-select';
-import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types';
+import { RVColorProp } from '../../types';
 import styles from './Select.module.scss';
 import type SelectType from 'react-select/dist/declarations/src/Select';
 
@@ -13,15 +13,27 @@ export interface RVSelect
     PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color' | 'size'
   > {
-  variant?: Exclude<RVVariantProp, RVVariantProp.disabled>;
+  /** set between the various designs of the component (default:RVVariantProp.primary) */
+  // variant?: Exclude<RVVariantProp, RVVariantProp.disabled>;
+  /** set the component color palette (default:RVColorProp.cgBlue) */
   color?: RVColorProp;
-  size?: RVSizeProp;
+  /** set the size of the component (default:RVSizeProp.medium) */
+  // size?: RVSizeProp;
+  /** set the identifying label text for selectInput */
   label?: string;
+  /** set the component to be disabled and not be interactive */
   disabled?: boolean;
+  /** set the component to fill the available width of the parent element */
   fullWidth?: boolean;
+  /** set the Select component to accept multiple values */
   isMulti?: boolean;
+  /** show a clear button at the end of the Select component  */
   isClearable?: boolean;
-  options: { label: string | number; value: string | number }[];
+  /** set the Select component available choices */
+  options: {
+    label: string | number;
+    value: string | number;
+  }[];
 }
 
 const Select = forwardRef<
@@ -32,8 +44,8 @@ const Select = forwardRef<
     {
       className,
       color = RVColorProp.cgBlue,
-      variant = RVVariantProp.primary,
-      size = RVSizeProp.small,
+      // variant = RVVariantProp.primary,
+      // size = RVSizeProp.small,
       disabled,
       onChange,
       options,
