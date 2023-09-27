@@ -34,9 +34,19 @@ jobs:
         run: yarn run build
 
       - name: Publish as NPM package 📦
-        uses: kanekotic/merge-release@master
+        uses: Github-Actions-Community/merge-release@v6.0.7
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
           DEPLOY_DIR: ./dist
           SRC_PACKAGE_DIR: ./dist
+
+      - name: Update CHANGELOG.md 📋
+        run: |
+        npm pkg set version=$(git describe --tags --abbrev=0)
+        yarn conventional-changelog -p angular -i CHANGELOG.md -s -r 0
+        git config user.name "changelog"
+        git config user.email "<>"
+        git add CHANGELOG.md
+        git commit -m ':wheelchair: docs-only --- update CHANGELOG'
+        git push -f
