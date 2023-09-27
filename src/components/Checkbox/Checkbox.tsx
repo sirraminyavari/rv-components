@@ -5,6 +5,8 @@ import {
   forwardRef,
   InputHTMLAttributes,
   PropsWithoutRef,
+  useCallback,
+  useEffect,
   useState,
 } from 'react';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types';
@@ -12,12 +14,7 @@ import styles from './Checkbox.module.scss';
 
 export interface RVCheckbox
   extends Omit<
-    PropsWithoutRef<
-      DetailedHTMLProps<
-        InputHTMLAttributes<HTMLInputElement | HTMLTextAreaElement>,
-        HTMLInputElement | HTMLTextAreaElement
-      >
-    >,
+    PropsWithoutRef<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>>,
     'color' | 'size'
   > {
   variant?: Exclude<RVVariantProp, RVVariantProp.disabled>;
@@ -36,21 +33,32 @@ const Checkbox = forwardRef<HTMLInputElement, RVCheckbox>(
       size = RVSizeProp.small,
       disabled,
       label,
+      checked,
+      id = `${Date.now()}`,
       onChange,
+      readOnly,
       ...props
     },
     ref
   ) => {
-    const [isToggled, setIsToggled] = useState<boolean>(false);
+    const [isToggled, setIsToggled] = useState<boolean>();
 
-    const onChangeHandler: ChangeEventHandler<HTMLInputElement> = (e) => {
-      setIsToggled(e.target.checked);
-      if (onChange) onChange(e);
-    };
+    const onChangeHandler: ChangeEventHandler<HTMLInputElement> = useCallback(
+      (e) => {
+        if (readOnly) return;
+        setIsToggled(e.target.checked);
+        if (onChange) onChange(e);
+      },
+      [isToggled, checked, readOnly]
+    );
+    useEffect(() => {
+      setIsToggled(checked);
+    }, [checked]);
+
     return (
       <>
         <label
-          htmlFor="two"
+          htmlFor={id}
           className={clsx(
             color,
             styles[size],
@@ -62,13 +70,15 @@ const Checkbox = forwardRef<HTMLInputElement, RVCheckbox>(
           )}
         >
           <input
-            id="two"
+            id={id}
             type="checkbox"
             ref={ref}
-            {...props}
             className={styles.input}
             disabled={disabled}
             onChange={onChangeHandler}
+            checked={isToggled}
+            readOnly={readOnly}
+            {...props}
           />
           <span className={styles.checkboxIndicator}></span>
           {label}
