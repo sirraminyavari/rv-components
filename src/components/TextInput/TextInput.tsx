@@ -27,9 +27,9 @@ export interface RVTextInput
   color?: RVColorProp;
   /** set the size of the component (default:RVSizeProp.medium) */
   size?: RVSizeProp;
-  /** set the identifying label text for checkbox */
+  /** set the identifying label text */
   label?: string;
-  /** set them component shape to be a isometric circle (default:undefined)*/
+  /** set the component to fill the available width of the parent element */
   fullWidth?: boolean;
   /** Textarea icon component (default: undefined) */
   Icon?: FunctionComponent<RVSvgProps>;

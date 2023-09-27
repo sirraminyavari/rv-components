@@ -34,8 +34,9 @@ export enum RVSizeProp {
   medium = 'medium',
   small = 'small',
 }
-
 export interface RVSvgProps extends SVGProps<SVGSVGElement> {
   size?: string;
   outline?: boolean;
 }
+
+export type Optional<T, K extends keyof T> = Omit<T, K> & Partial<Pick<T, K>>;
