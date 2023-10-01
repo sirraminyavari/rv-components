@@ -1,37 +1,123 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import {
   PasswordStrengthCheck as PasswordStrengthCheckComponent,
   RVPasswordStrengthCheck,
 } from '.';
+import { TextInput } from '../TextInput';
+import { RVColorProp, RVVariantProp } from '../../types';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Components/PasswordStrengthCheck',
   component: PasswordStrengthCheckComponent,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {} as RVPasswordStrengthCheck,
 } as ComponentMeta<typeof PasswordStrengthCheckComponent>;
+const Template: ComponentStory<typeof PasswordStrengthCheckComponent> = ({
+  password,
+  variant = RVVariantProp.outline,
+  color = RVColorProp.cgBlue,
+  size,
+  ...args
+}) => {
+  const [passwordInput, setPasswordInput] = useState<string | undefined>();
+  return (
+    <>
+      <TextInput
+        label={'secure password input ...'}
+        size={size}
+        color={color}
+        variant={variant}
+        value={passwordInput}
+        onChange={(e) => setPasswordInput(e.target.value)}
+      />
+      <PasswordStrengthCheckComponent
+        password={passwordInput}
+        variant={variant}
+        color={color}
+        size={size}
+        {...args}
+      />
+    </>
+  );
+};
+export const ShowCase: ComponentStory<typeof PasswordStrengthCheckComponent> = ({
+  password,
+  passwordPolicySetting = {
+    MaxLength: 32,
+    MinLength: 8,
+    SpecialCharacters: true,
+    UpperLower: true,
+  },
+  variant = RVVariantProp.outline,
+  color = RVColorProp.cgBlue,
+  size,
+  ...args
+}) => {
+  const [passwordInput, setPasswordInput] = useState<string | undefined>();
+  return (
+    <>
+      <TextInput
+        label={'secure password input ...'}
+        size={size}
+        color={color}
+        variant={variant}
+        value={passwordInput}
+        onChange={(e) => setPasswordInput(e.target.value)}
+      />
+      <PasswordStrengthCheckComponent
+        password={passwordInput}
+        passwordPolicySetting={passwordPolicySetting}
+        variant={variant}
+        color={color}
+        size={size}
+        {...args}
+      />
+    </>
+  );
+};
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof PasswordStrengthCheckComponent> = ({ ...args }) => (
-  <div>
-    <PasswordStrengthCheckComponent {...args} />
-  </div>
-);
+export const defaultPolicies = Template.bind({});
 
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-export const PasswordStrengthCheck = Template.bind({});
+export const InputLengthLimit = Template.bind({});
+InputLengthLimit.args = {
+  passwordPolicySetting: {
+    MaxLength: 15,
+    MinLength: 6,
+  },
+};
 
-export const primary = Template.bind({});
-primary.args = { variant: 'primary' };
+export const WithUpperAndLowercase = Template.bind({});
+WithUpperAndLowercase.args = {
+  passwordPolicySetting: {
+    UpperLower: true,
+  },
+};
 
-export const outline = Template.bind({});
-outline.args = { variant: 'outline' };
+export const NonAlphabetic = Template.bind({});
+NonAlphabetic.args = {
+  passwordPolicySetting: {
+    NonAlphabetic: true,
+  },
+};
 
-export const white = Template.bind({});
-white.args = { variant: 'white' };
+export const NonAlphaNumeric = Template.bind({});
+NonAlphaNumeric.args = {
+  passwordPolicySetting: {
+    NonAlphaNumeric: true,
+  },
+};
 
-export const disabled = Template.bind({});
-disabled.args = { disabled: true };
+export const Numeric = Template.bind({});
+Numeric.args = {
+  passwordPolicySetting: {
+    Numeric: true,
+  },
+};
+
+export const SpecialCharacters = Template.bind({});
+SpecialCharacters.args = {
+  passwordPolicySetting: {
+    SpecialCharacters: true,
+  },
+};
