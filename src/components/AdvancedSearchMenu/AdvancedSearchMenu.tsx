@@ -16,6 +16,7 @@ import { Typography } from '../Typography';
 import styles from './AdvancedSearchMenu.module.scss';
 import { RVSelectOptionItem } from '../SelectInput';
 import { AdvancedSearchMenuInputFields } from './AdvancedSearchMenuInputFields';
+import { isEqual, orderBy } from 'lodash';
 
 export type RVFormFieldValueTypes = {
   placeholder?: string;
@@ -33,7 +34,7 @@ export type RVFormFieldValueTypes = {
     }
   | {
       dataType: 'singleChoice';
-      defaultValues?: { label: string; value?: boolean }[];
+      defaultValues?: undefined;
       options: { label: string; value: boolean }[];
       canHaveMultipleInputs?: undefined;
     }
@@ -45,8 +46,8 @@ export type RVFormFieldValueTypes = {
     }
   | {
       dataType: 'date';
-      defaultValues: { label: string; value?: Date }[];
-      options?: undefined;
+      defaultValues?: undefined;
+      options: { label: string; value?: Date }[];
       canHaveMultipleInputs?: undefined;
     }
 );
@@ -83,6 +84,8 @@ const AdvancedSearchMenu = forwardRef<HTMLDivElement, RVAdvancedSearchMenu>(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       Record<string, RVFormFieldValueTypes & { inputValues?: any }>
     >({ ...formFieldTypes });
+    const [updateState, setUpdateState] = useState<number>();
+    const [resetState, setResetState] = useState<number | undefined>(Date.now());
 
     useEffect(() => {
       let tempSearchInputDataState = { ...searchInputData };
@@ -90,14 +93,14 @@ const AdvancedSearchMenu = forwardRef<HTMLDivElement, RVAdvancedSearchMenu>(
         if (searchInputData && searchInputData[name] !== undefined) {
           switch (tempSearchInputDataState[name].dataType) {
             case 'shortText':
-              if (!tempSearchInputDataState[name].inputValues) {
-                tempSearchInputDataState[name].inputValues = [''];
-              }
               if (
                 searchInputData[name].defaultValues &&
                 !tempSearchInputDataState[name].inputValues
               ) {
                 tempSearchInputDataState[name].inputValues = searchInputData[name].defaultValues;
+              }
+              if (!tempSearchInputDataState[name].inputValues) {
+                tempSearchInputDataState[name].inputValues = [''];
               }
 
               tempSearchInputDataState[name].hasChanged = false;
@@ -136,8 +139,15 @@ const AdvancedSearchMenu = forwardRef<HTMLDivElement, RVAdvancedSearchMenu>(
           }
         }
       });
-    }, [formFieldTypes]);
-
+      setSearchInputData(tempSearchInputDataState);
+      setUpdateState(Date.now());
+    }, [formFieldTypes, resetState]);
+    const resetFormToInitialData = () => {
+      setResetState(undefined);
+      setResetState(Date.now());
+      setSearchInputData(formFieldTypes);
+      if (onReset) onReset();
+    };
     const setSearchInputDataChange = useCallback(
       (
         name: string,
@@ -165,7 +175,10 @@ const AdvancedSearchMenu = forwardRef<HTMLDivElement, RVAdvancedSearchMenu>(
                 searchInputData[name].defaultValues &&
                 !tempSearchInputDataState[name].inputValues
               ) {
-                tempSearchInputDataState[name].inputValues = searchInputData[name].defaultValues;
+                tempSearchInputDataState[name].inputValues = [
+                  //@ts-expect-error-next-line
+                  ...searchInputData[name].defaultValues,
+                ];
               }
               if (searchInputData[name].inputValues[inputIdx] !== undefined) {
                 tempSearchInputDataState[name].inputValues[inputIdx] = newValue;
@@ -175,16 +188,20 @@ const AdvancedSearchMenu = forwardRef<HTMLDivElement, RVAdvancedSearchMenu>(
               }
               tempSearchInputDataState[name].inputValues?.forEach((value: string, idx: number) => {
                 if (value === '') {
-                  delete tempSearchInputDataState[name].inputValues[idx];
+                  tempSearchInputDataState[name].inputValues.splice(idx, 1);
                 }
               });
-              (tempSearchInputDataState[name].inputValues as string[]).push('');
+              tempSearchInputDataState[name].inputValues = (
+                tempSearchInputDataState[name].inputValues as string[]
+              ).filter((i) => i);
 
+              tempSearchInputDataState[name].inputValues.push('');
               tempSearchInputDataState[name].hasChanged =
                 JSON.stringify(formFieldTypes[name].defaultValues || []) !==
                 JSON.stringify(
                   tempSearchInputDataState[name].inputValues.filter((item: string) => item !== '')
                 );
+              console.log(tempSearchInputDataState[name]);
 
               break;
             case 'singleChoice':
@@ -206,22 +223,18 @@ const AdvancedSearchMenu = forwardRef<HTMLDivElement, RVAdvancedSearchMenu>(
               }
               //@ts-ignore-next-line
               tempSearchInputDataState[name].inputValues[inputIdx].value = isChecked;
-              tempSearchInputDataState[name].hasChanged =
-                JSON.stringify(
-                  tempSearchInputDataState[name].options?.filter((item) => item.value)
-                ) !=
-                JSON.stringify(
-                  tempSearchInputDataState[name].inputValues?.filter(
-                    (item: Record<string, string | boolean>) => item.value
-                  )
-                );
+              tempSearchInputDataState[name].hasChanged = isEqual(
+                orderBy(tempSearchInputDataState[name].options, 'name', 'asc'),
+                orderBy(tempSearchInputDataState[name].inputValues, 'name', 'asc')
+              );
+
+              console.log(tempSearchInputDataState[name]);
 
               break;
 
             case 'MultipleChoices':
               //@ts-ignore-next-line
               tempSearchInputDataState[name].inputValues = newValue;
-
               tempSearchInputDataState[name].hasChanged =
                 JSON.stringify(
                   tempSearchInputDataState[name].options?.filter((item) => item.value)
@@ -238,9 +251,10 @@ const AdvancedSearchMenu = forwardRef<HTMLDivElement, RVAdvancedSearchMenu>(
               break;
           }
           setSearchInputData(tempSearchInputDataState);
+          setUpdateState(Date.now());
         }
       },
-      [searchInputData, formFieldTypes]
+      [searchInputData, updateState, formFieldTypes]
     );
 
     return (
@@ -258,17 +272,19 @@ const AdvancedSearchMenu = forwardRef<HTMLDivElement, RVAdvancedSearchMenu>(
             </button>
           </div>
           <Scrollbar color={RVColorProp.distant} className={styles.advancedSearchMenuItemContainer}>
-            <AdvancedSearchMenuInputFields
-              searchInputData={searchInputData}
-              setSearchInputDataChange={setSearchInputDataChange}
-            />
+            {resetState && (
+              <AdvancedSearchMenuInputFields
+                searchInputData={searchInputData}
+                setSearchInputDataChange={setSearchInputDataChange}
+              />
+            )}
           </Scrollbar>
           <div className={styles.advancedSearchMenuBoxActionsContainer}>
             <Button
               color={RVColorProp.crayola}
               variant={RVVariantProp.white}
               fullCircle
-              onClick={onReset}
+              onClick={resetFormToInitialData}
             >
               <ReloadSvg />
             </Button>

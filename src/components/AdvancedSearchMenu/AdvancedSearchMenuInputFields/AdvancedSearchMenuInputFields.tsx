@@ -23,7 +23,6 @@ const AdvancedSearchMenuInputFields = ({
 }: RVAdvancedSearchMenuInputFields) => {
   return (
     <>
-      {' '}
       {Object.entries(searchInputData).map(
         ([
           name,
@@ -49,10 +48,13 @@ const AdvancedSearchMenuInputFields = ({
                     isActive={isActive}
                   >
                     <TextInput
+                      key={`${dataType}-${name}-input-${0}`}
+                      id={`${dataType}-${name}-input-${0}`}
                       name={name}
                       label={placeholder}
                       variant={RVVariantProp.outline}
                       color={RVColorProp.distant}
+                      defaultValue={inputValues[0]}
                       onChange={(event) => {
                         setSearchInputDataChange(name, 0, event.target.value);
                       }}

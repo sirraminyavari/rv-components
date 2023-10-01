@@ -21,28 +21,29 @@ const Template: ComponentStory<typeof AdvancedSearchMenuComponent> = ({
   const data: typeof formFieldTypes = {
     myName1: {
       dataType: 'shortText',
-      label: 'some label for short',
+      label: 'some label for text search',
       canHaveMultipleInputs: true,
       placeholder: 'some placeholder',
+      defaultValues: ['my values'],
     },
     myName2: {
       dataType: 'singleChoice',
-      label: 'some label for short',
+      label: 'some label for checkboxes',
       placeholder: 'some placeholder',
       options: [
         { label: 'label1', value: false },
-        { label: 'label2', value: false },
+        { label: 'label2', value: true },
         { label: 'label3', value: false },
       ],
     },
     myName3: {
       dataType: 'MultipleChoices',
-      label: 'some label for short',
+      label: 'some label for selectInput',
       placeholder: 'some placeholder',
       options: [
-        { label: 'label1', value: '123' },
-        { label: 'label2', value: '1234' },
-        { label: 'label3', value: '12345' },
+        { label: 'label1', value: '1000' },
+        { label: 'label2', value: '1001' },
+        { label: 'label3', value: '1002' },
       ],
     },
   };
@@ -61,12 +62,3 @@ const Template: ComponentStory<typeof AdvancedSearchMenuComponent> = ({
 
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 export const AdvancedSearchMenu = Template.bind({});
-
-export const primary = Template.bind({});
-primary.args = { variant: 'primary' };
-
-export const outline = Template.bind({});
-outline.args = { variant: 'outline' };
-
-export const white = Template.bind({});
-white.args = { variant: 'white' };
