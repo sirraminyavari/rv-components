@@ -1,18 +1,16 @@
 import clsx from 'clsx';
-import { DetailedHTMLProps, forwardRef, HTMLAttributes, PropsWithoutRef } from 'react';
-import { GroupBase, OptionsOrGroups } from 'react-select';
-import ReactSelect from 'react-select';
+import { ComponentProps, forwardRef, PropsWithoutRef, ComponentRef } from 'react';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types';
+import ReactSelect, { ActionMeta } from 'react-select';
+import type StateManagedSelect from 'react-select/dist/declarations/src/stateManager';
 import styles from './Select.module.scss';
-import type SelectType from 'react-select/dist/declarations/src/Select';
 
-interface RVSelectOptions extends OptionsOrGroups<string | number, GroupBase<string | number>> {}
-
+export interface RVSelectOptionItem {
+  readonly value?: string | number | boolean | Date;
+  readonly label: string | number;
+}
 export interface RVSelect
-  extends Omit<
-    PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
-    'color' | 'size'
-  > {
+  extends Omit<PropsWithoutRef<ComponentProps<StateManagedSelect>>, 'color' | 'size' | 'onChange'> {
   variant?: Exclude<RVVariantProp, RVVariantProp.disabled>;
   color?: RVColorProp;
   size?: RVSizeProp;
@@ -21,13 +19,12 @@ export interface RVSelect
   fullWidth?: boolean;
   isMulti?: boolean;
   isClearable?: boolean;
-  options: { label: string | number; value: string | number }[];
+  selectedOptions?: RVSelectOptionItem | RVSelectOptionItem[];
+  options?: RVSelectOptionItem[];
+  onChange?: (newValue: RVSelectOptionItem[], actionMeta: ActionMeta<RVSelectOptionItem[]>) => void;
 }
 
-const Select = forwardRef<
-  SelectType<string | number, boolean, GroupBase<string | number>>,
-  RVSelect
->(
+const Select = forwardRef<ComponentRef<StateManagedSelect>, RVSelect>(
   (
     {
       className,
@@ -35,10 +32,11 @@ const Select = forwardRef<
       variant = RVVariantProp.primary,
       size = RVSizeProp.small,
       disabled,
-      onChange,
       options,
       fullWidth,
       isMulti,
+      selectedOptions,
+      onChange,
       ...props
     },
     ref
@@ -57,10 +55,10 @@ const Select = forwardRef<
             disabled && styles.disabled,
             fullWidth && styles.fullWidth,
             color
-            // styles[size],
-            // styles[variant]
           )}
-          options={options as unknown as RVSelectOptions}
+          options={options}
+          value={selectedOptions}
+          onChange={onChange as (newValue: unknown, actionMeta: ActionMeta<unknown>) => void}
           {...props}
         />
       </>

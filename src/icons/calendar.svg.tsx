@@ -18,8 +18,8 @@ const CalendarSvg = ({ size, outline, ...props }: RVSvgProps) => {
             y="80"
             fill="none"
             stroke="currentColor"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinejoin="round"
+            strokeWidth="32"
             rx="48"
           />
           <circle cx="296" cy="232" r="24" fill="currentColor" />
@@ -34,16 +34,16 @@ const CalendarSvg = ({ size, outline, ...props }: RVSvgProps) => {
           <path
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
             d="M128 48v32m256-32v32"
           />
           <path
             fill="none"
             stroke="currentColor"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinejoin="round"
+            strokeWidth="32"
             d="M464 160H48"
           />
         </>

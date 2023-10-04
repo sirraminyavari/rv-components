@@ -61,6 +61,7 @@
     background-color: hsl(var(--lighter) / 100%);
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--black) / 15%);
     padding-inline: px-to-rem(3);
+    z-index: 2;
 
     [class*='-option'] {
       border-radius: $borderRadiusQuarter;
