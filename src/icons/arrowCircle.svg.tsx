@@ -14,16 +14,16 @@ export const ArrowLeftSvg = ({ size, outline, ...props }: RVSvgProps) => {
           <path
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
             d="M249.38 336L170 256l79.38-80m-68.35 80H342"
           />
           <path
             fill="none"
             stroke="currentColor"
-            stroke-miterlimit="10"
-            stroke-width="32"
+            strokeMiterlimit="10"
+            strokeWidth="32"
             d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192s192-86 192-192Z"
           />
         </>
@@ -52,16 +52,16 @@ export const ArrowRightSvg = ({ size, outline, ...props }: RVSvgProps) => {
           <path
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
             d="M262.62 336L342 256l-79.38-80m68.35 80H170"
           />
           <path
             fill="none"
             stroke="currentColor"
-            stroke-miterlimit="10"
-            stroke-width="32"
+            strokeMiterlimit="10"
+            strokeWidth="32"
             d="M256 448c106 0 192-86 192-192S362 64 256 64S64 150 64 256s86 192 192 192Z"
           />
         </>
@@ -90,16 +90,16 @@ export const ArrowUpSvg = ({ size, outline, ...props }: RVSvgProps) => {
           <path
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
             d="M176 249.38L256 170l80 79.38m-80-68.35V342"
           />
           <path
             fill="none"
             stroke="currentColor"
-            stroke-miterlimit="10"
-            stroke-width="32"
+            strokeMiterlimit="10"
+            strokeWidth="32"
             d="M448 256c0-106-86-192-192-192S64 150 64 256s86 192 192 192s192-86 192-192Z"
           />
         </>
@@ -128,16 +128,16 @@ export const ArrowDownSvg = ({ size, outline, ...props }: RVSvgProps) => {
           <path
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
             d="M176 262.62L256 342l80-79.38m-80 68.35V170"
           />
           <path
             fill="none"
             stroke="currentColor"
-            stroke-miterlimit="10"
-            stroke-width="32"
+            strokeMiterlimit="10"
+            strokeWidth="32"
             d="M256 64C150 64 64 150 64 256s86 192 192 192s192-86 192-192S362 64 256 64Z"
           />
         </>

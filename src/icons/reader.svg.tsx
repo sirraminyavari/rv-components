@@ -18,17 +18,17 @@ const ReaderSvg = ({ size, outline, ...props }: RVSvgProps) => {
             y="48"
             fill="none"
             stroke="currentColor"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinejoin="round"
+            strokeWidth="32"
             rx="48"
             ry="48"
           />
           <path
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
             d="M176 128h160m-160 80h160m-160 80h80"
           />
         </>
