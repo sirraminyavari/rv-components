@@ -1,3 +1,3 @@
-import { default as Select, RVSelect } from './Select';
-export type { RVSelect };
+import { default as Select, RVSelect, RVSelectOptionItem } from './Select';
+export type { RVSelect, RVSelectOptionItem };
 export { Select };
