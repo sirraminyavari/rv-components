@@ -43,10 +43,11 @@ jobs:
 
       - name: Update CHANGELOG.md 📋
         run: |
-        npm pkg set version=$(git describe --tags --abbrev=0)
-        yarn conventional-changelog -p angular -i CHANGELOG.md -s -r 0
-        git config user.name "changelog"
-        git config user.email "<>"
-        git add CHANGELOG.md
-        git commit -m ':wheelchair: docs-only --- update CHANGELOG'
-        git push -f
+          yarn global add conventional-changelog-cli
+          npm pkg set version=$(git describe --tags --abbrev=0)
+          conventional-changelog -p angular -i CHANGELOG.md -s -r 0
+          git config user.name "changelog"
+          git config user.email "<>"
+          git add CHANGELOG.md
+          git commit -m ':wheelchair: docs-only --- update CHANGELOG'
+          git push -f
