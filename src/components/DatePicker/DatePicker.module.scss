@@ -1,5 +1,16 @@
 @import '../../scss/modules/default';
+@import 'ramin-modern-calendar-datepicker/lib/DatePicker.css';
 
 .datePicker {
   cursor: pointer;
+
+  &.fullWidth {
+    width: 100%;
+  }
+
+  [class*='DatePicker__calendarContainer'] {
+    // background-color: red;
+
+    z-index: 5;
+  }
 }

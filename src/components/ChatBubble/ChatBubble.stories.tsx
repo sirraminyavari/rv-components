@@ -1,7 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { ChatBubble as ChatBubbleComponent, RVChatBubble } from '.';
+import { ThemeBlock } from '../../storybookComponents';
+import { RVVariantProp } from '../../types';
 
 export default {
   title: 'Components/ChatBubble',
@@ -12,24 +14,109 @@ export default {
 } as ComponentMeta<typeof ChatBubbleComponent>;
 
 const Template: ComponentStory<typeof ChatBubbleComponent> = ({
-  children = 'ChatBubble',
+  children = 'Hi there, how are you?',
   additionalInfo = '12:43',
-
+  color,
+  variant,
+  bubbleType,
   ...args
-}) => (
-  <ChatBubbleComponent additionalInfo={additionalInfo} {...args}>
-    {children}
-  </ChatBubbleComponent>
-);
+}) => {
+  const [colorClass, setColorClass] = useState(color);
+  useEffect(() => {
+    setColorClass(color);
+  }, [color]);
 
-export const ChatBubble = Template.bind({});
-ChatBubble.args = { variant: 'primary' };
+  return (
+    <ThemeBlock onColorChange={setColorClass}>
+      <ChatBubbleComponent
+        bubbleType={bubbleType || 'sender'}
+        variant={variant || RVVariantProp.primary}
+        color={colorClass}
+        additionalInfo={additionalInfo}
+        {...args}
+      >
+        {children}
+      </ChatBubbleComponent>
+      <ChatBubbleComponent
+        bubbleType={bubbleType || 'receiver'}
+        variant={variant || RVVariantProp.primary}
+        color={colorClass}
+        additionalInfo={additionalInfo}
+        {...args}
+      >
+        {children}
+      </ChatBubbleComponent>
+      <ChatBubbleComponent
+        bubbleType={bubbleType || 'sender'}
+        variant={variant || RVVariantProp.outline}
+        color={colorClass}
+        additionalInfo={additionalInfo}
+        {...args}
+      >
+        {children}
+      </ChatBubbleComponent>
+      <ChatBubbleComponent
+        bubbleType={bubbleType || 'receiver'}
+        variant={variant || RVVariantProp.outline}
+        color={colorClass}
+        additionalInfo={additionalInfo}
+        {...args}
+      >
+        {children}
+      </ChatBubbleComponent>
+      <ChatBubbleComponent
+        bubbleType={bubbleType || 'sender'}
+        variant={variant || RVVariantProp.white}
+        color={colorClass}
+        additionalInfo={additionalInfo}
+        {...args}
+      >
+        {children}
+      </ChatBubbleComponent>
+      <ChatBubbleComponent
+        bubbleType={bubbleType || 'receiver'}
+        variant={variant || RVVariantProp.white}
+        color={colorClass}
+        additionalInfo={additionalInfo}
+        {...args}
+      >
+        {children}
+      </ChatBubbleComponent>
+      <ChatBubbleComponent
+        bubbleType={bubbleType || 'sender'}
+        variant={variant || RVVariantProp.disabled}
+        color={colorClass}
+        additionalInfo={additionalInfo}
+        {...args}
+      >
+        {children}
+      </ChatBubbleComponent>
+      <ChatBubbleComponent
+        bubbleType={bubbleType || 'receiver'}
+        variant={variant || RVVariantProp.disabled}
+        color={colorClass}
+        additionalInfo={additionalInfo}
+        {...args}
+      >
+        {children}
+      </ChatBubbleComponent>
+    </ThemeBlock>
+  );
+};
 
-export const primary = Template.bind({});
-primary.args = { variant: 'primary' };
+export const ShowCase = ({ children = 'Hi there, how are you?', ...args }) => {
+  return (
+    <>
+      <ChatBubbleComponent {...args}>{children}</ChatBubbleComponent>
+    </>
+  );
+};
 
-export const outline = Template.bind({});
-outline.args = { variant: 'outline' };
+export const Conversation = Template.bind({});
+Conversation.args = {};
 
-export const white = Template.bind({});
-white.args = { variant: 'white' };
+export const Sender = Template.bind({});
+Sender.args = { bubbleType: 'sender' };
+
+export const Receiver = Template.bind({});
+Receiver.args = { bubbleType: 'receiver' };

@@ -21,12 +21,19 @@ export interface RVTextInput
     >,
     'color' | 'size'
   > {
+  /** set between the various designs of the component (default:RVVariantProp.primary) */
   variant?: Exclude<RVVariantProp, RVVariantProp.disabled>;
+  /** set the component color palette (default:RVColorProp.cgBlue) */
   color?: RVColorProp;
+  /** set the size of the component (default:RVSizeProp.medium) */
   size?: RVSizeProp;
+  /** set the identifying label text */
   label?: string;
+  /** set the component to fill the available width of the parent element */
   fullWidth?: boolean;
+  /** Textarea icon component (default: undefined) */
   Icon?: FunctionComponent<RVSvgProps>;
+  /** set the Textarea icon position if exists (default:trailing) */
   IconPosition?: 'leading' | 'trailing';
 }
 

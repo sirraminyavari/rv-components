@@ -8,10 +8,15 @@ export interface RVSeparator
     PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color'
   > {
+  /** set between the various designs of the component (default:RVVariantProp.primary) */
   variant?: RVVariantProp;
+  /** set the component color palette (default:RVColorProp.platinum) */
   color?: RVColorProp;
+  /** set the size of the component (default:RVSizeProp.medium) */
   size?: RVSizeProp;
+  /** set the separator label to not get wrapped */
   nowrap?: boolean;
+  /** set the separator label to have ellipsis when `nowrap` is toggled */
   ellipsis?: boolean;
 }
 
@@ -44,7 +49,7 @@ const Separator = forwardRef<HTMLDivElement, RVSeparator>(
         {...props}
       >
         <hr className={styles.horizontalLine} />
-        <span className={styles.content}>{children}</span>
+        {Boolean(children) && <span className={styles.content}>{children}</span>}
         <hr className={styles.horizontalLine} />
       </div>
     );

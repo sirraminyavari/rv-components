@@ -9,7 +9,7 @@ import {
   useEffect,
   useState,
 } from 'react';
-import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types';
+import { RVColorProp, RVSizeProp, RVSudoActionProp, RVVariantProp } from '../../types';
 import styles from './Checkbox.module.scss';
 
 export interface RVCheckbox
@@ -17,10 +17,16 @@ export interface RVCheckbox
     PropsWithoutRef<DetailedHTMLProps<InputHTMLAttributes<HTMLInputElement>, HTMLInputElement>>,
     'color' | 'size'
   > {
+  /** set between the various designs of the component (default:RVVariantProp.primary) */
   variant?: Exclude<RVVariantProp, RVVariantProp.disabled>;
+  /** set the component color palette (default:RVColorProp.cgBlue) */
   color?: RVColorProp;
+  /** set the size of the component (default:RVSizeProp.medium) */
   size?: RVSizeProp;
+  /** set the identifying label text for checkbox */
   label?: string;
+  /** set to programmatically change the css actions (hover,focus) (default:undefined)*/
+  sudoAction?: Exclude<RVSudoActionProp, RVSudoActionProp.active>;
 }
 
 const Checkbox = forwardRef<HTMLInputElement, RVCheckbox>(
@@ -37,6 +43,7 @@ const Checkbox = forwardRef<HTMLInputElement, RVCheckbox>(
       id = `${Date.now()}`,
       onChange,
       readOnly,
+      sudoAction,
       ...props
     },
     ref
@@ -68,6 +75,7 @@ const Checkbox = forwardRef<HTMLInputElement, RVCheckbox>(
             isToggled && styles.toggled,
             className
           )}
+          data-sudo={sudoAction}
         >
           <input
             id={id}

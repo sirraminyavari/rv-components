@@ -22,19 +22,30 @@ export interface RVAccordion
     PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color'
   > {
+  /**  */
   id?: string;
+  /** set the component color palette (default:RVColorProp.gray) */
   color?: RVColorProp;
+  /** set the Accordion toggle button label (accepts JSX/text) */
   label?: ReactNode;
+  /** forces the Accordion toggle to be always open or closed */
   open?: boolean;
+  /** the state of Accordion component at initial render */
   defaultOpen?: boolean;
+  /** the state of Accordion's label button */
   activeLabel?: boolean;
+  /** when the Accordion component and it's label button rendered, passed function will be called */
   onTriggerButtonLoad?: (element: HTMLButtonElement) => void;
+  /** when the Accordion label button clicked, passed function will be called */
   onLabelClick?: MouseEventHandler<HTMLButtonElement>;
+  /** when the Accordion toggle state changes, passed function will be called */
   onAccordionStatusChange?: (
     event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
     status: 'open' | 'closed'
   ) => void;
+  /** the Accordion label button classes */
   labelClassName?: string;
+  /** the Accordion content container classes */
   contentClassName?: string;
 }
 
@@ -97,7 +108,6 @@ const Accordion = forwardRef<HTMLDivElement, RVAccordion>(
             )}
             onClick={onLabelClick}
           >
-            {' '}
             {label}
           </span>
         </button>

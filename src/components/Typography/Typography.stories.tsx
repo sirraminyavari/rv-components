@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Typography as TypographyComponent, RVTypography } from '.';
+import { ThemeBlock } from '../../storybookComponents';
 
 export default {
   title: 'Components/Typography',
@@ -12,6 +13,25 @@ export default {
 } as ComponentMeta<typeof TypographyComponent>;
 
 const Template: ComponentStory<typeof TypographyComponent> = ({
+  children = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Porro dicta corporis magni, esse unde odit aperiam rem expedita obcaecati sit natus! Sequi fugit quisquam laudantium vero impedit suscipit blanditiis. Quibusdam!',
+  color,
+  ...args
+}) => {
+  const [colorClass, setColorClass] = useState(color);
+  useEffect(() => {
+    setColorClass(color);
+  }, [color]);
+
+  return (
+    <ThemeBlock onColorChange={setColorClass}>
+      <TypographyComponent color={colorClass} {...{ colorClass, ...args }}>
+        {children}
+      </TypographyComponent>
+    </ThemeBlock>
+  );
+};
+
+export const ShowCase = ({
   children = 'Lorem, ipsum dolor sit amet consectetur adipisicing elit.',
   ...args
 }) => <TypographyComponent {...args}>{children}</TypographyComponent>;
@@ -37,5 +57,5 @@ H6.args = { type: 'H6' };
 export const Paragraph = Template.bind({});
 Paragraph.args = { type: 'p' };
 
-export const Subtitle = Template.bind({});
-Subtitle.args = { type: 'sub' };
+export const Caption = Template.bind({});
+Caption.args = { type: 'caption' };
