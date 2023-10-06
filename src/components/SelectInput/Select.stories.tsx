@@ -1,57 +1,80 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Select as SelectComponent, RVSelect } from '.';
-import { ShapesSvg } from '../../icons';
+import { ThemeBlock } from '../../storybookComponents';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Components/Select',
   component: SelectComponent,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {} as RVSelect,
 } as ComponentMeta<typeof SelectComponent>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
+const defaultOptions = [
+  { label: 'John Wick', value: 'John Wick' },
+  { label: 'Frank Castle', value: 'Frank Castle' },
+  { label: 'John Constantine', value: 'John Constantine' },
+  { label: 'Charlie Wax', value: 'Charlie Wax' },
+  { label: 'Lucifer Morningstar', value: 'Lucifer Morningstar' },
+  { label: 'Mike McLusky', value: 'Mike McLusky' },
+  { label: 'Kayce Dutton', value: 'Kayce Dutton' },
+  { label: 'Alfie Solomons', value: 'Alfie Solomons' },
+  { label: 'Tyler Durden', value: 'Tyler Durden' },
+  {
+    label: 'Rhoshandiatellyneshiaunneveshenk Koyaanisquatsiuth Williams ',
+    value: 'Rhoshandiatellyneshiaunneveshenk Koyaanisquatsiuth Williams ',
+  },
+];
+
 const Template: ComponentStory<typeof SelectComponent> = ({
-  label = 'label',
-  options,
+  color,
+  options = defaultOptions,
+  label,
   ...args
-}) => (
-  <div style={{ minHeight: '100vh' }}>
-    <SelectComponent
-      label={label}
-      options={[
-        { label: 'John Wick', value: 'John Wick' },
-        { label: 'Frank Castle', value: 'Frank Castle' },
-        { label: 'John Constantine', value: 'John Constantine' },
-        { label: 'Charlie Wax', value: 'Charlie Wax' },
-        { label: 'Lucifer Morningstar', value: 'Lucifer Morningstar' },
-        { label: 'Mike McLusky', value: 'Mike McLusky' },
-        { label: 'Kayce Dutton', value: 'Kayce Dutton' },
-        { label: 'Alfie Solomons', value: 'Alfie Solomons' },
-        { label: 'Tyler Durden', value: 'Tyler Durden' },
-        {
-          label: 'Rhoshandiatellyneshiaunneveshenk Koyaanisquatsiuth Williams ',
-          value: 'Rhoshandiatellyneshiaunneveshenk Koyaanisquatsiuth Williams ',
-        },
-      ]}
-      {...args}
-    />
-  </div>
-);
+}) => {
+  const [colorClass, setColorClass] = useState(color);
+  useEffect(() => {
+    setColorClass(color);
+  }, [color]);
 
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-export const Select = Template.bind({});
+  return (
+    <ThemeBlock onColorChange={setColorClass}>
+      <div style={{ height: '350px', display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+        <SelectComponent label={label} color={colorClass} options={options} {...args} />
+      </div>
+    </ThemeBlock>
+  );
+};
 
-export const primary = Template.bind({});
-primary.args = { variant: 'primary' };
+export const ShowCase = ({ label, options = defaultOptions, ...args }) => {
+  return (
+    <>
+      <div style={{ height: '200px' }}>
+        <SelectComponent label={label} options={options} {...args} />
+      </div>
+    </>
+  );
+};
+export const MultiSelect = Template.bind({});
+MultiSelect.args = { isMulti: true };
 
-export const outline = Template.bind({});
-outline.args = { variant: 'outline' };
+export const ClearableSingleSelect = Template.bind({});
+ClearableSingleSelect.args = { isClearable: true };
 
-export const white = Template.bind({});
-white.args = { variant: 'white' };
+export const ClearableMultiSelect = Template.bind({});
+ClearableMultiSelect.args = { isClearable: true, isMulti: true };
+
+export const fullWidth = Template.bind({});
+fullWidth.args = { fullWidth: true };
 
 export const disabled = Template.bind({});
 disabled.args = { disabled: true };
+
+// export const SmallSized = Template.bind({});
+// SmallSized.args = { size: RVSizeProp.small };
+
+// export const MediumSized = Template.bind({});
+// MediumSized.args = { size: RVSizeProp.medium };
+
+// export const LargeSized = Template.bind({});
+// LargeSized.args = { size: RVSizeProp.large };

@@ -1,45 +1,105 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { DatePicker as DatePickerComponent, RVDatePicker } from '.';
-import { ShapesSvg } from '../../icons';
-
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
+import { RVVariantProp } from '../../types';
+import { ThemeBlock } from '../../storybookComponents';
 export default {
   title: 'Components/DatePicker',
   component: DatePickerComponent,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {} as RVDatePicker,
+  parameters: {
+    docs: {
+      description: {
+        component: `DatePicker component extends ramin-modern-calendar-datepicker package type interface and functionality`,
+      },
+    },
+  },
 } as ComponentMeta<typeof DatePickerComponent>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof DatePickerComponent> = ({ label = 'label', ...args }) => {
-  const first = useRef<HTMLInputElement>(null);
+const Template: ComponentStory<typeof DatePickerComponent> = ({
+  inputPlaceholder = 'picker label',
+  color,
+  variant,
+  ...args
+}) => {
+  const [colorClass, setColorClass] = useState(color);
+  useEffect(() => {
+    setColorClass(color);
+  }, [color]);
+
   return (
-    <div style={{ minHeight: '100vh', display: 'flex', alignItems: 'center' }}>
-      <DatePickerComponent
-        ref={first}
-        label={label}
-        {...args}
-        onClick={() => {
-          console.log(first);
+    <ThemeBlock onColorChange={setColorClass}>
+      <div
+        style={{
+          minHeight: '800px',
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          gap: '1rem',
         }}
-      />
-    </div>
+      >
+        <div>
+          <DatePickerComponent
+            inputPlaceholder={inputPlaceholder}
+            variant={variant || RVVariantProp.primary}
+            color={colorClass}
+            {...args}
+          />
+        </div>
+        <div>
+          <DatePickerComponent
+            inputPlaceholder={inputPlaceholder}
+            variant={variant || RVVariantProp.outline}
+            color={colorClass}
+            {...args}
+          />
+        </div>
+        <div>
+          <DatePickerComponent
+            inputPlaceholder={inputPlaceholder}
+            variant={variant || RVVariantProp.white}
+            color={colorClass}
+            {...args}
+          />
+        </div>
+      </div>
+    </ThemeBlock>
   );
 };
 
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
 export const DatePicker = Template.bind({});
 
-export const primary = Template.bind({});
-primary.args = { variant: 'primary' };
+export const inlinePanel = Template.bind({});
+inlinePanel.args = { fullWidth: true };
 
-export const outline = Template.bind({});
-outline.args = { variant: 'outline' };
+export const PersianLocale = Template.bind({});
+PersianLocale.args = { locale: 'fa' };
 
-export const white = Template.bind({});
-white.args = { variant: 'white' };
+export const shouldHighlightWeekends = Template.bind({});
+shouldHighlightWeekends.args = { shouldHighlightWeekends: true };
+
+export const minimumSelectableDate = Template.bind({});
+minimumSelectableDate.args = { minimumDate: { day: 8, month: 5, year: 2023 } };
+
+export const maximumSelectableDate = Template.bind({});
+maximumSelectableDate.args = { maximumDate: { day: 8, month: 5, year: 2025 } };
+
+export const disabledSelectableDates = Template.bind({});
+disabledSelectableDates.args = {
+  disabledDays: [
+    { day: 28, month: 10, year: 2023 },
+    { day: 28, month: 9, year: 2023 },
+    { day: 25, month: 9, year: 2023 },
+    { day: 21, month: 9, year: 2023 },
+    { day: 28, month: 8, year: 2023 },
+    { day: 28, month: 7, year: 2023 },
+    { day: 28, month: 6, year: 2023 },
+    { day: 28, month: 5, year: 2023 },
+    { day: 28, month: 4, year: 2023 },
+  ],
+};
 
 export const disabled = Template.bind({});
 disabled.args = { disabled: true };

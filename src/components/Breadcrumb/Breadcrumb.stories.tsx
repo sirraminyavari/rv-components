@@ -1,25 +1,23 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Breadcrumb as BreadcrumbComponent, RVBreadcrumb } from '.';
-import { RVSizeProp } from '../../types';
+import { RVSizeProp, RVVariantProp } from '../../types';
 import { FileTrayFullSvg } from '../../icons';
+import { ThemeBlock } from '../../storybookComponents';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Components/Breadcrumb',
   component: BreadcrumbComponent,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {} as RVBreadcrumb,
 } as ComponentMeta<typeof BreadcrumbComponent>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
 const Template: ComponentStory<typeof BreadcrumbComponent> = ({
   label = 'label',
   routeLinks = [
     { label: 'test1', path: '#!' },
     {
-      label: 'test',
+      label: 'test2',
       path: '#!',
       adjacentPaths: [
         { label: 'sub test', path: '#!' },
@@ -28,26 +26,99 @@ const Template: ComponentStory<typeof BreadcrumbComponent> = ({
       ],
     },
   ],
-  Icon = FileTrayFullSvg,
+  Icon,
+  size = RVSizeProp.small,
+
+  color,
+  variant,
+  ...args
+}) => {
+  const [colorClass, setColorClass] = useState(color);
+  useEffect(() => {
+    setColorClass(color);
+  }, [color]);
+
+  return (
+    <ThemeBlock onColorChange={setColorClass}>
+      <div style={{ minHeight: '10vh' }}>
+        <BreadcrumbComponent
+          routeLinks={routeLinks}
+          size={size}
+          Icon={Icon}
+          variant={variant || RVVariantProp.primary}
+          color={colorClass}
+          {...args}
+        />
+      </div>
+      <div style={{ minHeight: '10vh' }}>
+        <BreadcrumbComponent
+          routeLinks={routeLinks}
+          size={size}
+          Icon={Icon}
+          variant={variant || RVVariantProp.outline}
+          color={colorClass}
+          {...args}
+        />
+      </div>
+      <div style={{ minHeight: '10vh' }}>
+        <BreadcrumbComponent
+          routeLinks={routeLinks}
+          size={size}
+          Icon={Icon}
+          variant={variant || RVVariantProp.white}
+          color={colorClass}
+          {...args}
+        />
+      </div>
+      <div style={{ minHeight: '10vh' }}>
+        <BreadcrumbComponent
+          routeLinks={routeLinks}
+          size={size}
+          Icon={Icon}
+          variant={variant || RVVariantProp.disabled}
+          color={colorClass}
+          {...args}
+        />
+      </div>
+    </ThemeBlock>
+  );
+};
+
+export const ShowCase = ({
+  label = 'label',
+  routeLinks = [
+    { label: 'test1', path: '#!' },
+    {
+      label: 'test2',
+      path: '#!',
+      adjacentPaths: [
+        { label: 'sub test', path: '#!' },
+        { label: 'sub test2', path: '#!' },
+        { label: 'sub test3', path: '#!' },
+      ],
+    },
+  ],
+  Icon,
   size = RVSizeProp.small,
   ...args
-}) => (
-  <div style={{ minHeight: '100vh' }}>
-    <BreadcrumbComponent routeLinks={routeLinks} size={size} Icon={Icon} {...args} />
-  </div>
-);
+}) => {
+  return (
+    <>
+      <BreadcrumbComponent routeLinks={routeLinks} size={size} Icon={Icon} {...args} />
+    </>
+  );
+};
 
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-export const Breadcrumb = Template.bind({});
+export const WithoutIcon = Template.bind({});
+WithoutIcon.args = {};
+export const WithIcon = Template.bind({});
+WithIcon.args = { Icon: FileTrayFullSvg };
 
-export const primary = Template.bind({});
-primary.args = { variant: 'primary' };
+export const SmallSized = Template.bind({});
+SmallSized.args = { size: RVSizeProp.small, Icon: FileTrayFullSvg };
 
-export const outline = Template.bind({});
-outline.args = { variant: 'outline' };
+export const MediumSized = Template.bind({});
+MediumSized.args = { size: RVSizeProp.medium, Icon: FileTrayFullSvg };
 
-export const white = Template.bind({});
-white.args = { variant: 'white' };
-
-export const disabled = Template.bind({});
-disabled.args = { variant: 'disabled' };
+export const LargeSized = Template.bind({});
+LargeSized.args = { size: RVSizeProp.large, Icon: FileTrayFullSvg };

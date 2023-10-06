@@ -74,7 +74,8 @@
     }
 
     &:hover,
-    &.toggled {
+    &.toggled,
+    &[data-sudo='hover'] {
       color: hsl(var(--base));
 
       .checkboxIndicator {
@@ -86,7 +87,8 @@
       }
     }
 
-    &:focus-within {
+    &:focus-within,
+    &[data-sudo='focus'] {
       color: hsl(var(--darker));
 
       .checkboxIndicator {
@@ -113,7 +115,8 @@
     }
 
     &:hover,
-    &.toggled {
+    &.toggled,
+    &[data-sudo='hover'] {
       color: hsl(var(--dark));
 
       .checkboxIndicator {
@@ -123,7 +126,8 @@
       }
     }
 
-    &:focus-within {
+    &:focus-within,
+    &[data-sudo='focus'] {
       color: hsl(var(--darker));
 
       .checkboxIndicator {
@@ -150,7 +154,8 @@
     }
 
     &:hover,
-    &.toggled {
+    &.toggled,
+    &[data-sudo='hover'] {
       color: hsl(var(--base));
 
       .checkboxIndicator {
@@ -162,7 +167,8 @@
       }
     }
 
-    &:focus-within {
+    &:focus-within,
+    &[data-sudo='focus'] {
       color: hsl(var(--base));
 
       .checkboxIndicator {

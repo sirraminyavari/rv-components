@@ -8,10 +8,15 @@ export interface RVChatBubble
     PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color'
   > {
+  /** set between the various designs of the component (default:RVVariantProp.primary) */
   variant?: RVVariantProp;
+  /** set the component color palette (default:RVColorProp.cgBlue) */
   color?: RVColorProp;
+  /** set the size of the component (default:RVSizeProp.medium) */
   size?: RVSizeProp;
+  /** can be some minimal info or just a clock (default:undefined) */
   additionalInfo?: string;
+  /** set the direction of the bubble according to the type of it (default:undefined) */
   bubbleType?: 'sender' | 'receiver';
 }
 

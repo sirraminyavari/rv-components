@@ -67,7 +67,8 @@
       &.medium {
         margin-inline-end: px-to-rem(-28);
 
-        &:hover {
+        &:hover,
+        &[data-sudo='hover'] {
           transform: translateX(px-to-rem(-14));
         }
       }
@@ -76,7 +77,8 @@
       &.small {
         margin-inline-end: px-to-rem(-20);
 
-        &:hover {
+        &:hover,
+        &[data-sudo='hover'] {
           transform: translateX(px-to-rem(-12));
         }
       }
@@ -87,11 +89,13 @@
 .primary {
   background-color: hsl(var(--base));
 
-  &:hover {
+  &:hover,
+  &[data-sudo='hover'] {
     background-color: hsl(var(--light));
   }
 
-  &:active {
+  &:active,
+  &[data-sudo='active'] {
     background-color: hsl(var(--light));
   }
 }
@@ -101,11 +105,13 @@
   background-color: transparent;
   padding: px-to-rem(2);
 
-  &:hover {
+  &:hover,
+  &[data-sudo='hover'] {
     background-color: hsl(var(--base) / 15%);
   }
 
-  &:active {
+  &:active,
+  &[data-sudo='active'] {
     background-color: hsl(var(--base) / 25%);
   }
 }
@@ -113,7 +119,8 @@
 .white {
   background-color: hsl(var(--white));
 
-  &:hover {
+  &:hover,
+  &[data-sudo='hover'] {
     background-color: hsl(var(--base) / 100%);
   }
 }
@@ -128,19 +135,22 @@
     &.stacked {
       &:not(:last-of-type) {
         &.large {
-          &:hover {
+          &:hover,
+          &[data-sudo='hover'] {
             transform: translateX(px-to-rem(16));
           }
         }
 
         &.medium {
-          &:hover {
+          &:hover,
+          &[data-sudo='hover'] {
             transform: translateX(px-to-rem(14));
           }
         }
 
         &.small {
-          &:hover {
+          &:hover,
+          &[data-sudo='hover'] {
             transform: translateX(px-to-rem(12));
           }
         }

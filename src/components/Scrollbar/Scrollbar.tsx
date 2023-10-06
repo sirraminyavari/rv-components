@@ -18,12 +18,19 @@ export interface RVScrollbar
     PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color' | 'size'
   > {
+  /** set between the various designs of the component (coming soon) */
   variant?: Exclude<RVVariantProp, RVVariantProp.disabled>;
+  /** set the component color palette (default:RVColorProp.cgBlue) */
   color?: RVColorProp;
+  /** set the size of the component (default:RVSizeProp.medium) */
   size?: RVSizeProp;
-  onScrollEnd?: () => void;
+  /** a callback to call when the content is at the end of it  */
+  onScrollEnd?: (isAtTheBottom: boolean) => void;
+  /** set the `onScrollEnd` Threshold by pixels left to show before reaching the exact end */
   scrollEndThreshold?: number;
+  /** set the scrollbar to be visible all the time */
   alwaysShowScrollbar?: boolean;
+  /** set the scrollbar content wrapper className */
   contentContainerClassName?: string;
 }
 const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
@@ -97,7 +104,9 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
               contentRef?.current.getBoundingClientRect().height <=
             200
           ) {
-            onScrollEnd();
+            onScrollEnd(true);
+          } else {
+            onScrollEnd(false);
           }
     }, [onScrollEnd, scrollEndThreshold, contentRef]);
     const handleThumbPosition = useCallback(() => {

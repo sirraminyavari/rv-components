@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import { TextInput as TextInputComponent, RVTextInput } from '.';
+import { TextAreaInput as TextAreaInputComponent, RVTextAreaInput } from '.';
 import { ShapesSvg } from '../../icons';
 import { ThemeBlock } from '../../storybookComponents';
 import { RVSizeProp, RVVariantProp } from '../../types';
 
 export default {
-  title: 'Components/input/TextInput',
-  component: TextInputComponent,
-  argTypes: {} as RVTextInput,
-} as ComponentMeta<typeof TextInputComponent>;
+  title: 'Components/input/TextAreaInput',
+  component: TextAreaInputComponent,
+  argTypes: {} as RVTextAreaInput,
+} as ComponentMeta<typeof TextAreaInputComponent>;
 
-const Template: ComponentStory<typeof TextInputComponent> = ({
+const Template: ComponentStory<typeof TextAreaInputComponent> = ({
   label,
   color,
   variant,
@@ -26,7 +26,7 @@ const Template: ComponentStory<typeof TextInputComponent> = ({
   return (
     <ThemeBlock onColorChange={setColorClass}>
       <div>
-        <TextInputComponent
+        <TextAreaInputComponent
           label={label}
           variant={variant || RVVariantProp.primary}
           color={colorClass}
@@ -34,7 +34,7 @@ const Template: ComponentStory<typeof TextInputComponent> = ({
         />
       </div>
       <div>
-        <TextInputComponent
+        <TextAreaInputComponent
           label={label}
           variant={variant || RVVariantProp.outline}
           color={colorClass}
@@ -42,7 +42,7 @@ const Template: ComponentStory<typeof TextInputComponent> = ({
         />
       </div>
       <div>
-        <TextInputComponent
+        <TextAreaInputComponent
           label={label}
           variant={variant || RVVariantProp.white}
           color={colorClass}
@@ -56,13 +56,19 @@ const Template: ComponentStory<typeof TextInputComponent> = ({
 export const ShowCase = ({ label = 'label', ...args }) => {
   return (
     <>
-      <TextInputComponent label={label} {...args} />
+      <TextAreaInputComponent label={label} {...args} />
     </>
   );
 };
 
 export const WithoutLabel = Template.bind({});
 WithoutLabel.args = { label: undefined };
+
+export const customColumns = Template.bind({});
+customColumns.args = { cols: 12, label: 'text input label' };
+
+export const customRows = Template.bind({});
+customRows.args = { rows: 15, label: 'text input label' };
 
 export const TrailingIcon = Template.bind({});
 TrailingIcon.args = { Icon: ShapesSvg, IconPosition: 'trailing', label: 'text input label' };
