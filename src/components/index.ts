@@ -19,5 +19,6 @@ export * from './Separator';
 export * from './Sidebar';
 export * from './SideMenu';
 export * from './Switch';
+export * from './Toast';
 export * from './TextInput';
 export * from './Typography';
