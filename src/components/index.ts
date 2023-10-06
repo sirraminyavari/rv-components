@@ -7,6 +7,7 @@ export * from './Button';
 export * from './ButtonGroup';
 export * from './ChatBubble';
 export * from './Checkbox';
+export * from './copyToClipboard';
 export * from './DatePicker';
 export * from './Dropdown';
 export * from './Modal';
