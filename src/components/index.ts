@@ -16,6 +16,7 @@ export * from './RowItem';
 export * from './Scrollbar';
 export * from './SelectInput';
 export * from './Separator';
+export * from './Skeleton';
 export * from './Sidebar';
 export * from './SideMenu';
 export * from './Switch';
