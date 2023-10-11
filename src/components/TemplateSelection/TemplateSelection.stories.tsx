@@ -34,7 +34,7 @@ const templatesCallback: RVTemplateSelectionPanel['loadTemplateItems'] = async (
 const templatesPreviewCallback: RVTemplateSelectionPanel['loadPreviewItems'] = async (
   templateID: string
 ) => {
-  await new Promise((res) => setTimeout(res, 500));
+  await new Promise((res) => setTimeout(res, 1000));
   if (getRandomInt() % 2)
     return [
       {

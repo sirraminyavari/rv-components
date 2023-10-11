@@ -3,6 +3,7 @@ import { RVSizeProp, RVVariantProp } from '../../../types';
 import { Accordion } from '../../Accordion';
 import { Avatar } from '../../Avatar';
 import { Button } from '../../Button';
+import { Skeleton } from '../../Skeleton';
 import { Typography } from '../../Typography';
 import styles from './TemplateSelectionPanel.module.scss';
 
@@ -27,20 +28,24 @@ const TemplateSelectionPanelTemplateItems = ({
   loadTemplateItems,
   onSelect,
 }: RVTemplateSelectionPanelTemplateItems) => {
+  const [templatesLoadingSkeleton, setTemplatesLoadingSkeleton] = useState<boolean>(false);
   const [templates, setTemplates] = useState<
-    Awaited<ReturnType<RVTemplateSelectionPanelTemplateItems['loadTemplateItems']>> | undefined
-  >();
+    Awaited<ReturnType<RVTemplateSelectionPanelTemplateItems['loadTemplateItems']>>
+  >([]);
   useEffect(() => {
     (async () => {
+      if (!loadTemplateItems) return;
+      setTemplatesLoadingSkeleton(true);
       const allTemplates = await loadTemplateItems();
-      console.log(allTemplates);
 
       setTemplates(allTemplates);
+      setTemplatesLoadingSkeleton(false);
     })();
   }, [loadTemplateItems]);
 
   const generateTemplateItemTree = useCallback((templateItems?: TemplateDetails[]) => {
     if (templateItems === undefined) return <>no items</>;
+    if (templateItems.length === 0) return <></>;
     return templateItems.map((templateItem) => {
       if (templateItem.childTemplates)
         return (
@@ -107,7 +112,17 @@ const TemplateSelectionPanelTemplateItems = ({
     });
   }, []);
 
-  return <>{generateTemplateItemTree(templates)}</>;
+  return templatesLoadingSkeleton ? <LoadingState /> : <>{generateTemplateItemTree(templates)}</>;
 };
 
 export default TemplateSelectionPanelTemplateItems;
+
+const LoadingState = () => {
+  return (
+    <div className={styles.LoadingPreviewContainer}>
+      <Skeleton width={'70%'} height={20} />
+      <Skeleton width={'70%'} height={20} />
+      <Skeleton width={'70%'} height={20} />
+    </div>
+  );
+};

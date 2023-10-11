@@ -107,5 +107,34 @@
         margin-block: px-to-rem(4);
       }
     }
+
+    .LoadingPreviewContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+      height: 100%;
+      width: 100%;
+
+      & > span {
+        width: 100%;
+      }
+
+      .loadingStateIcon {
+        aspect-ratio: 1;
+        width: px-to-rem(20);
+        flex-shrink: 0;
+        flex-grow: 0;
+      }
+
+      .loadingStateLabel {
+        margin-block: px-to-rem(4);
+        width: 75%;
+        display: flex;
+        gap: px-to-rem(16);
+        flex-shrink: 0;
+        flex-grow: 0;
+      }
+    }
   }
 }

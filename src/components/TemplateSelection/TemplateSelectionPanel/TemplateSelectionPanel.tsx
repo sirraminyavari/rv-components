@@ -20,6 +20,7 @@ const TemplateSelectionPanel: VoidFunctionComponent<RVTemplateSelectionPanel> = 
   loadTemplateItems,
   loadPreviewItems,
 }) => {
+  const [previewLoadingSkeleton, setPreviewLoadingSkeleton] = useState<boolean>(false);
   const [previewItems, setPreviewItems] = useState<
     | {
         type: 'text' | 'checkbox' | 'date' | 'radio';
@@ -31,8 +32,10 @@ const TemplateSelectionPanel: VoidFunctionComponent<RVTemplateSelectionPanel> = 
   const loadPreViewItemsCallback = useCallback(
     async (templateID: string) => {
       if (!loadPreviewItems) return;
+      setPreviewLoadingSkeleton(true);
       const items = await loadPreviewItems(templateID);
       setPreviewItems(items);
+      setPreviewLoadingSkeleton(false);
     },
     [previewItems, loadPreviewItems]
   );
@@ -53,7 +56,10 @@ const TemplateSelectionPanel: VoidFunctionComponent<RVTemplateSelectionPanel> = 
         </Scrollbar>
       </div>
       <div className={styles.previewContainer}>
-        <TemplateSelectionPanelPreviewItems previewItems={previewItems} />
+        <TemplateSelectionPanelPreviewItems
+          previewItems={previewItems}
+          showSkeleton={previewLoadingSkeleton}
+        />
       </div>
     </div>
   );

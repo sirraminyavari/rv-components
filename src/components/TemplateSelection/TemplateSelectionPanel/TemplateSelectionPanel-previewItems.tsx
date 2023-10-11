@@ -8,33 +8,46 @@ import CalendarSvg from '../../../icons/calendar.svg';
 import { RVColorProp } from '../../../types';
 import { Typography } from '../../Typography';
 import styles from './TemplateSelectionPanel.module.scss';
+import { Skeleton } from '../../Skeleton';
 
 export interface RVTemplateSelectionPanelPreviewItems {
   previewItems?: {
     type: 'text' | 'checkbox' | 'date' | 'radio';
     label: string;
   }[];
+  showSkeleton?: boolean;
 }
 
 const TemplateSelectionPanelPreviewItems: VoidFunctionComponent<
   RVTemplateSelectionPanelPreviewItems
-> = ({ previewItems }) => {
-  return (
+> = ({ previewItems, showSkeleton }) => {
+  return showSkeleton ? (
+    <LoadingState />
+  ) : (
     <>
-      {previewItems === undefined && <EmptyState />}
-      {previewItems?.length === 0 && <EmptyState />}
-      {previewItems?.map(({ type, label }) => {
+      {!previewItems?.length && <EmptyState />}
+      {previewItems?.map(({ type, label }, idx) => {
         switch (type) {
           case 'radio':
             return (
-              <Typography type="H4" className={styles.previewNodeItem} color={RVColorProp.gray}>
+              <Typography
+                key={`preview-item-type-${idx}`}
+                type="H4"
+                className={styles.previewNodeItem}
+                color={RVColorProp.gray}
+              >
                 <RadioButtonSvg className={styles.previewIcon} />
                 {label}
               </Typography>
             );
           case 'checkbox':
             return (
-              <Typography type="H4" className={styles.previewNodeItem} color={RVColorProp.gray}>
+              <Typography
+                key={`preview-item-type-${idx}`}
+                type="H4"
+                className={styles.previewNodeItem}
+                color={RVColorProp.gray}
+              >
                 <CheckboxSvg className={styles.previewIcon} />
                 {label}
               </Typography>
@@ -42,7 +55,12 @@ const TemplateSelectionPanelPreviewItems: VoidFunctionComponent<
           case 'date':
             return (
               <>
-                <Typography type="H4" className={styles.previewNodeItem} color={RVColorProp.gray}>
+                <Typography
+                  key={`preview-item-type-${idx}`}
+                  type="H4"
+                  className={styles.previewNodeItem}
+                  color={RVColorProp.gray}
+                >
                   <CalendarSvg className={clsx(RVColorProp.gray, styles.previewIcon)} />
                   {label}
                 </Typography>
@@ -51,14 +69,19 @@ const TemplateSelectionPanelPreviewItems: VoidFunctionComponent<
           case 'text':
             return (
               <>
-                <Typography type="H4" className={styles.previewNodeItem} color={RVColorProp.gray}>
+                <Typography
+                  key={`preview-item-type-${idx}`}
+                  type="H4"
+                  className={styles.previewNodeItem}
+                  color={RVColorProp.gray}
+                >
                   <PenSvg className={styles.previewIcon} />
                   {label}
                 </Typography>
               </>
             );
           default:
-            return <></>;
+            return null;
         }
       })}
     </>
@@ -77,6 +100,28 @@ const EmptyState = () => {
       <Typography type="H4" color={RVColorProp.gray} className={styles.emptyStateLabel}>
         Please choose a template with form fields
       </Typography>
+    </div>
+  );
+};
+const LoadingState = () => {
+  return (
+    <div className={styles.LoadingPreviewContainer}>
+      {new Array(4).fill(0).map((_, idx) => {
+        return (
+          <Skeleton
+            key={`preview-items-loading-state-${idx}`}
+            inline
+            wrapper={({ children }) => (
+              <>
+                <Typography type="H4" className={styles.loadingStateLabel} color={RVColorProp.gray}>
+                  <Skeleton className={styles.loadingStateIcon} />
+                  {children}
+                </Typography>
+              </>
+            )}
+          />
+        );
+      })}
     </div>
   );
 };
