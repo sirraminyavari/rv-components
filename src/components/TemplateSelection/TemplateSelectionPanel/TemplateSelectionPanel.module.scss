@@ -7,22 +7,32 @@
   border-radius: px-to-rem(13);
   overflow: hidden;
 
+  .templateActionButton {
+    padding-inline: px-to-rem(35);
+  }
+
   .templatesContainer {
     box-sizing: border-box;
     flex-shrink: 0;
-    padding-block: px-to-rem(24);
+    padding-block: px-to-rem(16);
     padding-inline: px-to-rem(4);
     height: 100%;
     width: clamp(px-to-rem(50), 40%, px-to-rem(285));
 
     .templatesTitle {
       padding-inline: px-to-rem(20);
+      margin-block-start: 0;
+      margin-block-end: px-to-rem(12);
     }
 
     .templatesItemWrapper {
-      height: 85%;
+      height: 90%;
       padding-inline-end: px-to-rem(15);
       overflow-x: auto;
+
+      &.withSelectedButton {
+        height: 77%;
+      }
     }
 
     .accordionLabelButton {
@@ -33,6 +43,7 @@
 
       span {
         padding-inline: 0;
+        padding-block: px-to-rem(2);
       }
 
       .accordionLabelTitle {
@@ -50,8 +61,17 @@
       }
     }
 
+    .accordionLabelAvatar {
+      width: px-to-rem(32);
+      height: px-to-rem(32);
+      aspect-ratio: 1;
+      border-radius: px-to-rem(10);
+      border-width: px-to-rem(0.2);
+    }
+
     .accordionContent {
-      padding-inline-start: px-to-rem(24);
+      padding-inline-start: px-to-rem(36);
+      padding-block-start: px-to-rem(5);
       display: flex;
       flex-direction: column;
       gap: px-to-rem(6);
@@ -63,6 +83,48 @@
 
       .templateButtonLabel {
         margin-block: 0;
+
+        &.templateButtonActiveLabel {
+          color: hsl(var(--base));
+        }
+      }
+    }
+
+    .templatesButtonContainer {
+      padding-inline: px-to-rem(24);
+      padding-block-start: px-to-rem(8);
+      padding-block-end: px-to-rem(24);
+    }
+
+    .templatesCountLabel {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-block-start: 0;
+      margin-block-end: px-to-rem(8);
+    }
+
+    .LoadingTemplateContainer {
+      display: flex;
+      flex-direction: column;
+      justify-content: start;
+      align-items: start;
+      height: px-to-rem(120);
+      gap: px-to-rem(8);
+      padding-inline-start: px-to-rem(16);
+      width: 100%;
+
+      & > span {
+        width: 100%;
+      }
+
+      .loadingStateLabel {
+        width: 80%;
+        height: px-to-rem(16);
+      }
+
+      .loadingStateIndentedLabel {
+        margin-inline-start: 10%;
       }
     }
   }
@@ -70,11 +132,18 @@
   .previewContainer {
     box-sizing: border-box;
     background-color: hsl(var(--color-gray-lighter) / 20%);
-    padding-block: px-to-rem(40);
+    padding-block: px-to-rem(24);
     padding-inline: px-to-rem(32);
     height: 100%;
     width: 100%;
     overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &.centeredContent {
+      justify-content: center;
+    }
 
     .previewNodeItem {
       margin-block: px-to-rem(33);

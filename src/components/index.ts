@@ -1,3 +1,4 @@
+// components
 export * from './Accordion';
 export * from './AdvancedSearchMenu';
 export * from './Avatar';
@@ -23,3 +24,6 @@ export * from './Switch';
 export * from './Toast';
 export * from './TextInput';
 export * from './Typography';
+
+// layouts
+export * from './TemplateSelection';

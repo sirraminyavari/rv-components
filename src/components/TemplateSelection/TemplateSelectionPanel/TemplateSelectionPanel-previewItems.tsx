@@ -25,65 +25,67 @@ const TemplateSelectionPanelPreviewItems: VoidFunctionComponent<
     <LoadingState />
   ) : (
     <>
-      {!previewItems?.length && <EmptyState />}
-      {previewItems?.map(({ type, label }, idx) => {
-        switch (type) {
-          case 'radio':
-            return (
-              <Typography
-                key={`preview-item-type-${idx}`}
-                type="H4"
-                className={styles.previewNodeItem}
-                color={RVColorProp.gray}
-              >
-                <RadioButtonSvg className={styles.previewIcon} />
-                {label}
-              </Typography>
-            );
-          case 'checkbox':
-            return (
-              <Typography
-                key={`preview-item-type-${idx}`}
-                type="H4"
-                className={styles.previewNodeItem}
-                color={RVColorProp.gray}
-              >
-                <CheckboxSvg className={styles.previewIcon} />
-                {label}
-              </Typography>
-            );
-          case 'date':
-            return (
-              <>
+      <div>
+        {!previewItems?.length && <EmptyState />}
+        {previewItems?.map(({ type, label }, idx) => {
+          switch (type) {
+            case 'radio':
+              return (
                 <Typography
                   key={`preview-item-type-${idx}`}
                   type="H4"
                   className={styles.previewNodeItem}
                   color={RVColorProp.gray}
                 >
-                  <CalendarSvg className={clsx(RVColorProp.gray, styles.previewIcon)} />
+                  <RadioButtonSvg className={styles.previewIcon} />
                   {label}
                 </Typography>
-              </>
-            );
-          case 'text':
-            return (
-              <>
+              );
+            case 'checkbox':
+              return (
                 <Typography
                   key={`preview-item-type-${idx}`}
                   type="H4"
                   className={styles.previewNodeItem}
                   color={RVColorProp.gray}
                 >
-                  <PenSvg className={styles.previewIcon} />
+                  <CheckboxSvg className={styles.previewIcon} />
                   {label}
                 </Typography>
-              </>
-            );
-          default:
-            return null;
-        }
-      })}
+              );
+            case 'date':
+              return (
+                <>
+                  <Typography
+                    key={`preview-item-type-${idx}`}
+                    type="H4"
+                    className={styles.previewNodeItem}
+                    color={RVColorProp.gray}
+                  >
+                    <CalendarSvg className={clsx(RVColorProp.gray, styles.previewIcon)} />
+                    {label}
+                  </Typography>
+                </>
+              );
+            case 'text':
+              return (
+                <>
+                  <Typography
+                    key={`preview-item-type-${idx}`}
+                    type="H4"
+                    className={styles.previewNodeItem}
+                    color={RVColorProp.gray}
+                  >
+                    <PenSvg className={styles.previewIcon} />
+                    {label}
+                  </Typography>
+                </>
+              );
+            default:
+              return null;
+          }
+        })}
+      </div>
     </>
   );
 };

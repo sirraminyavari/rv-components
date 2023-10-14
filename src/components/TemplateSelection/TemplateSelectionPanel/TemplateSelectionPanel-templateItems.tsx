@@ -6,6 +6,7 @@ import { Button } from '../../Button';
 import { Skeleton } from '../../Skeleton';
 import { Typography } from '../../Typography';
 import styles from './TemplateSelectionPanel.module.scss';
+import clsx from 'clsx';
 
 type TemplateDetails = {
   id: string;
@@ -22,10 +23,12 @@ type TemplateDetails = {
 export interface RVTemplateSelectionPanelTemplateItems {
   onSelect?: (templateID: string) => void;
   loadTemplateItems: () => Promise<TemplateDetails[]>;
+  selectedTemplates: string[];
 }
 
 const TemplateSelectionPanelTemplateItems = ({
   loadTemplateItems,
+  selectedTemplates,
   onSelect,
 }: RVTemplateSelectionPanelTemplateItems) => {
   const [templatesLoadingSkeleton, setTemplatesLoadingSkeleton] = useState<boolean>(false);
@@ -60,7 +63,12 @@ const TemplateSelectionPanelTemplateItems = ({
                   onClick={() => onSelect && onSelect(templateItem.id)}
                 >
                   {templateItem?.avatarSrc && (
-                    <Avatar src={templateItem.avatarSrc} size={RVSizeProp.small} />
+                    <Avatar
+                      className={styles.accordionLabelAvatar}
+                      src={templateItem.avatarSrc}
+                      size={RVSizeProp.small}
+                      variant={RVVariantProp.outline}
+                    />
                   )}
                   <span>{templateItem.title}</span>
                 </Typography>
@@ -81,8 +89,21 @@ const TemplateSelectionPanelTemplateItems = ({
                     className={styles.templateButton}
                     onClick={() => onSelect && onSelect(id)}
                   >
-                    {avatarSrc && <Avatar src={avatarSrc} size={RVSizeProp.small} />}
-                    <Typography type="H4" className={styles.templateButtonLabel}>
+                    {avatarSrc && (
+                      <Avatar
+                        src={avatarSrc}
+                        size={RVSizeProp.small}
+                        className={styles.accordionLabelAvatar}
+                        variant={RVVariantProp.outline}
+                      />
+                    )}
+                    <Typography
+                      type="H4"
+                      className={clsx(
+                        styles.templateButtonLabel,
+                        selectedTemplates.includes(id) && styles.templateButtonActiveLabel
+                      )}
+                    >
                       {title}
                     </Typography>
                   </Button>
@@ -103,7 +124,13 @@ const TemplateSelectionPanelTemplateItems = ({
               onClick={() => onSelect && onSelect(id)}
             >
               {avatarSrc && <Avatar src={avatarSrc} size={RVSizeProp.small} />}
-              <Typography type="H4" className={styles.templateButtonLabel}>
+              <Typography
+                type="H4"
+                className={clsx(
+                  styles.templateButtonLabel,
+                  selectedTemplates.includes(id) && styles.templateButtonActiveLabel
+                )}
+              >
                 {title}
               </Typography>
             </Button>
@@ -119,10 +146,13 @@ export default TemplateSelectionPanelTemplateItems;
 
 const LoadingState = () => {
   return (
-    <div className={styles.LoadingPreviewContainer}>
-      <Skeleton width={'70%'} height={20} />
-      <Skeleton width={'70%'} height={20} />
-      <Skeleton width={'70%'} height={20} />
+    <div className={styles.LoadingTemplateContainer}>
+      <Skeleton className={styles.loadingStateLabel} />
+      <Skeleton className={styles.loadingStateLabel} />
+      <Skeleton className={styles.loadingStateLabel} />
+      <Skeleton className={clsx(styles.loadingStateLabel, styles.loadingStateIndentedLabel)} />
+      <Skeleton className={clsx(styles.loadingStateLabel, styles.loadingStateIndentedLabel)} />
+      <Skeleton className={styles.loadingStateLabel} />
     </div>
   );
 };

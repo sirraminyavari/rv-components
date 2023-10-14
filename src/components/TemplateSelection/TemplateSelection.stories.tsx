@@ -1,7 +1,10 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import React from 'react';
+import React, { useState } from 'react';
 import { getRandomInt } from '../../utils';
 import { TemplateSelectionPanel, RVTemplateSelectionPanel } from '.';
+import { Modal } from '../Modal';
+import { RVSizeProp } from '../../types';
+import { Button } from '../Button';
 
 export default {
   title: 'Layouts/TemplateSelectionPanel',
@@ -68,5 +71,40 @@ export const ShowCase: ComponentStory<typeof TemplateSelectionPanel> = ({
         loadPreviewItems={loadPreviewItems}
       />
     </div>
+  );
+};
+export const ModalView: ComponentStory<typeof TemplateSelectionPanel> = ({
+  loadTemplateItems = templatesCallback,
+  loadPreviewItems = templatesPreviewCallback,
+}) => {
+  const [modalStatus, setModalStatus] = useState(false);
+  const [selectedTemplates, setSelectedTemplates] = useState<string[]>();
+  return (
+    <>
+      <Button onClick={() => setModalStatus((prev) => !prev)}>open template selection menu</Button>
+      <p>Selected templates count: {selectedTemplates?.length || 0}</p>
+
+      {selectedTemplates?.map((template) => (
+        <p>{template}</p>
+      ))}
+
+      <Modal
+        isOpen={modalStatus}
+        size={RVSizeProp.large}
+        shouldCloseOnEsc
+        shouldCloseOnOverlayClick
+      >
+        <div style={{ height: '60vh' }}>
+          <TemplateSelectionPanel
+            loadTemplateItems={loadTemplateItems}
+            loadPreviewItems={loadPreviewItems}
+            onSubmit={(selectedTemplates) => {
+              setSelectedTemplates(selectedTemplates);
+              setModalStatus(false);
+            }}
+          />
+        </div>
+      </Modal>
+    </>
   );
 };
