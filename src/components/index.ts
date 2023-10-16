@@ -13,6 +13,7 @@ export * from './DatePicker';
 export * from './Dropdown';
 export * from './Modal';
 export * from './PeoplePicker';
+export * from './Panel';
 export * from './RowItem';
 export * from './Scrollbar';
 export * from './SelectInput';

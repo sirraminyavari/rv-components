@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { VoidFunctionComponent, useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { Scrollbar } from '../../Scrollbar';
 import { Typography } from '../../Typography';
 import styles from './TemplateSelectionPanel.module.scss';
@@ -13,17 +13,20 @@ import { Button } from '../../Button';
 import { RVColorProp, RVVariantProp } from '../../../types';
 
 export interface RVTemplateSelectionPanel {
+  /** callback to load template items */
   loadTemplateItems?: RVTemplateSelectionPanelTemplateItems['loadTemplateItems'];
+  /** callback to load the preview items for the selected template */
   loadPreviewItems?: (
     templateId: string
   ) => Promise<RVTemplateSelectionPanelPreviewItems['previewItems']>;
+  /** callback to return the selected template ids */
   onSubmit?: (selectedTemplates: string[]) => void;
 }
-const TemplateSelectionPanel: VoidFunctionComponent<RVTemplateSelectionPanel> = ({
+const TemplateSelectionPanel = ({
   loadTemplateItems,
   loadPreviewItems,
   onSubmit,
-}) => {
+}: RVTemplateSelectionPanel) => {
   const [previewLoadingSkeleton, setPreviewLoadingSkeleton] = useState<boolean>(false);
   const [previewTemplateID, setPreviewTemplateID] = useState<string>();
   const [selectedTemplates, setSelectedTemplates] = useState<string[]>([]);

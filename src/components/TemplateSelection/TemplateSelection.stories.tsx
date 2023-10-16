@@ -7,7 +7,7 @@ import { RVSizeProp } from '../../types';
 import { Button } from '../Button';
 
 export default {
-  title: 'Layouts/TemplateSelectionPanel',
+  title: 'Components/TemplateSelection',
   component: TemplateSelectionPanel,
   argTypes: {} as RVTemplateSelectionPanel,
 } as ComponentMeta<typeof TemplateSelectionPanel>;
@@ -93,6 +93,7 @@ export const ModalView: ComponentStory<typeof TemplateSelectionPanel> = ({
         size={RVSizeProp.large}
         shouldCloseOnEsc
         shouldCloseOnOverlayClick
+        onRequestClose={() => setModalStatus(false)}
       >
         <div style={{ height: '60vh' }}>
           <TemplateSelectionPanel
