@@ -9,6 +9,7 @@ import { RVColorProp } from '../../../types';
 import { Typography } from '../../Typography';
 import styles from './TemplateSelectionPanel.module.scss';
 import { Skeleton } from '../../Skeleton';
+import EmptyStateView from '../../../layouts/EmptyStateView/EmptyStateView';
 
 export interface RVTemplateSelectionPanelPreviewItems {
   previewItems?: {
@@ -26,7 +27,13 @@ const TemplateSelectionPanelPreviewItems: VoidFunctionComponent<
   ) : (
     <>
       <div>
-        {!previewItems?.length && <EmptyState />}
+        {!previewItems?.length && (
+          <EmptyStateView
+            IconComponent={ListCircleSvg}
+            title="No fields to show!"
+            description="Please choose a template with form fields"
+          />
+        )}
         {previewItems?.map(({ type, label }, idx) => {
           switch (type) {
             case 'radio':
@@ -92,19 +99,6 @@ const TemplateSelectionPanelPreviewItems: VoidFunctionComponent<
 
 export default TemplateSelectionPanelPreviewItems;
 
-const EmptyState = () => {
-  return (
-    <div className={styles.emptyPreviewContainer}>
-      <ListCircleSvg className={clsx(RVColorProp.gray, styles.emptyStateIcon)} />
-      <Typography type="H2" color={RVColorProp.gray} className={styles.emptyStateLabel}>
-        No fields to show!
-      </Typography>
-      <Typography type="H4" color={RVColorProp.gray} className={styles.emptyStateLabel}>
-        Please choose a template with form fields
-      </Typography>
-    </div>
-  );
-};
 const LoadingState = () => {
   return (
     <div className={styles.LoadingPreviewContainer}>

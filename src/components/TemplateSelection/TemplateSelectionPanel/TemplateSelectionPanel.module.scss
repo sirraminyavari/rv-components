@@ -159,24 +159,6 @@
       }
     }
 
-    .emptyPreviewContainer {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 100%;
-
-      .emptyStateIcon {
-        font-size: px-to-rem(72);
-        margin-block-end: px-to-rem(18);
-        color: hsl(var(--base));
-      }
-
-      .emptyStateLabel {
-        margin-block: px-to-rem(4);
-      }
-    }
-
     .LoadingPreviewContainer {
       display: flex;
       flex-direction: column;
