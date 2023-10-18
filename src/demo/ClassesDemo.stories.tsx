@@ -42,6 +42,9 @@ import {
   Typography,
 } from '..';
 import { Breadcrumb } from '../components/Breadcrumb';
+import { withAvatarDemo } from '../storybookComponents';
+
+const AvatarComponent = withAvatarDemo(Avatar, 'src');
 
 export default {
   title: 'Demo/Classes',
@@ -335,13 +338,14 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
                   </Button>
                   <AvatarGroup>
                     {new Array(3).fill(0).map((_, idx) => {
+                      const AvatarComponent = withAvatarDemo(Avatar, 'src', idx);
                       return (
-                        <Avatar
+                        <AvatarComponent
                           rounded="full"
                           size={RVSizeProp.small}
                           variant={RVVariantProp.white}
                           stacked
-                          src={`https://i.pravatar.cc/150?u=${idx}`}
+                          src="/demo-avatar"
                         />
                       );
                     })}

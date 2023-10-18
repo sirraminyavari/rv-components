@@ -300,7 +300,7 @@ export const NodePage: ComponentStory<FunctionComponent> = ({ ...args }) => {
                 }}
               >
                 <Avatar
-                  src="https://i.pravatar.cc/300"
+                  src="/demo-avatar"
                   fullCircle
                   variant={RVVariantProp.white}
                   size={RVSizeProp.medium}

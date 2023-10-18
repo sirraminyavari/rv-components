@@ -8,7 +8,6 @@ const withAvatarDemo =
       ...props,
       [srcPropKey]: Object.values(avatars)[avatarItem % Object.values(avatars).length],
     };
-
     return <Component {...demoProps} />;
   };
 
