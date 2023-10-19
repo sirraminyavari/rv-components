@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
-import { ThemeBlock } from '../../storybookComponents';
-import { Avatar as AvatarComponent, RVAvatar } from '.';
+import { ThemeBlock, withAvatarDemo } from '../../storybookComponents';
+import { Avatar, RVAvatar } from '.';
 import { AvatarGroup } from '../AvatarGroup';
 import { RVSizeProp, RVVariantProp } from '../../types';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
+const AvatarComponent = withAvatarDemo(Avatar, 'src');
+
 export default {
   title: 'Components/Avatar',
   component: AvatarComponent,
   // argTypes: {} as RVAvatar,
 } as ComponentMeta<typeof AvatarComponent>;
 
-const Template: ComponentStory<typeof AvatarComponent> = ({
-  src = 'https://i.pravatar.cc/300',
-  color,
-  variant,
-  ...args
-}) => {
+const Template: ComponentStory<typeof AvatarComponent> = ({ src, color, variant, ...args }) => {
   const [colorClass, setColorClass] = useState(color);
   useEffect(() => {
     setColorClass(color);
@@ -53,7 +49,7 @@ const Template: ComponentStory<typeof AvatarComponent> = ({
   );
 };
 
-export const ShowCase = ({ src = 'https://i.pravatar.cc/300', ...args }) => {
+export const ShowCase = ({ src, ...args }) => {
   return (
     <>
       <div>
@@ -93,13 +89,7 @@ RoundedHalf.args = { rounded: 'half' };
 export const RoundedFull = Template.bind({});
 RoundedFull.args = { rounded: 'full' };
 
-export const Stacked = ({
-  src = 'https://i.pravatar.cc/300',
-  stacked = true,
-  color,
-  variant,
-  ...args
-}) => {
+export const Stacked = ({ src, stacked = true, color, variant, ...args }) => {
   const [colorClass, setColorClass] = useState(color);
   useEffect(() => {
     setColorClass(color);

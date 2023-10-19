@@ -1,1 +1,2 @@
-export { default as ThemeBlock } from './themeBlock/themeBlock';
+export * from './themeBlock';
+export * from './useAvatarDemo';
