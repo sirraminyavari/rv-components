@@ -1,0 +1,51 @@
+@import '../../scss/modules/default';
+
+.panelContainer {
+  border-radius: px-to-rem(13);
+  background: hsl(var(--white));
+
+  .panelHeadContainer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: hsl(var(--lighter));
+
+    .closeIcon {
+      margin: 0;
+      font-size: px-to-rem(24);
+    }
+
+    .panelHeadTitle {
+      margin-block: px-to-rem(5);
+    }
+  }
+
+  .panelContentContainer {
+    padding-block: px-to-rem(10);
+    padding-inline: px-to-rem(24);
+  }
+
+  &.small {
+    .panelContentContainer,
+    .panelHeadContainer {
+      padding-block: px-to-rem(5);
+      padding-inline: px-to-rem(8);
+    }
+  }
+
+  &.medium {
+    .panelContentContainer,
+    .panelHeadContainer {
+      padding-block: px-to-rem(10);
+      padding-inline: px-to-rem(12);
+    }
+  }
+
+  &.large {
+    .panelContentContainer,
+    .panelHeadContainer {
+      padding-block: px-to-rem(20);
+      padding-inline: px-to-rem(24);
+    }
+  }
+}

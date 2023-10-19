@@ -1,0 +1,10 @@
+@import '../../scss/modules/default';
+
+.baseSkeleton {
+  --base-color: hsl(var(--base));
+  --highlight-color: hsl(var(--light));
+
+  &.circleSkeleton {
+    aspect-ratio: 1;
+  }
+}
