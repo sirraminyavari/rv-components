@@ -5,6 +5,8 @@ import { PeoplePicker as PeoplePickerComponent, RVPeoplePicker } from '.';
 import { Button, RVButton } from '../Button';
 import { PersonCircleSvg } from '../../icons';
 
+import * as demoAvatars from '../../storybookComponents/useAvatarDemo/assets/images';
+
 // More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Components/PeoplePicker',
@@ -31,37 +33,37 @@ const Template: ComponentStory<typeof PeoplePickerComponent> = ({
     {
       id: 'testid1',
       label: 'Me',
-      avatarSrc: 'https://i.pravatar.cc/300',
+      avatarSrc: demoAvatars.avatar1,
       selected: true,
     },
     {
       id: 'testid2',
       label: 'John Constantine',
-      avatarSrc: 'https://i.pravatar.cc/300',
+      avatarSrc: demoAvatars.avatar2,
       selected: false,
     },
     {
       id: 'testid3',
       label: 'Maria Sharapova',
-      avatarSrc: 'https://i.pravatar.cc/300',
+      avatarSrc: demoAvatars.avatar3,
       selected: false,
     },
     {
       id: 'testid11',
       label: 'Giorgia Whigham',
-      avatarSrc: 'https://i.pravatar.cc/300',
+      avatarSrc: demoAvatars.avatar4,
       selected: false,
     },
     {
       id: 'testid21',
       label: 'JJ Cole',
-      avatarSrc: 'https://i.pravatar.cc/300',
+      avatarSrc: demoAvatars.avatar5,
       selected: false,
     },
     {
       id: 'testid31',
       label: 'Anthony blinken',
-      avatarSrc: 'https://i.pravatar.cc/300',
+      avatarSrc: demoAvatars.avatar6,
       selected: false,
     },
     {
@@ -107,7 +109,6 @@ const Template: ComponentStory<typeof PeoplePickerComponent> = ({
   );
 };
 
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
 export const PeoplePicker = Template.bind({});
 
 export const primary = Template.bind({});

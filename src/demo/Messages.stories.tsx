@@ -45,6 +45,9 @@ import {
 } from '..';
 import { Breadcrumb } from '../components/Breadcrumb';
 import { Separator } from '../components/Separator';
+import { withAvatarDemo } from '../storybookComponents';
+
+const AvatarComponent = withAvatarDemo(Avatar, 'src', 5);
 
 export default {
   title: 'Demo/Messages',
@@ -261,8 +264,8 @@ export const Messages: ComponentStory<FunctionComponent> = ({ ...args }) => {
               alignItems: 'center',
             }}
           >
-            <Avatar
-              src="https://i.pravatar.cc/300"
+            <AvatarComponent
+              src="/demo-avatar"
               fullCircle
               variant={RVVariantProp.white}
               size={RVSizeProp.small}
