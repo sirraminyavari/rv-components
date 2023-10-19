@@ -1,48 +1,86 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
-import {
-  TextInput as TextInputComponent,
-  RVTextInput,
-  RVTextAreaInput,
-  TextAreaInput as TextAreaInputComponent,
-} from '.';
-import HomeSvg from '../../icons/home.svg';
+import { TextInput as TextInputComponent, RVTextInput } from '.';
 import { ShapesSvg } from '../../icons';
+import { ThemeBlock } from '../../storybookComponents';
+import { RVSizeProp, RVVariantProp } from '../../types';
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
-  title: 'Components/TextInput',
+  title: 'Components/input/TextInput',
   component: TextInputComponent,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   argTypes: {} as RVTextInput,
 } as ComponentMeta<typeof TextInputComponent>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof TextInputComponent> = ({ label = 'label', ...args }) => (
-  <TextInputComponent label={label} {...args} />
-);
-const TemplateTextArea: ComponentStory<typeof TextAreaInputComponent> = ({
-  label = 'label',
+const Template: ComponentStory<typeof TextInputComponent> = ({
+  label,
+  color,
+  variant,
   ...args
-}) => <TextAreaInputComponent label={label} {...args} />;
+}) => {
+  const [colorClass, setColorClass] = useState(color);
+  useEffect(() => {
+    setColorClass(color);
+  }, [color]);
 
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-export const TextInput = Template.bind({});
+  return (
+    <ThemeBlock onColorChange={setColorClass}>
+      <div>
+        <TextInputComponent
+          label={label}
+          variant={variant || RVVariantProp.primary}
+          color={colorClass}
+          {...args}
+        />
+      </div>
+      <div>
+        <TextInputComponent
+          label={label}
+          variant={variant || RVVariantProp.outline}
+          color={colorClass}
+          {...args}
+        />
+      </div>
+      <div>
+        <TextInputComponent
+          label={label}
+          variant={variant || RVVariantProp.white}
+          color={colorClass}
+          {...args}
+        />
+      </div>
+    </ThemeBlock>
+  );
+};
 
-export const TextAreaInput = TemplateTextArea.bind({});
+export const ShowCase = ({ label = 'label', ...args }) => {
+  return (
+    <>
+      <TextInputComponent label={label} {...args} />
+    </>
+  );
+};
 
-export const primary = Template.bind({});
-primary.args = { variant: 'primary' };
+export const WithoutLabel = Template.bind({});
+WithoutLabel.args = { label: undefined };
 
-export const outline = Template.bind({});
-outline.args = { variant: 'outline' };
+export const TrailingIcon = Template.bind({});
+TrailingIcon.args = { Icon: ShapesSvg, IconPosition: 'trailing', label: 'text input label' };
 
-export const white = Template.bind({});
-white.args = { variant: 'white' };
+export const LeadingIcon = Template.bind({});
+LeadingIcon.args = { Icon: ShapesSvg, IconPosition: 'leading', label: 'text input label' };
+
+export const WithValue = Template.bind({});
+WithValue.args = { defaultValue: 'some input value', label: 'text input label' };
+
+export const SmallSized = Template.bind({});
+SmallSized.args = { size: RVSizeProp.small, label: 'text input label' };
+
+export const MediumSized = Template.bind({});
+MediumSized.args = { size: RVSizeProp.medium, label: 'text input label' };
+
+export const LargeSized = Template.bind({});
+LargeSized.args = { size: RVSizeProp.large, label: 'text input label' };
 
 export const disabled = Template.bind({});
-disabled.args = { disabled: true, variant: 'white' };
-
-export const withIcon = Template.bind({});
-withIcon.args = { Icon: ShapesSvg };
+disabled.args = { disabled: true, defaultValue: 'some input value', label: 'text input label' };

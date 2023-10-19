@@ -2,8 +2,9 @@
 
 .buttonGroup {
   display: flex;
-  justify-content: center;
-  align-items: stretch;
+  justify-content: flex-start;
+  align-items: center;
+  box-sizing: border-box;
 
   & > button {
     border-radius: 0;

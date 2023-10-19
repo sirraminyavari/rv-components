@@ -16,14 +16,23 @@ export interface RVTextAreaInput
     >,
     'color' | 'size'
   > {
+  /** set between the various designs of the component (default:RVVariantProp.primary) */
   variant?: Exclude<RVVariantProp, RVVariantProp.disabled>;
+  /** set the component color palette (default:RVColorProp.cgBlue) */
   color?: RVColorProp;
+  /** set the size of the component (default:RVSizeProp.medium) */
   size?: RVSizeProp;
+  /** set the identifying label text for checkbox */
   label?: string;
+  /** set them component shape to be a isometric circle (default:undefined)*/
   fullWidth?: boolean;
+  /** Textarea icon component (default: undefined) */
   Icon?: FunctionComponent<RVSvgProps>;
+  /** set the Textarea icon position if exists (default:trailing) */
   IconPosition?: 'leading' | 'trailing';
+  /** number of text rows to show before overflowing */
   rows?: number;
+  /** number of text columns to show before overflowing */
   cols?: number;
 }
 

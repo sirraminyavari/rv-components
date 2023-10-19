@@ -1,38 +1,139 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
+import { ThemeBlock, withAvatarDemo } from '../../storybookComponents';
+import { Avatar, RVAvatar } from '.';
+import { AvatarGroup } from '../AvatarGroup';
+import { RVSizeProp, RVVariantProp } from '../../types';
 
-import { Avatar as AvatarComponent, RVAvatar } from '.';
-import HomeSvg from '../../icons/home.svg';
+const AvatarComponent = withAvatarDemo(Avatar, 'src');
 
-// More on default export: https://storybook.js.org/docs/react/writing-stories/introduction#default-export
 export default {
   title: 'Components/Avatar',
   component: AvatarComponent,
-  // More on argTypes: https://storybook.js.org/docs/react/api/argtypes
   // argTypes: {} as RVAvatar,
 } as ComponentMeta<typeof AvatarComponent>;
 
-// More on component templates: https://storybook.js.org/docs/react/writing-stories/introduction#using-args
-const Template: ComponentStory<typeof AvatarComponent> = ({
-  src = 'https://i.pravatar.cc/300',
-  ...args
-}) => <AvatarComponent src={src} {...args} />;
+const Template: ComponentStory<typeof AvatarComponent> = ({ src, color, variant, ...args }) => {
+  const [colorClass, setColorClass] = useState(color);
+  useEffect(() => {
+    setColorClass(color);
+  }, [color]);
 
-// More on args: https://storybook.js.org/docs/react/writing-stories/args
-export const Avatar = Template.bind({});
+  return (
+    <ThemeBlock onColorChange={setColorClass}>
+      <AvatarComponent
+        variant={variant || RVVariantProp.primary}
+        color={colorClass}
+        src={src}
+        {...args}
+      />
+      <AvatarComponent
+        variant={variant || RVVariantProp.outline}
+        color={colorClass}
+        src={src}
+        {...args}
+      />
+      <AvatarComponent
+        variant={variant || RVVariantProp.white}
+        color={colorClass}
+        src={src}
+        {...args}
+      />
+      <AvatarComponent
+        variant={variant || RVVariantProp.disabled}
+        color={colorClass}
+        src={src}
+        {...args}
+      />
+    </ThemeBlock>
+  );
+};
+
+export const ShowCase = ({ src, ...args }) => {
+  return (
+    <>
+      <div>
+        <AvatarComponent src={src} {...args} />
+      </div>
+    </>
+  );
+};
+export const SudoHover = Template.bind({});
+SudoHover.args = { sudoAction: 'hover' };
+
+export const SudoFocus = Template.bind({});
+SudoFocus.args = { sudoAction: 'focus' };
+
+export const SudoActive = Template.bind({});
+SudoActive.args = { sudoAction: 'active' };
+
+export const activeState = Template.bind({});
+activeState.args = { active: true };
 
 export const fullCircle = Template.bind({});
 fullCircle.args = {
   fullCircle: true,
 };
-export const primary = Template.bind({});
-primary.args = { variant: 'primary' };
+export const SmallSized = Template.bind({});
+SmallSized.args = { size: RVSizeProp.small };
 
-export const outline = Template.bind({});
-outline.args = { variant: 'outline' };
+export const MediumSized = Template.bind({});
+MediumSized.args = { size: RVSizeProp.medium };
 
-export const white = Template.bind({});
-white.args = { variant: 'white' };
+export const LargeSized = Template.bind({});
+LargeSized.args = { size: RVSizeProp.large };
 
-export const disabled = Template.bind({});
-disabled.args = { variant: 'disabled' };
+export const RoundedHalf = Template.bind({});
+RoundedHalf.args = { rounded: 'half' };
+
+export const RoundedFull = Template.bind({});
+RoundedFull.args = { rounded: 'full' };
+
+export const Stacked = ({ src, stacked = true, color, variant, ...args }) => {
+  const [colorClass, setColorClass] = useState(color);
+  useEffect(() => {
+    setColorClass(color);
+  }, [color]);
+
+  return (
+    <ThemeBlock onColorChange={setColorClass}>
+      <AvatarGroup>
+        <AvatarComponent
+          src={src}
+          stacked={stacked}
+          variant={variant || RVVariantProp.disabled}
+          color={colorClass}
+          {...args}
+        />
+        <AvatarComponent
+          src={src}
+          stacked={stacked}
+          variant={variant || RVVariantProp.disabled}
+          color={colorClass}
+          {...args}
+        />
+        <AvatarComponent
+          src={src}
+          stacked={stacked}
+          variant={variant || RVVariantProp.disabled}
+          color={colorClass}
+          {...args}
+        />
+        <AvatarComponent
+          src={src}
+          stacked={stacked}
+          variant={variant || RVVariantProp.disabled}
+          color={colorClass}
+          {...args}
+        />
+        <AvatarComponent
+          src={src}
+          stacked={stacked}
+          variant={variant || RVVariantProp.disabled}
+          color={colorClass}
+          {...args}
+        />
+      </AvatarGroup>
+    </ThemeBlock>
+  );
+};

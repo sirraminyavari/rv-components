@@ -14,9 +14,9 @@ const ReloadSvg = ({ size, outline, ...props }: RVSvgProps) => {
           <path
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-miterlimit="10"
-            stroke-width="32"
+            strokeLinecap="round"
+            strokeMiterlimit="10"
+            strokeWidth="32"
             d="m400 148l-21.12-24.57A191.43 191.43 0 0 0 240 64C134 64 48 150 48 256s86 192 192 192a192.09 192.09 0 0 0 181.07-128"
           />
           <path
@@ -29,9 +29,9 @@ const ReloadSvg = ({ size, outline, ...props }: RVSvgProps) => {
           <path
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-miterlimit="10"
-            stroke-width="32"
+            strokeLinecap="round"
+            strokeMiterlimit="10"
+            strokeWidth="32"
             d="m400 148l-21.12-24.57A191.43 191.43 0 0 0 240 64C134 64 48 150 48 256s86 192 192 192a192.09 192.09 0 0 0 181.07-128"
           />
           <path

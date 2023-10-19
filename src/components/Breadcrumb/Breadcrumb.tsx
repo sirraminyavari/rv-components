@@ -18,14 +18,20 @@ export interface RVBreadcrumb
     PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color' | 'size'
   > {
+  /** set between the various designs of the component (default:RVVariantProp.primary) */
   variant?: RVVariantProp;
+  /** set the component color palette (default:RVColorProp.cgBlue) */
   color?: RVColorProp;
+  /** set the size of the component (default:RVSizeProp.small) */
   size?: RVSizeProp;
   label?: string;
+  /** Breadcrumb current page icon component (default: undefined) */
   Icon?: FunctionComponent<RVSvgProps>;
+  /** array of primary routes (default: []) */
   routeLinks?: {
     label: string;
     path: string;
+    /** array of adjacent routes (default: []) */
     adjacentPaths?: {
       path: string;
       label: string;

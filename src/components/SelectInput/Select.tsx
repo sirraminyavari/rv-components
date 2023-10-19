@@ -1,44 +1,50 @@
 import clsx from 'clsx';
-import { DetailedHTMLProps, forwardRef, HTMLAttributes, PropsWithoutRef } from 'react';
-import { GroupBase, OptionsOrGroups } from 'react-select';
-import ReactSelect from 'react-select';
-import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types';
+import { ComponentProps, forwardRef, PropsWithoutRef, ComponentRef } from 'react';
+import { RVColorProp, RVVariantProp } from '../../types';
+import ReactSelect, { ActionMeta } from 'react-select';
+import type StateManagedSelect from 'react-select/dist/declarations/src/stateManager';
 import styles from './Select.module.scss';
-import type SelectType from 'react-select/dist/declarations/src/Select';
 
-interface RVSelectOptions extends OptionsOrGroups<string | number, GroupBase<string | number>> {}
-
+export interface RVSelectOptionItem {
+  readonly value?: string | number | boolean | Date;
+  readonly label: string | number;
+}
 export interface RVSelect
-  extends Omit<
-    PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
-    'color' | 'size'
-  > {
+  extends Omit<PropsWithoutRef<ComponentProps<StateManagedSelect>>, 'color' | 'size' | 'onChange'> {
+  /** set between the various designs of the component (default:RVVariantProp.outline) */
   variant?: Exclude<RVVariantProp, RVVariantProp.disabled>;
+  /** set the component color palette (default:RVColorProp.cgBlue) */
   color?: RVColorProp;
-  size?: RVSizeProp;
+  /** set the size of the component (default:RVSizeProp.medium) */
+  // size?: RVSizeProp;
+  /** set the identifying label text for selectInput */
   label?: string;
+  /** set the component to be disabled and not be interactive */
   disabled?: boolean;
+  /** set the component to fill the available width of the parent element */
   fullWidth?: boolean;
+  /** set the Select component to accept multiple values */
   isMulti?: boolean;
+  /** show a clear button at the end of the Select component  */
   isClearable?: boolean;
-  options: { label: string | number; value: string | number }[];
+  selectedOptions?: RVSelectOptionItem | RVSelectOptionItem[];
+  options?: RVSelectOptionItem[];
+  onChange?: (newValue: RVSelectOptionItem[], actionMeta: ActionMeta<RVSelectOptionItem[]>) => void;
 }
 
-const Select = forwardRef<
-  SelectType<string | number, boolean, GroupBase<string | number>>,
-  RVSelect
->(
+const Select = forwardRef<ComponentRef<StateManagedSelect>, RVSelect>(
   (
     {
       className,
       color = RVColorProp.cgBlue,
       variant = RVVariantProp.primary,
-      size = RVSizeProp.small,
+      // size = RVSizeProp.small,
       disabled,
-      onChange,
       options,
       fullWidth,
       isMulti,
+      selectedOptions,
+      onChange,
       ...props
     },
     ref
@@ -56,11 +62,12 @@ const Select = forwardRef<
             isMulti && styles.selectMulti,
             disabled && styles.disabled,
             fullWidth && styles.fullWidth,
+            variant,
             color
-            // styles[size],
-            // styles[variant]
           )}
-          options={options as unknown as RVSelectOptions}
+          options={options}
+          value={selectedOptions}
+          onChange={onChange as (newValue: unknown, actionMeta: ActionMeta<unknown>) => void}
           {...props}
         />
       </>

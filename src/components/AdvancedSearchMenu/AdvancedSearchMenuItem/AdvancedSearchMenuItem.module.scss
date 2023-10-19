@@ -1,0 +1,81 @@
+@import '../../../scss/modules/default';
+
+.advancedSearchMenuItem {
+  border-width: px-to-rem(1);
+  border-style: solid;
+  border-color: hsl(var(--light));
+  transition: border-color 0.2s ease-out;
+
+  &:not(:last-of-type) {
+    margin-block-end: px-to-rem(12);
+  }
+
+  .advancedSearchMenuItemLabelButton {
+    > svg {
+      margin-inline-start: 0;
+      display: none;
+    }
+
+    .advancedSearchMenuItemLabel {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: px-to-rem(12);
+      font-size: px-to-rem(16);
+      transition: color 0.2s ease-out;
+      color: hsl(var(--base));
+
+      .advancedSearchMenuItemLabelTitle,
+      .advancedSearchMenuItemLabelIndicators {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .advancedSearchMenuItemLabelTitle {
+        gap: px-to-rem(12);
+        margin-block: unset;
+      }
+
+      .advancedSearchMenuItemLabelIndicators {
+        gap: px-to-rem(9.5);
+        font-size: px-to-rem(19.5);
+      }
+
+      .advancedSearchMenuItemLabelActiveIcon {
+        color: hsl(var(--base));
+      }
+
+      .advancedSearchMenuItemLabelChevron {
+        transition: color 0.2s ease-out, transform 0.2s ease-out;
+        color: hsl(var(--base));
+      }
+    }
+  }
+
+  .advancedSearchMenuItemContent {
+    padding-inline: px-to-rem(5);
+    padding-block-start: px-to-rem(24);
+    padding-block-end: px-to-rem(12);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+
+    // flex-direction: column;
+    gap: px-to-rem(8);
+  }
+
+  &.advancedSearchMenuItemOpen {
+    border-color: hsl(var(--base));
+    overflow: visible;
+
+    .advancedSearchMenuItemLabelButton {
+      .advancedSearchMenuItemLabel {
+        .advancedSearchMenuItemLabelChevron {
+          transform: rotate(-180deg);
+        }
+      }
+    }
+  }
+}

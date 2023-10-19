@@ -13,7 +13,8 @@
   display: flex;
   align-items: center;
 
-  &:focus {
+  &:focus,
+  &[data-sudo='focus'] {
     outline-width: 0;
   }
 
@@ -80,22 +81,27 @@
   background-color: hsl(var(--base));
   color: hsl(var(--base-font));
 
-  &:hover {
+  &:hover,
+  &[data-sudo='hover'] {
     background-color: hsl(var(--dark));
     color: hsl(var(--dark-font));
   }
 
-  &:focus {
+  &:focus,
+  &[data-sudo='focus'] {
     background-color: hsl(var(--darker));
     color: hsl(var(--darker-font));
   }
 
   &:focus,
-  &.active {
+  &.active,
+  &[data-sudo='focus'],
+  &[data-sudo='active'] {
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--base) / 25%);
   }
 
-  &:active {
+  &:active,
+  &[data-sudo='active'] {
     background-color: hsl(var(--dark));
     color: hsl(var(--dark-font));
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--base) / 25%);
@@ -103,8 +109,11 @@
 
   &.badge {
     &:hover,
+    &[data-sudo='hover'],
     &:active,
-    &:focus {
+    &[data-sudo='active'],
+    &:focus,
+    &[data-sudo='focus'] {
       background-color: hsl(var(--base));
       color: hsl(var(--base-font));
       box-shadow: unset;
@@ -118,17 +127,20 @@
   color: hsl(var(--base));
   background-color: transparent;
 
-  &:hover {
+  &:hover,
+  &[data-sudo='hover'] {
     background-color: hsl(var(--base) / 15%);
     color: hsl(var(--base));
   }
 
   &:focus,
-  &.active {
+  &.active,
+  &[data-sudo='active'] {
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--base) / 25%);
   }
 
-  &:active {
+  &:active,
+  &[data-sudo='active'] {
     background-color: hsl(var(--base) / 25%);
     color: hsl(var(--base));
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--base) / 25%);
@@ -136,8 +148,11 @@
 
   &.badge {
     &:hover,
+    &[data-sudo='hover'],
     &:active,
-    &:focus {
+    &[data-sudo='active'],
+    &:focus,
+    &[data-sudo='focus'] {
       border-color: hsl(var(--base));
       color: hsl(var(--base));
       background-color: transparent;
@@ -151,20 +166,24 @@
   color: hsl(var(--base));
   background-color: hsl(var(--white));
 
-  &:hover {
+  &:hover,
+  &[data-sudo='hover'] {
     background-color: hsl(var(--base) / 25%);
     color: hsl(var(--base));
   }
 
-  &:focus {
+  &:focus,
+  &[data-sudo='focus'] {
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(3) hsl(var(--black) / 15%);
   }
 
-  &.active {
+  &.active,
+  &[data-sudo='active'] {
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--base) / 35%);
   }
 
-  &:active {
+  &:active,
+  &[data-sudo='active'] {
     background-color: hsl(var(--base) / 15%);
     color: hsl(var(--base));
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--base) / 35%);
@@ -172,8 +191,10 @@
 
   &.badge {
     &:hover,
+    &[data-sudo='hover'],
     &:active,
-    &:focus {
+    &[data-sudo='active'] &:focus,
+    &[data-sudo='focus'] {
       color: hsl(var(--base));
       background-color: hsl(var(--white));
       box-shadow: unset;
@@ -187,12 +208,15 @@
   background-color: hsl(var(--base) / 10%);
 
   &:hover,
+  &[data-sudo='hover'],
   &:active,
-  &:focus {
+  &[data-sudo='active'] &:focus,
+  &[data-sudo='focus'] {
     cursor: default;
   }
 
-  &:focus {
+  &:focus,
+  &[data-sudo='focus'] {
     outline: hsl(var(--base) / 20%) dashed px-to-rem(2);
   }
 }
