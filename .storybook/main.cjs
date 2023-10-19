@@ -8,7 +8,12 @@ module.exports = {
         __IS_DEV__: process.env.NODE_ENV === 'development',
       })
     );
-
+    config.module.rules.push({
+      test: /\.mjs$/,
+      include: /node_modules/,
+      type: 'javascript/auto',
+    });
+    config.resolve.extensions.push('.mjs', '.js', '.json');
     // config.module.rules = [
     //   {
     //     test: /\.(woff|woff2|eot|ttf|svg)$/,

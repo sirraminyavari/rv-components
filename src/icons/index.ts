@@ -50,3 +50,6 @@ export { default as PenSvg } from './pen.svg';
 export { default as RadioButtonSvg } from './radioButton.svg';
 export { default as CheckedCircleSvg } from './checkedCircle.svg';
 export { default as ChevronCircleSvg } from './chevronCircle.svg';
+export { default as CopySvg } from './copy.svg';
+export { default as CheckedSvg } from './checked.svg';
+export { default as ListCircleSvg } from './checked.svg';

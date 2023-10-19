@@ -1,0 +1,79 @@
+@import '../../scss/modules/default';
+
+.toastWrapperContainer {
+  &.small {
+    --toastify-toast-width: 250px;
+  }
+
+  &.medium {
+    --toastify-toast-width: 320px;
+  }
+
+  &.large {
+    --toastify-toast-width: 450px;
+  }
+}
+
+.toastContainer {
+  --toastify-color-light: hsl(var(--white));
+  --toastify-color-dark: #121212;
+  --toastify-color-info: #3498db;
+  --toastify-color-success: #07bc0c;
+  --toastify-color-warning: #f1c40f;
+  --toastify-color-error: #e74c3c;
+  --toastify-color-transparent: rgba(255, 255, 255, 0.7);
+  --toastify-color-progress-light: hsl(var(--base));
+
+  justify-content: center;
+  border-radius: px-to-rem(4);
+  box-shadow: 0 px-to-rem(2) px-to-rem(16) 0 hsl(var(--black) / 30%);
+  padding-block: px-to-rem(18);
+  padding-inline: px-to-rem(16);
+  border-width: px-to-rem(1);
+  border-style: solid;
+  border-color: transparent;
+
+  [class^='Toastify__toast-icon'] {
+    margin-inline-end: px-to-rem(8);
+  }
+
+  [class^='Toastify__progress-bar'] {
+    border-radius: px-to-rem(10);
+    border-start-end-radius: px-to-rem(10);
+  }
+
+  &.primary {
+    background-color: hsl(var(--base));
+    color: hsl(var(--base-font));
+    border-color: transparent;
+  }
+
+  &.outline {
+    background-color: hsl(var(--white));
+    border-color: hsl(var(--base));
+  }
+
+  &.white {
+    background-color: hsl(var(--white));
+    color: hsl(var(--base));
+    border-color: transparent;
+  }
+
+  &.small {
+    box-shadow: 0 px-to-rem(2) px-to-rem(16) 0 hsl(var(--black) / 30%);
+    padding-block: px-to-rem(18);
+    padding-inline: px-to-rem(16);
+  }
+
+  &.medium {
+    box-shadow: 0 px-to-rem(2) px-to-rem(16) 0 hsl(var(--black) / 30%);
+    padding-block: px-to-rem(18);
+    padding-inline: px-to-rem(16);
+  }
+
+  &.large {
+    box-shadow: 0 px-to-rem(2) px-to-rem(16) 0 hsl(var(--black) / 30%);
+    padding-block: px-to-rem(18);
+    padding-inline: px-to-rem(16);
+  }
+}
