@@ -3,11 +3,11 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Panel as PanelComponent, RVPanel } from '.';
 import { RVSizeProp } from '../../types';
-import { Modal } from '../Modal';
-import { Button } from '../Button';
+import { Modal } from '../../components/Modal';
+import { Button } from '../../components/Button';
 
 export default {
-  title: 'Components/Panel',
+  title: 'Layouts/Panel',
   component: PanelComponent,
   argTypes: {
     children: { control: 'text' },
@@ -61,6 +61,9 @@ export const ModalShowCase = ({ children = demoContent, onClose, ...args }) => {
 
 export const withoutLabel = Template.bind({});
 withoutLabel.args = { children: '' };
+
+export const withoutCloseButton = Template.bind({});
+withoutCloseButton.args = { onClose: undefined };
 
 export const SmallSized = Template.bind({});
 SmallSized.args = { size: RVSizeProp.small };

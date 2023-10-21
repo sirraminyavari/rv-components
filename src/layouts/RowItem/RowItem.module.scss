@@ -19,25 +19,18 @@
   flex-wrap: wrap;
 
   &.large {
-    padding-inline-start: px-to-rem(24);
-    padding-inline-end: px-to-rem(32);
-    padding-block: px-to-rem(24);
+    padding-inline: px-to-rem(24);
+    padding-block: px-to-rem(10);
   }
 
   &.medium {
-    padding-inline-start: px-to-rem(16);
-    padding-inline-end: px-to-rem(24);
-    padding-block: px-to-rem(16);
+    padding-inline: px-to-rem(16);
+    padding-block: px-to-rem(6);
   }
 
   &.small {
-    padding-inline-start: px-to-rem(8);
-    padding-inline-end: px-to-rem(16);
-    padding-block: px-to-rem(8);
-  }
-
-  &.fullCircle {
-    border-radius: 100%;
+    padding-inline: px-to-rem(8);
+    padding-block: px-to-rem(4);
   }
 
   &.roundedFull {
@@ -57,7 +50,7 @@
     align-items: center;
     flex-wrap: wrap;
 
-    & > svg {
+    &>svg {
       font-size: px-to-rem(32);
       margin-inline-end: px-to-rem(24);
     }
@@ -66,13 +59,17 @@
 
 .primary {
   background-color: hsl(var(--base));
+  color: hsl(var(--base-font));
+  border-color: hsl(var(--base));
 
-  &:hover {
-    background-color: hsl(var(--dark));
-  }
+  &.clickable {
+    &:hover {
+      background-color: hsl(var(--dark));
+    }
 
-  &:active {
-    background-color: hsl(var(--dark));
+    &:active {
+      background-color: hsl(var(--dark));
+    }
   }
 }
 
@@ -80,24 +77,32 @@
   border-color: hsl(var(--base) / 15%);
   background-color: transparent;
 
-  &:hover {
-    border-color: hsl(var(--base) / 60%);
-  }
+  &.clickable {
+    &:hover {
+      border-color: hsl(var(--base) / 60%);
+    }
 
-  &:active {
-    background-color: hsl(var(--base) / 25%);
+    &:active {
+      background-color: hsl(var(--base) / 25%);
+    }
   }
 }
 
 .white {
-  background-color: hsl(var(--white));
+  background-color: hsl(var(--base) / 5%);
+  border-color: hsl(var(--white));
+  color: hsl(var(--base));
 
-  &:hover {
-    background-color: hsl(var(--base) / 5%);
+  &.clickable {
+    &:hover {
+      background-color: hsl(var(--base) / 5%);
+    }
   }
 }
 
 .disabled {
-  background-color: hsl(var(--base));
+  background-color: hsl(var(--base) / 10%);
+  border-color: hsl(var(--base) / 10%);
+  color: hsl(var(--base));
   filter: contrast(0.5);
 }

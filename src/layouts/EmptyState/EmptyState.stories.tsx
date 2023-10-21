@@ -1,18 +1,18 @@
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 import React, { useState } from 'react';
-import { EmptyStateView, RVEmptyStateView } from '.';
+import { EmptyState, RVEmptyState } from '.';
 import { Modal } from '../../components/Modal';
 import { RVSizeProp } from '../../types';
 import { Button } from '../../components/Button';
 import { CMLogoSvg } from '../../icons';
 
 export default {
-  title: 'Layout/TemplateSelection',
-  component: EmptyStateView,
-  argTypes: {} as RVEmptyStateView,
-} as ComponentMeta<typeof EmptyStateView>;
+  title: 'Layouts/EmptyState',
+  component: EmptyState,
+  argTypes: {} as RVEmptyState,
+} as ComponentMeta<typeof EmptyState>;
 
-export const ShowCase: ComponentStory<typeof EmptyStateView> = ({
+export const ShowCase: ComponentStory<typeof EmptyState> = ({
   IconComponent = CMLogoSvg,
   children,
   color,
@@ -21,18 +21,18 @@ export const ShowCase: ComponentStory<typeof EmptyStateView> = ({
 }) => {
   return (
     <div style={{ height: '90vh' }}>
-      <EmptyStateView
+      <EmptyState
         IconComponent={IconComponent}
         color={color}
         description={description}
         title={title}
       >
         {children}
-      </EmptyStateView>
+      </EmptyState>
     </div>
   );
 };
-export const ModalView: ComponentStory<typeof EmptyStateView> = ({
+export const ModalView: ComponentStory<typeof EmptyState> = ({
   IconComponent = CMLogoSvg,
   children,
   color,
@@ -53,7 +53,7 @@ export const ModalView: ComponentStory<typeof EmptyStateView> = ({
         onRequestClose={() => setModalStatus(false)}
       >
         <div style={{ height: '60vh' }}>
-          <EmptyStateView
+          <EmptyState
             IconComponent={IconComponent}
             color={color}
             description={description}
@@ -68,7 +68,7 @@ export const ModalView: ComponentStory<typeof EmptyStateView> = ({
             >
               Go back
             </Button>
-          </EmptyStateView>
+          </EmptyState>
         </div>
       </Modal>
     </>
