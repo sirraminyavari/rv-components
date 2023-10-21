@@ -1,14 +1,14 @@
 @import '../../scss/modules/default';
 
 .baseSideMenu {
-  transition: width 0.3s ease-out, padding 0.3s ease-out;
+  transition: width 0.3s cubic-bezier(0.33, 1, 0.68, 1), padding 0.3s cubic-bezier(0.33, 1, 0.68, 1);
   width: var(--side-menu-width, 100%);
   height: var(--side-menu-height, 100%);
   padding-block: px-to-rem(12);
   padding-inline: px-to-rem(12);
-  overflow: hidden;
   flex-shrink: 0;
-  box-sizing: border-box;
+  overflow: hidden;
+  box-sizing: content-box;
 
   &.sideMenuClose {
     width: 0;
@@ -24,7 +24,7 @@
   background-color: hsl(var(--base));
   display: inline-block;
   position: relative;
-  width: 100%;
+  width: var(--side-menu-width, 100%);
   color: hsl(var(--base-font));
   height: 100%;
 }

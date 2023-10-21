@@ -24,6 +24,8 @@ export interface RVScrollbar
   color?: RVColorProp;
   /** set the size of the component (default:RVSizeProp.medium) */
   size?: RVSizeProp;
+  /** set the scrollbar component to contain the content within a panel like container (default:false) */
+  asPanel?: boolean;
   /** a callback to call when the content is at the end of it  */
   onScrollEnd?: (isAtTheBottom: boolean) => void;
   /** set the `onScrollEnd` Threshold by pixels left to show before reaching the exact end */
@@ -42,6 +44,7 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
       color = RVColorProp.cgBlue,
       variant = RVVariantProp.primary,
       size = RVSizeProp.medium,
+      asPanel,
       onScrollEnd,
       scrollEndThreshold,
       alwaysShowScrollbar,
@@ -218,7 +221,7 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
     }, [handleThumbMousemove, handleThumbMouseup]);
 
     return (
-      <div className={clsx(styles.scrollbarContainer, className)}>
+      <div className={clsx(styles.scrollbarContainer, color, asPanel && styles.asPanel, className)}>
         <div className={styles.scrollbarContent} ref={contentRef} {...props}>
           <div ref={contentInnerRef} className={contentContainerClassName}>
             {children}
