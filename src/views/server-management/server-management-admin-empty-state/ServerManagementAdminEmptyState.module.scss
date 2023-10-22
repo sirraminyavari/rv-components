@@ -1,0 +1,16 @@
+@import '../../../scss/modules/default';
+
+.defaultIcon {
+  color: hsl(var(--base));
+  font-size: px-to-rem(96);
+}
+
+.title {
+  margin-block: 0;
+}
+
+.description {
+  margin-block-start: px-to-rem(40);
+  text-align: center;
+  max-width: px-to-rem(520);
+}
