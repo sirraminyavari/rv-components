@@ -1,0 +1,46 @@
+@import '../../../scss/modules/default';
+
+.mainContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: px-to-rem(16);
+  width: 100%;
+}
+
+.resultsPanel {
+  box-sizing: border-box;
+  padding-inline: px-to-rem(32);
+  width: 100%;
+
+  &.emptyState {
+    height: 100%;
+    padding-block: 0;
+  }
+}
+
+.resultCountCaption {
+  margin-block-start: px-to-rem(24);
+  margin-block-end: px-to-rem(8);
+  white-space: nowrap;
+}
+
+.rowActionsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: px-to-rem(16);
+
+  .actionButton {
+    padding-inline: px-to-rem(40);
+  }
+
+  .actionIconButton {
+    font-size: px-to-rem(20);
+
+    svg {
+      padding: px-to-rem(2.5);
+    }
+  }
+}
