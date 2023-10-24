@@ -27,7 +27,7 @@ const ServerManagementRowDetails = ({
       <Panel title={title} size={RVSizeProp.medium} onClose={onClose}>
         {!details && <LoadingState />}
         {details &&
-          Object.entries(details).map(([title, value = null], idx) => (
+          Object.entries(details).map(([itemTitle, value = null], idx) => (
             <div className={styles.detailsBlock} key={`ServerManagementRowDetails-${idx}`}>
               <Typography
                 type="p"
@@ -35,7 +35,7 @@ const ServerManagementRowDetails = ({
                 className={styles.detailsLabel}
                 muted={value === null}
               >
-                {title}
+                {itemTitle}
               </Typography>
               {value !== null && (
                 <CopyToClipboard
@@ -62,7 +62,7 @@ const LoadingState = () => {
     <div>
       {new Array(6).fill(0).map((_, idx) => {
         return (
-          <div className={styles.loadingStateContainer}>
+          <div key={`loading-state-skeleton-${idx}`} className={styles.loadingStateContainer}>
             <Skeleton
               key={`preview-items-loading-state-${idx}`}
               inline
