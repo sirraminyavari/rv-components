@@ -30,24 +30,23 @@ jobs:
       - name: install package dependencies 🛠️
         run: yarn install
 
+      - name: Update CHANGELOG.md and Versioning 📋
+        run: |
+          yarn global add conventional-changelog-cli
+          yarn run build:version-bump
+          conventional-changelog -p angular -i CHANGELOG.md -s -r 0
+
       - name: generate package assets (npm) ⚙️
         run: yarn run build
 
-      - name: Publish as NPM package 📦
-        uses: Github-Actions-Community/merge-release@v6.0.7
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          NPM_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
-          DEPLOY_DIR: ./dist
-          SRC_PACKAGE_DIR: ./dist
-
-      - name: Update CHANGELOG.md 📋
+      - name: generate package assets (npm) ⚙️
         run: |
-          yarn global add conventional-changelog-cli
-          npm pkg set version=$(git describe --tags --abbrev=0)
-          conventional-changelog -p angular -i CHANGELOG.md -s -r 0
           git config user.name "changelog"
           git config user.email "<>"
           git add CHANGELOG.md
+          git add package.json
           git commit -m ':wheelchair: docs-only --- update CHANGELOG'
           git push -f
+
+      - name: Publish as NPM package 📦
+        run: npm publish ./dist --access=public

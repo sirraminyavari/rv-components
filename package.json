@@ -1,20 +1,20 @@
 {
   "name": "@cliqmind/rv-components",
-  "version": "0.12.1",
+  "version": "0.12.1-alpha",
   "license": "UNLICENSED",
-  "typings": "index.d.ts",
+  "typings": "./src/index.d.ts",
   "type": "module",
-  "main": "index.cjs",
-  "module": "index.js",
+  "main": "./src/index.js",
+  "module": "./src/index.js",
   "engines": {
     "node": ">=16.0.0"
   },
   "scripts": {
-    "build": "yarn build:clear-dist && yarn build:tsc && yarn build:rollup && yarn build:scss",
+    "build": "yarn build:clear-dist && yarn build:rollup && yarn build:scss && yarn postbuild",
     "build:clear-dist": "rm -rf dist",
     "build:rollup": "rollup -c --bundleConfigAsCjs",
-    "build:tsc": "tsc -p ./tsconfig.json",
-    "build:scss": "cpx 'src/**/*.{scss,css,ttf,eot,woff,woff2,svg}' dist",
+    "build:scss": "cpx 'src/**/*.{scss,css,ttf,eot,woff,woff2,svg}' dist/src",
+    "build:version-bump":"node ./scripts/version-bump.js",
     "postbuild": "cpx './package.json' dist",
     "lint": "eslint src --color --fix",
     "stylint": "stylelint 'src/**/*.{scss,css}' --fix",

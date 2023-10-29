@@ -10,23 +10,19 @@ import { builtinModules } from 'module';
 
 const packageJson = require('./package.json');
 
-export default [
+/** @type {import('rollup').RollupOptions} */
+
+const rollupConfig = [
   {
     input: 'src/index.ts',
     output: [
       {
-        file: 'dist/index.cjs',
-        format: 'cjs',
+        dir: 'dist',
+        format: 'es',
         sourcemap: false,
+        preserveModules: true,
         exports: 'named',
       },
-      // {
-      //   dir: 'dist/',
-      //   format: 'cjs',
-      //   sourcemap: false,
-      //   preserveModules: false,
-      //   exports: 'named',
-      // },
     ],
     external: [
       //   ...builtinModules,
@@ -41,14 +37,14 @@ export default [
       //     : []),
     ],
     plugins: [
-      peerDepsExternal(),
       resolve({ extensions: ['.ts', '.tsx', '.json'] }),
+      peerDepsExternal(),
       commonjs(),
       typescript({
         tsconfig: './tsconfig.json',
         compilerOptions: {
-          declaration: false,
-          declarationDir: 'dist',
+          declaration: true,
+          declarationDir: 'dist/src',
         },
       }),
       postcss({
@@ -56,15 +52,12 @@ export default [
         writeDefinitions: true,
         modules: true,
         namedExports: true,
+        minimize: true,
         plugins: [autoprefixer()],
       }),
       terser(),
     ],
-    external: ['react', 'react-dom', 'styled-components'],
+    external: ['react', 'react-dom', 'styled-components', 'lodash'],
   },
-  //   {
-  // input: 'dist/esm/types/index.d.ts',
-  // output: [{ file: 'dist/index.d.ts', format: 'esm' }],
-  // plugins: [dts.default()],
-  //   },
 ];
+export default rollupConfig;
