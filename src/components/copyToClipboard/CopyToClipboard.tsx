@@ -79,7 +79,7 @@ const CopyToClipboard: FunctionComponent<RVCopyToClipboard> = ({
   );
   return (
     <div className={clsx(color, styles[size], styles.copyToClipboard, className)} {...props}>
-      <span className={styles.label}>{children}</span>
+      <div className={styles.label}>{children}</div>
       <span>
         <Button
           className={clsx(styles.copyButton)}

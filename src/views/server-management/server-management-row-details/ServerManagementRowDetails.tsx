@@ -19,10 +19,10 @@ const ServerManagementRowDetails = ({
   return (
     <Modal
       isOpen={isOpen}
-      size={RVSizeProp.medium}
+      size={RVSizeProp.small}
       shouldCloseOnEsc
       onRequestClose={onClose}
-      style={{ content: { height: '80vh' } }}
+      style={{ content: { maxHeight: '80vh' } }}
     >
       <Panel title={title} size={RVSizeProp.medium} onClose={onClose}>
         {!details && <LoadingState />}
@@ -37,7 +37,7 @@ const ServerManagementRowDetails = ({
               >
                 {itemTitle}
               </Typography>
-              {value !== null && (
+              {value !== null ? (
                 <CopyToClipboard
                   copyIconOutline
                   variant={RVVariantProp.white}
@@ -47,6 +47,10 @@ const ServerManagementRowDetails = ({
                     {value}
                   </Typography>
                 </CopyToClipboard>
+              ) : (
+                <Typography type="H4" className={styles.emptyDetailsLabel} muted>
+                  -
+                </Typography>
               )}
             </div>
           ))}

@@ -15,13 +15,13 @@ const ServerManagementAdminEmptyState: FunctionComponent = () => {
         <>
           <AlertSvg className={clsx(RVColorProp.gray, styles.defaultIcon)} />
           <Typography type="H1" color={RVColorProp.gray} className={styles.title}>
-            No results found
+            No servers added
           </Typography>
         </>
       }
       description={
         <Typography type="p" color={RVColorProp.gray} className={styles.description}>
-          برای تعریف زد-سرور جدید از دکمه New server استفاده کنید.
+          Add Z-servers with the 'New Server' button.
         </Typography>
       }
     />

@@ -1,6 +1,6 @@
 import { FormEventHandler, useCallback, useEffect, useState } from 'react';
 import clsx from 'clsx';
-import PQueue from 'p-queue';
+import * as PQueue from 'p-queue';
 import CMServerSearch from '../../../icons/cm-server-search.svg';
 import SearchSvg from '../../../icons/search.svg';
 import {
@@ -29,13 +29,15 @@ interface ServerResultEntity {
 
 export interface RVServerManagementSearchPanel {
   serversListCallback: () => Promise<RVSelectOptionItem[]>;
-  addCallback: (serverID: string) => Promise<boolean>;
+  addCallback: (selectedItemID: string) => Promise<boolean>;
+  detailsCallback: (selectedItemID: string) => Promise<boolean>;
   serverSearchCallback: (arg: { serverID: string; query: string }) => Promise<ServerResultEntity[]>;
 }
 
 const ServerManagementSearchPanel = ({
   serversListCallback,
   addCallback,
+  detailsCallback,
   serverSearchCallback,
 }: RVServerManagementSearchPanel) => {
   const [openSidebar, setOpenSidebar] = useState(false);
@@ -80,13 +82,14 @@ const ServerManagementSearchPanel = ({
       event.preventDefault();
       setOpenSidebar(true);
       setIsLoading(true);
+
       try {
         if (!serversList) throw new Error('no selected servers!');
         setResults([]);
-        const queue = new PQueue({ concurrency: 1, timeout: 15000 });
+        const queue = new PQueue.default({ concurrency: 1, timeout: 15000 });
         const allServersSelected =
           selectedServers.length === 1 && selectedServers[0]?.value === 'all-servers';
-        const callbacksList = (allServersSelected ? serversList : selectedServers).map(
+        const searchCallbacks = (allServersSelected ? serversList : selectedServers).map(
           ({ value }) => {
             return async () => {
               const serverResult = await serverSearchCallback({
@@ -97,7 +100,8 @@ const ServerManagementSearchPanel = ({
             };
           }
         );
-        await queue.addAll(callbacksList, {});
+
+        await queue.addAll(searchCallbacks);
       } catch (error) {
         console.log('err', { error });
       }
@@ -114,8 +118,8 @@ const ServerManagementSearchPanel = ({
           <>
             <CMServerSearch className={styles.defaultIcon} />
             <Typography type="p" color={RVColorProp.gray} className={styles.detailsBlock}>
-              برای جستجو در منابع کتابخانه‌ای، ابتدا زد-سرور(های) موردنظر خود را انتخاب کنید و در
-              کادر دوم یکی از سه مقدار کتاب که نتیجه دقیق‌تری به شما می‌دهد را وارد کنید.
+              To search in library resources, choose a Z-Server and enter either the title,
+              creator(s), or publisher.
             </Typography>
           </>
         }
@@ -185,6 +189,7 @@ const ServerManagementSearchPanel = ({
                   <div className={styles.rowActionsContainer}>
                     <Typography type="caption">{server?.title}</Typography>
                     <Button
+                      onClick={() => detailsCallback(id)}
                       variant={RVVariantProp.white}
                       color={RVColorProp.crayola}
                       fullCircle
@@ -202,7 +207,7 @@ const ServerManagementSearchPanel = ({
                   </div>
                 }
               >
-                <div>
+                <div className={styles.resultTitleContainer}>
                   <Typography type="H4" className={styles.resultTitle}>
                     {title}
                   </Typography>
@@ -224,7 +229,6 @@ const ServerManagementSearchPanel = ({
             ))}
 
           {isLoading && <LoadingState />}
-          <LoadingState />
         </Scrollbar>
       </SideMenu>
     </div>
