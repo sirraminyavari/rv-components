@@ -10,6 +10,11 @@
   .detailsLabel {
     margin-block: 0;
   }
+
+  .emptyDetailsLabel {
+    margin-block: 0;
+    margin-inline-end: px-to-rem(32);
+  }
 }
 
 .loadingStateContainer {
