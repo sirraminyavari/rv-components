@@ -6,6 +6,7 @@ import styles from './ServerManagementAdminList.module.scss';
 import { RowItem } from '../../../layouts';
 import { ServerManagementEmptyState } from '../server-management-empty-state';
 import clsx from 'clsx';
+import { Trans } from 'react-i18next';
 
 export interface RVServerManagementAdminList {
   serversListCallback: () => Promise<{ id: string; label: string }[]>;
@@ -45,7 +46,9 @@ const ServerManagementAdminList = ({
         )}
         {serversList && serversList.length !== 0 && (
           <Typography type="caption" color={RVColorProp.gray} className={styles.resultCountCaption}>
-            {serversList.length} results found
+            <Trans ns="common" i18nKey="result_found" count={serversList.length}>
+              {{ count: serversList.length }} results found
+            </Trans>
           </Typography>
         )}
         {serversList &&
@@ -71,7 +74,9 @@ const ServerManagementAdminList = ({
                     className={styles.actionButton}
                     onClick={() => editCallback(id)}
                   >
-                    Edit
+                    <Trans ns="common" i18nKey="edit">
+                      Edit
+                    </Trans>
                   </Button>
                 </div>
               }
