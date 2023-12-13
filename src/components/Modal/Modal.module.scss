@@ -33,6 +33,7 @@
   border-radius: $borderRadiusHalf;
   transition: transform var(--modal-transition-duration, 250ms) ease-in-out,
     opacity var(--modal-transition-duration, 250ms) ease-in-out;
+  outline-color: transparent;
 
   &[class*='ReactModal__Content--after-open'] {
     transform: scale(1);

@@ -1,12 +1,14 @@
 import clsx from 'clsx';
 import { Typography } from '../../components';
 import { RVColorProp } from '../../types';
-import styles from './EmptyStateView.module.scss';
+import styles from './EmptyState.module.scss';
 import { PropsWithChildren, ReactNode, VoidFunctionComponent } from 'react';
 
-export interface RVEmptyStateView {
+export interface RVEmptyState {
   /** set the component color palette (default:RVColorProp.gray) */
   color?: RVColorProp;
+  /** set custom class for the Empty State container (default:undefined) */
+  className?: string;
   /** set the Empty State banner icon (default:undefined) */
   IconComponent?: VoidFunctionComponent<{ className: string }>;
   /** set the Empty State title string (default:undefined) */
@@ -15,15 +17,16 @@ export interface RVEmptyStateView {
   description?: ReactNode;
 }
 
-const EmptyStateView = ({
+const EmptyState = ({
   IconComponent,
   description,
   title,
   color = RVColorProp.gray,
   children,
-}: PropsWithChildren<RVEmptyStateView>) => {
+  className,
+}: PropsWithChildren<RVEmptyState>) => {
   return (
-    <div className={clsx(color, styles.emptyStateContainer)}>
+    <div className={clsx(color, styles.emptyStateContainer, className)}>
       {IconComponent !== undefined && <IconComponent className={clsx(styles.emptyStateIcon)} />}
       {typeof title === 'string' ? (
         <Typography type="H2" color={color} className={styles.emptyStateLabel}>
@@ -44,4 +47,4 @@ const EmptyStateView = ({
     </div>
   );
 };
-export default EmptyStateView;
+export default EmptyState;

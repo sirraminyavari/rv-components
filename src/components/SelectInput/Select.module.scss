@@ -11,9 +11,15 @@
     outline: transparent;
     box-shadow: none;
     background-color: hsl(var(--white));
+    border-width: px-to-rem(2);
 
     &:hover {
       border-color: hsl(var(--base) / 50%);
+    }
+
+    [class*='-ValueContainer'] {
+      padding-block: px-to-rem(6);
+      padding-inline: px-to-rem(8);
     }
   }
 
@@ -45,7 +51,7 @@
   }
 
   [class*='-MultiValueGeneric'] {
-    color: hsl(var(--light-font));
+    color: hsl(var(--black));
   }
 
   [class*='-MultiValueRemove'] {
@@ -58,7 +64,7 @@
 
   [class*='-menu'] {
     border-radius: $borderRadiusQuarter;
-    background-color: hsl(var(--lighter) / 100%);
+    background-color: hsl(var(--white) / 100%);
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--black) / 15%);
     padding-inline: px-to-rem(3);
     z-index: 2;
@@ -93,6 +99,10 @@
     }
   }
 
+  &:last-child[class*='-menu'] {
+    width: 100%;
+  }
+
   &.fullWidth {
     &[class*='-container'] {
       width: 100%;
@@ -103,8 +113,8 @@
     [class*='-indicatorSeparator'] + [class*='-indicatorContainer'] {
       svg {
         border-radius: px-to-rem(20);
-        background-color: hsl(var(--base));
-        color: hsl(var(--lighter));
+        background-color: hsl(var(--lighter));
+        color: hsl(var(--base));
         transform: rotate(0);
       }
     }

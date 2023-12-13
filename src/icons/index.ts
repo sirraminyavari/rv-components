@@ -1,4 +1,5 @@
 export { default as CMLogoSvg } from './cm-logo.svg';
+export { default as CMServerSearch } from './cm-server-search.svg';
 
 export { default as HomeSvg } from './home.svg';
 export { default as NotificationSvg } from './notification.svg';
@@ -52,4 +53,8 @@ export { default as CheckedCircleSvg } from './checkedCircle.svg';
 export { default as ChevronCircleSvg } from './chevronCircle.svg';
 export { default as CopySvg } from './copy.svg';
 export { default as CheckedSvg } from './checked.svg';
-export { default as ListCircleSvg } from './checked.svg';
+export { default as ListCircleSvg } from './listCircle.svg';
+export { default as AlertSvg } from './alert.svg';
+export { default as ListItemSvg } from './listItem.svg';
+export { default as TrashSvg } from './trash.svg';
+export { default as ExternalLinkSvg } from './externalLink.svg';

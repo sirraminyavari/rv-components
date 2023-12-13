@@ -8,11 +8,17 @@ export interface RVRowItem
     PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color'
   > {
+  /** set between the various designs of the component (default:RVVariantProp.outline) */
   variant?: RVVariantProp;
+  /** set the component color palette (default:RVColorProp.cgBlue) */
   color?: RVColorProp;
+  /** set the size of the component (default:RVSizeProp.medium) */
   size?: RVSizeProp;
-  fullCircle?: boolean;
+  /** set to change the roundness of the RowItem corners (default:"half")*/
   rounded?: 'full' | 'half';
+  /** set the appropriate styles to RowItem to be clickable (default:false)*/
+  clickable?: boolean;
+  /** passed ReactNodes will be placed at the end of the RowItem as actions */
   ActionsComponent?: ReactNode;
 }
 
@@ -24,9 +30,9 @@ const RowItem = forwardRef<HTMLDivElement, RVRowItem>(
       color = RVColorProp.cgBlue,
       variant = RVVariantProp.outline,
       size = RVSizeProp.medium,
-      fullCircle,
       rounded = 'half',
       ActionsComponent,
+      clickable,
       ...props
     },
     ref
@@ -41,7 +47,7 @@ const RowItem = forwardRef<HTMLDivElement, RVRowItem>(
           styles[RVSizeProp[size]],
           rounded === 'full' && styles.roundedFull,
           rounded === 'half' && styles.roundedHalf,
-          fullCircle && styles.fullCircle,
+          clickable && styles.clickable,
           className
         )}
         {...props}

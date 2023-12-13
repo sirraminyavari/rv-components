@@ -113,4 +113,18 @@
       }
     }
   }
+
+  &.asPanel {
+    border-style: solid;
+    border-width: px-to-rem(1);
+    border-color: hsl(var(--light));
+    background-color: hsl(var(--white));
+    border-radius: px-to-rem(13);
+    box-sizing: border-box;
+    padding-inline: px-to-rem(6);
+
+    .scrollbar {
+      inset-inline-end: px-to-rem(-3);
+    }
+  }
 }

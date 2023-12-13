@@ -1,0 +1,50 @@
+@import '../../../scss/modules/default';
+
+.scrollbarContainer {
+  width: 100%;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-block-start: px-to-rem(40);
+  padding-block-end: px-to-rem(32);
+  margin-inline: auto;
+  border-radius: px-to-rem(13);
+  width: 100%;
+  max-width: px-to-rem(500);
+
+  form {
+    display: contents;
+  }
+
+  .icon {
+    font-size: px-to-rem(64);
+    color: hsl(var(--base));
+  }
+
+  .titleInputBlock {
+    margin-block-start: px-to-rem(42);
+    margin-block-end: px-to-rem(56);
+    width: 100%;
+    max-width: px-to-rem(400);
+  }
+
+  .inputBlock {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    gap: px-to-rem(16);
+    margin-block: px-to-rem(40);
+    width: 100%;
+    max-width: px-to-rem(400);
+  }
+
+  .actionContainer {
+    width: 100%;
+    max-width: px-to-rem(400);
+  }
+}

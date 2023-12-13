@@ -1,70 +1,123 @@
 import resolve from '@rollup/plugin-node-resolve';
+import glob from 'glob';
 import commonjs from '@rollup/plugin-commonjs';
 import typescript from '@rollup/plugin-typescript';
-import dts from 'rollup-plugin-dts';
+
 import postcss from 'rollup-plugin-postcss';
 import autoprefixer from 'autoprefixer';
+import cssnano from 'cssnano';
+
 import { terser } from 'rollup-plugin-terser';
 import peerDepsExternal from 'rollup-plugin-peer-deps-external';
-import { builtinModules } from 'module';
 
 const packageJson = require('./package.json');
 
-export default [
+const entryPoints = [
+  'src/index.ts',
+  ...glob.sync('src/?(components|constants|hooks|icons|layouts|types|utils|views)/**/index.ts'),
+];
+
+/** @type {import('rollup').RollupOptions} */
+
+const rollupConfig = [
   {
-    input: 'src/index.ts',
-    output: [
-      {
-        file: 'dist/index.cjs',
-        format: 'cjs',
-        sourcemap: false,
-        exports: 'named',
-      },
-      // {
-      //   dir: 'dist/',
-      //   format: 'cjs',
-      //   sourcemap: false,
-      //   preserveModules: false,
-      //   exports: 'named',
-      // },
-    ],
+    input: entryPoints,
+    output: {
+      dir: 'dist',
+      format: 'es',
+      preserveModules: true,
+      preserveModulesRoot: 'src',
+      entryFileNames: '[name].mjs',
+    },
+
     external: [
-      //   ...builtinModules,
-      //   ...(packageJson.dependencies
-      //     ? Object.keys(packageJson.dependencies)
-      //     : []),
-      //   ...(packageJson.devDependencies
-      //     ? Object.keys(packageJson.devDependencies)
-      //     : []),
-      //   ...(packageJson.peerDependencies
-      //     ? Object.keys(packageJson.peerDependencies)
-      //     : []),
+      ...Object.keys({
+        ...packageJson.peerDependencies,
+        ...packageJson.dependencies,
+      }),
     ],
     plugins: [
-      peerDepsExternal(),
       resolve({ extensions: ['.ts', '.tsx', '.json'] }),
+      peerDepsExternal(),
       commonjs(),
       typescript({
         tsconfig: './tsconfig.json',
         compilerOptions: {
-          declaration: false,
+          declaration: true,
           declarationDir: 'dist',
+          outDir: 'dist',
         },
       }),
+      // sass({
+      //   processor: (css) =>
+      //     postcss([autoprefixer])
+      //       .process(css)
+      //       .then((result) => result.css),
+      // }),
       postcss({
         extract: false,
         writeDefinitions: true,
         modules: true,
         namedExports: true,
-        plugins: [autoprefixer()],
+        minimize: true,
+        plugins: [autoprefixer(), cssnano({ preset: 'default' })],
+        inject(cssVariableName) {
+          return `import styleInject from 'style-inject';\nstyleInject(${cssVariableName});`;
+        },
       }),
       terser(),
     ],
-    external: ['react', 'react-dom', 'styled-components'],
   },
-  //   {
-  // input: 'dist/esm/types/index.d.ts',
-  // output: [{ file: 'dist/index.d.ts', format: 'esm' }],
-  // plugins: [dts.default()],
-  //   },
+  {
+    input: entryPoints,
+    output: [
+      {
+        dir: 'dist',
+        format: 'cjs',
+        preserveModules: true,
+        preserveModulesRoot: 'src',
+        entryFileNames: '[name].cjs',
+      },
+    ],
+
+    external: [
+      ...Object.keys({
+        ...packageJson.peerDependencies,
+        ...packageJson.dependencies,
+      }),
+    ],
+    plugins: [
+      resolve({ extensions: ['.ts', '.tsx', '.json'] }),
+      peerDepsExternal(),
+      commonjs(),
+      typescript({
+        tsconfig: './tsconfig.json',
+        compilerOptions: {
+          declaration: true,
+          declarationDir: 'dist',
+          outDir: 'dist',
+        },
+      }),
+
+      // sass({
+      //   processor: (css) =>
+      //     postcss([autoprefixer])
+      //       .process(css)
+      //       .then((result) => result.css),
+      // }),
+      postcss({
+        extract: false,
+        writeDefinitions: true,
+        modules: true,
+        namedExports: true,
+        minimize: true,
+        plugins: [autoprefixer(), cssnano({ preset: 'default' })],
+        inject(cssVariableName) {
+          return `import styleInject from 'style-inject';\nstyleInject(${cssVariableName});`;
+        },
+      }),
+      terser(),
+    ],
+  },
 ];
+export default rollupConfig;

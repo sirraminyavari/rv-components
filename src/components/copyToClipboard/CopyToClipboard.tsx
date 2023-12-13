@@ -24,6 +24,10 @@ export interface RVCopyToClipboard
   variant?: Exclude<RVVariantProp, RVVariantProp.disabled>;
   /** set the component color palette (default:RVColorProp.cgBlue) */
   color?: RVColorProp;
+  /** set the copy icon component to be outlined or solid (default:false) */
+  copyIconOutline?: boolean;
+  /** set the copy icon animation duration in milliseconds (default:1000) */
+  iconAnimationTimeout?: number;
   /** set the size of the component (default:RVSizeProp.medium) */
   size?: RVSizeProp;
   /** set to disable the trigger button  */
@@ -38,6 +42,8 @@ export interface RVCopyToClipboard
 
 const CopyToClipboard: FunctionComponent<RVCopyToClipboard> = ({
   variant = RVVariantProp.white,
+  copyIconOutline,
+  iconAnimationTimeout = 1000,
   color = RVColorProp.cgBlue,
   size = RVSizeProp.medium,
   children,
@@ -60,7 +66,7 @@ const CopyToClipboard: FunctionComponent<RVCopyToClipboard> = ({
         if (triggerIconTimeout.current !== undefined) clearTimeout(triggerIconTimeout.current);
         triggerIconTimeout.current = setTimeout(() => {
           setIsCopyTriggered(false);
-        }, 3000);
+        }, iconAnimationTimeout);
       } catch (error) {
         console.error('copy to clipboard failed!');
       }
@@ -69,11 +75,11 @@ const CopyToClipboard: FunctionComponent<RVCopyToClipboard> = ({
         if (triggerIconTimeout.current) clearTimeout(triggerIconTimeout.current);
       };
     },
-    [onCopyToClipboard, clipboardContext, disabled]
+    [onCopyToClipboard, clipboardContext, disabled, iconAnimationTimeout]
   );
   return (
     <div className={clsx(color, styles[size], styles.copyToClipboard, className)} {...props}>
-      <span className={styles.label}>{children}</span>
+      <div className={styles.label}>{children}</div>
       <span>
         <Button
           className={clsx(styles.copyButton)}
@@ -84,8 +90,14 @@ const CopyToClipboard: FunctionComponent<RVCopyToClipboard> = ({
           disabled={disabled}
         >
           <span className={styles.copyButtonLabel}>copy to clipboard</span>
-          <CopySvg className={clsx(!isCopyTriggered && styles.activeButtonIcon)} />
-          <CheckedSvg className={clsx(isCopyTriggered && styles.activeButtonIcon)} />
+          <CopySvg
+            outline={copyIconOutline}
+            className={clsx(!isCopyTriggered && styles.activeButtonIcon)}
+          />
+          <CheckedSvg
+            outline={copyIconOutline}
+            className={clsx(isCopyTriggered && styles.activeButtonIcon)}
+          />
         </Button>
       </span>
     </div>

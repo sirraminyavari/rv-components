@@ -1,8 +1,8 @@
 {
   // see https://www.typescriptlang.org/tsconfig to better understand tsconfigs
   "compilerOptions": {
-    "target": "ES5",
-    "module": "esnext",
+    "target": "es6",
+    "module": "ES6",
     "lib": ["dom", "esnext"],
     "importHelpers": true,
     // output .d.ts declaration files for consumers
@@ -41,11 +41,7 @@
       }
     ]
   },
+
   "include": ["src/**/*", "src/types/**/*"],
-  "exclude": [
-    "node_modules",
-    "build",
-    "src/**/*.stories.tsx",
-    "src/**/*.test.tsx"
-  ]
+  "exclude": ["node_modules", "build", "src/**/*.stories.tsx", "src/**/*.test.tsx"]
 }

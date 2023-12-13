@@ -62,6 +62,9 @@ export const ShowCase = ({
 export const SmallSized = Template.bind({});
 SmallSized.args = { size: RVSizeProp.small };
 
+export const outlineIcon = Template.bind({});
+outlineIcon.args = { copyIconOutline: true };
+
 export const MediumSized = Template.bind({});
 MediumSized.args = { size: RVSizeProp.medium };
 
