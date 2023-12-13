@@ -2,9 +2,9 @@ import clsx from 'clsx';
 import { DetailedHTMLProps, HTMLAttributes, PropsWithoutRef } from 'react';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types/global';
 import styles from './Panel.module.scss';
-import { Button } from '../Button';
+import { Button } from '../../components/Button';
 import CloseSvg from '../../icons/close.svg';
-import { Typography } from '../Typography';
+import { Typography } from '../../components/Typography';
 
 export interface RVPanel
   extends Omit<
@@ -49,16 +49,18 @@ const Panel = ({
         <Typography type="H3" color={RVColorProp.cgBlue} className={styles.panelHeadTitle}>
           {title}
         </Typography>
-        <Button
-          fullCircle
-          color={RVColorProp.crayola}
-          size={RVSizeProp.small}
-          variant={RVVariantProp.white}
-          rounded="half"
-          onClick={() => onClose && onClose()}
-        >
-          <CloseSvg className={styles.closeIcon} />
-        </Button>
+        {onClose && (
+          <Button
+            fullCircle
+            color={RVColorProp.crayola}
+            size={RVSizeProp.small}
+            variant={RVVariantProp.white}
+            rounded="half"
+            onClick={() => onClose && onClose()}
+          >
+            <CloseSvg className={styles.closeIcon} />
+          </Button>
+        )}
       </div>
       <div className={styles.panelContentContainer}>{children}</div>
     </div>

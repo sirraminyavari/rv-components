@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { CSSProperties, forwardRef, useCallback, useRef } from 'react';
 import ReactModal, { Props as ModalProps } from 'react-modal';
-import mergeWith from 'lodash/mergeWith';
+import { mergeWith } from 'lodash';
 import { RVColorProp, RVSizeProp } from '../../types';
 import styles from './Modal.module.scss';
 

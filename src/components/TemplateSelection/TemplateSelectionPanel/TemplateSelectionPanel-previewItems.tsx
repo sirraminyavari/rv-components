@@ -9,7 +9,7 @@ import { RVColorProp } from '../../../types';
 import { Typography } from '../../Typography';
 import styles from './TemplateSelectionPanel.module.scss';
 import { Skeleton } from '../../Skeleton';
-import EmptyStateView from '../../../layouts/EmptyStateView/EmptyStateView';
+import EmptyState from '../../../layouts/EmptyState/EmptyState';
 
 export interface RVTemplateSelectionPanelPreviewItems {
   previewItems?: {
@@ -28,7 +28,7 @@ const TemplateSelectionPanelPreviewItems: VoidFunctionComponent<
     <>
       <div>
         {!previewItems?.length && (
-          <EmptyStateView
+          <EmptyState
             IconComponent={ListCircleSvg}
             title="No fields to show!"
             description="Please choose a template with form fields"

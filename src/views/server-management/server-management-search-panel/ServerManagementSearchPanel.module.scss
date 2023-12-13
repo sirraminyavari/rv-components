@@ -1,0 +1,128 @@
+@import '../../../scss/modules/default';
+
+.resultsLayoutContainer {
+  width: 50%;
+  min-height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-width: px-to-rem(512);
+  margin-inline: auto;
+  padding-inline: px-to-rem(12);
+  padding-block: px-to-rem(24);
+
+  .defaultIcon {
+    font-size: px-to-rem(128);
+  }
+
+  .detailsBlock {
+    margin-block-start: px-to-rem(23);
+    margin-block-end: px-to-rem(74);
+    text-align: center;
+  }
+}
+
+.inputsBlock {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: px-to-rem(24);
+  width: 100%;
+
+  .selectInput {
+    width: 100%;
+    z-index: 3;
+  }
+}
+
+.actionContainer {
+  width: 100%;
+  text-align: center;
+  margin-block-start: px-to-rem(20);
+
+  .actionButton {
+    width: 60%;
+    justify-content: center;
+    margin-inline: auto;
+  }
+}
+
+.mainContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: px-to-rem(16);
+}
+
+.sidebar {
+  height: 90vh;
+  flex-shrink: 0;
+}
+
+.resultsPanel {
+  box-sizing: border-box;
+  padding-inline: px-to-rem(32);
+
+  &.emptyState {
+    height: 100%;
+    padding-block: 0;
+  }
+}
+
+.resultCountCaption {
+  margin-block-start: px-to-rem(24);
+  margin-block-end: px-to-rem(8);
+  white-space: nowrap;
+}
+
+.resultTitle {
+  margin-block: 0;
+}
+
+.resultAuthors {
+  display: flex;
+  justify-content: start;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: px-to-rem(8);
+  padding-inline-start: 0;
+  list-style: none;
+
+  li:not(:first-of-type) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &::before {
+      content: '';
+      width: px-to-rem(4);
+      height: px-to-rem(4);
+      margin-inline-end: px-to-rem(8);
+      color: inherit;
+      background-color: currentcolor;
+      display: inline-block;
+      border-radius: 100%;
+    }
+  }
+}
+
+.rowActionsContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: px-to-rem(16);
+
+  .actionButton {
+    padding-inline: px-to-rem(40);
+  }
+}
+
+.loadingStateLabel {
+  margin-block: px-to-rem(8);
+
+  span {
+    height: px-to-rem(80);
+  }
+}
