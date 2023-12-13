@@ -14,7 +14,7 @@
     "build:rollup": "rollup -c --bundleConfigAsCjs",
     "build:scss": "cpx 'src/**/*.{scss,css,ttf,eot,woff,woff2,svg}' dist",
     "build:version-bump": "node ./scripts/version-bump.js",
-    "postbuild": "cpx './package.json' dist",
+    "postbuild": "cpx './package.json' dist && cpx './README.md' dist && cpx './CHANGELOG.md' dist",
     "lint": "eslint src --color --fix",
     "stylint": "stylelint 'src/**/*.{scss,css}' --fix",
     "format": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}'",
