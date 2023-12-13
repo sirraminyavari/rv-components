@@ -1,6 +1,6 @@
 {
   "name": "@cliqmind/rv-components",
-  "version": "0.12.1-beta.rc12",
+  "version": "0.12.1-beta.rc16",
   "license": "UNLICENSED",
   "typings": "./index.d.ts",
   "main": "./index.cjs",
@@ -26,6 +26,7 @@
   "peerDependencies": {
     "@popperjs/core": "^2.11.8",
     "clsx": "^1.2.1",
+    "i18next": "^23.7.8",
     "p-queue": "^7.4.1",
     "ramin-modern-calendar-datepicker": "^3.1.10",
     "react": ">=17.0.2",
@@ -113,12 +114,14 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "clsx": "^1.2.1",
+    "i18next": "^23.7.8",
     "lodash": "^4.17.21",
     "p-queue": "^6.6.2",
     "ramin-modern-calendar-datepicker": "^3.1.10",
-    "react": "^17.0.2",
+    "react": ">=17.0.2",
     "react-animate-height": "^3.1.0",
-    "react-dom": "^17.0.2",
+    "react-dom": ">=17.0.2",
+    "react-i18next": "^13.5.0",
     "react-loading-skeleton": "^3.3.1",
     "react-modal": "^3.16.1",
     "react-perfect-scrollbar": "^1.5.8",

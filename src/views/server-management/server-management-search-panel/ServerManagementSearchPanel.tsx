@@ -19,6 +19,8 @@ import styles from './ServerManagementSearchPanel.module.scss';
 import { RowItem } from '../../../layouts';
 import ListItemSvg from '../../../icons/listItem.svg';
 import { ServerManagementEmptyState } from '../server-management-empty-state';
+import { Trans } from 'react-i18next';
+import { t } from 'i18next';
 
 interface ServerResultEntity {
   id: string;
@@ -66,10 +68,26 @@ const ServerManagementSearchPanel = ({
       });
 
       if (isAllSelected) {
-        return [{ label: 'Search within all servers', value: 'all-servers' }];
+        return [
+          {
+            label: t('search_panel_all_servers_option', {
+              defaultValue: 'Search all servers',
+              ns: 'server-management',
+              count: serversList?.length,
+            }),
+            value: 'all-servers',
+          },
+        ];
       } else if (selectedServersList.length === 0) {
         return [
-          { label: 'Search within all servers', value: 'all-servers' },
+          {
+            label: t('search_panel_all_servers_option', {
+              defaultValue: 'Search all servers',
+              ns: 'server-management',
+              count: serversList?.length,
+            }),
+            value: 'all-servers',
+          },
           ...(serversList || []),
         ];
       } else return [...(serversList || [])];
@@ -118,8 +136,10 @@ const ServerManagementSearchPanel = ({
           <>
             <CMServerSearch className={styles.defaultIcon} />
             <Typography type="p" color={RVColorProp.gray} className={styles.detailsBlock}>
-              To search in library resources, choose a Z-Server and enter either the title,
-              creator(s), or publisher.
+              <Trans ns="server-management" i18nKey="search_panel_title">
+                To search in library resources, choose a Z-Server and enter either the title,
+                creator(s), or publisher.
+              </Trans>
             </Typography>
           </>
         }
@@ -127,7 +147,15 @@ const ServerManagementSearchPanel = ({
         <form className={styles.inputsBlock} onSubmit={onSearchSubmit}>
           <div className={styles.selectInput}>
             <Select
-              placeholder={isLoadingServerList ? '' : 'choose server(s) ...'}
+              placeholder={
+                isLoadingServerList
+                  ? ''
+                  : t('search_panel_server_select_placeholder', {
+                      defaultValue: 'choose server(s) ...',
+                      ns: 'server-management',
+                      count: serversList?.length,
+                    })
+              }
               fullWidth
               options={selectInputServersList(selectedServers)}
               isMulti
@@ -139,7 +167,11 @@ const ServerManagementSearchPanel = ({
             />
           </div>
           <TextInput
-            label="Search title, creator(s) or publisher"
+            label={t('search_panel_server_query_placeholder', {
+              defaultValue: 'Search title, creator(s) or publisher',
+              ns: 'server-management',
+              count: serversList?.length,
+            })}
             variant={RVVariantProp.outline}
             color={RVColorProp.cgBlue}
             value={searchQuery}
@@ -149,7 +181,9 @@ const ServerManagementSearchPanel = ({
           <div className={styles.actionContainer}>
             <Button className={styles.actionButton} type="submit">
               <SearchSvg />
-              Search
+              <Trans ns="common" i18nKey="search">
+                Search
+              </Trans>
             </Button>
           </div>
         </form>
@@ -176,7 +210,9 @@ const ServerManagementSearchPanel = ({
               color={RVColorProp.gray}
               className={styles.resultCountCaption}
             >
-              {results.length} results found
+              <Trans ns="common" i18nKey="result_found" count={results.length}>
+                {{ count: results.length }} results found
+              </Trans>
             </Typography>
           )}
           {results &&
@@ -202,7 +238,9 @@ const ServerManagementSearchPanel = ({
                       className={styles.actionButton}
                       onClick={() => addCallback(id)}
                     >
-                      Add
+                      <Trans ns="common" i18nKey="add">
+                        Add
+                      </Trans>
                     </Button>
                   </div>
                 }

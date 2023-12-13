@@ -4,6 +4,7 @@ import clsx from 'clsx';
 import { Button, RVTextInput, Scrollbar, TextInput, Typography } from '../../../components';
 import { RVColorProp, RVVariantProp } from '../../../types';
 import { FormEventHandler, useState } from 'react';
+import { Trans } from 'react-i18next';
 
 interface ServerEntity {
   title: string;
@@ -48,7 +49,9 @@ const ServerManagementAdminNewServer = ({
     >
       <PlusCircleSvg outline className={clsx(RVColorProp.gray, styles.icon)} />
       <Typography type="H1" color={RVColorProp.gray}>
-        New server
+        <Trans ns="server-management" i18nKey="new_server_title">
+          New server
+        </Trans>
       </Typography>
       <form onSubmit={onFormSubmit}>
         <div className={styles.titleInputBlock}>
@@ -108,7 +111,9 @@ const ServerManagementAdminNewServer = ({
         </div>
         <div className={styles.actionContainer}>
           <Button type="submit" fullWidth>
-            Add new server
+            <Trans ns="server-management" i18nKey="add_new_server_button">
+              Add new server
+            </Trans>
           </Button>
         </div>
       </form>
