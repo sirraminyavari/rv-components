@@ -16,9 +16,7 @@ const ServerManagementAdminEmptyState: FunctionComponent = () => {
         <>
           <AlertSvg className={clsx(RVColorProp.gray, styles.defaultIcon)} />
           <Typography type="H1" color={RVColorProp.gray} className={styles.title}>
-            <Trans ns="server-management" i18nKey="no_servers_available">
-              No servers added
-            </Trans>
+            No results found
           </Typography>
         </>
       }

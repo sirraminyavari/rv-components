@@ -57,4 +57,3 @@ export { default as ListCircleSvg } from './listCircle.svg';
 export { default as AlertSvg } from './alert.svg';
 export { default as ListItemSvg } from './listItem.svg';
 export { default as TrashSvg } from './trash.svg';
-export { default as ExternalLinkSvg } from './externalLink.svg';
