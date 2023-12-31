@@ -43,5 +43,5 @@
   },
 
   "include": ["src/**/*", "src/types/**/*"],
-  "exclude": ["node_modules", "build", "src/**/*.stories.tsx", "src/**/*.test.tsx"]
+  "exclude": ["node_modules", "build", "src/**/*.stories.tsx", "src/**/*.test.tsx", "src/**/*.faker.ts"]
 }

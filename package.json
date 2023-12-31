@@ -25,6 +25,8 @@
   },
   "peerDependencies": {
     "@popperjs/core": "^2.11.8",
+    "@tanstack/react-table": "^8.11.3",
+    "@tanstack/react-virtual": "^3.0.1",
     "clsx": "^1.2.1",
     "p-queue": "^6",
     "ramin-modern-calendar-datepicker": "^3.1.10",
@@ -42,6 +44,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.20.5",
+    "@faker-js/faker": "^8.3.1",
     "@rollup/plugin-commonjs": "^24.1.0-0",
     "@rollup/plugin-node-resolve": "^15.0.1",
     "@rollup/plugin-typescript": "8.3.3",
@@ -112,6 +115,8 @@
   },
   "dependencies": {
     "@popperjs/core": "^2.11.8",
+    "@tanstack/react-table": "^8.11.3",
+    "@tanstack/react-virtual": "^3.0.1",
     "clsx": "^1.2.1",
     "i18next": "^23.7.8",
     "lodash": "^4.17.21",

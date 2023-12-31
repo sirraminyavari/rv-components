@@ -20,6 +20,7 @@ export * from './Skeleton';
 export * from './Sidebar';
 export * from './SideMenu';
 export * from './Switch';
+export * from './Table';
 export * from './Toast';
 export * from './TextInput';
 export * from './Typography';
