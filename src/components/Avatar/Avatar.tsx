@@ -20,6 +20,10 @@ export interface RVAvatar
   stacked?: boolean;
   /** set to change the roundness of the button corners (default:"small") */
   rounded?: 'full' | 'half';
+  /** set the Avatar component to have a small indicator (default:false) */
+  withIndicator?: boolean;
+  /** set the Avatar indicator color (default: RVColorProp.cgBlue) */
+  indicatorColor?: RVColorProp;
   /** set the component image source URL (required) */
   src: string;
   /** set the image accessibility label */
@@ -38,6 +42,8 @@ const Avatar = forwardRef<HTMLImageElement, RVAvatar>(
       fullCircle,
       rounded,
       stacked,
+      indicatorColor = RVColorProp.crayola,
+      withIndicator,
       alt = '',
       sudoAction,
       ...props
@@ -45,23 +51,37 @@ const Avatar = forwardRef<HTMLImageElement, RVAvatar>(
     ref
   ) => {
     return (
-      <img
-        ref={ref}
+      <div
         className={clsx(
-          styles.baseAvatar,
-          color,
-          styles[RVVariantProp[variant]],
+          styles.avatarContainer,
           styles[RVSizeProp[size]],
-          rounded === 'full' && styles.roundedFull,
-          rounded === 'half' && styles.roundedHalf,
-          fullCircle && styles.fullCircle,
           stacked && styles.stacked,
-          className
+          styles[RVVariantProp[variant]],
+          fullCircle && styles.fullCircle
         )}
-        alt={alt}
-        data-sudo={sudoAction}
-        {...props}
-      />
+      >
+        <img
+          ref={ref}
+          className={clsx(
+            styles.baseAvatar,
+            color,
+
+            rounded === 'full' && styles.roundedFull,
+            rounded === 'half' && styles.roundedHalf,
+
+            className
+          )}
+          alt={alt}
+          data-sudo={sudoAction}
+          {...props}
+        />
+        {withIndicator && (
+          <>
+            <span className={clsx(indicatorColor, styles.indicator)} />
+            <span className={clsx(color, styles.indicatorRing)} />
+          </>
+        )}
+      </div>
     );
   }
 );
