@@ -38,7 +38,7 @@
     cursor: grab;
     flex-shrink: 0;
 
-    &:before {
+    &::before {
       position: absolute;
       content: '';
       transition: background-color 0.25s;
@@ -82,8 +82,14 @@
 .LoadingTemplateContainer {
   .loadingStateLabel {
     border-radius: 0;
-    height: px-to-rem(45);
-    margin-block-start: px-to-rem(5);
+    width: 80%;
+
+    // margin-inline: auto;
+    margin-block: px-to-rem(12);
+
+    span {
+      height: px-to-rem(30);
+    }
   }
 }
 
@@ -106,11 +112,13 @@
       .tableResizeIndicator {
         width: px-to-rem(3);
         height: 80%;
+
         // transform: translateX(px-to-rem());
 
-        &:before {
+        &::before {
           width: px-to-rem(1);
           height: 100%;
+
           // transform: translateX(-40%);
           border-radius: px-to-rem(10);
         }
@@ -155,9 +163,10 @@
       .tableResizeIndicator {
         width: px-to-rem(6);
         height: 80%;
+
         // transform: translateX(px-to-rem());
 
-        &:before {
+        &::before {
           width: px-to-rem(3);
           height: 100%;
           transform: translateX(-10%);
@@ -203,9 +212,10 @@
       .tableResizeIndicator {
         width: px-to-rem(8);
         height: 80%;
+
         // transform: translateX(px-to-rem());
 
-        &:before {
+        &::before {
           width: px-to-rem(3);
           height: 100%;
           transform: translateX(-40%);
@@ -248,7 +258,7 @@
         }
 
         &.tableResizeIndicatorActive {
-          &:before {
+          &::before {
             background-color: hsl(var(--base-font));
           }
         }
@@ -287,7 +297,6 @@
 
   &.outline {
     border-radius: px-to-rem(10);
-
     border-width: px-to-rem(1);
     border-style: solid;
     border-color: hsl(var(--base));
@@ -297,7 +306,6 @@
       color: hsl(var(--base));
       border-top-left-radius: px-to-rem(10);
       border-top-right-radius: px-to-rem(10);
-
       border-width: px-to-rem(1);
       border-bottom-width: px-to-rem(2);
       border-style: solid;
@@ -309,7 +317,7 @@
         }
 
         &.tableResizeIndicatorActive {
-          &:before {
+          &::before {
             background-color: hsl(var(--base));
           }
         }
@@ -352,7 +360,6 @@
     .tableHead {
       background-color: hsl(var(--base-font));
       color: hsl(var(--base));
-
       border-width: px-to-rem(0);
       border-bottom-width: px-to-rem(1);
       border-style: solid;
@@ -364,7 +371,7 @@
         }
 
         &.tableResizeIndicatorActive {
-          &:before {
+          &::before {
             background-color: hsl(var(--base));
           }
         }

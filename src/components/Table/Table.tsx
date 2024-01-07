@@ -7,6 +7,8 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  ReactNode,
+  FunctionComponent,
 } from 'react';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types';
 
@@ -24,7 +26,7 @@ import { useVirtualizer } from '@tanstack/react-virtual';
 import styles from './Table.module.scss';
 import clsx from 'clsx';
 import { CaretSvg } from '../../icons';
-import Skeleton from 'react-loading-skeleton';
+import { Skeleton } from '../Skeleton';
 
 export interface RVTable
   extends Omit<
@@ -39,11 +41,11 @@ export interface RVTable
   size?: RVSizeProp;
 
   /** set Table component height (default:80dvh)*/
-  tableHight?: string | number;
+  tableHeight?: string | number;
   /** set Table columns structure [guide](https://tanstack.com/table/v8/docs/guide/column-defs) */
-  columns?: ColumnDef<Record<string, string | number | Date>>[];
+  columns?: ColumnDef<Record<string, ReactNode>>[];
   /** set Table rows data structure */
-  rowsData?: Record<string, string | number | Date>[];
+  rowsData?: Record<string, ReactNode>[];
   /** The number of items to render above and below the visible area of Table component rows. Increasing this number will increase the amount of time it takes to render the virtualized items, but might decrease the likelihood of seeing slow-rendering blank items at the top and bottom of the virtualized items when scrolling (default: 5)*/
   overScan?: number;
   /** set Table component to have resizable columns (default: false) */
@@ -52,32 +54,36 @@ export interface RVTable
   dir?: 'rtl' | 'ltr';
   /** set Table component to automatically detect columns and row data with infinite scroll loading pagination */
   loadTableDataCallback?: (currentPage?: number) => Promise<{
-    data: Record<string, string | number | Date>[];
+    data: Record<string, string | number | Date | ReactNode>[];
     totalPages: number;
   }>;
+  /** set Table component to call a function when reaching the bottom of the data */
+  onBottomReachedCallback?: () => Promise<void>;
+  /** set Table component to call a function when reaching the bottom of the data */
+  disableInfiniteScroll?: boolean;
 }
-const Table = ({
+const Table: FunctionComponent<RVTable> = ({
   color = RVColorProp.cgBlue,
   variant = RVVariantProp.primary,
   size = RVSizeProp.medium,
   className,
   columns,
-  tableHight = '80dvh',
+  tableHeight = '80dvh',
   overScan = 5,
   dir = 'ltr',
   resizable = false,
   rowsData,
   loadTableDataCallback,
-}: RVTable) => {
-  const [tableRowsData, setTableRowsData] = useState<Record<string, string | number | Date>[]>(
-    rowsData || []
-  );
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  onBottomReachedCallback,
+  disableInfiniteScroll,
+}) => {
+  const [tableRowsData, setTableRowsData] = useState<Record<string, ReactNode>[]>(rowsData || []);
+  // const [isLoading, setIsLoading] = useState<boolean>(false);
   const [isFetching, setIsFetching] = useState<boolean>(false);
   const [currentPage, setCurrentPage] = useState<number>(-1);
   const [totalPages, setTotalPages] = useState<number | undefined>();
 
-  const tableColumns = useMemo<ColumnDef<Record<string, string | number | Date>>[]>(() => {
+  const tableColumns = useMemo<ColumnDef<Record<string, ReactNode>>[]>(() => {
     if (columns) return columns;
     if (tableRowsData.length)
       return Object.keys(tableRowsData[0]).map((dataColumnKey) => ({
@@ -89,7 +95,7 @@ const Table = ({
   }, [tableRowsData, columns, currentPage, resizable]);
 
   const table = useReactTable({
-    data: tableRowsData,
+    data: loadTableDataCallback ? tableRowsData : rowsData || [],
     columns: tableColumns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -116,43 +122,45 @@ const Table = ({
 
   const loadPaginatedData = useCallback(async () => {
     if (!loadTableDataCallback) return;
-    if (isFetching) return;
+    if (isFetching || disableInfiniteScroll) return;
     if (currentPage === totalPages) return;
     setIsFetching(true);
-    setIsLoading(true);
+    // setIsLoading(true);
     const nextPage = currentPage + 1;
     try {
       const { data, totalPages: apiTotalPages } = await loadTableDataCallback(nextPage);
       setTotalPages(apiTotalPages);
       setCurrentPage(nextPage);
-      console.log({ nextPage, currentPage, totalPages });
       setTableRowsData((prev = []) => [...prev, ...data]);
     } catch (error) {}
     setIsFetching(false);
-    setIsLoading(false);
-  }, [isFetching, currentPage, totalPages]);
+    // setIsLoading(false);
+  }, [isFetching, currentPage, totalPages, disableInfiniteScroll]);
 
   const fetchMoreOnBottomReached = useCallback(
     (containerRefElement?: HTMLDivElement | null) => {
       if (containerRefElement) {
         const { scrollHeight, scrollTop, clientHeight } = containerRefElement;
         //once the user has scrolled within 300px of the bottom of the table, fetch more data if there is any
-        if (
-          scrollHeight - scrollTop - clientHeight < 300 &&
-          !isFetching &&
-          typeof currentPage === 'number' &&
-          typeof totalPages === 'number' &&
-          currentPage < totalPages
-        ) {
-          loadPaginatedData();
+        if (scrollHeight - scrollTop - clientHeight < 300) {
+          if (
+            !isFetching &&
+            typeof currentPage === 'number' &&
+            typeof totalPages === 'number' &&
+            currentPage < totalPages
+          ) {
+            loadPaginatedData();
+          }
+
+          if (onBottomReachedCallback && !disableInfiniteScroll) onBottomReachedCallback();
         }
       }
     },
-    [loadPaginatedData, isFetching, currentPage, totalPages]
+    [loadPaginatedData, isFetching, currentPage, totalPages, disableInfiniteScroll]
   );
   useEffect(() => {
     fetchMoreOnBottomReached(tableContainerRef.current);
-  }, [fetchMoreOnBottomReached, loadTableDataCallback]);
+  }, [fetchMoreOnBottomReached, loadTableDataCallback, onBottomReachedCallback]);
   useEffect(() => {
     if (loadPaginatedData && currentPage === -1) loadPaginatedData();
   }, []);
@@ -164,7 +172,7 @@ const Table = ({
         className={clsx(styles.tableContainer, color, styles[size], styles[variant], className)}
         ref={tableContainerRef}
         onScroll={(e) => fetchMoreOnBottomReached(e.target as HTMLDivElement)}
-        style={{ height: tableHight }}
+        style={{ height: tableHeight }}
       >
         <table className={styles.table}>
           <thead className={styles.tableHead}>
@@ -197,9 +205,10 @@ const Table = ({
                               onClick={header.column.getToggleSortingHandler()}
                             />
                           ),
-                        }[header.column.getIsSorted() as string] ?? (
-                          <TableSortIndicator onClick={header.column.getToggleSortingHandler()} />
-                        )}
+                        }[header.column.getIsSorted() as string] ??
+                          (header.column.getCanSort() && (
+                            <TableSortIndicator onClick={header.column.getToggleSortingHandler()} />
+                          ))}
                         {header.column.getCanResize() && (
                           <div
                             className={clsx(
@@ -226,32 +235,60 @@ const Table = ({
             {rowVirtualizer.getVirtualItems().map((virtualRow) => {
               const row = rows[virtualRow.index] as Row<Record<string, string | number | Date>>;
               return (
-                <tr
-                  data-index={virtualRow.index}
-                  ref={(node) => rowVirtualizer.measureElement(node)}
-                  key={row.id}
-                  style={{
-                    transform: `translateY(${virtualRow.start}px)`,
-                  }}
-                >
-                  {row.getVisibleCells().map((cell) => {
-                    return (
-                      <td
-                        key={cell.id}
+                <>
+                  <tr
+                    data-index={virtualRow.index}
+                    ref={(node) => rowVirtualizer.measureElement(node)}
+                    key={row.id}
+                    style={{
+                      transform: `translateY(${virtualRow.start}px)`,
+                    }}
+                  >
+                    {row.getVisibleCells().map((cell) => {
+                      return (
+                        <td
+                          key={cell.id}
+                          style={{
+                            width: cell.column.getSize(),
+                          }}
+                        >
+                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                        </td>
+                      );
+                    })}
+                  </tr>
+                  {(isFetching || disableInfiniteScroll) &&
+                    virtualRow.index + 1 === rows.length && (
+                      <tr
+                        data-index={virtualRow.index + 1}
+                        ref={(node) => rowVirtualizer.measureElement(node)}
+                        key={row.id + 1}
                         style={{
-                          width: cell.column.getSize(),
+                          transform: `translateY(${
+                            (virtualRow.start / virtualRow.index) * (virtualRow.index + 1)
+                          }px)`,
                         }}
                       >
-                        {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                      </td>
-                    );
-                  })}
-                </tr>
+                        {row.getVisibleCells().map((cell) => {
+                          return (
+                            <td
+                              key={cell.id + 1}
+                              style={{
+                                width: cell.column.getSize(),
+                              }}
+                              className={styles.LoadingTemplateContainer}
+                            >
+                              <Skeleton containerClassName={styles.loadingStateLabel} />
+                            </td>
+                          );
+                        })}
+                      </tr>
+                    )}
+                </>
               );
             })}
           </tbody>
         </table>
-        {isLoading && <LoadingState />}
       </div>
     </>
   );
@@ -274,16 +311,6 @@ const TableSortIndicator = ({
         outline={sort !== 'desc'}
         className={styles.tableSortIndicatorBottom}
       />
-    </div>
-  );
-};
-
-const LoadingState = () => {
-  return (
-    <div className={styles.LoadingTemplateContainer}>
-      <Skeleton className={styles.loadingStateLabel} />
-      <Skeleton className={styles.loadingStateLabel} />
-      <Skeleton className={styles.loadingStateLabel} />
     </div>
   );
 };

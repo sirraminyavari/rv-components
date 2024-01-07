@@ -1,11 +1,11 @@
-import React, { useEffect, useMemo, useState } from 'react';
+import React, { ReactNode, useEffect, useMemo, useState } from 'react';
 import { ComponentStory, ComponentMeta } from '@storybook/react';
 
 import { Table as TableComponent, RVTable } from '.';
 import { ThemeBlock } from '../../storybookComponents';
 import { RVSizeProp, RVVariantProp } from '../../types';
 import { ColumnDef } from '@tanstack/react-table';
-import { Person, makeData } from './makeData.faker';
+import { makeData } from './makeData.faker';
 
 export default {
   title: 'Components/Table',
@@ -15,7 +15,7 @@ export default {
 
 const fakeDataLoaderCallback: RVTable['loadTableDataCallback'] = async (currentPage) => {
   const response = {
-    data: makeData(currentPage, 25) as Record<string, string | number | Date>[],
+    data: makeData(currentPage, 25) as Record<string, ReactNode>[],
     totalPages: 5,
   };
   console.log(currentPage, response);
@@ -37,7 +37,7 @@ const Template: ComponentStory<typeof TableComponent> = ({
   useEffect(() => {
     setColorClass(color);
   }, [color]);
-  const columns = useMemo<ColumnDef<Record<string, string | number | Date>>[]>(
+  const columns = useMemo<ColumnDef<Record<string, ReactNode>>[]>(
     () => [
       {
         accessorKey: 'id',
@@ -87,7 +87,7 @@ const Template: ComponentStory<typeof TableComponent> = ({
         <TableComponent
           rowsData={rowsDataInput || makeData(0, 10)}
           columns={columnsInput || columns}
-          tableHight={'200px'}
+          tableHeight={'200px'}
           color={colorClass}
           variant={variant || RVVariantProp.primary}
           {...args}
@@ -97,7 +97,7 @@ const Template: ComponentStory<typeof TableComponent> = ({
         <TableComponent
           rowsData={rowsDataInput || makeData(0, 10)}
           columns={columnsInput || columns}
-          tableHight={'200px'}
+          tableHeight={'200px'}
           color={colorClass}
           variant={variant || RVVariantProp.outline}
           {...args}
@@ -107,7 +107,7 @@ const Template: ComponentStory<typeof TableComponent> = ({
         <TableComponent
           rowsData={rowsDataInput || makeData(0, 10)}
           columns={columnsInput || columns}
-          tableHight={'200px'}
+          tableHeight={'200px'}
           color={colorClass}
           variant={variant || RVVariantProp.white}
           {...args}
@@ -128,7 +128,7 @@ export const CustomColumns: ComponentStory<typeof TableComponent> = ({
   variant,
   ...args
 }) => {
-  const columns = useMemo<ColumnDef<Record<string, string | number | Date>>[]>(
+  const columns = useMemo<ColumnDef<Record<string, ReactNode>>[]>(
     () => [
       {
         accessorKey: 'id',
@@ -211,7 +211,7 @@ export const InfiniteScrollWithCustomColumns: ComponentStory<typeof TableCompone
   columns: inputColumns,
   ...args
 }) => {
-  const columns = useMemo<ColumnDef<Record<string, string | number | Date>>[]>(
+  const columns = useMemo<ColumnDef<Record<string, ReactNode>>[]>(
     () => [
       {
         accessorKey: 'id',
