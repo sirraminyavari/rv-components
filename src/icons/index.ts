@@ -57,3 +57,6 @@ export { default as ListCircleSvg } from './listCircle.svg';
 export { default as AlertSvg } from './alert.svg';
 export { default as ListItemSvg } from './listItem.svg';
 export { default as TrashSvg } from './trash.svg';
+export { default as LoadingSvg } from './loading.svg';
+export { default as LockOpened } from './lockOpened.svg';
+export { default as LockClosed } from './lockClosed.svg';

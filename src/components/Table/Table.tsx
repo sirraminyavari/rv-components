@@ -50,6 +50,8 @@ export interface RVTable
   overScan?: number;
   /** set Table component to have resizable columns (default: false) */
   resizable?: boolean;
+  /** set Table component to show a skeleton for each column (default: false) */
+  showSkeleton?: boolean;
   /** set Table component direction (mostly used with resizable columns enabled) */
   dir?: 'rtl' | 'ltr';
   /** set Table component to automatically detect columns and row data with infinite scroll loading pagination */
@@ -67,6 +69,7 @@ const Table: FunctionComponent<RVTable> = ({
   variant = RVVariantProp.primary,
   size = RVSizeProp.medium,
   className,
+  showSkeleton = true,
   columns,
   tableHeight = '80dvh',
   overScan = 5,
@@ -257,33 +260,32 @@ const Table: FunctionComponent<RVTable> = ({
                       );
                     })}
                   </tr>
-                  {(isFetching || disableInfiniteScroll) &&
-                    virtualRow.index + 1 === rows.length && (
-                      <tr
-                        data-index={virtualRow.index + 1}
-                        ref={(node) => rowVirtualizer.measureElement(node)}
-                        key={row.id + 1}
-                        style={{
-                          transform: `translateY(${
-                            (virtualRow.start / virtualRow.index) * (virtualRow.index + 1)
-                          }px)`,
-                        }}
-                      >
-                        {row.getVisibleCells().map((cell) => {
-                          return (
-                            <td
-                              key={cell.id + 1}
-                              style={{
-                                width: cell.column.getSize(),
-                              }}
-                              className={styles.LoadingTemplateContainer}
-                            >
-                              <Skeleton containerClassName={styles.loadingStateLabel} />
-                            </td>
-                          );
-                        })}
-                      </tr>
-                    )}
+                  {(isFetching || showSkeleton) && virtualRow.index + 1 === rows.length && (
+                    <tr
+                      data-index={virtualRow.index + 1}
+                      ref={(node) => rowVirtualizer.measureElement(node)}
+                      key={row.id + 1}
+                      style={{
+                        transform: `translateY(${
+                          (virtualRow.start / virtualRow.index) * (virtualRow.index + 1)
+                        }px)`,
+                      }}
+                    >
+                      {row.getVisibleCells().map((cell) => {
+                        return (
+                          <td
+                            key={cell.id + 1}
+                            style={{
+                              width: cell.column.getSize(),
+                            }}
+                            className={styles.LoadingTemplateContainer}
+                          >
+                            <Skeleton containerClassName={styles.loadingStateLabel} />
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  )}
                 </>
               );
             })}

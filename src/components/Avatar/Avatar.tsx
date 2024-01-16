@@ -46,6 +46,7 @@ const Avatar = forwardRef<HTMLImageElement, RVAvatar>(
       withIndicator,
       alt = '',
       sudoAction,
+      children,
       ...props
     },
     ref
@@ -81,6 +82,7 @@ const Avatar = forwardRef<HTMLImageElement, RVAvatar>(
             <span className={clsx(color, styles.indicatorRing)} />
           </>
         )}
+        {children}
       </div>
     );
   }
