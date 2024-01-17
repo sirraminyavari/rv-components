@@ -48,7 +48,7 @@ const Switch = forwardRef<HTMLInputElement, RVSwitch>(
     },
     ref
   ) => {
-    const [isToggled, setIsToggled] = useState<boolean>();
+    const [isToggled, setIsToggled] = useState<boolean | undefined>(checked);
 
     const onChangeHandler: ChangeEventHandler<HTMLInputElement> = useCallback(
       (e) => {
