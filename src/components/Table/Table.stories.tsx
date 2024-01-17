@@ -274,6 +274,9 @@ ResizableColumns.args = { resizable: true };
 export const OverScan = ShowCase.bind({});
 OverScan.args = { overScan: 20 };
 
+export const FixedColumns = ShowCase.bind({});
+FixedColumns.args = { fixedColumn: ['firstName', 'lastName'] };
+
 export const RTL = Template.bind({});
 RTL.args = { dir: 'rtl' };
 

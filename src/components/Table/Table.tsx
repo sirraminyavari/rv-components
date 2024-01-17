@@ -63,6 +63,7 @@ export interface RVTable
   onBottomReachedCallback?: () => Promise<void>;
   /** set Table component to call a function when reaching the bottom of the data */
   disableInfiniteScroll?: boolean;
+  fixedColumn?: (string | number)[];
 }
 const Table: FunctionComponent<RVTable> = ({
   color = RVColorProp.cgBlue,
@@ -75,6 +76,7 @@ const Table: FunctionComponent<RVTable> = ({
   overScan = 5,
   dir = 'ltr',
   resizable = false,
+  fixedColumn,
   rowsData,
   loadTableDataCallback,
   onBottomReachedCallback,
@@ -184,9 +186,16 @@ const Table: FunctionComponent<RVTable> = ({
                 {headerGroup.headers.map((header) => {
                   return (
                     <th
-                      key={header.id}
+                      key={`table-th-${header.id}`}
                       style={{
                         width: header.getSize(),
+                        ...(fixedColumn?.includes(header.id)
+                          ? {
+                              position: 'sticky',
+                              insetInlineStart: 0,
+                              zIndex: 1,
+                            }
+                          : {}),
                       }}
                     >
                       <div
@@ -253,6 +262,13 @@ const Table: FunctionComponent<RVTable> = ({
                           key={cell.id}
                           style={{
                             width: cell.column.getSize(),
+                            ...(fixedColumn?.includes(cell.column.id)
+                              ? {
+                                  position: 'sticky',
+                                  insetInlineStart: 0,
+                                  zIndex: 1,
+                                }
+                              : {}),
                           }}
                         >
                           {flexRender(cell.column.columnDef.cell, cell.getContext())}
