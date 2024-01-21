@@ -10,6 +10,8 @@ import UserManagementAdminListModal from './user-management-admin-list-panels/Us
 import UserManagementAdminListCreateUserPanel from './user-management-admin-list-panels/UserManagementAdminListCreateUserPanel';
 import UserManagementAdminListRolePanel from './user-management-admin-list-panels/UserManagementAdminListRolePanel';
 import UserManagementAdminListResetPasswordPanel from './user-management-admin-list-panels/UserManagementAdminListResetPasswordPanel';
+import { useDebounce } from 'use-debounce';
+import UserManagementAdminListConfidentialityPanel from './user-management-admin-list-panels/UserManagementAdminListConfidentialityPanel';
 
 export interface RVUserManagementAdminList {
   usersCountPerPage?: number;
@@ -48,7 +50,7 @@ export interface RVUserManagementAdminList {
     }[];
   }>;
   updateUserDataCallback: (data: {
-    userID: string;
+    UserID: string;
     FirstName?: string;
     LastName?: string;
     UserName?: string;
@@ -72,6 +74,7 @@ export interface RVUserManagementAdminList {
   }) => Promise<{ status: boolean; message?: string }>;
 
   updateUserApprovalCallback: (data: { UserID: string; IsApproved: boolean }) => Promise<boolean>;
+  unblockUserCallback: (data: { UserID: string }) => Promise<boolean>;
   updateUserAdminStatusCallback: (data: {
     UserID: string;
     IsSetToBeAdmin: boolean;
@@ -90,8 +93,13 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
   updateUserApprovalCallback,
   updateUserAdminStatusCallback,
   setUserRandomPasswordCallback,
+  unblockUserCallback,
   usersCountPerPage = 10,
 }) => {
+  const [loadAllUsersDataDebouncedCallback] = useDebounce(loadAllUsersDataCallback, 700, {
+    leading: true,
+  });
+
   const [modalStatus, setModalStatus] = useState(false);
   const [modalContent, setModalContent] = useState<{
     user?: RVUserManagementAdminListUserEntity;
@@ -121,7 +129,7 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
   } = useUserManagementAdminList({
     openModal,
     closeModal,
-    loadAllUsersDataCallback,
+    loadAllUsersDataCallback: loadAllUsersDataDebouncedCallback as typeof loadAllUsersDataCallback,
     updateUserDataCallback,
     usersCountPerPage,
     loadConfidentialityLevelsCallback,
@@ -129,6 +137,7 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
     createNewUserCallback,
     updateUserAdminStatusCallback,
     setUserRandomPasswordCallback,
+    unblockUserCallback,
   });
 
   return (
@@ -186,7 +195,9 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
             defaultValue: 'Active Users',
             ns: 'user_management_list',
           })}
-          onChange={(e) => setSearchInActiveUsers(e.target.checked)}
+          onChange={(e) => {
+            setSearchInActiveUsers(e.target.checked);
+          }}
           checked={searchInActiveUsers}
         />
       </div>
@@ -202,9 +213,18 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
         }}
         disableInfiniteScroll={isLoading}
         showSkeleton={showSkeleton}
-        overScan={100}
+        fixedColumn={['Full Name', 'Username']}
+        overScan={5}
       />
       <UserManagementAdminListModal modalStatus={modalStatus} closeCallback={closeModal}>
+        {modalContent.modalContentType === 'confidentialityChange' && (
+          <UserManagementAdminListConfidentialityPanel
+            closeModalCallback={closeModal}
+            confidentialityLevels={confidentialityLevels}
+            updateUserDataCallback={updateUserDataCallback}
+            user={modalContent.user!}
+          />
+        )}
         {modalContent.modalContentType === 'newUser' && (
           <UserManagementAdminListCreateUserPanel
             closeModalCallback={closeModal}

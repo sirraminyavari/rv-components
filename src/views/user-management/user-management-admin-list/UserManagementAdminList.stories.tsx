@@ -26,7 +26,7 @@ const loadAllUsersData: RVUserManagementAdminList['loadAllUsersDataCallback'] = 
   Count,
   LowerBoundary,
 }) => {
-  const usersData = makeData(LowerBoundary < 50 ? Count : 5).map((person, idx) => ({
+  const usersData = makeData(25).map((person, idx) => ({
     ...person,
     UserName: person.UserName,
   }));
@@ -35,7 +35,7 @@ const loadAllUsersData: RVUserManagementAdminList['loadAllUsersDataCallback'] = 
   return new Promise((res) =>
     setTimeout(() => {
       res({
-        TotalCount: 55,
+        TotalCount: 200,
         AppID: '',
         SystemAdminsEditable: true,
         ConfidentialitiesEditable: true,
@@ -54,6 +54,26 @@ const saveUserData: RVUserManagementAdminList['updateUserDataCallback'] = async 
     }, 1000)
   );
 };
+const setRandomPassword: RVUserManagementAdminList['setUserRandomPasswordCallback'] = async (
+  user
+) => {
+  const usersData = makeData(1);
+  console.log('update requested ...', { user });
+
+  return new Promise((res) =>
+    setTimeout(() => {
+      res({ Password: usersData[0].UserName + 'pass' });
+    }, 1000)
+  );
+};
+const updateUserAdminStatusCallback: RVUserManagementAdminList['updateUserAdminStatusCallback'] =
+  async (user) => {
+    return new Promise((res) =>
+      setTimeout(() => {
+        res(true);
+      }, 1000)
+    );
+  };
 const loadConfidentialityLevels: RVUserManagementAdminList['loadConfidentialityLevelsCallback'] =
   async () => {
     return new Promise((res) =>
@@ -79,6 +99,8 @@ export const List: ComponentStory<typeof UserManagementAdminListComponent> = ({
         loadAllUsersDataCallback={loadAllUsersData}
         updateUserDataCallback={saveUserData}
         loadConfidentialityLevelsCallback={loadConfidentialityLevels}
+        setUserRandomPasswordCallback={setRandomPassword}
+        updateUserAdminStatusCallback={updateUserAdminStatusCallback}
       />
     </div>
   );

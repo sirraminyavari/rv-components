@@ -2,7 +2,7 @@ import { FormEvent, ReactNode, useCallback, useEffect, useMemo, useState } from 
 import { Button, RVSelectOptionItem, RVToast } from '../../../components';
 import { RVSizeProp, RVVariantProp } from '../../../types';
 import type { ColumnDef } from '@tanstack/react-table';
-import { debounce, omit, throttle } from 'lodash';
+import { omit } from 'lodash';
 import type {
   RVUserManagementAdminList,
   RVUserManagementAdminListUserEntity,
@@ -21,6 +21,7 @@ const useUserManagementAdminList = ({
   updateUserApprovalCallback,
   closeModal,
   openModal,
+  unblockUserCallback,
   usersCountPerPage = 10,
 }: RVUserManagementAdminList & {
   closeModal: () => void;
@@ -35,7 +36,7 @@ const useUserManagementAdminList = ({
   >();
 
   const [pageLowerBoundary, setPageLowerBoundary] = useState<number | void>();
-  const [totalUsers, setTotalUsers] = useState<number | void>();
+  const [totalUsers, setTotalUsers] = useState<number>(0);
 
   const [tempUserEditedFields, setTempUserEditedFields] = useState<
     Record<
@@ -65,21 +66,32 @@ const useUserManagementAdminList = ({
     async (reset?: boolean) => {
       if (!loadAllUsersDataCallback) return;
       if (isLoading) return;
-
-      if ((usersListData || []).length > (totalUsers || 0)) return;
-
-      setIsLoading(true);
-      const { TotalCount, Users } = await loadAllUsersDataCallback({
-        IsOnline: searchInOnlineUsers,
-        ApprovedStatus: searchInActiveUsers,
-        Count: usersCountPerPage,
-        LowerBoundary: reset ? 1 : pageLowerBoundary || 1,
-        SearchText: searchText,
+      console.log({
+        isLoading,
+        usersListData,
+        totalUsers,
+        usersCountPerPage,
+        searchText,
+        searchInActiveUsers,
+        searchInOnlineUsers,
+        userLength: (usersListData || []).length,
       });
-      setTotalUsers(TotalCount);
-      setPageLowerBoundary((currentLowerBoundary) => (currentLowerBoundary || 1) + Users.length);
-      setUsersListData((prev = []) => (reset ? Users : [...prev, ...Users]));
+
+      if (usersListData !== undefined && (usersListData || []).length >= totalUsers) return;
+      setIsLoading(false);
+
       try {
+        setIsLoading(true);
+        const { TotalCount, Users } = await loadAllUsersDataCallback({
+          IsOnline: searchInOnlineUsers,
+          ApprovedStatus: searchInActiveUsers,
+          Count: usersCountPerPage,
+          LowerBoundary: reset ? 1 : pageLowerBoundary || 1,
+          SearchText: searchText,
+        });
+        setTotalUsers(TotalCount);
+        setPageLowerBoundary((currentLowerBoundary) => (currentLowerBoundary || 1) + Users.length);
+        setUsersListData((prev = []) => (reset ? Users : [...prev, ...Users]));
       } catch {}
       setIsLoading(false);
     },
@@ -91,6 +103,7 @@ const useUserManagementAdminList = ({
       searchText,
       isLoading,
       usersListData,
+      setIsLoading,
     ]
   );
 
@@ -133,7 +146,7 @@ const useUserManagementAdminList = ({
           const formData = new FormData((e.target as HTMLFormElement) || e.currentTarget);
           try {
             await updateUserDataCallback({
-              userID: user.UserID,
+              UserID: user.UserID,
               [userEntityKey]: formData.get(userEntityKey),
             });
 
@@ -170,13 +183,24 @@ const useUserManagementAdminList = ({
 
   useEffect(() => {
     if (confidentialityLevels === undefined) loadConfidentialityInputTypes();
-    return throttle(
-      debounce(() => {
+    const controller = new AbortController();
+    new Promise(async (resolve, reject) => {
+      controller.signal.addEventListener('abort', () => {
+        reject('cancel ...');
+      });
+      const load = async () => {
         setUsersListData();
-        loadDataCallback(true);
-      }, 500),
-      500
-    );
+        setPageLowerBoundary();
+        setTotalUsers(0);
+        await loadDataCallback(true);
+      };
+      await load();
+      resolve(true);
+    });
+    return () => {
+      controller.abort('abort ...');
+      console.warn('abortd .....');
+    };
   }, [searchText, searchInActiveUsers, searchInOnlineUsers]);
 
   const usersTableColumns: ColumnDef<Record<string, ReactNode>>[] = useMemo(
@@ -194,6 +218,7 @@ const useUserManagementAdminList = ({
             setEditableItem,
             tempUserEditedFields,
             updateEditedData,
+            unblockUserCallback,
           });
 
           return <FullNameCellComponent />;
@@ -246,7 +271,24 @@ const useUserManagementAdminList = ({
           return (
             <>
               <div className={styles.clickableInputContainer}>
-                <span>{userConfidentiality ? userConfidentiality.label : 'not set ...'}</span>
+                <Button
+                  type="button"
+                  variant={RVVariantProp.outline}
+                  size={RVSizeProp.small}
+                  onClick={() =>
+                    openModal({ user: row, modalContentType: 'confidentialityChange' })
+                  }
+                >
+                  {userConfidentiality?.label
+                    ? t(userConfidentiality?.label || '', {
+                        defaultValue: userConfidentiality?.label,
+                        ns: 'common',
+                      })
+                    : t('not_selected', {
+                        defaultValue: 'Not Select ...',
+                        ns: 'common',
+                      })}
+                </Button>
               </div>
             </>
           );

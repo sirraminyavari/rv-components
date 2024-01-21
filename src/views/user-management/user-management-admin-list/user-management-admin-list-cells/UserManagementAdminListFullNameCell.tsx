@@ -28,6 +28,7 @@ interface RVUserManagementAdminListFullNameCell {
     saveStatus?: boolean
   ) => void;
   cell: CellContext<Record<string, ReactNode>, unknown>;
+  unblockUserCallback: (data: { UserID: string }) => Promise<boolean>;
 }
 // ;
 const UserManagementAdminListFullNameCell =
@@ -36,6 +37,7 @@ const UserManagementAdminListFullNameCell =
     setEditableItem,
     tempUserEditedFields,
     updateEditedData,
+    unblockUserCallback,
   }: RVUserManagementAdminListFullNameCell) =>
   () => {
     const row = cell.getValue() as RVUserManagementAdminListUserEntity;
@@ -50,7 +52,10 @@ const UserManagementAdminListFullNameCell =
             fullCircle
           >
             {row.IsLockedOut && (
-              <LockOpened className={clsx(styles.lockIcon, RVColorProp.crayola)} />
+              <LockOpened
+                className={clsx(styles.lockIcon, RVColorProp.crayola)}
+                onClick={() => unblockUserCallback && unblockUserCallback({ UserID: row.UserID })}
+              />
             )}
           </Avatar>
 

@@ -75,6 +75,7 @@ const UserManagementAdminListRolePanel: FunctionComponent<RVUserManagementAdminL
               options={selectOptions}
               className={styles.modalSelectInput}
               pageSize={320}
+              fullWidth
               selectedOptions={selectOptions.find(
                 (item) => Boolean(item.value === 'admin') === user.IsSystemAdmin
               )}

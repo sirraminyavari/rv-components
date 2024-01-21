@@ -33,7 +33,6 @@ const UserManagementAdminListResetPasswordPanel: FunctionComponent<
       RVToast.error('error in updating ...');
     }
     setIsLoading(false);
-    closeModalCallback();
   }, [setUserRandomPasswordCallback, user]);
 
   return (
@@ -65,22 +64,23 @@ const UserManagementAdminListResetPasswordPanel: FunctionComponent<
             </Typography>
           </div>
           {password ? (
-            <>
+            <div className={styles.newPasswordBlock}>
               <Typography
                 className={styles.newPasswordTitle}
-                type="H5"
+                type="H3"
                 color={RVColorProp.grayDark}
               >
                 <Trans ns="new-password" i18nKey="common">
                   new password
                 </Trans>
+                :
               </Typography>
               <div className={styles.passwordContainer}>
-                <CopyToClipboard clipboardContext={password}>
+                <CopyToClipboard clipboardContext={password} variant={RVVariantProp.white}>
                   <code>{password}</code>
                 </CopyToClipboard>
               </div>
-            </>
+            </div>
           ) : (
             <Button
               className={styles.conformButton}

@@ -122,6 +122,7 @@ const UserManagementAdminListCreateUser: FunctionComponent<RVUserManagementAdmin
               options={confidentialityLevels}
               className={styles.modalSelectInput}
               pageSize={320}
+              fullWidth
               onChange={(selected) => {
                 setConfidentialityLevel(
                   (selected as unknown as RVSelectOptionItem).value as string
@@ -153,6 +154,7 @@ const UserManagementAdminListCreateUser: FunctionComponent<RVUserManagementAdmin
               ]}
               className={styles.modalSelectInput}
               pageSize={320}
+              fullWidth
               onChange={(selected) => {
                 setIsSystemAdmin((selected as unknown as RVSelectOptionItem).value === 'admin');
               }}

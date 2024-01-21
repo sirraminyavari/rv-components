@@ -92,6 +92,10 @@
       min-width: 100%;
       width: 100%;
       box-sizing: border-box;
+
+      & > [class*='-container'] {
+        width: 100%;
+      }
     }
   }
 
@@ -109,20 +113,26 @@
   .newPasswordTitle {
     margin-block-start: px-to-rem(5);
     margin-block-end: px-to-rem(12);
-    text-align: center;
+    text-align: start;
     width: 100%;
   }
 
   .passwordContainer {
     display: flex;
     justify-content: space-between;
-    border-width: px-to-rem(1);
-    border-style: solid;
-    border-color: hsl(var(--base));
-    border-radius: px-to-rem(8);
+    // border-width: px-to-rem(1);
+    // border-style: solid;
+    // border-color: hsl(var(--base));
+    // border-radius: px-to-rem(8);
     padding-block: px-to-rem(4);
     padding-inline: px-to-rem(8);
-    margin-inline: auto;
+    // margin-inline: auto;
+  }
+
+  .newPasswordBlock {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
   }
 
   .conformButton {
