@@ -19,7 +19,7 @@ const UserManagementAdminListModal: FunctionComponent<RVUserManagementAdminListM
         size={RVSizeProp.small}
         shouldCloseOnEsc
         onRequestClose={closeCallback}
-        style={{ content: { maxHeight: '80vh' } }}
+        style={{ content: { maxHeight: '80vh', overflow: 'unset' } }}
       >
         {children as JSX.Element}
       </Modal>

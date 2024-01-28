@@ -52,7 +52,6 @@ const UserManagementAdminListResetPasswordPanel: FunctionComponent<
               src={String(user?.ProfileImageURL)}
               size={RVSizeProp.medium}
               variant={RVVariantProp.outline}
-              fullCircle
             >
               {user.IsLockedOut && (
                 <LockOpened className={clsx(styles.lockIcon, RVColorProp.crayola)} />
@@ -67,7 +66,7 @@ const UserManagementAdminListResetPasswordPanel: FunctionComponent<
             <div className={styles.newPasswordBlock}>
               <Typography
                 className={styles.newPasswordTitle}
-                type="H3"
+                type="H5"
                 color={RVColorProp.grayDark}
               >
                 <Trans ns="new-password" i18nKey="common">

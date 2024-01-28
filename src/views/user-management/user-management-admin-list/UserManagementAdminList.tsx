@@ -124,7 +124,6 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
     usersTableColumns,
     usersListData,
     loadDataCallback,
-    showSkeleton,
     confidentialityLevels,
   } = useUserManagementAdminList({
     openModal,
@@ -212,7 +211,7 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
           loadDataCallback && loadDataCallback();
         }}
         disableInfiniteScroll={isLoading}
-        showSkeleton={showSkeleton}
+        showSkeleton={isLoading}
         fixedColumn={['Full Name', 'Username']}
         overScan={5}
       />

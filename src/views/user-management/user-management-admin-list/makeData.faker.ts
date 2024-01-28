@@ -14,7 +14,7 @@ const range = (len: number) => {
 const newPerson = (): RVUserManagementAdminListUserEntity => {
   return {
     UserID: uniqueId(),
-    UserName: faker.random.alphaNumeric(8),
+    UserName: faker.string.alphanumeric(8),
     FirstName: faker.person.firstName(),
     LastName: faker.person.lastName(),
     ImageURL: faker.image.avatar(),

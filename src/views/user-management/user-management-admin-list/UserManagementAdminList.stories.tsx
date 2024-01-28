@@ -26,7 +26,7 @@ const loadAllUsersData: RVUserManagementAdminList['loadAllUsersDataCallback'] = 
   Count,
   LowerBoundary,
 }) => {
-  const usersData = makeData(25).map((person, idx) => ({
+  const usersData = makeData(3).map((person, idx) => ({
     ...person,
     UserName: person.UserName,
   }));
@@ -35,7 +35,7 @@ const loadAllUsersData: RVUserManagementAdminList['loadAllUsersDataCallback'] = 
   return new Promise((res) =>
     setTimeout(() => {
       res({
-        TotalCount: 200,
+        TotalCount: 3,
         AppID: '',
         SystemAdminsEditable: true,
         ConfidentialitiesEditable: true,

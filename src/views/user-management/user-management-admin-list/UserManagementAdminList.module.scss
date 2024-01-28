@@ -113,7 +113,7 @@
   .newPasswordTitle {
     margin-block-start: px-to-rem(5);
     margin-block-end: px-to-rem(12);
-    text-align: start;
+    text-align: center;
     width: 100%;
   }
 
@@ -131,11 +131,13 @@
 
   .newPasswordBlock {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
     width: 100%;
   }
 
   .conformButton {
-    margin-block-start: px-to-rem(80);
+    margin-block-start: px-to-rem(12);
   }
 }

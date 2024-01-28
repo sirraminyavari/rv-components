@@ -77,9 +77,11 @@ const UserManagementAdminListRolePanel: FunctionComponent<RVUserManagementAdminL
               pageSize={320}
               fullWidth
               selectedOptions={selectOptions.find(
-                (item) => Boolean(item.value === 'admin') === user.IsSystemAdmin
+                (item) => Boolean(item.value === 'admin') === isSystemAdmin
               )}
               onChange={(selected) => {
+                console.log(selected);
+
                 setIsSystemAdmin((selected as unknown as RVSelectOptionItem).value === 'admin');
               }}
             />

@@ -19,7 +19,7 @@ const useUserManagementAdminList = ({
   updateUserDataCallback,
   loadConfidentialityLevelsCallback,
   updateUserApprovalCallback,
-  closeModal,
+  // closeModal,
   openModal,
   unblockUserCallback,
   usersCountPerPage = 10,
@@ -66,20 +66,33 @@ const useUserManagementAdminList = ({
     async (reset?: boolean) => {
       if (!loadAllUsersDataCallback) return;
       if (isLoading) return;
-      console.log({
+
+      console.table({
         isLoading,
-        usersListData,
         totalUsers,
+        pageLowerBoundary,
         usersCountPerPage,
-        searchText,
-        searchInActiveUsers,
-        searchInOnlineUsers,
         userLength: (usersListData || []).length,
       });
-
-      if (usersListData !== undefined && (usersListData || []).length >= totalUsers) return;
-      setIsLoading(false);
-
+      if (reset) {
+        try {
+          setIsLoading(true);
+          const { TotalCount, Users } = await loadAllUsersDataCallback({
+            IsOnline: searchInOnlineUsers,
+            ApprovedStatus: searchInActiveUsers,
+            Count: usersCountPerPage,
+            LowerBoundary: reset ? 1 : pageLowerBoundary || 1,
+            SearchText: searchText,
+          });
+          setTotalUsers(TotalCount);
+          setPageLowerBoundary(
+            (currentLowerBoundary) => (currentLowerBoundary || 1) + Users.length
+          );
+          setUsersListData((prev = []) => (reset ? Users : [...prev, ...Users]));
+        } catch {}
+        setIsLoading(false);
+        return;
+      } else if (pageLowerBoundary && totalUsers <= pageLowerBoundary) return;
       try {
         setIsLoading(true);
         const { TotalCount, Users } = await loadAllUsersDataCallback({
@@ -103,9 +116,22 @@ const useUserManagementAdminList = ({
       searchText,
       isLoading,
       usersListData,
-      setIsLoading,
     ]
   );
+
+  useEffect(() => {
+    if (confidentialityLevels === undefined) loadConfidentialityInputTypes();
+
+    const load = async () => {
+      setUsersListData();
+      setPageLowerBoundary();
+      setTotalUsers(0);
+      await loadDataCallback(true);
+    };
+    load();
+
+    return () => {};
+  }, [JSON.stringify({ searchText, searchInActiveUsers, searchInOnlineUsers })]);
 
   const setEditableItem = useCallback(
     (
@@ -180,28 +206,6 @@ const useUserManagementAdminList = ({
       },
     [tempUserEditedFields]
   );
-
-  useEffect(() => {
-    if (confidentialityLevels === undefined) loadConfidentialityInputTypes();
-    const controller = new AbortController();
-    new Promise(async (resolve, reject) => {
-      controller.signal.addEventListener('abort', () => {
-        reject('cancel ...');
-      });
-      const load = async () => {
-        setUsersListData();
-        setPageLowerBoundary();
-        setTotalUsers(0);
-        await loadDataCallback(true);
-      };
-      await load();
-      resolve(true);
-    });
-    return () => {
-      controller.abort('abort ...');
-      console.warn('abortd .....');
-    };
-  }, [searchText, searchInActiveUsers, searchInOnlineUsers]);
 
   const usersTableColumns: ColumnDef<Record<string, ReactNode>>[] = useMemo(
     () => [
@@ -362,7 +366,6 @@ const useUserManagementAdminList = ({
     usersTableColumns,
     usersListData,
     loadDataCallback,
-    showSkeleton: Boolean(totalUsers && totalUsers >= (usersListData || []).length),
     confidentialityLevels,
   };
 };
