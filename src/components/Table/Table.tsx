@@ -114,7 +114,7 @@ const Table: FunctionComponent<RVTable> = ({
   const tableContainerRef = useRef<HTMLDivElement>(null);
 
   const rowVirtualizer = useVirtualizer({
-    count: rows.length,
+    count: rows.length + 1,
     estimateSize: () => 33,
     getScrollElement: () => tableContainerRef.current,
 
@@ -246,53 +246,66 @@ const Table: FunctionComponent<RVTable> = ({
           >
             {rowVirtualizer.getVirtualItems().map((virtualRow) => {
               const row = rows[virtualRow.index] as Row<Record<string, string | number | Date>>;
-              return (
-                <>
-                  <tr
-                    data-index={virtualRow.index}
-                    ref={(node) => rowVirtualizer.measureElement(node)}
-                    key={row.id}
-                    style={{
-                      transform: `translateY(${virtualRow.start}px)`,
-                    }}
-                  >
-                    {row.getVisibleCells().map((cell) => {
-                      return (
-                        <td
-                          key={cell.id}
-                          style={{
-                            width: cell.column.getSize(),
-                            ...(fixedColumn?.includes(cell.column.id)
-                              ? {
-                                  position: 'sticky',
-                                  insetInlineStart: 0,
-                                  zIndex: 1,
-                                }
-                              : {}),
-                          }}
-                        >
-                          {flexRender(cell.column.columnDef.cell, cell.getContext())}
-                        </td>
-                      );
-                    })}
-                  </tr>
-                  {(isFetching || showSkeleton) && virtualRow.index + 1 === rows.length && (
+              if (row)
+                return (
+                  <>
                     <tr
-                      data-index={virtualRow.index + 1}
+                      data-index={virtualRow.index}
                       ref={(node) => rowVirtualizer.measureElement(node)}
-                      key={row.id + 1}
+                      key={row.id}
                       style={{
-                        transform: `translateY(${
-                          (virtualRow.start / virtualRow.index) * (virtualRow.index + 1)
-                        }px)`,
+                        transform: `translateY(${virtualRow.start}px)`,
                       }}
                     >
                       {row.getVisibleCells().map((cell) => {
                         return (
                           <td
-                            key={cell.id + 1}
+                            key={cell.id}
                             style={{
                               width: cell.column.getSize(),
+                              ...(fixedColumn?.includes(cell.column.id)
+                                ? {
+                                    position: 'sticky',
+                                    insetInlineStart: 0,
+                                    zIndex: 1,
+                                  }
+                                : {}),
+                            }}
+                          >
+                            {flexRender(cell.column.columnDef.cell, cell.getContext())}
+                          </td>
+                        );
+                      })}
+                    </tr>
+                  </>
+                );
+              else
+                return (
+                  (isFetching || showSkeleton) && (
+                    <tr
+                      data-index={virtualRow.index + 1}
+                      ref={(node) => rowVirtualizer.measureElement(node)}
+                      key={Date.now()}
+                      style={{
+                        background: 'inherit',
+                        transform: `translateY(${
+                          (virtualRow.start / virtualRow.index) * (virtualRow.index + 1)
+                        }px)`,
+                      }}
+                    >
+                      {columns?.map((cell) => {
+                        return (
+                          <td
+                            key={cell.id}
+                            style={{
+                              width: cell.size,
+                              ...(fixedColumn?.includes((cell.header as string) || '')
+                                ? {
+                                    position: 'sticky',
+                                    insetInlineStart: 0,
+                                    zIndex: 0,
+                                  }
+                                : {}),
                             }}
                             className={styles.LoadingTemplateContainer}
                           >
@@ -301,9 +314,8 @@ const Table: FunctionComponent<RVTable> = ({
                         );
                       })}
                     </tr>
-                  )}
-                </>
-              );
+                  )
+                );
             })}
           </tbody>
         </table>

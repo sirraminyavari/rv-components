@@ -36,7 +36,6 @@ const Modal = forwardRef<ReactModal, RVModal>(
     const parentSelectorCallback = useCallback(() => {
       if (parentSelector) return parentSelector();
       if (appElement.current) return appElement.current!;
-      console.log('no !!!');
       if (document.getElementById(elementID)) return document.getElementById(elementID)!;
       return document.body;
     }, [appElement.current, isOpen]);
