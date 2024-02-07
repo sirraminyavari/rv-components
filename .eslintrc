@@ -10,7 +10,8 @@
     "**/*.stories.tsx",
     "**/*.stories.js",
     "**/*.stories.jsx",
-    "**/*.stories.mdx"
+    "**/*.stories.mdx",
+    "**/*.faker.ts"
   ],
   "settings": {
     "import/resolver": {

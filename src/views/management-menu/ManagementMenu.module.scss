@@ -1,0 +1,26 @@
+@import '../../scss/modules/default';
+
+.menuContainer {
+  display: flex;
+  flex-wrap: wrap;
+  row-gap: px-to-rem(24);
+  column-gap: px-to-rem(24);
+  justify-content: flex-start;
+  align-items: center;
+  padding-block: 10dvh;
+  padding-inline: 5dvw;
+
+  .menuButton {
+    border-radius: px-to-rem(10);
+    height: px-to-rem(120);
+    aspect-ratio: 2/1;
+    margin-block-start: px-to-rem(5);
+    flex-direction: column;
+    justify-content: space-around;
+    font-weight: 600;
+
+    svg {
+      font-size: px-to-rem(48);
+    }
+  }
+}
