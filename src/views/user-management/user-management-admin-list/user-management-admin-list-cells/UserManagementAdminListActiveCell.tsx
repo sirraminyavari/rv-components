@@ -23,6 +23,7 @@ const UserManagementAdminListActiveCell =
         setIsLoading(true);
         try {
           await updateUserApprovalCallback({ UserID: row.UserID, IsApproved: statusToChange });
+          onApprovalChange(statusToChange);
         } catch (error) {
           RVToast.error('error in updating ...');
         }
@@ -38,6 +39,7 @@ const UserManagementAdminListActiveCell =
             id={`${String(row.UserID)}-allowance-switch`}
             name={`active__${row.UserID}`}
             checked={Boolean(row.IsApproved)}
+            readOnly
             onChange={(e) => {
               onApprovalChange(e.target.checked);
             }}

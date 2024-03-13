@@ -27,8 +27,10 @@
 
     .templatesItemWrapper {
       height: 90%;
+      width: 99%;
       padding-inline-end: px-to-rem(15);
       overflow-x: auto;
+      box-sizing: border-box;
 
       &.withSelectedButton {
         height: 77%;
@@ -36,6 +38,9 @@
     }
 
     .accordionLabelButton {
+      flex-wrap: nowrap;
+      text-align: start;
+
       svg {
         flex-shrink: 0;
         margin-inline-start: 0;
@@ -81,6 +86,7 @@
     .templateButton {
       justify-content: start;
       flex-wrap: wrap;
+      margin-block: px-to-rem(3);
 
       .templateButtonLabel {
         margin-block: 0;

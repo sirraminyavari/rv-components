@@ -13,6 +13,7 @@ import styles from './UserManagementAdminList.module.scss';
 import { getRandomInt } from '../../../utils';
 import UserManagementAdminListActiveCell from './user-management-admin-list-cells/UserManagementAdminListActiveCell';
 import { t } from 'i18next';
+import { Trans } from 'react-i18next';
 
 const useUserManagementAdminList = ({
   loadAllUsersDataCallback,
@@ -52,7 +53,7 @@ const useUserManagementAdminList = ({
   const [searchText, setSearchText] = useState<string>('');
   const [confidentialityLevels, setConfidentialityLevels] = useState<RVSelectOptionItem[]>();
   const [searchInOnlineUsers, setSearchInOnlineUsers] = useState<boolean>(false);
-  const [searchInActiveUsers, setSearchInActiveUsers] = useState<boolean>(false);
+  const [searchInActiveUsers, setSearchInActiveUsers] = useState<boolean>(true);
 
   const loadConfidentialityInputTypes = useCallback(async () => {
     const { Levels } = await loadConfidentialityLevelsCallback();
@@ -67,19 +68,12 @@ const useUserManagementAdminList = ({
       if (!loadAllUsersDataCallback) return;
       if (isLoading) return;
 
-      console.table({
-        isLoading,
-        totalUsers,
-        pageLowerBoundary,
-        usersCountPerPage,
-        userLength: (usersListData || []).length,
-      });
       if (reset) {
         try {
           setIsLoading(true);
           const { TotalCount, Users } = await loadAllUsersDataCallback({
-            IsOnline: searchInOnlineUsers,
-            ApprovedStatus: searchInActiveUsers,
+            IsOnline: searchInOnlineUsers || false,
+            IsApproved: searchInActiveUsers || false,
             Count: usersCountPerPage,
             LowerBoundary: reset ? 1 : pageLowerBoundary || 1,
             SearchText: searchText,
@@ -96,8 +90,8 @@ const useUserManagementAdminList = ({
       try {
         setIsLoading(true);
         const { TotalCount, Users } = await loadAllUsersDataCallback({
-          IsOnline: searchInOnlineUsers,
-          ApprovedStatus: searchInActiveUsers,
+          IsOnline: searchInOnlineUsers || false,
+          IsApproved: searchInActiveUsers || false,
           Count: usersCountPerPage,
           LowerBoundary: reset ? 1 : pageLowerBoundary || 1,
           SearchText: searchText,
@@ -122,13 +116,11 @@ const useUserManagementAdminList = ({
   useEffect(() => {
     if (confidentialityLevels === undefined) loadConfidentialityInputTypes();
 
-    const load = async () => {
-      setUsersListData();
-      setPageLowerBoundary();
-      setTotalUsers(0);
-      await loadDataCallback(true);
-    };
-    load();
+    if (isLoading) return;
+    setUsersListData();
+    setPageLowerBoundary();
+    setTotalUsers(0);
+    loadDataCallback(true);
 
     return () => {};
   }, [JSON.stringify({ searchText, searchInActiveUsers, searchInOnlineUsers })]);
@@ -137,21 +129,32 @@ const useUserManagementAdminList = ({
     (
       user: RVUserManagementAdminListUserEntity,
       userEntityKey: keyof RVUserManagementAdminListUserEntity,
-      saveStatus: boolean = false
+      saveStatus: boolean = false,
+      clear: boolean = false
     ) => {
-      setTempUserEditedFields((prev) => {
-        return {
-          ...prev,
-          hash: getRandomInt(0, 10000),
-          [user.UserID]: {
-            ...prev[user.UserID],
-            [userEntityKey]: {
-              saveStatus: saveStatus,
-              value: undefined,
+      if (clear)
+        setTempUserEditedFields((prev) => {
+          return {
+            ...prev,
+            [user.UserID]: {
+              ...omit(prev[user.UserID], userEntityKey),
             },
-          },
-        };
-      });
+          };
+        });
+      else
+        setTempUserEditedFields((prev) => {
+          return {
+            ...prev,
+            hash: getRandomInt(0, 10000),
+            [user.UserID]: {
+              ...prev[user.UserID],
+              [userEntityKey]: {
+                saveStatus: saveStatus,
+                value: undefined,
+              },
+            },
+          };
+        });
     },
 
     [tempUserEditedFields]
@@ -179,24 +182,34 @@ const useUserManagementAdminList = ({
             setUsersListData((prev) => {
               if (prev)
                 return prev.map((userItem) => {
-                  if (userItem.UserID === user.UserID)
+                  if (userItem.UserID === user.UserID) {
+                    if (userEntityKey === 'IsSystemAdmin')
+                      return {
+                        ...userItem,
+                        [userEntityKey]: formData.get(userEntityKey) === 'admin',
+                      };
+                    if (userEntityKey === 'Confidentiality')
+                      return {
+                        ...userItem,
+                        Confidentiality: {
+                          ConfidentialityID: formData.get(userEntityKey) as string,
+                          ID: formData.get(userEntityKey) as string,
+                          LevelID: '0',
+                          Title: confidentialityLevels?.find(
+                            (i) => i.value === formData.get(userEntityKey)
+                          )?.label as string,
+                        },
+                      };
+
                     return {
                       ...userItem,
                       [userEntityKey]: formData.get(userEntityKey) || userItem[userEntityKey],
                     };
-                  else return userItem;
+                  } else return userItem;
                 });
               else return;
             });
-
-            setTempUserEditedFields((prev) => {
-              return {
-                ...prev,
-                [user.UserID]: {
-                  ...omit(prev[user.UserID], userEntityKey),
-                },
-              };
-            });
+            setEditableItem(user, userEntityKey, undefined, true);
           } catch (error) {
             console.log(error);
 
@@ -210,7 +223,11 @@ const useUserManagementAdminList = ({
   const usersTableColumns: ColumnDef<Record<string, ReactNode>>[] = useMemo(
     () => [
       {
-        header: 'Full Name',
+        id: 'Full Name',
+        header: t('full_name', {
+          defaultValue: 'Full Name',
+          ns: 'common',
+        }),
         enableSorting: false,
         enableResizing: false,
         size: 450,
@@ -230,7 +247,11 @@ const useUserManagementAdminList = ({
       },
       {
         accessorKey: 'username',
-        header: 'Username',
+        id: 'Username',
+        header: t('user_name', {
+          defaultValue: 'Username',
+          ns: 'common',
+        }),
         enableSorting: false,
         enableResizing: false,
         size: 250,
@@ -247,8 +268,12 @@ const useUserManagementAdminList = ({
         },
       },
       {
+        id: 'active',
         accessorKey: 'active',
-        header: 'Active',
+        header: t('active_status', {
+          defaultValue: 'Active Status',
+          ns: 'common',
+        }),
         enableSorting: false,
         enableResizing: false,
         size: 100,
@@ -262,7 +287,12 @@ const useUserManagementAdminList = ({
         },
       },
       {
-        header: 'Confidentiality',
+        id: 'Confidentiality',
+        accessorKey: 'Confidentiality',
+        header: t('confidentiality', {
+          defaultValue: 'Confidentiality',
+          ns: 'common',
+        }),
         enableSorting: false,
         enableResizing: false,
         size: 250,
@@ -299,7 +329,12 @@ const useUserManagementAdminList = ({
         },
       },
       {
-        header: 'Role',
+        id: 'Role',
+        accessorKey: 'Role',
+        header: t('role', {
+          defaultValue: 'Role',
+          ns: 'common',
+        }),
         enableSorting: false,
         enableResizing: false,
         size: 150,
@@ -329,7 +364,12 @@ const useUserManagementAdminList = ({
         },
       },
       {
-        header: 'Reset Password',
+        id: 'Reset Password',
+        accessorKey: 'Reset Password',
+        header: t('reset_password', {
+          defaultValue: 'Reset Password',
+          ns: 'common',
+        }),
         enableSorting: false,
         enableResizing: false,
         size: 150,
@@ -342,9 +382,12 @@ const useUserManagementAdminList = ({
                 <Button
                   size={RVSizeProp.small}
                   fullWidth
+                  noWrap
                   onClick={() => openModal({ user: row, modalContentType: 'passwordReset' })}
                 >
-                  Reset
+                  <Trans ns="common" i18nKey="reset_password">
+                    Reset
+                  </Trans>
                 </Button>
               </div>
             </>
@@ -352,7 +395,7 @@ const useUserManagementAdminList = ({
         },
       },
     ],
-    [tempUserEditedFields, confidentialityLevels]
+    [tempUserEditedFields, confidentialityLevels, JSON.stringify(usersListData)]
   );
 
   return {
@@ -366,6 +409,8 @@ const useUserManagementAdminList = ({
     usersTableColumns,
     usersListData,
     loadDataCallback,
+    updateEditedData,
+    setEditableItem,
     confidentialityLevels,
   };
 };

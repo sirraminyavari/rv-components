@@ -7,6 +7,10 @@
   gap: px-to-rem(8);
   margin-block: px-to-rem(20);
 
+  & > * {
+    max-width: 50%;
+  }
+
   .detailsLabel {
     margin-block: 0;
   }

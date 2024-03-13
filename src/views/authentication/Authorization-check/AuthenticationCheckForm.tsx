@@ -71,7 +71,7 @@ const AuthenticationCheckForm: FunctionComponent<RVAuthenticationCheckForm> = ({
           </Typography>
         )}
         <Typography className={styles.formDescription} type="H5">
-          <Trans ns="common" i18nKey="confirm">
+          <Trans ns="common" i18nKey="re_authenticate_panel_message">
             The requested page is password protected. please confirm your account password to
             continue.
           </Trans>

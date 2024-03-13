@@ -164,7 +164,7 @@ const Table: FunctionComponent<RVTable> = ({
     [loadPaginatedData, isFetching, currentPage, totalPages, disableInfiniteScroll]
   );
   useEffect(() => {
-    fetchMoreOnBottomReached(tableContainerRef.current);
+    if (rowsData?.length) fetchMoreOnBottomReached(tableContainerRef.current);
   }, [fetchMoreOnBottomReached, loadTableDataCallback, onBottomReachedCallback]);
   useEffect(() => {
     if (loadPaginatedData && currentPage === -1) loadPaginatedData();
@@ -173,7 +173,6 @@ const Table: FunctionComponent<RVTable> = ({
   return (
     <>
       <div
-        dir={dir}
         className={clsx(styles.tableContainer, color, styles[size], styles[variant], className)}
         ref={tableContainerRef}
         onScroll={(e) => fetchMoreOnBottomReached(e.target as HTMLDivElement)}

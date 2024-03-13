@@ -1,9 +1,13 @@
-import { useState, useCallback, FunctionComponent, useEffect } from 'react';
-import { Button, RVSelectOptionItem, RVToast, Select } from '../../../../components';
 import {
-  RVUserManagementAdminList,
-  RVUserManagementAdminListUserEntity,
-} from '../UserManagementAdminList';
+  useState,
+  useCallback,
+  FunctionComponent,
+  useEffect,
+  FormEvent,
+  FormEventHandler,
+} from 'react';
+import { Button, RVSelectOptionItem, RVToast, Select } from '../../../../components';
+import { RVUserManagementAdminListUserEntity } from '../UserManagementAdminList';
 import styles from '../UserManagementAdminList.module.scss';
 import { RVSizeProp } from '../../../../types';
 import { t } from 'i18next';
@@ -11,34 +15,61 @@ import { Panel } from '../../../../layouts';
 import { Trans } from 'react-i18next';
 
 interface RVUserManagementAdminListConfidentialityPanel {
-  updateUserDataCallback: RVUserManagementAdminList['updateUserDataCallback'];
+  updateEditedData: (
+    user: RVUserManagementAdminListUserEntity,
+    userEntityKeys: (keyof RVUserManagementAdminListUserEntity)[]
+  ) => (e: FormEvent<HTMLFormElement>) => Promise<void>;
+  setEditableItem: (
+    user: RVUserManagementAdminListUserEntity,
+    userEntityKey: keyof RVUserManagementAdminListUserEntity,
+    saveStatus?: boolean,
+    clear?: boolean
+  ) => void;
   confidentialityLevels?: RVSelectOptionItem[];
   closeModalCallback: () => void;
+  loadDataCallback: (reset?: boolean | undefined) => void;
+
   user: RVUserManagementAdminListUserEntity;
 }
 // ;
 const UserManagementAdminListConfidentialityPanel: FunctionComponent<
   RVUserManagementAdminListConfidentialityPanel
-> = ({ user, confidentialityLevels, updateUserDataCallback, closeModalCallback }) => {
+> = ({
+  user,
+  confidentialityLevels,
+  setEditableItem,
+  updateEditedData,
+  loadDataCallback,
+  closeModalCallback,
+}) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [selectedConfidentialityID, setSelectedConfidentialityID] = useState<string>();
-  const setUserConfidentialityCallback = useCallback(async () => {
-    if (!updateUserDataCallback) return;
-    setIsLoading(true);
-    try {
-      await updateUserDataCallback({
-        UserID: user.UserID,
-        Confidentiality: selectedConfidentialityID,
-      });
-    } catch (error) {
-      RVToast.error('error in updating ...');
-    }
-    setIsLoading(false);
-    closeModalCallback();
-  }, [updateUserDataCallback, user]);
+  const setUserConfidentialityCallback: FormEventHandler<HTMLFormElement> = useCallback(
+    async (e) => {
+      if (!updateEditedData) return;
+      setIsLoading(true);
+      try {
+        await updateEditedData(user, ['Confidentiality'])(e);
+      } catch (error) {
+        RVToast.error('error in updating ...');
+      }
+      setIsLoading(false);
+      closeModalCallback();
+    },
+    [updateEditedData, loadDataCallback, user, selectedConfidentialityID]
+  );
+
   useEffect(() => {
     setSelectedConfidentialityID(user.Confidentiality?.ID);
   }, [user]);
+
+  useEffect(() => {
+    setEditableItem(user, 'Confidentiality');
+
+    return () => {
+      setEditableItem(user, 'Confidentiality', undefined, true);
+    };
+  }, []);
 
   return (
     <>
@@ -51,7 +82,7 @@ const UserManagementAdminListConfidentialityPanel: FunctionComponent<
         onClose={closeModalCallback}
         className={styles.modalPanel}
       >
-        <div className={styles.formContainer}>
+        <form onSubmit={setUserConfidentialityCallback} className={styles.formContainer}>
           <div className={styles.modalInputContainer}>
             <Select
               placeholder={t('user_confidentiality_placeholder', {
@@ -61,6 +92,7 @@ const UserManagementAdminListConfidentialityPanel: FunctionComponent<
               options={confidentialityLevels}
               className={styles.modalSelectInput}
               pageSize={320}
+              name="Confidentiality"
               fullWidth
               selectedOptions={confidentialityLevels?.find(
                 (item) => item.value === selectedConfidentialityID
@@ -72,18 +104,12 @@ const UserManagementAdminListConfidentialityPanel: FunctionComponent<
               }}
             />
           </div>
-          <Button
-            className={styles.conformButton}
-            type="submit"
-            fullWidth
-            disabled={isLoading}
-            onClick={setUserConfidentialityCallback}
-          >
-            <Trans ns="confirm" i18nKey="common">
+          <Button className={styles.conformButton} type="submit" fullWidth disabled={isLoading}>
+            <Trans ns="common" i18nKey="confirm">
               Confirm
             </Trans>
           </Button>
-        </div>
+        </form>
       </Panel>
     </>
   );

@@ -6,7 +6,7 @@ import { RVColorProp, RVSizeProp, RVVariantProp } from '../../../../types';
 import { t } from 'i18next';
 import { Panel } from '../../../../layouts';
 import { Trans } from 'react-i18next';
-import { LockOpened } from '../../../../icons';
+import { LockOpenedSvg } from '../../../../icons';
 import clsx from 'clsx';
 
 interface RVUserManagementAdminListResetPasswordPanel {
@@ -54,7 +54,7 @@ const UserManagementAdminListResetPasswordPanel: FunctionComponent<
               variant={RVVariantProp.outline}
             >
               {user.IsLockedOut && (
-                <LockOpened className={clsx(styles.lockIcon, RVColorProp.crayola)} />
+                <LockOpenedSvg className={clsx(styles.lockIcon, RVColorProp.crayola)} />
               )}
             </Avatar>
 
@@ -69,7 +69,7 @@ const UserManagementAdminListResetPasswordPanel: FunctionComponent<
                 type="H5"
                 color={RVColorProp.grayDark}
               >
-                <Trans ns="new-password" i18nKey="common">
+                <Trans ns="common" i18nKey="new_password">
                   new password
                 </Trans>
                 :
@@ -88,7 +88,7 @@ const UserManagementAdminListResetPasswordPanel: FunctionComponent<
               disabled={isLoading}
               onClick={setAdminStatusCallback}
             >
-              <Trans ns="confirm" i18nKey="common">
+              <Trans ns="common" i18nKey="confirm">
                 Confirm
               </Trans>
             </Button>

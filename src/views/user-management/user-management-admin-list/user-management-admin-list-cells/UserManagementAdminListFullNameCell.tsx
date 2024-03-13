@@ -1,7 +1,7 @@
 import type { CellContext } from '@tanstack/react-table';
 import type { FormEvent, ReactNode } from 'react';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../../../types';
-import { LoadingSvg, LockOpened } from '../../../../icons';
+import { LoadingSvg, LockOpenedSvg } from '../../../../icons';
 import { Avatar, TextInput } from '../../../../components';
 import { t } from 'i18next';
 import styles from '../UserManagementAdminList.module.scss';
@@ -52,7 +52,7 @@ const UserManagementAdminListFullNameCell =
             fullCircle
           >
             {row.IsLockedOut && (
-              <LockOpened
+              <LockOpenedSvg
                 className={clsx(styles.lockIcon, RVColorProp.crayola)}
                 onClick={() => unblockUserCallback && unblockUserCallback({ UserID: row.UserID })}
               />

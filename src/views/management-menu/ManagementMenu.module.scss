@@ -1,14 +1,17 @@
 @import '../../scss/modules/default';
 
 .menuContainer {
-  display: flex;
-  flex-wrap: wrap;
+  // display: flex;
+  // flex-wrap: wrap;
+  justify-content: center;
+  // align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, px-to-rem(250));
   row-gap: px-to-rem(24);
   column-gap: px-to-rem(24);
-  justify-content: flex-start;
-  align-items: center;
   padding-block: 10dvh;
   padding-inline: 5dvw;
+  margin-inline: auto;
 
   .menuButton {
     border-radius: px-to-rem(10);

@@ -1,6 +1,6 @@
 import { FormEventHandler, useCallback, useEffect, useState } from 'react';
 import clsx from 'clsx';
-import * as PQueue from 'p-queue';
+import * as Queue from 'p-queue';
 import CMServerSearch from '../../../icons/cm-server-search.svg';
 import SearchSvg from '../../../icons/search.svg';
 import {
@@ -27,12 +27,13 @@ interface ServerResultEntity {
   title: string;
   authors: string[];
   server: { title: string };
+  details?: Record<string, string | number | null>;
 }
 
 export interface RVServerManagementSearchPanel {
   serversListCallback: () => Promise<RVSelectOptionItem[]>;
   addCallback: (selectedItemID: string) => Promise<boolean>;
-  detailsCallback: (selectedItemID: string) => Promise<boolean>;
+  detailsCallback: (serverItem: ServerResultEntity) => Promise<boolean>;
   serverSearchCallback: (arg: { serverID: string; query: string }) => Promise<ServerResultEntity[]>;
 }
 
@@ -104,7 +105,7 @@ const ServerManagementSearchPanel = ({
       try {
         if (!serversList) throw new Error('no selected servers!');
         setResults([]);
-        const queue = new PQueue.default({ concurrency: 1, timeout: 15000 });
+        const queue = new Queue.default({ concurrency: 1, timeout: 15000 });
         const allServersSelected =
           selectedServers.length === 1 && selectedServers[0]?.value === 'all-servers';
         const searchCallbacks = (allServersSelected ? serversList : selectedServers).map(
@@ -125,7 +126,7 @@ const ServerManagementSearchPanel = ({
       }
       setIsLoading(false);
     },
-    [selectedServers, searchQuery, serversListCallback, serversList]
+    [selectedServers, searchQuery, serversListCallback, JSON.stringify(serversList)]
   );
 
   return (
@@ -172,6 +173,7 @@ const ServerManagementSearchPanel = ({
               ns: 'server-management',
               count: serversList?.length,
             })}
+            className={styles.searchInput}
             variant={RVVariantProp.outline}
             color={RVColorProp.cgBlue}
             value={searchQuery}
@@ -217,7 +219,7 @@ const ServerManagementSearchPanel = ({
           )}
           {results &&
             results.length !== 0 &&
-            results.map(({ server, authors, title, id }) => (
+            results.map(({ server, authors, title, id, details }) => (
               <RowItem
                 key={`row-result-${id}`}
                 size={RVSizeProp.medium}
@@ -225,7 +227,7 @@ const ServerManagementSearchPanel = ({
                   <div className={styles.rowActionsContainer}>
                     <Typography type="caption">{server?.title}</Typography>
                     <Button
-                      onClick={() => detailsCallback(id)}
+                      onClick={() => detailsCallback({ server, authors, title, id, details })}
                       variant={RVVariantProp.white}
                       color={RVColorProp.crayola}
                       fullCircle

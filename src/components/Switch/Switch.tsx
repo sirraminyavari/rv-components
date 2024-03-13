@@ -52,9 +52,9 @@ const Switch = forwardRef<HTMLInputElement, RVSwitch>(
 
     const onChangeHandler: ChangeEventHandler<HTMLInputElement> = useCallback(
       (e) => {
+        if (onChange) onChange(e);
         if (readOnly) return;
         setIsToggled(e.target.checked);
-        if (onChange) onChange(e);
       },
       [isToggled, checked, readOnly]
     );

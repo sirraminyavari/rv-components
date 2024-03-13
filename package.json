@@ -1,6 +1,6 @@
 {
   "name": "@cliqmind/rv-components",
-  "version": "0.12.1-beta.rc16",
+  "version": "0.12.1-beta.rc29",
   "license": "UNLICENSED",
   "typings": "./index.d.ts",
   "main": "./index.cjs",
@@ -28,7 +28,7 @@
     "@tanstack/react-table": "^8.11.3",
     "@tanstack/react-virtual": "^3.0.1",
     "clsx": "^1.2.1",
-    "p-queue": "^6",
+    "p-queue": "^8",
     "ramin-modern-calendar-datepicker": "^3.1.10",
     "react": ">=17.0.2",
     "react-animate-height": "^3.1.0",

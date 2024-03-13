@@ -25,3 +25,4 @@ export * from './Toast';
 export * from './TextInput';
 export * from './Typography';
 export * from './TemplateSelection';
+export * from './Loading';

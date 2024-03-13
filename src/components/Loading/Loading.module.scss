@@ -1,0 +1,143 @@
+@import '../../scss/modules/default';
+
+@keyframes loadingCircle1 {
+  0% {
+    stroke-dasharray: 0 999;
+    stroke-dashoffset: 0;
+  }
+
+  25% {
+    stroke-dasharray: 435 999;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 435 999;
+    stroke-dashoffset: -425;
+  }
+
+  // 90% {
+  //     stroke-dasharray: 0 999;
+  //     stroke-dashoffset: 0;
+  // }
+}
+
+@keyframes loadingCircle2 {
+  0% {
+    stroke-dasharray: 0 999;
+    stroke-dashoffset: 0;
+  }
+
+  25% {
+    stroke-dasharray: 335 999;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 335 999;
+    stroke-dashoffset: -334;
+  }
+
+  // 90% {
+  //     stroke-dasharray: 0 999;
+  //     stroke-dashoffset: 0;
+  // }
+}
+
+@keyframes loadingCircle3 {
+  0% {
+    stroke-dasharray: 0 999;
+    stroke-dashoffset: 0;
+  }
+
+  25% {
+    stroke-dasharray: 241 999;
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 241 999;
+    stroke-dashoffset: -245;
+  }
+
+  // 90% {
+  //     stroke-dasharray: 0 999;
+  //     stroke-dashoffset: 0;
+  // }
+}
+
+@keyframes loadingCircle4 {
+  0% {
+    stroke-dasharray: 0 999;
+    stroke-dashoffset: 0;
+  }
+
+  25% {
+    stroke-dasharray: 150 999;
+
+    stroke-dashoffset: 0;
+  }
+
+  50% {
+    stroke-dasharray: 90 999;
+
+    stroke-dashoffset: -155;
+  }
+
+  // 90% {
+  //     stroke-dasharray: 0 999;
+  //     stroke-dashoffset: 0;
+  // }
+}
+
+.loadingContainer {
+  padding-block: 4rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 8rem;
+  position: absolute;
+  inset: 0;
+  height: 100%;
+
+  &.inline {
+    position: unset;
+    height: unset;
+    inset: unset;
+  }
+
+  .loadingSvg {
+    transform: rotate(270deg);
+
+    circle {
+      transition: all 0.1s ease-in-out;
+      animation-duration: 3s;
+      animation-iteration-count: infinite;
+      animation-timing-function: ease-in-out;
+
+      &:nth-of-type(1) {
+        stroke: hsl(var(--darker) / 100%);
+        animation-name: loadingCircle1;
+      }
+
+      &:nth-of-type(2) {
+        stroke: hsl(var(--base) / 100%);
+        animation-name: loadingCircle2;
+        animation-delay: 0.2s;
+      }
+
+      &:nth-of-type(3) {
+        stroke: hsl(var(--dark) / 100%);
+        animation-name: loadingCircle3;
+        animation-delay: 0.4s;
+      }
+
+      &:nth-of-type(4) {
+        stroke: hsl(var(--base) / 80%);
+        animation-name: loadingCircle4;
+        animation-delay: 0.5s;
+      }
+    }
+  }
+}

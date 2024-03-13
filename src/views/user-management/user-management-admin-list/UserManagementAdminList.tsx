@@ -55,7 +55,7 @@ export interface RVUserManagementAdminList {
     LastName?: string;
     UserName?: string;
     Confidentiality?: string;
-    SetUserRole?: string;
+    IsSystemAdmin?: 'admin' | 'user';
   }) => Promise<boolean>;
   loadConfidentialityLevelsCallback: () => Promise<{
     Levels: {
@@ -75,10 +75,6 @@ export interface RVUserManagementAdminList {
 
   updateUserApprovalCallback: (data: { UserID: string; IsApproved: boolean }) => Promise<boolean>;
   unblockUserCallback: (data: { UserID: string }) => Promise<boolean>;
-  updateUserAdminStatusCallback: (data: {
-    UserID: string;
-    IsSetToBeAdmin: boolean;
-  }) => Promise<boolean>;
   setUserRandomPasswordCallback: (data: { UserID: string }) => Promise<{ Password: string }>;
 }
 
@@ -91,7 +87,6 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
   loadConfidentialityLevelsCallback,
   createNewUserCallback,
   updateUserApprovalCallback,
-  updateUserAdminStatusCallback,
   setUserRandomPasswordCallback,
   unblockUserCallback,
   usersCountPerPage = 10,
@@ -125,6 +120,8 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
     usersListData,
     loadDataCallback,
     confidentialityLevels,
+    updateEditedData,
+    setEditableItem,
   } = useUserManagementAdminList({
     openModal,
     closeModal,
@@ -134,7 +131,6 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
     loadConfidentialityLevelsCallback,
     updateUserApprovalCallback,
     createNewUserCallback,
-    updateUserAdminStatusCallback,
     setUserRandomPasswordCallback,
     unblockUserCallback,
   });
@@ -167,7 +163,7 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
         <TextInput
           label={t('all_users_search_placeholder', {
             defaultValue: 'Search through all users',
-            ns: 'user_management_list',
+            ns: 'user-management',
           })}
           className={styles.searchInput}
           variant={RVVariantProp.outline}
@@ -182,8 +178,9 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
           id="search_online_users"
           label={t('online_users', {
             defaultValue: 'Online Users',
-            ns: 'user_management_list',
+            ns: 'user-management',
           })}
+          readOnly
           onChange={(e) => setSearchInOnlineUsers(e.target.checked)}
           checked={searchInOnlineUsers}
         />
@@ -192,8 +189,9 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
           id="search_active_users"
           label={t('active_users', {
             defaultValue: 'Active Users',
-            ns: 'user_management_list',
+            ns: 'user-management',
           })}
+          readOnly
           onChange={(e) => {
             setSearchInActiveUsers(e.target.checked);
           }}
@@ -208,7 +206,7 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
         variant={RVVariantProp.white}
         tableHeight={'70dvh'}
         onBottomReachedCallback={async () => {
-          loadDataCallback && loadDataCallback();
+          (usersListData || []).length && loadDataCallback && loadDataCallback();
         }}
         disableInfiniteScroll={isLoading}
         showSkeleton={isLoading}
@@ -220,13 +218,16 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
           <UserManagementAdminListConfidentialityPanel
             closeModalCallback={closeModal}
             confidentialityLevels={confidentialityLevels}
-            updateUserDataCallback={updateUserDataCallback}
+            updateEditedData={updateEditedData}
+            setEditableItem={setEditableItem}
+            loadDataCallback={loadDataCallback}
             user={modalContent.user!}
           />
         )}
         {modalContent.modalContentType === 'newUser' && (
           <UserManagementAdminListCreateUserPanel
             closeModalCallback={closeModal}
+            loadDataCallback={loadDataCallback}
             confidentialityLevels={confidentialityLevels}
             createNewUserCallback={createNewUserCallback}
           />
@@ -235,7 +236,9 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
           <UserManagementAdminListRolePanel
             closeModalCallback={closeModal}
             user={modalContent.user!}
-            updateUserAdminStatusCallback={updateUserAdminStatusCallback}
+            updateEditedData={updateEditedData}
+            setEditableItem={setEditableItem}
+            loadDataCallback={loadDataCallback}
           />
         )}
         {modalContent.modalContentType === 'passwordReset' && (

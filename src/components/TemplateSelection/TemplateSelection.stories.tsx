@@ -73,6 +73,22 @@ export const ShowCase: ComponentStory<typeof TemplateSelectionPanel> = ({
     </div>
   );
 };
+
+export const muliSelection: ComponentStory<typeof TemplateSelectionPanel> = ({
+  loadTemplateItems = templatesCallback,
+  loadPreviewItems = templatesPreviewCallback,
+  multi = true,
+}) => {
+  return (
+    <div style={{ height: '60vh' }}>
+      <TemplateSelectionPanel
+        multi={multi}
+        loadTemplateItems={loadTemplateItems}
+        loadPreviewItems={loadPreviewItems}
+      />
+    </div>
+  );
+};
 export const ModalView: ComponentStory<typeof TemplateSelectionPanel> = ({
   loadTemplateItems = templatesCallback,
   loadPreviewItems = templatesPreviewCallback,

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import TrashSvg from '../../../icons/trash.svg';
 import { Button, Scrollbar, Skeleton, Typography } from '../../../components';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../../types';
@@ -9,7 +9,7 @@ import clsx from 'clsx';
 import { Trans } from 'react-i18next';
 
 export interface RVServerManagementAdminList {
-  serversListCallback: () => Promise<{ id: string; label: string }[]>;
+  serversListCallback: () => Promise<{ id: string; label: string; details?: string }[]>;
   editCallback: (serverID: string) => Promise<boolean>;
   removeCallback: (serverID: string) => Promise<boolean>;
 }
@@ -20,15 +20,25 @@ const ServerManagementAdminList = ({
   removeCallback,
 }: RVServerManagementAdminList) => {
   const [isLoading, setIsLoading] = useState(false);
-  const [serversList, setServersList] = useState<{ label: string; id: string }[]>();
+  const [serversList, setServersList] =
+    useState<{ label: string; id: string; details?: string }[]>();
   useEffect(() => {
     (async () => {
       setIsLoading(true);
+      setServersList([]);
       const servers = await serversListCallback();
       setServersList(servers);
       setIsLoading(false);
     })();
   }, [serversListCallback]);
+
+  const onServerRemove = useCallback(async (id: string) => {
+    try {
+      await removeCallback(id);
+      const servers = await serversListCallback();
+      setServersList(servers);
+    } catch (error) {}
+  }, []);
 
   return (
     <>
@@ -53,7 +63,7 @@ const ServerManagementAdminList = ({
         )}
         {serversList &&
           serversList.length !== 0 &&
-          serversList.map(({ id, label }) => (
+          serversList.map(({ id, label, details }) => (
             <RowItem
               key={`row-result-${id}`}
               size={RVSizeProp.medium}
@@ -65,7 +75,7 @@ const ServerManagementAdminList = ({
                     className={styles.actionIconButton}
                     fullCircle
                     rounded="half"
-                    onClick={() => removeCallback(id)}
+                    onClick={() => onServerRemove(id)}
                   >
                     <TrashSvg />
                   </Button>
@@ -81,10 +91,11 @@ const ServerManagementAdminList = ({
                 </div>
               }
             >
-              <div>
+              <div className={styles.resultTitleContainer}>
                 <Typography type="H4" className={styles.resultTitle}>
                   {label}
                 </Typography>
+                {details && <span className={styles.resultTitleInfo}>{details}</span>}
               </div>
             </RowItem>
           ))}

@@ -17,12 +17,14 @@ export interface RVUserManagementAdminListCreateUser {
     confidentialityLevelID?: string;
   }) => Promise<{ status: boolean; message?: string }>;
   closeModalCallback: () => void;
+  loadDataCallback: (reset?: boolean | undefined) => void;
 }
 
 const UserManagementAdminListCreateUser: FunctionComponent<RVUserManagementAdminListCreateUser> = ({
   confidentialityLevels,
   createNewUserCallback,
   closeModalCallback,
+  loadDataCallback,
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [confidentialityLevel, setConfidentialityLevel] = useState<string>();
@@ -53,6 +55,7 @@ const UserManagementAdminListCreateUser: FunctionComponent<RVUserManagementAdmin
       } catch (error) {
         RVToast.error((error as Error).message);
       }
+      loadDataCallback(true);
       setIsLoading(false);
       closeModalCallback();
     },
@@ -162,11 +165,11 @@ const UserManagementAdminListCreateUser: FunctionComponent<RVUserManagementAdmin
           </div>
           <Button className={styles.conformButton} type="submit" fullWidth disabled={isLoading}>
             {isLoading ? (
-              <Trans ns="creating_new_user" i18nKey="common">
+              <Trans ns="common" i18nKey="creating_new_user">
                 creating new user ...
               </Trans>
             ) : (
-              <Trans ns="confirm" i18nKey="common">
+              <Trans ns="common" i18nKey="confirm">
                 Confirm
               </Trans>
             )}

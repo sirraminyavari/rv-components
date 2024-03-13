@@ -11,6 +11,7 @@ import TemplateSelectionPanelPreviewItems, {
 } from './TemplateSelectionPanel-previewItems';
 import { Button } from '../../Button';
 import { RVColorProp, RVVariantProp } from '../../../types';
+import { Trans } from 'react-i18next';
 
 export interface RVTemplateSelectionPanel {
   /** callback to load template items */
@@ -21,13 +22,18 @@ export interface RVTemplateSelectionPanel {
   ) => Promise<RVTemplateSelectionPanelPreviewItems['previewItems']>;
   /** callback to return the selected template ids */
   onSubmit?: (selectedTemplates: string[]) => void;
+
+  /** allow multiple templates to be selected (default:false) */
+  multi?: boolean;
 }
 const TemplateSelectionPanel = ({
   loadTemplateItems,
   loadPreviewItems,
   onSubmit,
+  multi,
 }: RVTemplateSelectionPanel) => {
   const [previewLoadingSkeleton, setPreviewLoadingSkeleton] = useState<boolean>(false);
+  const [isSubmitInProgress, setIsSubmitInProgress] = useState<boolean>(false);
   const [previewTemplateID, setPreviewTemplateID] = useState<string>();
   const [selectedTemplates, setSelectedTemplates] = useState<string[]>([]);
   const [previewItems, setPreviewItems] = useState<
@@ -51,8 +57,17 @@ const TemplateSelectionPanel = ({
     [previewItems, loadPreviewItems]
   );
 
-  const toggleTemplateSelection = useCallback(() => {
+  const toggleTemplateSelection = useCallback(async () => {
     if (!previewTemplateID) return;
+    if (!multi) {
+      if (onSubmit) {
+        setIsSubmitInProgress(true);
+        await onSubmit([previewTemplateID]);
+        setIsSubmitInProgress(false);
+      }
+      return;
+    }
+
     const selectedTemplateIDs = [...selectedTemplates];
     if (selectedTemplateIDs.includes(previewTemplateID))
       setSelectedTemplates(
@@ -64,19 +79,20 @@ const TemplateSelectionPanel = ({
       selectedTemplateIDs.push(previewTemplateID);
       setSelectedTemplates(selectedTemplateIDs);
     }
-    console.log(selectedTemplateIDs);
-  }, [previewTemplateID, selectedTemplates]);
+  }, [previewTemplateID, selectedTemplates, multi, onSubmit]);
 
   return (
     <div className={clsx(styles.container)}>
       <div className={styles.templatesContainer}>
         <Typography type="H3" muted className={styles.templatesTitle}>
-          Choose a template
+          <Trans ns="common" i18nKey="choose_template">
+            Choose a template
+          </Trans>
         </Typography>
         <Scrollbar
           className={clsx(
             styles.templatesItemWrapper,
-            selectedTemplates.length !== 0 && styles.withSelectedButton
+            multi && selectedTemplates.length !== 0 && styles.withSelectedButton
           )}
         >
           {loadTemplateItems && (
@@ -87,7 +103,7 @@ const TemplateSelectionPanel = ({
             />
           )}
         </Scrollbar>
-        {selectedTemplates.length !== 0 && (
+        {multi && selectedTemplates.length !== 0 && (
           <div className={styles.templatesButtonContainer}>
             <div>
               <Typography
@@ -95,7 +111,11 @@ const TemplateSelectionPanel = ({
                 color={RVColorProp.distant}
                 className={styles.templatesCountLabel}
               >
-                <span>Selected Templates</span>
+                <span>
+                  <Trans ns="common" i18nKey="selected_templates">
+                    Selected Templates
+                  </Trans>
+                </span>
                 <span>{selectedTemplates.length}</span>
               </Typography>
             </div>
@@ -104,8 +124,17 @@ const TemplateSelectionPanel = ({
               variant={RVVariantProp.primary}
               onClick={() => onSubmit && onSubmit(selectedTemplates)}
               fullWidth
+              disabled={isSubmitInProgress}
             >
-              Select Templates
+              {isSubmitInProgress ? (
+                <Trans ns="common" i18nKey="submitting">
+                  submitting ...
+                </Trans>
+              ) : (
+                <Trans ns="common" i18nKey="select_templates">
+                  Select Templates
+                </Trans>
+              )}
             </Button>
           </div>
         )}
@@ -130,11 +159,16 @@ const TemplateSelectionPanel = ({
                   : RVVariantProp.primary
               }
               onClick={toggleTemplateSelection}
+              disabled={isSubmitInProgress}
             >
               {selectedTemplates.includes(previewTemplateID || '') ? (
-                <>Add to selected</>
+                <Trans ns="common" i18nKey="add_to_selected">
+                  Add to selected
+                </Trans>
               ) : (
-                <>Select Template</>
+                <Trans ns="common" i18nKey="select_template">
+                  Select Template
+                </Trans>
               )}
             </Button>
           </div>

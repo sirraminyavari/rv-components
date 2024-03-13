@@ -1,4 +1,11 @@
-import { useState, useCallback, FunctionComponent } from 'react';
+import {
+  useState,
+  useCallback,
+  FunctionComponent,
+  FormEvent,
+  FormEventHandler,
+  useEffect,
+} from 'react';
 import { Button, RVSelectOptionItem, RVToast, Select } from '../../../../components';
 import { RVUserManagementAdminListUserEntity } from '../UserManagementAdminList';
 import styles from '../UserManagementAdminList.module.scss';
@@ -8,21 +15,31 @@ import { Panel } from '../../../../layouts';
 import { Trans } from 'react-i18next';
 
 interface RVUserManagementAdminListRolePanel {
-  updateUserAdminStatusCallback: (data: {
-    UserID: string;
-    IsSetToBeAdmin: boolean;
-  }) => Promise<boolean>;
+  updateEditedData: (
+    user: RVUserManagementAdminListUserEntity,
+    userEntityKeys: (keyof RVUserManagementAdminListUserEntity)[]
+  ) => (e: FormEvent<HTMLFormElement>) => Promise<void>;
+  setEditableItem: (
+    user: RVUserManagementAdminListUserEntity,
+    userEntityKey: keyof RVUserManagementAdminListUserEntity,
+    saveStatus?: boolean,
+    clear?: boolean
+  ) => void;
   closeModalCallback: () => void;
+  loadDataCallback: (reset?: boolean | undefined) => void;
+
   user: RVUserManagementAdminListUserEntity;
 }
 // ;
 const UserManagementAdminListRolePanel: FunctionComponent<RVUserManagementAdminListRolePanel> = ({
   user,
-  updateUserAdminStatusCallback,
+  setEditableItem,
+  updateEditedData,
   closeModalCallback,
+  loadDataCallback,
 }) => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isSystemAdmin, setIsSystemAdmin] = useState<boolean>(false);
+  const [isSystemAdmin, setIsSystemAdmin] = useState<boolean>(user.IsSystemAdmin || false);
   const selectOptions = [
     {
       label: t('admin', {
@@ -39,25 +56,33 @@ const UserManagementAdminListRolePanel: FunctionComponent<RVUserManagementAdminL
       value: 'user',
     },
   ];
-  const setAdminStatusCallback = useCallback(async () => {
-    if (!updateUserAdminStatusCallback) return;
-    setIsLoading(true);
-    try {
-      await updateUserAdminStatusCallback({
-        UserID: user.UserID,
-        IsSetToBeAdmin: isSystemAdmin,
-      });
-    } catch (error) {
-      RVToast.error('error in updating ...');
-    }
-    setIsLoading(false);
-    closeModalCallback();
-  }, [updateUserAdminStatusCallback, user]);
+  useEffect(() => {
+    setEditableItem(user, 'IsSystemAdmin');
+
+    return () => {
+      setEditableItem(user, 'IsSystemAdmin', undefined, true);
+    };
+  }, []);
+
+  const setAdminStatusCallback: FormEventHandler<HTMLFormElement> = useCallback(
+    async (e) => {
+      if (!updateEditedData) return;
+      setIsLoading(true);
+      try {
+        await updateEditedData(user, ['IsSystemAdmin'])(e);
+      } catch (error) {
+        RVToast.error('error in updating ...');
+      }
+      setIsLoading(false);
+      closeModalCallback();
+    },
+    [updateEditedData, loadDataCallback, isSystemAdmin, user]
+  );
 
   return (
     <>
       <Panel
-        title={t('chnage_user_role', {
+        title={t('change_user_role', {
           defaultValue: 'Change User Role',
           ns: 'user-management',
         })}
@@ -65,7 +90,7 @@ const UserManagementAdminListRolePanel: FunctionComponent<RVUserManagementAdminL
         onClose={closeModalCallback}
         className={styles.modalPanel}
       >
-        <div className={styles.formContainer}>
+        <form onSubmit={setAdminStatusCallback} className={styles.formContainer}>
           <div className={styles.modalInputContainer}>
             <Select
               placeholder={t('role', {
@@ -76,28 +101,22 @@ const UserManagementAdminListRolePanel: FunctionComponent<RVUserManagementAdminL
               className={styles.modalSelectInput}
               pageSize={320}
               fullWidth
+              name="IsSystemAdmin"
+              // value={isSystemAdmin ? 'admin' : 'user'}
               selectedOptions={selectOptions.find(
                 (item) => Boolean(item.value === 'admin') === isSystemAdmin
               )}
               onChange={(selected) => {
-                console.log(selected);
-
                 setIsSystemAdmin((selected as unknown as RVSelectOptionItem).value === 'admin');
               }}
             />
           </div>
-          <Button
-            className={styles.conformButton}
-            type="submit"
-            fullWidth
-            disabled={isLoading}
-            onClick={setAdminStatusCallback}
-          >
-            <Trans ns="confirm" i18nKey="common">
+          <Button className={styles.conformButton} type="submit" fullWidth disabled={isLoading}>
+            <Trans ns="common" i18nKey="confirm">
               Confirm
             </Trans>
           </Button>
-        </div>
+        </form>
       </Panel>
     </>
   );
