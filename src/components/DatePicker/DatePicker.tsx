@@ -71,7 +71,6 @@ const DatePicker = forwardRef<HTMLInputElement, RVDatePicker>(
       inputDate.setHours(0);
       inputDate.setMinutes(0);
       inputDate.setSeconds(0);
-      console.log(selectedDay);
 
       return `${inputDate.toLocaleDateString(locale, {
         // minute: false,

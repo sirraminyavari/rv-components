@@ -49,6 +49,10 @@ const templatesPreviewCallback: RVTemplateSelectionPanel['loadPreviewItems'] = a
         label: `template no. ${templateID} checkbox input`,
       },
       {
+        type: 'numeric',
+        label: `template no. ${templateID} numeric input`,
+      },
+      {
         type: 'date',
         label: `template no. ${templateID} date input`,
       },

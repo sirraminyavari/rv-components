@@ -59,7 +59,6 @@ const CopyToClipboard: FunctionComponent<RVCopyToClipboard> = ({
     async (ev: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
       if (disabled) return;
       try {
-        console.log('init:', triggerIconTimeout.current);
         await navigator.clipboard.writeText(clipboardContext);
         if (onCopyToClipboard) onCopyToClipboard({ ...ev, clipboardContext });
         setIsCopyTriggered(true);

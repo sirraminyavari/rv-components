@@ -87,6 +87,8 @@
       justify-content: start;
       flex-wrap: wrap;
       margin-block: px-to-rem(3);
+      margin-inline: auto;
+      max-width: 98%;
 
       .templateButtonLabel {
         margin-block: 0;

@@ -14,9 +14,9 @@ const LockOpenedSvg = ({ size, outline, ...props }: RVSvgProps) => {
           <path
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
             d="M336 112a80 80 0 0 0-160 0v96"
           />
           <rect
@@ -26,9 +26,9 @@ const LockOpenedSvg = ({ size, outline, ...props }: RVSvgProps) => {
             y="208"
             fill="none"
             stroke="currentColor"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="32"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="32"
             rx="48"
             ry="48"
           />

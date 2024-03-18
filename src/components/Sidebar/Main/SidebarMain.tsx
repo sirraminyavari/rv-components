@@ -102,7 +102,6 @@ const SidebarMain = forwardRef<HTMLDivElement, RVSidebarMain>(
         }
         const tile = event?.currentTarget || activeTile.current!;
         const tileBoundingRect = tile.getBoundingClientRect();
-        console.table(tileBoundingRect);
 
         activeSecondaryIndicatorRef.current.style.top = String(`${tileBoundingRect.y + 7.5}px`);
         activeSecondaryIndicatorRef.current.style.height = `${tileBoundingRect.height - 15}px`;

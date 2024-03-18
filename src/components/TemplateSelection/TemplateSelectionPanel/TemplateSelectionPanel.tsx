@@ -38,7 +38,7 @@ const TemplateSelectionPanel = ({
   const [selectedTemplates, setSelectedTemplates] = useState<string[]>([]);
   const [previewItems, setPreviewItems] = useState<
     | {
-        type: 'text' | 'checkbox' | 'date' | 'radio';
+        type: 'text' | 'numeric' | 'checkbox' | 'date' | 'radio';
         label: string;
       }[]
     | undefined
@@ -161,14 +161,30 @@ const TemplateSelectionPanel = ({
               onClick={toggleTemplateSelection}
               disabled={isSubmitInProgress}
             >
-              {selectedTemplates.includes(previewTemplateID || '') ? (
-                <Trans ns="common" i18nKey="add_to_selected">
-                  Add to selected
-                </Trans>
+              {multi ? (
+                <>
+                  {selectedTemplates.includes(previewTemplateID || '') ? (
+                    <Trans ns="common" i18nKey="add_to_selected">
+                      Add to selected
+                    </Trans>
+                  ) : (
+                    <Trans ns="common" i18nKey="select_template">
+                      Select Template
+                    </Trans>
+                  )}
+                </>
               ) : (
-                <Trans ns="common" i18nKey="select_template">
-                  Select Template
-                </Trans>
+                <>
+                  {isSubmitInProgress ? (
+                    <Trans ns="common" i18nKey="submitting">
+                      submitting ...
+                    </Trans>
+                  ) : (
+                    <Trans ns="common" i18nKey="select_templates">
+                      Select Template
+                    </Trans>
+                  )}
+                </>
               )}
             </Button>
           </div>

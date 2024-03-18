@@ -37,7 +37,7 @@ const Loading = forwardRef<HTMLDivElement, RVLoading>(
             strokeWidth="8"
             strokeDasharray="0 999"
             fill="transparent"
-            stroke-linecap="round"
+            strokeLinecap="round"
           />
           <circle
             r="55"
@@ -46,7 +46,7 @@ const Loading = forwardRef<HTMLDivElement, RVLoading>(
             strokeWidth="8"
             strokeDasharray="0 999"
             fill="transparent"
-            stroke-linecap="round"
+            strokeLinecap="round"
           />
           <circle
             r="40"
@@ -55,7 +55,7 @@ const Loading = forwardRef<HTMLDivElement, RVLoading>(
             strokeWidth="8"
             strokeDasharray="0 999"
             fill="transparent"
-            stroke-linecap="round"
+            strokeLinecap="round"
           />
           <circle
             r="25"
@@ -64,7 +64,7 @@ const Loading = forwardRef<HTMLDivElement, RVLoading>(
             strokeWidth="8"
             strokeDasharray="0 999"
             fill="transparent"
-            stroke-linecap="round"
+            strokeLinecap="round"
           />
           Sorry, your browser does not support inline SVG.
         </svg>

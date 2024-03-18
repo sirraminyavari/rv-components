@@ -28,7 +28,7 @@ export interface RVServerManagementAdminNewServer {
   modalView?: boolean;
   onSubmitCallback: (newServer: ServerEntity) => Promise<string>;
   onCancelCallback?: () => void;
-  connectionTestCallback?: (serverDetails: ServerEntity) => Promise<boolean>;
+  connectionTestCallback?: (serverDetails: ServerEntity) => Promise<boolean | string>;
   initialData?: Partial<ServerEntity>;
 }
 
@@ -46,11 +46,12 @@ const ServerManagementAdminNewServer = ({
     host: '',
     port: '',
     database: '',
+    ...(initialData || {}),
   });
   const [isConnectionTestLoading, setIsConnectionTestLoading] = useState(false);
   const [submitError, setSubmitError] = useState<string | void>();
   const [connectionTestResult, setConnectionTestResult] = useState<
-    void | 'successful' | 'failure'
+    void | 'successful' | 'failure' | string
   >();
   const onInputChange: RVTextInput['onChange'] = (e) => {
     setNewServerData((prev) => ({
@@ -79,7 +80,9 @@ const ServerManagementAdminNewServer = ({
     setIsConnectionTestLoading(true);
     try {
       const testResult = await connectionTestCallback(newServerData);
-      setConnectionTestResult(testResult ? 'successful' : 'failure');
+      if (typeof testResult === 'boolean')
+        setConnectionTestResult(testResult ? 'successful' : 'failure');
+      else setConnectionTestResult(testResult);
     } catch (error) {
       setConnectionTestResult('failure');
     }
@@ -100,7 +103,7 @@ const ServerManagementAdminNewServer = ({
           ns: 'server-management',
         });
       default:
-        return '';
+        return connectionTestResult;
     }
   }, [connectionTestResult]);
   return (
@@ -126,7 +129,7 @@ const ServerManagementAdminNewServer = ({
       <form onSubmit={onFormSubmit}>
         <div className={styles.titleInputBlock}>
           <TextInput
-            defaultValue={initialData?.title}
+            value={newServerData.title}
             fullWidth
             color={RVColorProp.cgBlue}
             variant={RVVariantProp.outline}
@@ -140,7 +143,7 @@ const ServerManagementAdminNewServer = ({
         </div>
         <div className={styles.inputBlock}>
           <TextInput
-            defaultValue={initialData?.host}
+            value={newServerData.host}
             fullWidth
             color={RVColorProp.cgBlue}
             variant={RVVariantProp.outline}
@@ -158,7 +161,7 @@ const ServerManagementAdminNewServer = ({
           />
 
           <TextInput
-            defaultValue={initialData?.database}
+            value={newServerData.database}
             fullWidth
             color={RVColorProp.cgBlue}
             variant={RVVariantProp.outline}
@@ -175,7 +178,7 @@ const ServerManagementAdminNewServer = ({
             required
           />
           <TextInput
-            defaultValue={initialData?.port}
+            value={newServerData.port}
             fullWidth
             color={RVColorProp.cgBlue}
             variant={RVVariantProp.outline}
@@ -193,7 +196,7 @@ const ServerManagementAdminNewServer = ({
         </div>
         <div className={styles.inputBlock}>
           <TextInput
-            defaultValue={initialData?.username}
+            value={newServerData.username}
             fullWidth
             color={RVColorProp.cgBlue}
             variant={RVVariantProp.outline}
@@ -206,7 +209,7 @@ const ServerManagementAdminNewServer = ({
             })}
           />
           <TextInput
-            defaultValue={initialData?.password}
+            value={newServerData.password}
             fullWidth
             color={RVColorProp.cgBlue}
             variant={RVVariantProp.outline}

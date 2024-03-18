@@ -127,6 +127,11 @@
   flex-wrap: nowrap;
   gap: px-to-rem(16);
 
+  .serverTitle {
+    width: px-to-rem(180);
+    flex-shrink: 0;
+  }
+
   .actionButton {
     padding-inline: px-to-rem(40);
   }

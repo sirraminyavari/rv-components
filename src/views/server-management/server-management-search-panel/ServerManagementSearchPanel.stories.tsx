@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import { ComponentMeta } from '@storybook/react';
+import { ComponentMeta, ComponentStory } from '@storybook/react';
 
 import {
   ServerManagementSearchPanel as ServerManagementSearchPanel,
@@ -37,10 +37,11 @@ const searchCallback: RVServerManagementSearchPanel['serverSearchCallback'] = as
     authors: ['Professor X', 'Edward Beck', 'J.J Nolan'],
     id: 'server-id-' + serverID + getRandomInt(100, 500),
     server: { title: serverID.toUpperCase() },
+    serverJsonResult: getRandomInt(0, 3) % 2 ? undefined : { some: { code: { error: true } } },
     title: 'the hands on guide:' + serverID + getRandomInt(12, 60),
   });
 };
-export const SearchPanel = ({ ...args }) => {
+export const SearchPanel: ComponentStory<typeof ServerManagementSearchPanel> = ({ ...args }) => {
   const [DetailsPanelState, setDetailsPanelState] = useState(false);
   const [detailsPanelData, setDetailsPanelData] = useState<Record<string, any>>();
   const setItemData = useCallback(async () => {
@@ -53,7 +54,15 @@ export const SearchPanel = ({ ...args }) => {
       'my details data 5': 'Wisely',
       'my details data 6': 'Cocoa',
       'my details data 1': null,
-      'my details data 7': '43534588-xcvxvxcv',
+      serverJsonResult: JSON.stringify({
+        'my details data 3': 435,
+        'my details data 4': 'author',
+        'my details data 2': null,
+        'my details data 5': 'Wisely',
+        'my details data 6': 'Cocoa',
+        'my details data 1': null,
+        'my details data 7': '43534588-xcvxvxcv',
+      }),
     });
 
     return true;
@@ -69,7 +78,7 @@ export const SearchPanel = ({ ...args }) => {
           alert(id);
           return true;
         }}
-        {...args}
+        // {...args}
       />
       <ServerManagementRowDetails
         title={'Result details'}

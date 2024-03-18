@@ -6,13 +6,69 @@
   align-items: center;
   gap: px-to-rem(8);
   margin-block: px-to-rem(20);
+  padding-block: px-to-rem(2);
+  padding-inline: px-to-rem(2);
+  border-end-end-radius: px-to-rem(7);
+  border-start-end-radius: px-to-rem(7);
 
-  & > * {
-    max-width: 50%;
+  &:hover {
+    background-color: hsl(var(--black) / 1.5%);
   }
 
   .detailsLabel {
     margin-block: 0;
+    max-width: 33%;
+  }
+
+  .detailsValueContainer {
+    width: 60%;
+    justify-content: space-between;
+  }
+
+  .detailsValue {
+    margin-block: 0;
+  }
+
+  &.jsonCodeBlock {
+    flex-direction: column;
+    align-items: start;
+    border-radius: 0;
+    border-top-width: px-to-rem(2);
+    border-top-style: solid;
+    border-top-color: hsl(var(--black) / 10%);
+
+    &:hover {
+      background-color: unset;
+    }
+
+    .detailsLabel {
+      width: 100%;
+      max-width: unset;
+      text-align: center;
+    }
+
+    .detailsValueContainer {
+      width: 100%;
+      max-width: 100%;
+
+      > div {
+        display: contents;
+      }
+
+      .detailsValue {
+        overflow-x: auto;
+        width: 100%;
+        max-width: unset;
+        background-color: hsl(var(--base) / 10%);
+        border-radius: px-to-rem(7);
+        padding: px-to-rem(7);
+        // margin-inline-end: px-to-rem(-35);
+
+        pre {
+          white-space: pre;
+        }
+      }
+    }
   }
 
   .emptyDetailsLabel {

@@ -28,13 +28,18 @@ interface ServerResultEntity {
   authors: string[];
   server: { title: string };
   details?: Record<string, string | number | null>;
+  serverJsonResult?: string;
 }
 
 export interface RVServerManagementSearchPanel {
   serversListCallback: () => Promise<RVSelectOptionItem[]>;
-  addCallback: (selectedItemID: string) => Promise<boolean>;
+  addCallback: (selectedItems: ServerResultEntity[]) => Promise<boolean>;
   detailsCallback: (serverItem: ServerResultEntity) => Promise<boolean>;
-  serverSearchCallback: (arg: { serverID: string; query: string }) => Promise<ServerResultEntity[]>;
+  serverSearchCallback: (arg: {
+    serverID: string;
+    serverTitle: string;
+    query: string;
+  }) => Promise<ServerResultEntity[]>;
 }
 
 const ServerManagementSearchPanel = ({
@@ -109,10 +114,11 @@ const ServerManagementSearchPanel = ({
         const allServersSelected =
           selectedServers.length === 1 && selectedServers[0]?.value === 'all-servers';
         const searchCallbacks = (allServersSelected ? serversList : selectedServers).map(
-          ({ value }) => {
+          ({ label, value }) => {
             return async () => {
               const serverResult = await serverSearchCallback({
                 serverID: String(value),
+                serverTitle: String(label),
                 query: searchQuery,
               });
               setResults((prev = []) => [...prev, ...serverResult]);
@@ -219,54 +225,92 @@ const ServerManagementSearchPanel = ({
           )}
           {results &&
             results.length !== 0 &&
-            results.map(({ server, authors, title, id, details }) => (
-              <RowItem
-                key={`row-result-${id}`}
-                size={RVSizeProp.medium}
-                ActionsComponent={
-                  <div className={styles.rowActionsContainer}>
-                    <Typography type="caption">{server?.title}</Typography>
-                    <Button
-                      onClick={() => detailsCallback({ server, authors, title, id, details })}
-                      variant={RVVariantProp.white}
-                      color={RVColorProp.crayola}
-                      fullCircle
-                      rounded="half"
-                    >
-                      <ListItemSvg />
-                    </Button>
-                    <Button
-                      variant={RVVariantProp.outline}
-                      className={styles.actionButton}
-                      onClick={() => addCallback(id)}
-                    >
-                      <Trans ns="common" i18nKey="add">
-                        Add
-                      </Trans>
-                    </Button>
+            results.map(({ server, authors, title, id, details, serverJsonResult }, idx) =>
+              serverJsonResult ? (
+                <RowItem
+                  key={`row-result-${id || idx}`}
+                  size={RVSizeProp.medium}
+                  color={RVColorProp.crayola}
+                  ActionsComponent={
+                    <div className={styles.rowActionsContainer}>
+                      <Typography type="caption">{server?.title}</Typography>
+                      <Button
+                        onClick={() =>
+                          detailsCallback({
+                            server,
+                            authors: [],
+                            title: '',
+                            id,
+                            details: { serverJsonResult },
+                          })
+                        }
+                        variant={RVVariantProp.white}
+                        color={RVColorProp.crayola}
+                        fullCircle
+                        rounded="half"
+                      >
+                        <ListItemSvg />
+                      </Button>
+                    </div>
+                  }
+                >
+                  <div className={styles.resultTitleContainer}>
+                    <Typography type="H4" className={styles.resultTitle}>
+                      {title}
+                    </Typography>
                   </div>
-                }
-              >
-                <div className={styles.resultTitleContainer}>
-                  <Typography type="H4" className={styles.resultTitle}>
-                    {title}
-                  </Typography>
-                  <ul className={styles.resultAuthors}>
-                    {authors.map((author) => (
-                      <li key={`row-result-author-${author}`}>
-                        <Typography
-                          type="p"
-                          color={RVColorProp.gray}
-                          className={styles.resultTitle}
-                        >
-                          {author}
-                        </Typography>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </RowItem>
-            ))}
+                </RowItem>
+              ) : (
+                <RowItem
+                  key={`row-result-${id}`}
+                  size={RVSizeProp.medium}
+                  ActionsComponent={
+                    <div className={styles.rowActionsContainer}>
+                      <Typography type="caption" className={styles.serverTitle}>
+                        {server?.title}
+                      </Typography>
+                      <Button
+                        onClick={() => detailsCallback({ server, authors, title, id, details })}
+                        variant={RVVariantProp.white}
+                        color={RVColorProp.crayola}
+                        fullCircle
+                        rounded="half"
+                      >
+                        <ListItemSvg />
+                      </Button>
+                      <Button
+                        variant={RVVariantProp.outline}
+                        className={styles.actionButton}
+                        onClick={() => addCallback([{ id, server, authors, title, details }])}
+                      >
+                        <Trans ns="common" i18nKey="add">
+                          Add
+                        </Trans>
+                      </Button>
+                    </div>
+                  }
+                >
+                  <div className={styles.resultTitleContainer}>
+                    <Typography type="H4" className={styles.resultTitle}>
+                      {title}
+                    </Typography>
+                    <ul className={styles.resultAuthors}>
+                      {authors.map((author) => (
+                        <li key={`row-result-author-${author}`}>
+                          <Typography
+                            type="p"
+                            color={RVColorProp.gray}
+                            className={styles.resultTitle}
+                          >
+                            {author}
+                          </Typography>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                </RowItem>
+              )
+            )}
 
           {isLoading && <LoadingState />}
         </Scrollbar>

@@ -65,3 +65,7 @@ export { default as RemoteServerSvg } from './remoteServer.svg';
 export { default as BookSvg } from './book.svg';
 export { default as BookSearchSvg } from './bookSearch.svg';
 export { default as FormsSvg } from './forms.svg';
+export { default as NumericSvg } from './numeric.svg';
+export { default as CheckListSvg } from './checkList.svg';
+export { default as RelationGraphSvg } from './relationGraph.svg';
+export { default as databaseAddSvg } from './databaseAdd.svg';

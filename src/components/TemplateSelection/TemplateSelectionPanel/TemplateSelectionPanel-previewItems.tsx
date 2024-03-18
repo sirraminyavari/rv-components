@@ -10,10 +10,11 @@ import { Typography } from '../../Typography';
 import styles from './TemplateSelectionPanel.module.scss';
 import { Skeleton } from '../../Skeleton';
 import EmptyState from '../../../layouts/EmptyState/EmptyState';
+import { NumericSvg } from '../../../icons';
 
 export interface RVTemplateSelectionPanelPreviewItems {
   previewItems?: {
-    type: 'text' | 'checkbox' | 'date' | 'radio';
+    type: 'text' | 'checkbox' | 'date' | 'radio' | 'numeric';
     label: string;
   }[];
   showSkeleton?: boolean;
@@ -84,6 +85,20 @@ const TemplateSelectionPanelPreviewItems: VoidFunctionComponent<
                     color={RVColorProp.gray}
                   >
                     <PenSvg className={styles.previewIcon} />
+                    {label}
+                  </Typography>
+                </>
+              );
+            case 'numeric':
+              return (
+                <>
+                  <Typography
+                    key={`preview-item-type-${idx}`}
+                    type="H4"
+                    className={styles.previewNodeItem}
+                    color={RVColorProp.gray}
+                  >
+                    <NumericSvg className={styles.previewIcon} />
                     {label}
                   </Typography>
                 </>
