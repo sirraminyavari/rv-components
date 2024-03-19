@@ -1,12 +1,15 @@
-import replace from 'replace-in-file';
+const replace = require('replace-in-file');
+
 const options = {
   files: 'dist/*/**',
-  from: /\.scss/g,
-  to: '.css',
+  from: /\.module\.scss\.(cjs|mjs)/g,
+  to: '.module.scss',
 };
-try {
-  const results = await replace(options);
-  console.log('Replacement results:', results);
-} catch (error) {
-  console.error('Error occurred:', error);
-}
+(async () => {
+  try {
+    const results = await replace(options);
+    console.log('Replacement results:', results);
+  } catch (error) {
+    console.error('Error occurred:', error);
+  }
+})();

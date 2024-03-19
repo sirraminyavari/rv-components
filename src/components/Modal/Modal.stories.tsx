@@ -71,7 +71,7 @@ const Template: ComponentStory<typeof ModalComponent> = ({
               size={RVSizeProp.small}
               onClick={() => setModalStatus(!modalStatus)}
             >
-              Open Modal
+              Close Modal
             </Button>
           </div>
         </ModalComponent>
@@ -102,7 +102,7 @@ export const ShowCase = ({
         <div style={defaultModalStyles}>
           {children}
           <Button size={RVSizeProp.small} onClick={() => setModalStatus(!modalStatus)}>
-            Open Modal
+            Close Modal
           </Button>
         </div>
       </ModalComponent>

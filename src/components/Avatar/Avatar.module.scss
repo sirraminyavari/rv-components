@@ -1,38 +1,53 @@
 @import '../../scss/modules/default';
 
-.baseAvatar {
-  border: none;
-  border-radius: $borderRadiusHalf;
-  border-width: px-to-rem(3);
-  border-style: solid;
-  border-color: transparent;
+.avatarContainer {
+  display: inline-block;
+  position: relative;
   transition: all 0.24s ease-out;
-  display: inline;
-  aspect-ratio: 1;
-  box-sizing: border-box;
+
+  .indicator,
+  .indicatorRing {
+    width: 20%;
+    height: 20%;
+    aspect-ratio: 1;
+    position: absolute;
+    inset-block-end: px-to-rem(0);
+    inset-inline-end: px-to-rem(0);
+    transform: translateX(2px) translateY(-2px);
+    border-style: solid;
+    border-radius: 100%;
+    display: block;
+    box-sizing: border-box;
+    transition: all 0.24s ease-out;
+  }
+
+  .indicator {
+    background-color: hsl(var(--base) / 100%);
+    border-color: hsl(var(--white) / 100%);
+    border-width: px-to-rem(3);
+  }
+
+  .indicatorRing {
+    background-color: transparent;
+    border-width: px-to-rem(3);
+  }
 
   &.large {
-    width: px-to-rem(68);
+    .baseAvatar {
+      width: px-to-rem(68);
+    }
   }
 
   &.medium {
-    width: px-to-rem(56);
+    .baseAvatar {
+      width: px-to-rem(56);
+    }
   }
 
   &.small {
-    width: px-to-rem(40);
-  }
-
-  &.fullCircle {
-    border-radius: 100%;
-  }
-
-  &.roundedFull {
-    border-radius: $borderRadiusFull;
-  }
-
-  &.roundedHalf {
-    border-radius: $borderRadiusHalf;
+    .baseAvatar {
+      width: px-to-rem(40);
+    }
   }
 
   &.stacked {
@@ -84,14 +99,63 @@
       }
     }
   }
+
+  &.fullCircle {
+    img {
+      border-radius: 100%;
+    }
+
+    .indicator,
+    .indicatorRing {
+      width: 20%;
+      height: 20%;
+      inset-block-end: 5%;
+      inset-inline-end: 5%;
+    }
+  }
+}
+
+.avatarContainer > .baseAvatar {
+  border: none;
+  border-radius: $borderRadiusHalf;
+  border-width: px-to-rem(3);
+  border-style: solid;
+  border-color: transparent;
+  transition: all 0.24s ease-out;
+  display: inline;
+  aspect-ratio: 1;
+  box-sizing: border-box;
+
+  &.roundedFull {
+    border-radius: $borderRadiusFull;
+  }
+
+  &.roundedHalf {
+    border-radius: $borderRadiusHalf;
+  }
 }
 
 .primary {
-  background-color: hsl(var(--base));
+  img {
+    background-color: hsl(var(--base));
+  }
+
+  .indicator,
+  .indicatorRing {
+    transform: translateX(10%) translateY(-10%);
+    border-color: hsl(var(--base) / 100%);
+  }
 
   &:hover,
   &[data-sudo='hover'] {
-    background-color: hsl(var(--light));
+    img {
+      background-color: hsl(var(--light));
+    }
+
+    .indicator,
+    .indicatorRing {
+      border-color: hsl(var(--lighter) / 100%);
+    }
   }
 
   &:active,
@@ -101,37 +165,86 @@
 }
 
 .outline {
-  border-color: hsl(var(--base));
-  background-color: transparent;
-  padding: px-to-rem(2);
+  img {
+    border-color: hsl(var(--base));
+    background-color: transparent;
+    padding: px-to-rem(2);
+  }
+
+  .indicator,
+  .indicatorRing {
+    transform: translateX(15%) translateY(-20%);
+  }
+
+  .indicator {
+    border-color: hsl(var(--white) / 100%);
+  }
+
+  .indicatorRing {
+    border-color: hsl(var(--base) / 15%);
+  }
 
   &:hover,
   &[data-sudo='hover'] {
-    background-color: hsl(var(--base) / 15%);
+    img {
+      background-color: hsl(var(--base) / 15%);
+    }
   }
 
   &:active,
   &[data-sudo='active'] {
-    background-color: hsl(var(--base) / 25%);
+    img {
+      background-color: hsl(var(--base) / 25%);
+    }
   }
 }
 
 .white {
-  background-color: hsl(var(--white));
+  img {
+    background-color: hsl(var(--white));
+  }
+
+  .indicator,
+  .indicatorRing {
+    transform: translateX(15%) translateY(-17%);
+  }
+
+  .indicator {
+    border-color: hsl(var(--white) / 100%);
+  }
+
+  .indicatorRing {
+    border-color: hsl(var(--white) / 15%);
+  }
 
   &:hover,
   &[data-sudo='hover'] {
-    background-color: hsl(var(--base) / 100%);
+    img {
+      background-color: hsl(var(--base) / 100%);
+    }
+
+    .indicatorRing {
+      border-color: hsl(var(--base) / 100%);
+    }
   }
 }
 
 .disabled {
-  background-color: hsl(var(--base));
-  filter: contrast(0.5);
+  img {
+    background-color: hsl(var(--base));
+    filter: contrast(0.5);
+  }
+
+  .indicator,
+  .indicatorRing {
+    transform: translateX(15%) translateY(-17%);
+    border-color: hsl(var(--base));
+    filter: contrast(0.5);
+  }
 }
 
 @include on-rtl {
-  .baseAvatar {
+  .avatarContainer {
     &.stacked {
       &:not(:last-of-type) {
         &.large {

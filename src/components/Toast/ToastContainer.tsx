@@ -22,15 +22,18 @@ export interface RVToastContainer extends Omit<ToastContainerProps, 'color' | 't
 }
 
 const CloseButton = ({ closeToast }: CloseButtonProps) => (
-  <Button
-    onClick={closeToast}
-    variant={RVVariantProp.white}
-    size={RVSizeProp.small}
-    fullCircle
-    rounded="half"
-  >
-    <CloseSvg />
-  </Button>
+  <div className={styles.closeButtonContainer}>
+    <Button
+      onClick={closeToast}
+      variant={RVVariantProp.white}
+      size={RVSizeProp.small}
+      fullCircle
+      rounded="half"
+      className={styles.closeButton}
+    >
+      <CloseSvg />
+    </Button>
+  </div>
 );
 const ToastContainer: FunctionComponent<RVToastContainer> = ({
   variant = RVVariantProp.white,

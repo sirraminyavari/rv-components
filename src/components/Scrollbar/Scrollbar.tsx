@@ -40,6 +40,7 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
     {
       children,
       className,
+      style,
       contentContainerClassName,
       color = RVColorProp.cgBlue,
       variant = RVVariantProp.primary,
@@ -123,11 +124,14 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
       if (scrollingTimeoutRef.current) {
         clearTimeout(scrollingTimeoutRef.current);
       }
-      setIsScrolling(true);
-      handleOnScrollEnd();
-      scrollingTimeoutRef.current = setTimeout(() => {
-        setIsScrolling(false);
-      }, 1000);
+
+      if (contentHeight > trackHeight * 1.1) {
+        setIsScrolling(true);
+        handleOnScrollEnd();
+        scrollingTimeoutRef.current = setTimeout(() => {
+          setIsScrolling(false);
+        }, 1000);
+      }
 
       let newTop = (+contentTop / +contentHeight) * trackHeight;
       newTop = Math.min(newTop, trackHeight - thumbHeight);
@@ -221,7 +225,10 @@ const Scrollbar = forwardRef<HTMLDivElement, RVScrollbar>(
     }, [handleThumbMousemove, handleThumbMouseup]);
 
     return (
-      <div className={clsx(styles.scrollbarContainer, color, asPanel && styles.asPanel, className)}>
+      <div
+        className={clsx(styles.scrollbarContainer, color, asPanel && styles.asPanel, className)}
+        style={style}
+      >
         <div className={styles.scrollbarContent} ref={contentRef} {...props}>
           <div ref={contentInnerRef} className={contentContainerClassName}>
             {children}

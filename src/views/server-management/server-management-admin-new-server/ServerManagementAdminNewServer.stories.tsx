@@ -14,15 +14,31 @@ export default {
   argTypes: {} as RVServerManagementAdminNewServer,
 } as ComponentMeta<typeof ServerManagementAdminNewServerComponent>;
 
-export const panel = ({ ...args }) => {
+export const newServerPanel = ({ ...args }) => {
   const onSubmitCallback: RVServerManagementAdminNewServer['onSubmitCallback'] = async (
     newServer
   ) => {
-    console.log(newServer);
+    return 'created !';
   };
   return (
     <div style={{ display: 'flex', justifyContent: 'center' }}>
       <ServerManagementAdminNewServerComponent onSubmitCallback={onSubmitCallback} {...args} />
+    </div>
+  );
+};
+export const modifyServerPanel = ({ ...args }) => {
+  const onSubmitCallback: RVServerManagementAdminNewServer['onSubmitCallback'] = async (server) => {
+    console.log({ server });
+
+    return 'modified !';
+  };
+  return (
+    <div style={{ display: 'flex', justifyContent: 'center' }}>
+      <ServerManagementAdminNewServerComponent
+        onSubmitCallback={onSubmitCallback}
+        initialData={{ database: '345', host: '4.2.2.1', port: '320' }}
+        {...args}
+      />
     </div>
   );
 };

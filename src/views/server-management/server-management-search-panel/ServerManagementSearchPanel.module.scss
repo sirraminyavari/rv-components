@@ -11,6 +11,7 @@
   margin-inline: auto;
   padding-inline: px-to-rem(12);
   padding-block: px-to-rem(24);
+  z-index: 0;
 
   .defaultIcon {
     font-size: px-to-rem(128);
@@ -33,6 +34,11 @@
   .selectInput {
     width: 100%;
     z-index: 3;
+    // min-width: px-to-rem(300);
+  }
+
+  .searchInput {
+    min-width: unset;
   }
 }
 
@@ -45,6 +51,7 @@
     width: 60%;
     justify-content: center;
     margin-inline: auto;
+    flex-shrink: 0;
   }
 }
 
@@ -62,7 +69,8 @@
 
 .resultsPanel {
   box-sizing: border-box;
-  padding-inline: px-to-rem(32);
+  padding-inline: px-to-rem(24);
+  padding-block-end: px-to-rem(8);
 
   &.emptyState {
     height: 100%;
@@ -70,8 +78,13 @@
   }
 }
 
+.resultTitleContainer {
+  max-width: 100%;
+}
+
 .resultCountCaption {
   margin-block-start: px-to-rem(24);
+  margin-inline-start: px-to-rem(8);
   margin-block-end: px-to-rem(8);
   white-space: nowrap;
 }
@@ -111,8 +124,13 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
   gap: px-to-rem(16);
+
+  .serverTitle {
+    width: px-to-rem(180);
+    flex-shrink: 0;
+  }
 
   .actionButton {
     padding-inline: px-to-rem(40);

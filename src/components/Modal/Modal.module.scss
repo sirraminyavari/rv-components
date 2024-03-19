@@ -63,3 +63,22 @@
     min-width: px-to-rem(320);
   }
 }
+
+.primary {
+  .modalOverlay {
+    background-image: linear-gradient(
+      135deg,
+      hsl(var(--light) / 30%) 0%,
+      hsl(var(--base) / 30%) 100%
+    );
+  }
+}
+
+.white {
+  .modalContent {
+    border-style: solid;
+    border-color: hsl(var(--base) / 20%);
+    border-radius: px-to-rem(12);
+    border-width: px-to-rem(1.5);
+  }
+}

@@ -201,7 +201,6 @@ const AdvancedSearchMenu = forwardRef<HTMLDivElement, RVAdvancedSearchMenu>(
                 JSON.stringify(
                   tempSearchInputDataState[name].inputValues.filter((item: string) => item !== '')
                 );
-              console.log(tempSearchInputDataState[name]);
 
               break;
             case 'singleChoice':
@@ -227,8 +226,6 @@ const AdvancedSearchMenu = forwardRef<HTMLDivElement, RVAdvancedSearchMenu>(
                 orderBy(tempSearchInputDataState[name].options, 'name', 'asc'),
                 orderBy(tempSearchInputDataState[name].inputValues, 'name', 'asc')
               );
-
-              console.log(tempSearchInputDataState[name]);
 
               break;
 

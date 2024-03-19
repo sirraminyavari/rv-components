@@ -3,13 +3,13 @@ import { ComponentStory, ComponentMeta } from '@storybook/react';
 import { ThemeBlock, withAvatarDemo } from '../../storybookComponents';
 import { Avatar, RVAvatar } from '.';
 import { AvatarGroup } from '../AvatarGroup';
-import { RVSizeProp, RVVariantProp } from '../../types';
+import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types';
 
 const AvatarComponent = withAvatarDemo(Avatar, 'src');
 
 export default {
   title: 'Components/Avatar',
-  component: AvatarComponent,
+  component: Avatar,
   // argTypes: {} as RVAvatar,
 } as ComponentMeta<typeof AvatarComponent>;
 
@@ -21,35 +21,43 @@ const Template: ComponentStory<typeof AvatarComponent> = ({ src, color, variant,
 
   return (
     <ThemeBlock onColorChange={setColorClass}>
-      <AvatarComponent
-        variant={variant || RVVariantProp.primary}
-        color={colorClass}
-        src={src}
-        {...args}
-      />
-      <AvatarComponent
-        variant={variant || RVVariantProp.outline}
-        color={colorClass}
-        src={src}
-        {...args}
-      />
-      <AvatarComponent
-        variant={variant || RVVariantProp.white}
-        color={colorClass}
-        src={src}
-        {...args}
-      />
-      <AvatarComponent
-        variant={variant || RVVariantProp.disabled}
-        color={colorClass}
-        src={src}
-        {...args}
-      />
+      <div>
+        <AvatarComponent
+          variant={variant || RVVariantProp.primary}
+          color={colorClass}
+          src={src}
+          {...args}
+        />
+      </div>
+      <div>
+        <AvatarComponent
+          variant={variant || RVVariantProp.outline}
+          color={colorClass}
+          src={src}
+          {...args}
+        />
+      </div>
+      <div>
+        <AvatarComponent
+          variant={variant || RVVariantProp.white}
+          color={colorClass}
+          src={src}
+          {...args}
+        />
+      </div>
+      <div>
+        <AvatarComponent
+          variant={variant || RVVariantProp.disabled}
+          color={colorClass}
+          src={src}
+          {...args}
+        />
+      </div>
     </ThemeBlock>
   );
 };
 
-export const ShowCase = ({ src, ...args }) => {
+export const ShowCase: ComponentStory<typeof AvatarComponent> = ({ src, ...args }) => {
   return (
     <>
       <div>
@@ -58,6 +66,9 @@ export const ShowCase = ({ src, ...args }) => {
     </>
   );
 };
+export const withIndicator = Template.bind({});
+withIndicator.args = { withIndicator: true };
+
 export const SudoHover = Template.bind({});
 SudoHover.args = { sudoAction: 'hover' };
 
@@ -89,7 +100,13 @@ RoundedHalf.args = { rounded: 'half' };
 export const RoundedFull = Template.bind({});
 RoundedFull.args = { rounded: 'full' };
 
-export const Stacked = ({ src, stacked = true, color, variant, ...args }) => {
+export const Stacked: ComponentStory<typeof AvatarComponent> = ({
+  src,
+  stacked = true,
+  color,
+  variant,
+  ...args
+}) => {
   const [colorClass, setColorClass] = useState(color);
   useEffect(() => {
     setColorClass(color);
@@ -101,35 +118,35 @@ export const Stacked = ({ src, stacked = true, color, variant, ...args }) => {
         <AvatarComponent
           src={src}
           stacked={stacked}
-          variant={variant || RVVariantProp.disabled}
+          variant={variant || RVVariantProp.primary}
           color={colorClass}
           {...args}
         />
         <AvatarComponent
           src={src}
           stacked={stacked}
-          variant={variant || RVVariantProp.disabled}
+          variant={variant || RVVariantProp.primary}
           color={colorClass}
           {...args}
         />
         <AvatarComponent
           src={src}
           stacked={stacked}
-          variant={variant || RVVariantProp.disabled}
+          variant={variant || RVVariantProp.primary}
           color={colorClass}
           {...args}
         />
         <AvatarComponent
           src={src}
           stacked={stacked}
-          variant={variant || RVVariantProp.disabled}
+          variant={variant || RVVariantProp.primary}
           color={colorClass}
           {...args}
         />
         <AvatarComponent
           src={src}
           stacked={stacked}
-          variant={variant || RVVariantProp.disabled}
+          variant={variant || RVVariantProp.primary}
           color={colorClass}
           {...args}
         />

@@ -38,17 +38,19 @@ const TemplateSelectionPanelTemplateItems = ({
   useEffect(() => {
     (async () => {
       if (!loadTemplateItems) return;
+      if (templatesLoadingSkeleton) return;
       setTemplatesLoadingSkeleton(true);
       const allTemplates = await loadTemplateItems();
 
-      setTemplates(allTemplates);
+      setTemplates((prev) => (prev.length ? prev : allTemplates));
       setTemplatesLoadingSkeleton(false);
     })();
-  }, [loadTemplateItems]);
+  }, []);
 
   const generateTemplateItemTree = useCallback((templateItems?: TemplateDetails[]) => {
     if (templateItems === undefined) return <>no items</>;
     if (templateItems.length === 0) return <></>;
+
     return templateItems.map((templateItem) => {
       if (templateItem.childTemplates)
         return (
@@ -113,29 +115,29 @@ const TemplateSelectionPanelTemplateItems = ({
           </>
         );
       else
-        return templateItems?.map(({ id, title, avatarSrc }) => {
-          return (
-            <Button
-              key={`template-${id}`}
-              variant={RVVariantProp.white}
-              size={RVSizeProp.small}
-              fullWidth
-              className={styles.templateButton}
-              onClick={() => onSelect && onSelect(id)}
+        return (
+          <Button
+            key={`template-${templateItem.id}`}
+            variant={RVVariantProp.white}
+            size={RVSizeProp.small}
+            fullWidth
+            className={styles.templateButton}
+            onClick={() => onSelect && onSelect(templateItem.id)}
+          >
+            {templateItem.avatarSrc && (
+              <Avatar src={templateItem.avatarSrc} size={RVSizeProp.small} />
+            )}
+            <Typography
+              type="H4"
+              className={clsx(
+                styles.templateButtonLabel,
+                selectedTemplates.includes(templateItem.id) && styles.templateButtonActiveLabel
+              )}
             >
-              {avatarSrc && <Avatar src={avatarSrc} size={RVSizeProp.small} />}
-              <Typography
-                type="H4"
-                className={clsx(
-                  styles.templateButtonLabel,
-                  selectedTemplates.includes(id) && styles.templateButtonActiveLabel
-                )}
-              >
-                {title}
-              </Typography>
-            </Button>
-          );
-        });
+              {templateItem.title}
+            </Typography>
+          </Button>
+        );
     });
   }, []);
 

@@ -126,7 +126,6 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
                   link.onClick && link.onClick(e);
                 }}
                 onTriggerButtonLoad={(buttonElement) => {
-                  console.log();
                   if (buttonElement.dataset.id === activeLink) {
                     activeTile.current = buttonElement;
                     onActiveClick();

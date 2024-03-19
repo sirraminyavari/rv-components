@@ -59,7 +59,6 @@ const CopyToClipboard: FunctionComponent<RVCopyToClipboard> = ({
     async (ev: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>) => {
       if (disabled) return;
       try {
-        console.log('init:', triggerIconTimeout.current);
         await navigator.clipboard.writeText(clipboardContext);
         if (onCopyToClipboard) onCopyToClipboard({ ...ev, clipboardContext });
         setIsCopyTriggered(true);
@@ -79,7 +78,7 @@ const CopyToClipboard: FunctionComponent<RVCopyToClipboard> = ({
   );
   return (
     <div className={clsx(color, styles[size], styles.copyToClipboard, className)} {...props}>
-      <span className={styles.label}>{children}</span>
+      <div className={styles.label}>{children}</div>
       <span>
         <Button
           className={clsx(styles.copyButton)}

@@ -17,16 +17,16 @@ const serverListCallback: RVServerManagementAdminList['serversListCallback'] = a
   await new Promise((res) => setTimeout(res, 1000));
   const count = getRandomInt(25, 100);
   const demoData = [
-    { label: 'server ABC', id: 'abc' },
-    { label: 'server NBC', id: 'nbc' },
-    { label: 'server BBC', id: 'bbc' },
-    { label: 'server MTV', id: 'mtv' },
+    { label: 'server ABC', id: 'abc', details: 'server-info' },
+    { label: 'server NBC', id: 'nbc', details: 'server-info' },
+    { label: 'server BBC', id: 'bbc', details: 'server-info' },
+    { label: 'server MTV', id: 'mtv', details: 'server-info' },
   ];
   return new Array(count).fill(demoData[getRandomInt(0, 4)]);
 };
 export const list = ({ ...args }) => {
   return (
-    <div style={{ display: 'flex', justifyContent: 'center', height: '60vh' }}>
+    <div style={{ display: 'flex', justifyContent: 'center', height: '90dvh' }}>
       <ServerManagementAdminList
         serversListCallback={serverListCallback}
         editCallback={async (id) => {

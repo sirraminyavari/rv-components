@@ -10,8 +10,10 @@ export interface RVDropdown
     PropsWithoutRef<DetailedHTMLProps<HTMLAttributes<HTMLDivElement>, HTMLDivElement>>,
     'color' | 'size'
   > {
-  variant?: Exclude<RVVariantProp, RVVariantProp.disabled>;
+  /** set the component color palette (default:RVColorProp.cgBlue) */
   color?: RVColorProp;
+  variant?: Exclude<RVVariantProp, RVVariantProp.disabled>;
+  /** set the size of the component (default:RVSizeProp.small) */
   size?: RVSizeProp;
   label?: string;
   disabled?: boolean;

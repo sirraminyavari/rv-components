@@ -2,16 +2,18 @@
 
 .mainContainer {
   display: flex;
-  align-items: center;
+  align-items: start;
   justify-content: center;
   gap: px-to-rem(16);
   width: 100%;
+  flex: 0.9;
 }
 
 .resultsPanel {
   box-sizing: border-box;
-  padding-inline: px-to-rem(32);
+  padding-inline: px-to-rem(24);
   width: 100%;
+  height: 100%;
 
   &.emptyState {
     height: 100%;
@@ -23,6 +25,20 @@
   margin-block-start: px-to-rem(24);
   margin-block-end: px-to-rem(8);
   white-space: nowrap;
+}
+
+.resultTitleContainer {
+  display: flex;
+  gap: px-to-rem(6);
+  align-items: center;
+  flex-wrap: wrap;
+
+  .resultTitleInfo {
+    background-color: hsl(var(--black) / 10%);
+    font-size: px-to-rem(12);
+    border-radius: px-to-rem(4);
+    padding-inline: px-to-rem(4);
+  }
 }
 
 .rowActionsContainer {

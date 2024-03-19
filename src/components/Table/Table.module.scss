@@ -1,0 +1,411 @@
+@import '../../scss/modules/default';
+
+.table {
+  display: grid;
+}
+
+.tableHead {
+  display: grid;
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  box-sizing: border-box;
+  min-height: px-to-rem(30);
+
+  tr {
+    display: flex;
+    width: 100%;
+    background-color: inherit;
+
+    th {
+      display: flex;
+      box-sizing: border-box;
+      background-color: inherit;
+    }
+  }
+
+  .tableHeadLabel {
+    display: flex;
+    user-select: none;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    width: 100%;
+  }
+
+  .tableResizeIndicator {
+    z-index: 1;
+    position: absolute;
+    inset-inline-end: 0;
+    cursor: grab;
+    flex-shrink: 0;
+
+    &::before {
+      position: absolute;
+      content: '';
+      transition: background-color 0.25s;
+    }
+
+    &.tableResizeIndicatorActive {
+      cursor: grabbing;
+    }
+  }
+
+  .tableSortIndicator {
+    display: inline-flex;
+    flex-direction: column;
+    cursor: pointer;
+
+    .tableSortIndicatorTop {
+      margin-block-start: px-to-rem(2);
+      margin-block-end: px-to-rem(-10);
+    }
+  }
+}
+
+.tableBody {
+  display: grid;
+  position: relative;
+
+  tr {
+    display: flex;
+    position: absolute;
+    transition: background-color 0.24s ease;
+
+    td {
+      display: flex;
+      justify-self: start;
+      align-items: center;
+      box-sizing: border-box;
+      background-color: inherit;
+    }
+  }
+}
+
+.LoadingTemplateContainer {
+  .loadingStateLabel {
+    border-radius: 0;
+    width: 80%;
+
+    // margin-inline: auto;
+    margin-block: px-to-rem(12);
+
+    span {
+      height: px-to-rem(30);
+    }
+  }
+}
+
+.tableContainer {
+  overflow: auto;
+  position: relative;
+  border-radius: px-to-rem(10);
+  padding-inline: 0;
+
+  &.small {
+    .tableHead {
+      .tableHeadLabel {
+        gap: px-to-rem(2);
+        padding-inline: px-to-rem(3);
+        padding-block: px-to-rem(1);
+        width: 100%;
+        font-size: px-to-rem(13);
+      }
+
+      .tableResizeIndicator {
+        width: px-to-rem(3);
+        height: 80%;
+
+        // transform: translateX(px-to-rem());
+
+        &::before {
+          width: px-to-rem(1);
+          height: 100%;
+
+          // transform: translateX(-40%);
+          border-radius: px-to-rem(10);
+        }
+      }
+
+      .tableSortIndicator {
+        margin-inline-end: px-to-rem(2);
+        font-size: px-to-rem(14);
+        gap: px-to-rem(0);
+
+        .tableSortIndicatorTop {
+          margin-block-start: px-to-rem(2);
+          margin-block-end: px-to-rem(-8);
+        }
+      }
+    }
+
+    .tableBody {
+      tr {
+        width: 100%;
+
+        td {
+          font-size: px-to-rem(14);
+          padding-inline: px-to-rem(3);
+          padding-block: px-to-rem(2);
+        }
+      }
+    }
+  }
+
+  &.medium {
+    .tableHead {
+      padding-block: px-to-rem(3);
+
+      .tableHeadLabel {
+        gap: px-to-rem(2);
+        padding-inline: px-to-rem(6);
+        padding-block: px-to-rem(1);
+        width: 100%;
+      }
+
+      .tableResizeIndicator {
+        width: px-to-rem(6);
+        height: 80%;
+
+        // transform: translateX(px-to-rem());
+
+        &::before {
+          width: px-to-rem(3);
+          height: 100%;
+          transform: translateX(-10%);
+          border-radius: px-to-rem(10);
+        }
+      }
+
+      .tableSortIndicator {
+        margin-inline-end: px-to-rem(2);
+        font-size: px-to-rem(16);
+        gap: px-to-rem(0);
+
+        .tableSortIndicatorTop {
+          margin-block-start: px-to-rem(2);
+          margin-block-end: px-to-rem(-10);
+        }
+      }
+    }
+
+    .tableBody {
+      tr {
+        width: 100%;
+
+        td {
+          padding-inline: px-to-rem(4);
+          padding-block: px-to-rem(1);
+        }
+      }
+    }
+  }
+
+  &.large {
+    .tableHead {
+      padding-block: px-to-rem(5);
+
+      .tableHeadLabel {
+        gap: px-to-rem(4);
+        padding-inline: px-to-rem(8);
+        padding-block: px-to-rem(2);
+        width: 100%;
+      }
+
+      .tableResizeIndicator {
+        width: px-to-rem(8);
+        height: 80%;
+
+        // transform: translateX(px-to-rem());
+
+        &::before {
+          width: px-to-rem(3);
+          height: 100%;
+          transform: translateX(-40%);
+          border-radius: px-to-rem(10);
+        }
+      }
+
+      .tableSortIndicator {
+        margin-inline-end: px-to-rem(2);
+        font-size: px-to-rem(16);
+        gap: px-to-rem(0);
+
+        .tableSortIndicatorTop {
+          margin-block-start: px-to-rem(2);
+          margin-block-end: px-to-rem(-10);
+        }
+      }
+    }
+
+    .tableBody {
+      tr {
+        width: 100%;
+
+        td {
+          padding-inline: px-to-rem(8);
+          padding-block: px-to-rem(2);
+        }
+      }
+    }
+  }
+
+  &.primary {
+    .tableHead {
+      background-color: hsl(var(--base));
+      color: hsl(var(--base-font));
+
+      .tableResizeIndicator {
+        &::before {
+          background-color: hsl(var(--base-font) / 50%);
+        }
+
+        &.tableResizeIndicatorActive {
+          &::before {
+            background-color: hsl(var(--base-font));
+          }
+        }
+      }
+
+      .tableSortIndicator {
+        color: hsl(var(--base-font));
+      }
+    }
+
+    .tableBody {
+      background-color: hsl(var(--white));
+      color: hsl(var(--white));
+
+      tr {
+        &:nth-of-type(2n) {
+          background-color: hsl(var(--light) / 95%);
+          color: hsl(var(--light-font));
+
+          &:hover {
+            background-color: hsl(var(--light) / 100%);
+          }
+        }
+
+        &:nth-of-type(2n-1) {
+          background-color: hsl(var(--lighter) / 95%);
+          color: hsl(var(--lighter-font));
+
+          &:hover {
+            background-color: hsl(var(--lighter) / 100%);
+          }
+        }
+      }
+    }
+  }
+
+  &.outline {
+    border-radius: px-to-rem(10);
+    border-width: px-to-rem(1);
+    border-style: solid;
+    border-color: hsl(var(--base));
+
+    .tableHead {
+      background-color: hsl(var(--base-font));
+      color: hsl(var(--base));
+      border-top-left-radius: px-to-rem(10);
+      border-top-right-radius: px-to-rem(10);
+      border-width: px-to-rem(1);
+      border-bottom-width: px-to-rem(2);
+      border-style: solid;
+      border-color: hsl(var(--base));
+
+      .tableResizeIndicator {
+        &::before {
+          background-color: hsl(var(--base) / 50%);
+        }
+
+        &.tableResizeIndicatorActive {
+          &::before {
+            background-color: hsl(var(--base));
+          }
+        }
+      }
+
+      .tableSortIndicator {
+        color: hsl(var(--base));
+      }
+    }
+
+    .tableBody {
+      background-color: hsl(var(--white));
+      color: hsl(var(--white));
+      border-bottom-left-radius: px-to-rem(10);
+      border-bottom-right-radius: px-to-rem(10);
+
+      tr {
+        &:nth-of-type(2n) {
+          background-color: hsl(var(--light) / 95%);
+          color: hsl(var(--light-font));
+
+          &:hover {
+            background-color: hsl(var(--light) / 100%);
+          }
+        }
+
+        &:nth-of-type(2n-1) {
+          background-color: hsl(var(--lighter) / 95%);
+          color: hsl(var(--lighter-font));
+
+          &:hover {
+            background-color: hsl(var(--lighter) / 100%);
+          }
+        }
+      }
+    }
+  }
+
+  &.white {
+    .tableHead {
+      background-color: hsl(var(--base-font));
+      color: hsl(var(--base));
+      border-width: px-to-rem(0);
+      border-bottom-width: px-to-rem(1);
+      border-style: solid;
+      border-color: hsl(var(--base));
+
+      .tableResizeIndicator {
+        &::before {
+          background-color: hsl(var(--base) / 50%);
+        }
+
+        &.tableResizeIndicatorActive {
+          &::before {
+            background-color: hsl(var(--base));
+          }
+        }
+      }
+
+      .tableSortIndicator {
+        color: hsl(var(--base));
+      }
+    }
+
+    .tableBody {
+      background-color: hsl(var(--white));
+      color: hsl(var(--base));
+
+      tr {
+        background-color: hsl(var(--white));
+
+        &:nth-of-type(2n) {
+          &:hover {
+            background-color: hsl(var(--light) / 95%);
+            color: hsl(var(--light-font));
+          }
+        }
+
+        &:nth-of-type(2n-1) {
+          &:hover {
+            background-color: hsl(var(--lighter) / 95%);
+            color: hsl(var(--lighter-font));
+          }
+        }
+      }
+    }
+  }
+}
