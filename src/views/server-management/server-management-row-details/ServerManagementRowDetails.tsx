@@ -36,7 +36,7 @@ const ServerManagementRowDetails = ({
               >
                 <Typography
                   type="p"
-                  color={RVColorProp.crayola}
+                  color={details.isError ? RVColorProp.crayola : RVColorProp.cgBlue}
                   className={styles.detailsLabel}
                   muted={value === null}
                 >
@@ -46,7 +46,7 @@ const ServerManagementRowDetails = ({
                   <CopyToClipboard
                     copyIconOutline
                     variant={RVVariantProp.white}
-                    color={RVColorProp.crayola}
+                    color={details.isError ? RVColorProp.crayola : RVColorProp.cgBlue}
                     clipboardContext={String(value)}
                     className={clsx(styles.detailsValueContainer)}
                   >

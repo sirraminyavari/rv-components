@@ -29,6 +29,7 @@ interface ServerResultEntity {
   server: { title: string };
   details?: Record<string, string | number | null>;
   serverJsonResult?: string;
+  isError?: boolean;
 }
 
 export interface RVServerManagementSearchPanel {
@@ -225,91 +226,106 @@ const ServerManagementSearchPanel = ({
           )}
           {results &&
             results.length !== 0 &&
-            results.map(({ server, authors, title, id, details, serverJsonResult }, idx) =>
-              serverJsonResult ? (
-                <RowItem
-                  key={`row-result-${id || idx}`}
-                  size={RVSizeProp.medium}
-                  color={RVColorProp.crayola}
-                  ActionsComponent={
-                    <div className={styles.rowActionsContainer}>
-                      <Typography type="caption">{server?.title}</Typography>
-                      <Button
-                        onClick={() =>
-                          detailsCallback({
-                            server,
-                            authors: [],
-                            title: '',
-                            id,
-                            details: { serverJsonResult },
-                          })
-                        }
-                        variant={RVVariantProp.white}
-                        color={RVColorProp.crayola}
-                        fullCircle
-                        rounded="half"
-                      >
-                        <ListItemSvg />
-                      </Button>
-                    </div>
-                  }
-                >
-                  <div className={styles.resultTitleContainer}>
-                    <Typography type="H4" className={styles.resultTitle}>
-                      {title}
-                    </Typography>
-                  </div>
-                </RowItem>
-              ) : (
-                <RowItem
-                  key={`row-result-${id}`}
-                  size={RVSizeProp.medium}
-                  ActionsComponent={
-                    <div className={styles.rowActionsContainer}>
-                      <Typography type="caption" className={styles.serverTitle}>
-                        {server?.title}
+            results.map(
+              ({ server, authors, title, id, details, serverJsonResult = '', isError }, idx) =>
+                isError ? (
+                  <RowItem
+                    key={`row-result-${id || idx}`}
+                    size={RVSizeProp.medium}
+                    color={RVColorProp.crayola}
+                    ActionsComponent={
+                      <div className={styles.rowActionsContainer}>
+                        <Typography type="caption">{server?.title}</Typography>
+                        <Button
+                          onClick={() =>
+                            detailsCallback({
+                              server,
+                              authors: [],
+                              title: '',
+                              id,
+                              details: { serverJsonResult },
+                              isError,
+                            })
+                          }
+                          variant={RVVariantProp.white}
+                          color={RVColorProp.crayola}
+                          fullCircle
+                          rounded="half"
+                        >
+                          <ListItemSvg />
+                        </Button>
+                      </div>
+                    }
+                  >
+                    <div className={styles.resultTitleContainer}>
+                      <Typography type="H4" className={styles.resultTitle}>
+                        {title}
                       </Typography>
-                      <Button
-                        onClick={() => detailsCallback({ server, authors, title, id, details })}
-                        variant={RVVariantProp.white}
-                        color={RVColorProp.crayola}
-                        fullCircle
-                        rounded="half"
-                      >
-                        <ListItemSvg />
-                      </Button>
-                      <Button
-                        variant={RVVariantProp.outline}
-                        className={styles.actionButton}
-                        onClick={() => addCallback([{ id, server, authors, title, details }])}
-                      >
-                        <Trans ns="common" i18nKey="add">
-                          Add
-                        </Trans>
-                      </Button>
                     </div>
-                  }
-                >
-                  <div className={styles.resultTitleContainer}>
-                    <Typography type="H4" className={styles.resultTitle}>
-                      {title}
-                    </Typography>
-                    <ul className={styles.resultAuthors}>
-                      {authors.map((author) => (
-                        <li key={`row-result-author-${author}`}>
-                          <Typography
-                            type="p"
-                            color={RVColorProp.gray}
-                            className={styles.resultTitle}
-                          >
-                            {author}
-                          </Typography>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                </RowItem>
-              )
+                  </RowItem>
+                ) : (
+                  <RowItem
+                    key={`row-result-${id}`}
+                    size={RVSizeProp.medium}
+                    ActionsComponent={
+                      <div className={styles.rowActionsContainer}>
+                        <Typography type="caption" className={styles.serverTitle}>
+                          {server?.title}
+                        </Typography>
+                        <Button
+                          onClick={() =>
+                            detailsCallback({
+                              server,
+                              authors,
+                              title,
+                              id,
+                              details,
+                              serverJsonResult,
+                            })
+                          }
+                          variant={RVVariantProp.white}
+                          color={RVColorProp.crayola}
+                          fullCircle
+                          rounded="half"
+                        >
+                          <ListItemSvg />
+                        </Button>
+                        <Button
+                          variant={RVVariantProp.outline}
+                          className={styles.actionButton}
+                          onClick={() =>
+                            addCallback([
+                              { id, server, authors, title, details, serverJsonResult, isError },
+                            ])
+                          }
+                        >
+                          <Trans ns="common" i18nKey="add">
+                            Add
+                          </Trans>
+                        </Button>
+                      </div>
+                    }
+                  >
+                    <div className={styles.resultTitleContainer}>
+                      <Typography type="H4" className={styles.resultTitle}>
+                        {title}
+                      </Typography>
+                      <ul className={styles.resultAuthors}>
+                        {authors.map((author) => (
+                          <li key={`row-result-author-${author}`}>
+                            <Typography
+                              type="p"
+                              color={RVColorProp.gray}
+                              className={styles.resultTitle}
+                            >
+                              {author}
+                            </Typography>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </RowItem>
+                )
             )}
 
           {isLoading && <LoadingState />}

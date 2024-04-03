@@ -3,7 +3,7 @@
 .detailsBlock {
   display: flex;
   justify-content: space-between;
-  align-items: center;
+  align-items: start;
   gap: px-to-rem(8);
   margin-block: px-to-rem(20);
   padding-block: px-to-rem(2);
@@ -23,6 +23,7 @@
   .detailsValueContainer {
     width: 60%;
     justify-content: space-between;
+    align-items: start;
   }
 
   .detailsValue {
@@ -66,6 +67,11 @@
 
         pre {
           white-space: pre;
+
+          code {
+            border: none;
+            background-color: unset;
+          }
         }
       }
     }
