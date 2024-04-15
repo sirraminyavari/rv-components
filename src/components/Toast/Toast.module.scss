@@ -23,6 +23,7 @@
   --toastify-color-error: #e74c3c;
   --toastify-color-transparent: rgb(255 255 255 / 70%);
   --toastify-color-progress-light: hsl(var(--base));
+  --toastify-font-family: inherit;
 
   justify-content: center;
   border-radius: px-to-rem(4);
@@ -32,6 +33,8 @@
   border-width: px-to-rem(1);
   border-style: solid;
   border-color: transparent;
+  direction: inherit !important;
+  font-family: inherit;
 
   [class^='Toastify__toast-icon'] {
     margin-inline-end: px-to-rem(8);

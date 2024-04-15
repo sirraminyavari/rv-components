@@ -37,6 +37,7 @@
     border-top-width: px-to-rem(2);
     border-top-style: solid;
     border-top-color: hsl(var(--black) / 10%);
+    padding-block-start: px-to-rem(16);
 
     &:hover {
       background-color: unset;
@@ -46,6 +47,7 @@
       width: 100%;
       max-width: unset;
       text-align: center;
+      padding-inline-start: px-to-rem(4);
     }
 
     .detailsValueContainer {

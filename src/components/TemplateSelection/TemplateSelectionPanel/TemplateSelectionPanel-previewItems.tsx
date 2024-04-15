@@ -11,6 +11,7 @@ import styles from './TemplateSelectionPanel.module.scss';
 import { Skeleton } from '../../Skeleton';
 import EmptyState from '../../../layouts/EmptyState/EmptyState';
 import { NumericSvg } from '../../../icons';
+import { t } from 'i18next';
 
 export interface RVTemplateSelectionPanelPreviewItems {
   previewItems?: {
@@ -31,8 +32,14 @@ const TemplateSelectionPanelPreviewItems: VoidFunctionComponent<
         {!previewItems?.length && (
           <EmptyState
             IconComponent={ListCircleSvg}
-            title="No fields to show!"
-            description="Please choose a template with form fields"
+            title={t('template_selection_empty_state_title', {
+              defaultValue: 'No fields to show!',
+              ns: 'common',
+            })}
+            description={t('template_selection_empty_state_description', {
+              defaultValue: 'Please choose a template with form fields',
+              ns: 'common',
+            })}
           />
         )}
         {previewItems?.map(({ type, label }, idx) => {

@@ -168,8 +168,8 @@ const TemplateSelectionPanel = ({
                       Add to selected
                     </Trans>
                   ) : (
-                    <Trans ns="common" i18nKey="select_template">
-                      Select Template
+                    <Trans ns="common" i18nKey="select_templates">
+                      Select Templates
                     </Trans>
                   )}
                 </>
@@ -180,7 +180,7 @@ const TemplateSelectionPanel = ({
                       submitting ...
                     </Trans>
                   ) : (
-                    <Trans ns="common" i18nKey="select_templates">
+                    <Trans ns="common" i18nKey="select_template">
                       Select Template
                     </Trans>
                   )}

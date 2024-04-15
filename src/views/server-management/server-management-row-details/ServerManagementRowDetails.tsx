@@ -3,6 +3,7 @@ import styles from './ServerManagementRowDetails.module.scss';
 import { Panel } from '../../../layouts/Panel';
 import { CopyToClipboard, Modal, Skeleton, Typography } from '../../../components';
 import clsx from 'clsx';
+import { Trans } from 'react-i18next';
 
 export interface RVServerManagementRowDetails {
   title: string;
@@ -40,7 +41,11 @@ const ServerManagementRowDetails = ({
                   className={styles.detailsLabel}
                   muted={value === null}
                 >
-                  {itemTitle}
+                  {itemTitle === 'serverJsonResult' ? (
+                    <Trans ns="common" i18nKey="raw_result"></Trans>
+                  ) : (
+                    itemTitle
+                  )}
                 </Typography>
                 {value !== null ? (
                   <CopyToClipboard
@@ -51,8 +56,8 @@ const ServerManagementRowDetails = ({
                     className={clsx(styles.detailsValueContainer)}
                   >
                     <div className={clsx(styles.detailsValue)}>
-                      <pre>
-                        <code>{JSON.stringify(JSON.parse((value as string) || ''), null, 4)}</code>
+                      <pre dir="ltr">
+                        <code>{JSON.stringify(JSON.parse((value as string) || ''), null, 2)}</code>
                       </pre>
                     </div>
                   </CopyToClipboard>
