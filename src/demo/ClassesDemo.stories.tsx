@@ -83,6 +83,7 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
     <div style={{ display: 'flex', minHeight: '100vh', width: '100%' }}>
       <div style={{ display: 'flex', height: '100vh', position: 'sticky', top: 0 }}>
         <SidebarMainComponent
+          currentPath="#home"
           primaryLinks={[
             !isActionBarOpen
               ? {
@@ -93,71 +94,83 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
                   },
                   noIndicator: true,
                   menuTrigger: true,
+                  path: '#menu',
                 }
               : {
                   Icon: CMLogoSvg,
                   title: '',
                   onClick: () => {},
                   noIndicator: true,
+                  path: '#menu',
                 },
             {
               Icon: HomeSvg,
               onClick: () => {},
               noIndicator: false,
+              path: '#menu',
             },
             {
               Icon: NotificationSvg,
-              title: '',
+              title: 'asdasd',
               onClick: () => {},
               noIndicator: false,
+              path: '#home',
             },
             {
               Icon: SocialSvg,
               title: '',
               onClick: () => {},
               noIndicator: false,
+              path: '#menu',
             },
             {
               Icon: BriefcaseSvg,
               title: '',
               onClick: () => {},
               noIndicator: false,
+              path: '#menu',
             },
             {
               Icon: ChatBubblesSvg,
               title: '',
               onClick: () => {},
               noIndicator: false,
+              path: '#menu',
             },
             {
               Icon: ShapesSvg,
               title: '',
               onClick: () => {},
               noIndicator: false,
+              path: '#menu',
             },
             {
               Icon: HammerWrenchSvg,
               title: '',
               onClick: () => {},
               noIndicator: false,
+              path: '#menu',
             },
             {
               Icon: DashboardSvg,
               title: '',
               onClick: () => {},
               noIndicator: false,
+              path: '#menu',
             },
             {
               Icon: ChartColumnBarSvg,
               title: '',
               onClick: () => {},
               noIndicator: false,
+              path: '#menu',
             },
             {
               Icon: SettingsSvg,
               title: '',
               onClick: () => {},
               noIndicator: false,
+              path: '#menu',
             },
           ]}
           secondaryLinks={[
@@ -166,12 +179,14 @@ export const Classes: ComponentStory<FunctionComponent> = ({ ...args }) => {
               title: '',
               onClick: () => {},
               noIndicator: false,
+              path: '#menu',
             },
             {
               Icon: AlbumsSvg,
               title: '',
               onClick: () => {},
               noIndicator: false,
+              path: '#menu',
             },
           ]}
           {...args}

@@ -202,7 +202,7 @@ const SidebarMain = forwardRef<HTMLDivElement, RVSidebarMain>(
                   outline={!noIndicator || !menuTrigger}
                 />
               )}
-              {title}
+              {title && <span className={styles.menuTileTitle}>{title}</span>}
             </SidebarMainNavLink>
           ))}
         </Scrollbar>

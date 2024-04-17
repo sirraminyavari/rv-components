@@ -16,7 +16,7 @@
   display: block;
   padding-block: px-to-rem(12);
   position: relative;
-  padding-inline-start: px-to-rem(24);
+  padding-inline-start: px-to-rem(8);
   width: px-to-rem(350);
   color: hsl(var(--base-font));
   height: 100%;
@@ -124,6 +124,10 @@
   margin-inline-start: px-to-rem(19.2);
 }
 
+.nestedAccordion {
+  padding-inline-start: px-to-rem(12);
+}
+
 .triggerCollapse {
   margin-inline-start: auto;
 
@@ -151,12 +155,12 @@
     position: absolute;
 
     &.start {
-      top: px-to-rem(-15.4);
+      top: px-to-rem(-13.4);
       inset-inline-end: px-to-rem(-0.4);
     }
 
     &.end {
-      bottom: px-to-rem(-15.4);
+      bottom: px-to-rem(-13.4);
       inset-inline-end: px-to-rem(-0.4);
       transform: scaleY(-1);
     }

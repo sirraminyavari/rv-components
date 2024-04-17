@@ -1,11 +1,13 @@
 import clsx from 'clsx';
 import {
+  ChangeEventHandler,
   DetailedHTMLProps,
   Dispatch,
   forwardRef,
   FunctionComponent,
   HTMLAttributes,
   MouseEvent,
+  MouseEventHandler,
   PropsWithoutRef,
   SetStateAction,
   useCallback,
@@ -38,18 +40,11 @@ export interface RVSidebarSubMenu
     Icon?: FunctionComponent<RVSvgProps>;
     title?: string;
     badge?: string | number;
-    onClick?: (event?: MouseEvent<HTMLButtonElement>) => void;
-    onChange?: (event?: MouseEvent<HTMLButtonElement>) => void;
+    onClick?: MouseEventHandler<HTMLButtonElement | HTMLInputElement>;
+    onChange?: ChangeEventHandler<HTMLInputElement | HTMLTextAreaElement>;
     input?: boolean;
     color?: RVColorProp;
-    childItems?: {
-      id?: string;
-      Icon?: FunctionComponent<RVSvgProps>;
-      title?: string;
-      badge?: string | number;
-      onClick?: (event?: MouseEvent<HTMLButtonElement>) => void;
-      childItems?: [];
-    }[];
+    childItems?: RVSidebarSubMenu['links'];
   }[];
 }
 
@@ -112,6 +107,8 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
                 Icon={link.Icon}
                 IconPosition="leading"
                 className={styles.menuInput}
+                onChange={link?.onChange}
+                onClick={link?.onClick as MouseEventHandler<HTMLInputElement>}
               />
             );
           if (link.childItems && link.childItems.length) {
@@ -125,6 +122,7 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
                   onActiveClick(e);
                   link.onClick && link.onClick(e);
                 }}
+                contentClassName={styles.nestedAccordion}
                 onTriggerButtonLoad={(buttonElement) => {
                   if (buttonElement.dataset.id === activeLink) {
                     activeTile.current = buttonElement;

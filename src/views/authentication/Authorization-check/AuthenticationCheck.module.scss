@@ -20,6 +20,7 @@
       hsl(var(--light) / 30%) 0%,
       hsl(var(--base) / 30%) 100%
     );
+    z-index: 10;
   }
 
   .form {
