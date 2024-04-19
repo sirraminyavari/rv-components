@@ -9,6 +9,7 @@ import {
   useMemo,
   ReactNode,
   FunctionComponent,
+  Fragment,
 } from 'react';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types';
 
@@ -117,7 +118,6 @@ const Table: FunctionComponent<RVTable> = ({
     count: rows.length + 1,
     estimateSize: () => 33,
     getScrollElement: () => tableContainerRef.current,
-
     measureElement:
       typeof window !== 'undefined' && navigator.userAgent.indexOf('Firefox') === -1
         ? (element) => element?.getBoundingClientRect().height
@@ -247,7 +247,7 @@ const Table: FunctionComponent<RVTable> = ({
               const row = rows[virtualRow.index] as Row<Record<string, string | number | Date>>;
               if (row)
                 return (
-                  <>
+                  <Fragment key={row.id}>
                     <tr
                       data-index={virtualRow.index}
                       ref={(node) => rowVirtualizer.measureElement(node)}
@@ -276,7 +276,7 @@ const Table: FunctionComponent<RVTable> = ({
                         );
                       })}
                     </tr>
-                  </>
+                  </Fragment>
                 );
               else
                 return (

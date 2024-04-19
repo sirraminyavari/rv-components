@@ -1,6 +1,6 @@
 {
   "name": "@cliqmind/rv-components",
-  "version": "0.12.1-beta.rc34.6",
+  "version": "0.12.1-beta.rc34.8",
   "license": "UNLICENSED",
   "typings": "./index.d.ts",
   "main": "./index.cjs",
@@ -38,6 +38,7 @@
     "react-popper": "^2.3.0",
     "react-select": "^5.7.0",
     "react-toastify": "^9.1.3",
+    "rxjs": "^7.8.1",
     "sass": "^1.57.0",
     "style-inject": "^0.3.0",
     "tslib": "^2.4.1",
@@ -117,7 +118,7 @@
   "dependencies": {
     "@popperjs/core": "^2.11.8",
     "@tanstack/react-table": "^8.11.3",
-    "@tanstack/react-virtual": "^3.0.1",
+    "@tanstack/react-virtual": "3.0",
     "clsx": "^1.2.1",
     "i18next": "^23.7.8",
     "lodash": "^4.17.21",
@@ -133,6 +134,7 @@
     "react-popper": "^2.3.0",
     "react-select": "^5.7.0",
     "react-toastify": "^9.1.3",
+    "rxjs": "^7.8.1",
     "use-debounce": "^10.0.0"
   }
 }

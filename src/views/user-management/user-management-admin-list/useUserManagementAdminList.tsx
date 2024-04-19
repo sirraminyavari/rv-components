@@ -14,6 +14,8 @@ import { getRandomInt } from '../../../utils';
 import UserManagementAdminListActiveCell from './user-management-admin-list-cells/UserManagementAdminListActiveCell';
 import { t } from 'i18next';
 import { Trans } from 'react-i18next';
+import { Subject, merge } from 'rxjs';
+import { debounceTime, throttleTime, distinctUntilChanged } from 'rxjs/operators';
 
 const useUserManagementAdminList = ({
   loadAllUsersDataCallback,
@@ -51,6 +53,19 @@ const useUserManagementAdminList = ({
     > & { hash?: number }
   >({});
   const [searchText, setSearchText] = useState<string>('');
+  const searchSubject = new Subject<string>();
+  const throttledSearch = searchSubject.pipe(throttleTime(700), distinctUntilChanged());
+  const debouncedSearch = searchSubject.pipe(debounceTime(2000), distinctUntilChanged());
+  const mergedSearch = merge(throttledSearch, debouncedSearch);
+  mergedSearch.subscribe((response) => {
+    setSearchText(response);
+    console.log({ response });
+  });
+
+  const handleSearchTextChange = (query: string) => {
+    searchSubject.next(query); // Emit value to searchSubject
+  };
+
   const [confidentialityLevels, setConfidentialityLevels] = useState<RVSelectOptionItem[]>();
   const [searchInOnlineUsers, setSearchInOnlineUsers] = useState<boolean>(false);
   const [searchInActiveUsers, setSearchInActiveUsers] = useState<boolean>(true);
@@ -401,13 +416,14 @@ const useUserManagementAdminList = ({
   return {
     isLoading,
     searchText,
-    setSearchText,
+    setSearchText: handleSearchTextChange,
     searchInOnlineUsers,
     setSearchInOnlineUsers,
     searchInActiveUsers,
     setSearchInActiveUsers,
     usersTableColumns,
     usersListData,
+    totalUsers,
     loadDataCallback,
     updateEditedData,
     setEditableItem,

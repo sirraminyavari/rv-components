@@ -7,6 +7,13 @@
   padding-block-end: px-to-rem(40);
   flex-wrap: wrap;
   gap: px-to-rem(12);
+
+  .headerSubtitle {
+    white-space: nowrap;
+    text-align: center;
+    align-self: end;
+    margin-inline-start: px-to-rem(-12);
+  }
 }
 
 .searchInputContainer {

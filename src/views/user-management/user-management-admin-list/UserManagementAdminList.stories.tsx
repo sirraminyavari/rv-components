@@ -25,17 +25,18 @@ export default {
 const loadAllUsersData: RVUserManagementAdminList['loadAllUsersDataCallback'] = async ({
   Count,
   LowerBoundary,
+  SearchText,
 }) => {
-  const usersData = makeData(3).map((person, idx) => ({
+  const usersData = makeData(10).map((person, idx) => ({
     ...person,
-    UserName: person.UserName,
+    UserName: `${idx + LowerBoundary}${person.UserName}`,
   }));
-  console.log('fetch requested ...', { Count, LowerBoundary });
+  console.log('fetch requested ...', { Count, LowerBoundary, SearchText });
 
   return new Promise((res) =>
     setTimeout(() => {
       res({
-        TotalCount: 3,
+        TotalCount: 350,
         AppID: '',
         SystemAdminsEditable: true,
         ConfidentialitiesEditable: true,
@@ -66,7 +67,7 @@ const setRandomPassword: RVUserManagementAdminList['setUserRandomPasswordCallbac
     }, 1000)
   );
 };
-const updateUserAdminStatusCallback: RVUserManagementAdminList['updateUserAdminStatusCallback'] =
+const updateUserAdminStatusCallback: RVUserManagementAdminList['updateUserApprovalCallback'] =
   async (user) => {
     alert(JSON.stringify(user));
     return new Promise((res) =>
@@ -101,7 +102,7 @@ export const List: ComponentStory<typeof UserManagementAdminListComponent> = ({
         updateUserDataCallback={saveUserData}
         loadConfidentialityLevelsCallback={loadConfidentialityLevels}
         setUserRandomPasswordCallback={setRandomPassword}
-        updateUserAdminStatusCallback={updateUserAdminStatusCallback}
+        updateUserApprovalCallback={updateUserAdminStatusCallback}
       />
     </div>
   );

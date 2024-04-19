@@ -1,5 +1,5 @@
-import { FunctionComponent, useState } from 'react';
-import { Breadcrumb, Button, Switch, Table, TextInput } from '../../../components';
+import { FunctionComponent, useEffect, useState } from 'react';
+import { Breadcrumb, Button, Switch, Table, TextInput, Typography } from '../../../components';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../../types';
 import { PlusSvg, SearchSvg, peopleSvg } from '../../../icons';
 import { t } from 'i18next';
@@ -10,7 +10,7 @@ import UserManagementAdminListModal from './user-management-admin-list-panels/Us
 import UserManagementAdminListCreateUserPanel from './user-management-admin-list-panels/UserManagementAdminListCreateUserPanel';
 import UserManagementAdminListRolePanel from './user-management-admin-list-panels/UserManagementAdminListRolePanel';
 import UserManagementAdminListResetPasswordPanel from './user-management-admin-list-panels/UserManagementAdminListResetPasswordPanel';
-import { useDebounce } from 'use-debounce';
+// import { useDebounce } from 'use-debounce';
 import UserManagementAdminListConfidentialityPanel from './user-management-admin-list-panels/UserManagementAdminListConfidentialityPanel';
 
 export interface RVUserManagementAdminList {
@@ -91,10 +91,11 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
   unblockUserCallback,
   usersCountPerPage = 10,
 }) => {
-  const [loadAllUsersDataDebouncedCallback] = useDebounce(loadAllUsersDataCallback, 700, {
-    leading: true,
-  });
+  // const [loadAllUsersDataDebouncedCallback] = useDebounce(loadAllUsersDataCallback, 700, {
+  //   maxWait: 30000,
+  // });
 
+  const [searchInputQuery, setSearchInputQuery] = useState<string>('');
   const [modalStatus, setModalStatus] = useState(false);
   const [modalContent, setModalContent] = useState<{
     user?: RVUserManagementAdminListUserEntity;
@@ -110,7 +111,7 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
   };
   const {
     isLoading,
-    searchText,
+    // searchText,
     setSearchText,
     searchInOnlineUsers,
     setSearchInOnlineUsers,
@@ -118,6 +119,7 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
     setSearchInActiveUsers,
     usersTableColumns,
     usersListData,
+    totalUsers,
     loadDataCallback,
     confidentialityLevels,
     updateEditedData,
@@ -125,7 +127,7 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
   } = useUserManagementAdminList({
     openModal,
     closeModal,
-    loadAllUsersDataCallback: loadAllUsersDataDebouncedCallback as typeof loadAllUsersDataCallback,
+    loadAllUsersDataCallback: loadAllUsersDataCallback,
     updateUserDataCallback,
     usersCountPerPage,
     loadConfidentialityLevelsCallback,
@@ -135,23 +137,38 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
     unblockUserCallback,
   });
 
+  useEffect(() => {
+    setSearchText(searchInputQuery);
+  }, [searchInputQuery]);
+
   return (
     <>
       <div className={styles.headerContainer}>
-        <Breadcrumb
-          Icon={peopleSvg}
-          variant={RVVariantProp.white}
-          size={RVSizeProp.medium}
-          routeLinks={[
-            {
-              label: t('all_users', {
-                defaultValue: 'All Users',
-                ns: 'common',
-              }),
-              path: '',
-            },
-          ]}
-        />
+        <>
+          <Breadcrumb
+            Icon={peopleSvg}
+            variant={RVVariantProp.white}
+            size={RVSizeProp.medium}
+            routeLinks={[
+              {
+                label: t('all_users', {
+                  defaultValue: 'All Users',
+                  ns: 'common',
+                }),
+                path: '',
+              },
+            ]}
+          />
+          {Boolean(totalUsers) && (
+            <Typography type="caption" muted className={styles.headerSubtitle}>
+              ({totalUsers}{' '}
+              <Trans ns="common" i18nKey="people">
+                People
+              </Trans>
+              )
+            </Typography>
+          )}
+        </>
         <Button size={RVSizeProp.small} onClick={() => openModal({ modalContentType: 'newUser' })}>
           <PlusSvg />
           <Trans ns="user-management" i18nKey="create_new_user">
@@ -169,8 +186,8 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
           variant={RVVariantProp.outline}
           Icon={SearchSvg}
           color={RVColorProp.distant}
-          onChange={(e) => setSearchText(e.target.value)}
-          value={searchText}
+          onChange={(e) => setSearchInputQuery(e.target.value)}
+          value={searchInputQuery}
           fullWidth
         />
         <Switch
@@ -211,7 +228,7 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
         disableInfiniteScroll={isLoading}
         showSkeleton={isLoading}
         fixedColumn={['Full Name', 'Username']}
-        overScan={5}
+        overScan={50}
       />
       <UserManagementAdminListModal modalStatus={modalStatus} closeCallback={closeModal}>
         {modalContent.modalContentType === 'confidentialityChange' && (
