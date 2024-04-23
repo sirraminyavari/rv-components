@@ -49,6 +49,10 @@ const templatesPreviewCallback: RVTemplateSelectionPanel['loadPreviewItems'] = a
         label: `template no. ${templateID} checkbox input`,
       },
       {
+        type: 'numeric',
+        label: `template no. ${templateID} numeric input`,
+      },
+      {
         type: 'date',
         label: `template no. ${templateID} date input`,
       },
@@ -67,6 +71,22 @@ export const ShowCase: ComponentStory<typeof TemplateSelectionPanel> = ({
   return (
     <div style={{ height: '60vh' }}>
       <TemplateSelectionPanel
+        loadTemplateItems={loadTemplateItems}
+        loadPreviewItems={loadPreviewItems}
+      />
+    </div>
+  );
+};
+
+export const muliSelection: ComponentStory<typeof TemplateSelectionPanel> = ({
+  loadTemplateItems = templatesCallback,
+  loadPreviewItems = templatesPreviewCallback,
+  multi = true,
+}) => {
+  return (
+    <div style={{ height: '60vh' }}>
+      <TemplateSelectionPanel
+        multi={multi}
         loadTemplateItems={loadTemplateItems}
         loadPreviewItems={loadPreviewItems}
       />

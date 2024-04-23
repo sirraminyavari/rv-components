@@ -32,7 +32,8 @@ export const DetailsPanel: ComponentStory<typeof ServerManagementRowDetails> = (
     const timer = setTimeout(() => {
       setDetails({
         'my details data 3': 435,
-        'my details data 4': 'author',
+        'my details data 4':
+          'author lorem Lorem ipsum dolor sit amet consectetur adipisicing elit. Nam, magnam sint ipsa eum perferendis quia! Tenetur quos quisquam nostrum, voluptatibus veniam harum sed dolorum, enim repudiandae non aliquam reprehenderit earum? ',
         'my details data 2': null,
         'my details data 5': 'Wisely',
         'my details data 6': 'Cocoa',

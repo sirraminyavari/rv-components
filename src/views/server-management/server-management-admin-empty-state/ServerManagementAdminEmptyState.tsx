@@ -5,6 +5,7 @@ import { RVColorProp } from '../../../types';
 import { EmptyState } from '../../../layouts/EmptyState';
 import styles from './ServerManagementAdminEmptyState.module.scss';
 import clsx from 'clsx';
+import { Trans } from 'react-i18next';
 
 export interface RVServerManagementAdminEmptyState {}
 
@@ -21,7 +22,9 @@ const ServerManagementAdminEmptyState: FunctionComponent = () => {
       }
       description={
         <Typography type="p" color={RVColorProp.gray} className={styles.description}>
-          برای تعریف زد-سرور جدید از دکمه New server استفاده کنید.
+          <Trans ns="server-management" i18nKey="add_new_server_description">
+            Add Z-servers with the 'New Server' button.
+          </Trans>
         </Typography>
       }
     />

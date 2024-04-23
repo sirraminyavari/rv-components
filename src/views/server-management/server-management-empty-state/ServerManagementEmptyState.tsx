@@ -5,6 +5,7 @@ import { RVColorProp } from '../../../types';
 import { EmptyState } from '../../../layouts/EmptyState';
 import styles from './ServerManagementEmptyState.module.scss';
 import clsx from 'clsx';
+import { Trans } from 'react-i18next';
 
 export interface RVServerManagementEmptyState {}
 
@@ -15,14 +16,17 @@ const ServerManagementEmptyState: FunctionComponent = () => {
         <>
           <AlertSvg className={clsx(RVColorProp.crayola, styles.defaultIcon)} />
           <Typography type="H1" color={RVColorProp.crayola} className={styles.title}>
-            No results found
+            <Trans ns="server-management" i18nKey="empty_state_title">
+              No matching resources.
+            </Trans>
           </Typography>
         </>
       }
       description={
         <Typography type="p" color={RVColorProp.gray} className={styles.description}>
-          درصورتی که از صحیح بودن نوشتار مشخصه موردنظر خود اطمینان دارید، لطفا با استفاده از کادر
-          جستجوی کنار، مشخصه‌های دیگر کتاب را وارد و نتایج آن را مشاهده کنید.
+          <Trans ns="server-management" i18nKey="empty_state_description">
+            Check your spelling or try different attributes.
+          </Trans>
         </Typography>
       }
     />

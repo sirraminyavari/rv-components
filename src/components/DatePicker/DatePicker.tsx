@@ -7,6 +7,7 @@ import DatePickerPanel, {
   DayValue,
   Calendar,
 } from 'ramin-modern-calendar-datepicker';
+import 'ramin-modern-calendar-datepicker/lib/DatePicker.css';
 
 import styles from './DatePicker.module.scss';
 import { Optional, RVColorProp, RVSizeProp, RVVariantProp } from '../../types';
@@ -70,7 +71,6 @@ const DatePicker = forwardRef<HTMLInputElement, RVDatePicker>(
       inputDate.setHours(0);
       inputDate.setMinutes(0);
       inputDate.setSeconds(0);
-      console.log(selectedDay);
 
       return `${inputDate.toLocaleDateString(locale, {
         // minute: false,

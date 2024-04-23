@@ -27,7 +27,7 @@
 
   .titleInputBlock {
     margin-block-start: px-to-rem(42);
-    margin-block-end: px-to-rem(56);
+    margin-block-end: px-to-rem(24);
     width: 100%;
     max-width: px-to-rem(400);
   }
@@ -38,7 +38,7 @@
     align-items: center;
     flex-direction: column;
     gap: px-to-rem(16);
-    margin-block: px-to-rem(40);
+    margin-block: px-to-rem(24);
     width: 100%;
     max-width: px-to-rem(400);
   }
@@ -46,5 +46,17 @@
   .actionContainer {
     width: 100%;
     max-width: px-to-rem(400);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    gap: px-to-rem(12);
+
+    .actionResultText {
+      width: 90%;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+    }
   }
 }

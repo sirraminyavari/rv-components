@@ -1,6 +1,6 @@
 import { FormEventHandler, useCallback, useEffect, useState } from 'react';
 import clsx from 'clsx';
-import PQueue from 'p-queue';
+import * as Queue from 'p-queue';
 import CMServerSearch from '../../../icons/cm-server-search.svg';
 import SearchSvg from '../../../icons/search.svg';
 import {
@@ -19,23 +19,34 @@ import styles from './ServerManagementSearchPanel.module.scss';
 import { RowItem } from '../../../layouts';
 import ListItemSvg from '../../../icons/listItem.svg';
 import { ServerManagementEmptyState } from '../server-management-empty-state';
+import { Trans } from 'react-i18next';
+import { t } from 'i18next';
 
 interface ServerResultEntity {
   id: string;
   title: string;
   authors: string[];
   server: { title: string };
+  details?: Record<string, string | number | null>;
+  serverJsonResult?: string;
+  isError?: boolean;
 }
 
 export interface RVServerManagementSearchPanel {
   serversListCallback: () => Promise<RVSelectOptionItem[]>;
-  addCallback: (serverID: string) => Promise<boolean>;
-  serverSearchCallback: (arg: { serverID: string; query: string }) => Promise<ServerResultEntity[]>;
+  addCallback: (selectedItems: ServerResultEntity[]) => Promise<boolean>;
+  detailsCallback: (serverItem: ServerResultEntity) => Promise<boolean>;
+  serverSearchCallback: (arg: {
+    serverID: string;
+    serverTitle: string;
+    query: string;
+  }) => Promise<ServerResultEntity[]>;
 }
 
 const ServerManagementSearchPanel = ({
   serversListCallback,
   addCallback,
+  detailsCallback,
   serverSearchCallback,
 }: RVServerManagementSearchPanel) => {
   const [openSidebar, setOpenSidebar] = useState(false);
@@ -64,10 +75,26 @@ const ServerManagementSearchPanel = ({
       });
 
       if (isAllSelected) {
-        return [{ label: 'Search within all servers', value: 'all-servers' }];
+        return [
+          {
+            label: t('search_panel_all_servers_option', {
+              defaultValue: 'Search all servers',
+              ns: 'server-management',
+              count: serversList?.length,
+            }),
+            value: 'all-servers',
+          },
+        ];
       } else if (selectedServersList.length === 0) {
         return [
-          { label: 'Search within all servers', value: 'all-servers' },
+          {
+            label: t('search_panel_all_servers_option', {
+              defaultValue: 'Search all servers',
+              ns: 'server-management',
+              count: serversList?.length,
+            }),
+            value: 'all-servers',
+          },
           ...(serversList || []),
         ];
       } else return [...(serversList || [])];
@@ -80,30 +107,33 @@ const ServerManagementSearchPanel = ({
       event.preventDefault();
       setOpenSidebar(true);
       setIsLoading(true);
+
       try {
         if (!serversList) throw new Error('no selected servers!');
         setResults([]);
-        const queue = new PQueue({ concurrency: 1, timeout: 15000 });
+        const queue = new Queue.default({ concurrency: 1, timeout: 15000 });
         const allServersSelected =
           selectedServers.length === 1 && selectedServers[0]?.value === 'all-servers';
-        const callbacksList = (allServersSelected ? serversList : selectedServers).map(
-          ({ value }) => {
+        const searchCallbacks = (allServersSelected ? serversList : selectedServers).map(
+          ({ label, value }) => {
             return async () => {
               const serverResult = await serverSearchCallback({
                 serverID: String(value),
+                serverTitle: String(label),
                 query: searchQuery,
               });
               setResults((prev = []) => [...prev, ...serverResult]);
             };
           }
         );
-        await queue.addAll(callbacksList, {});
+
+        await queue.addAll(searchCallbacks);
       } catch (error) {
         console.log('err', { error });
       }
       setIsLoading(false);
     },
-    [selectedServers, searchQuery, serversListCallback, serversList]
+    [selectedServers, searchQuery, serversListCallback, JSON.stringify(serversList)]
   );
 
   return (
@@ -114,8 +144,10 @@ const ServerManagementSearchPanel = ({
           <>
             <CMServerSearch className={styles.defaultIcon} />
             <Typography type="p" color={RVColorProp.gray} className={styles.detailsBlock}>
-              برای جستجو در منابع کتابخانه‌ای، ابتدا زد-سرور(های) موردنظر خود را انتخاب کنید و در
-              کادر دوم یکی از سه مقدار کتاب که نتیجه دقیق‌تری به شما می‌دهد را وارد کنید.
+              <Trans ns="server-management" i18nKey="search_panel_title">
+                To search in library resources, choose a Z-Server and enter either the title,
+                creator(s), or publisher.
+              </Trans>
             </Typography>
           </>
         }
@@ -123,7 +155,15 @@ const ServerManagementSearchPanel = ({
         <form className={styles.inputsBlock} onSubmit={onSearchSubmit}>
           <div className={styles.selectInput}>
             <Select
-              placeholder={isLoadingServerList ? '' : 'choose server(s) ...'}
+              placeholder={
+                isLoadingServerList
+                  ? ''
+                  : t('search_panel_server_select_placeholder', {
+                      defaultValue: 'choose server(s) ...',
+                      ns: 'server-management',
+                      count: serversList?.length,
+                    })
+              }
               fullWidth
               options={selectInputServersList(selectedServers)}
               isMulti
@@ -135,7 +175,12 @@ const ServerManagementSearchPanel = ({
             />
           </div>
           <TextInput
-            label="Search title, creator(s) or publisher"
+            label={t('search_panel_server_query_placeholder', {
+              defaultValue: 'Search title, creator(s) or publisher',
+              ns: 'server-management',
+              count: serversList?.length,
+            })}
+            className={styles.searchInput}
             variant={RVVariantProp.outline}
             color={RVColorProp.cgBlue}
             value={searchQuery}
@@ -145,7 +190,9 @@ const ServerManagementSearchPanel = ({
           <div className={styles.actionContainer}>
             <Button className={styles.actionButton} type="submit">
               <SearchSvg />
-              Search
+              <Trans ns="common" i18nKey="search">
+                Search
+              </Trans>
             </Button>
           </div>
         </form>
@@ -172,59 +219,116 @@ const ServerManagementSearchPanel = ({
               color={RVColorProp.gray}
               className={styles.resultCountCaption}
             >
-              {results.length} results found
+              <Trans ns="common" i18nKey="result_found" count={results.length}>
+                {{ count: results.length }} results found
+              </Trans>
             </Typography>
           )}
           {results &&
             results.length !== 0 &&
-            results.map(({ server, authors, title, id }) => (
-              <RowItem
-                key={`row-result-${id}`}
-                size={RVSizeProp.medium}
-                ActionsComponent={
-                  <div className={styles.rowActionsContainer}>
-                    <Typography type="caption">{server?.title}</Typography>
-                    <Button
-                      variant={RVVariantProp.white}
-                      color={RVColorProp.crayola}
-                      fullCircle
-                      rounded="half"
-                    >
-                      <ListItemSvg />
-                    </Button>
-                    <Button
-                      variant={RVVariantProp.outline}
-                      className={styles.actionButton}
-                      onClick={() => addCallback(id)}
-                    >
-                      Add
-                    </Button>
-                  </div>
-                }
-              >
-                <div>
-                  <Typography type="H4" className={styles.resultTitle}>
-                    {title}
-                  </Typography>
-                  <ul className={styles.resultAuthors}>
-                    {authors.map((author) => (
-                      <li key={`row-result-author-${author}`}>
-                        <Typography
-                          type="p"
-                          color={RVColorProp.gray}
-                          className={styles.resultTitle}
+            results.map(
+              ({ server, authors, title, id, details, serverJsonResult = '', isError }, idx) =>
+                isError ? (
+                  <RowItem
+                    key={`row-result-${id || idx}`}
+                    size={RVSizeProp.medium}
+                    color={RVColorProp.crayola}
+                    ActionsComponent={
+                      <div className={styles.rowActionsContainer}>
+                        <Typography type="caption">{server?.title}</Typography>
+                        <Button
+                          onClick={() =>
+                            detailsCallback({
+                              server,
+                              authors: [],
+                              title: '',
+                              id,
+                              details: { serverJsonResult },
+                              isError,
+                            })
+                          }
+                          variant={RVVariantProp.white}
+                          color={RVColorProp.crayola}
+                          fullCircle
+                          rounded="half"
                         >
-                          {author}
+                          <ListItemSvg />
+                        </Button>
+                      </div>
+                    }
+                  >
+                    <div className={styles.resultTitleContainer}>
+                      <Typography type="H4" className={styles.resultTitle}>
+                        {title}
+                      </Typography>
+                    </div>
+                  </RowItem>
+                ) : (
+                  <RowItem
+                    key={`row-result-${id}`}
+                    size={RVSizeProp.medium}
+                    ActionsComponent={
+                      <div className={styles.rowActionsContainer}>
+                        <Typography type="caption" className={styles.serverTitle}>
+                          {server?.title}
                         </Typography>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </RowItem>
-            ))}
+                        <Button
+                          onClick={() =>
+                            detailsCallback({
+                              server,
+                              authors,
+                              title,
+                              id,
+                              details,
+                              serverJsonResult,
+                            })
+                          }
+                          variant={RVVariantProp.white}
+                          color={RVColorProp.crayola}
+                          fullCircle
+                          rounded="half"
+                        >
+                          <ListItemSvg />
+                        </Button>
+                        <Button
+                          variant={RVVariantProp.outline}
+                          className={styles.actionButton}
+                          onClick={() =>
+                            addCallback([
+                              { id, server, authors, title, details, serverJsonResult, isError },
+                            ])
+                          }
+                        >
+                          <Trans ns="common" i18nKey="add">
+                            Add
+                          </Trans>
+                        </Button>
+                      </div>
+                    }
+                  >
+                    <div className={styles.resultTitleContainer}>
+                      <Typography type="H4" className={styles.resultTitle}>
+                        {title}
+                      </Typography>
+                      <ul className={styles.resultAuthors}>
+                        {authors.map((author) => (
+                          <li key={`row-result-author-${author}`}>
+                            <Typography
+                              type="p"
+                              color={RVColorProp.gray}
+                              className={styles.resultTitle}
+                            >
+                              {author}
+                            </Typography>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </RowItem>
+                )
+            )}
 
           {isLoading && <LoadingState />}
-          <LoadingState />
         </Scrollbar>
       </SideMenu>
     </div>

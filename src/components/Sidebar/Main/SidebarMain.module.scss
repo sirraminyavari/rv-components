@@ -16,6 +16,11 @@
   transition: transform 0.3s;
 }
 
+.menuTileTitle {
+  padding-inline: px-to-rem(4);
+  @include truncate(100%);
+}
+
 .menuActiveIndicator {
   z-index: 3;
   position: absolute;
@@ -53,6 +58,7 @@
   width: 100%;
   height: auto;
   margin-block-end: px-to-rem(16);
+  box-sizing: content-box;
 
   > svg {
     font-size: px-to-rem(48);

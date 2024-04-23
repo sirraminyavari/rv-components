@@ -23,6 +23,7 @@
   --toastify-color-error: #e74c3c;
   --toastify-color-transparent: rgb(255 255 255 / 70%);
   --toastify-color-progress-light: hsl(var(--base));
+  --toastify-font-family: inherit;
 
   justify-content: center;
   border-radius: px-to-rem(4);
@@ -32,6 +33,8 @@
   border-width: px-to-rem(1);
   border-style: solid;
   border-color: transparent;
+  direction: inherit !important;
+  font-family: inherit;
 
   [class^='Toastify__toast-icon'] {
     margin-inline-end: px-to-rem(8);
@@ -40,6 +43,18 @@
   [class^='Toastify__progress-bar'] {
     border-radius: px-to-rem(10);
     border-start-end-radius: px-to-rem(10);
+  }
+
+  .closeButtonContainer {
+    flex-shrink: 0;
+    min-width: px-to-rem(42);
+
+    .closeButton {
+      svg {
+        font-size: px-to-rem(16);
+        margin: px-to-rem(4);
+      }
+    }
   }
 
   &.primary {
@@ -61,19 +76,19 @@
 
   &.small {
     box-shadow: 0 px-to-rem(2) px-to-rem(16) 0 hsl(var(--black) / 30%);
-    padding-block: px-to-rem(18);
-    padding-inline: px-to-rem(16);
+    padding-block: px-to-rem(4);
+    padding-inline: px-to-rem(2);
   }
 
   &.medium {
     box-shadow: 0 px-to-rem(2) px-to-rem(16) 0 hsl(var(--black) / 30%);
-    padding-block: px-to-rem(18);
-    padding-inline: px-to-rem(16);
+    padding-block: px-to-rem(8);
+    padding-inline: px-to-rem(4);
   }
 
   &.large {
     box-shadow: 0 px-to-rem(2) px-to-rem(16) 0 hsl(var(--black) / 30%);
-    padding-block: px-to-rem(18);
-    padding-inline: px-to-rem(16);
+    padding-block: px-to-rem(12);
+    padding-inline: px-to-rem(6);
   }
 }

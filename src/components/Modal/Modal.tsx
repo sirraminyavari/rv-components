@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { CSSProperties, forwardRef, useCallback, useRef } from 'react';
 import ReactModal, { Props as ModalProps } from 'react-modal';
 import { mergeWith } from 'lodash';
-import { RVColorProp, RVSizeProp } from '../../types';
+import { RVColorProp, RVSizeProp, RVVariantProp } from '../../types';
 import styles from './Modal.module.scss';
 
 export interface RVModal extends ModalProps {
@@ -10,6 +10,8 @@ export interface RVModal extends ModalProps {
   color?: RVColorProp;
   /** set the size of the component (default:RVSizeProp.small) */
   size?: RVSizeProp;
+  /** set between the various designs of the component (default:RVVariantProp.white) */
+  variant?: Exclude<RVVariantProp, RVVariantProp.disabled | RVVariantProp.outline>;
 }
 
 const Modal = forwardRef<ReactModal, RVModal>(
@@ -19,6 +21,7 @@ const Modal = forwardRef<ReactModal, RVModal>(
       overlayClassName,
       color = RVColorProp.cgBlue,
       size = RVSizeProp.small,
+      variant = RVVariantProp.white,
       closeTimeoutMS = 200,
       style,
       children,
@@ -33,7 +36,6 @@ const Modal = forwardRef<ReactModal, RVModal>(
     const parentSelectorCallback = useCallback(() => {
       if (parentSelector) return parentSelector();
       if (appElement.current) return appElement.current!;
-      console.log('no !!!');
       if (document.getElementById(elementID)) return document.getElementById(elementID)!;
       return document.body;
     }, [appElement.current, isOpen]);
@@ -50,7 +52,7 @@ const Modal = forwardRef<ReactModal, RVModal>(
         <ReactModal
           ref={ref}
           appElement={appElement.current}
-          portalClassName={'RVPortal'}
+          portalClassName={clsx('RVPortal', styles[variant])}
           overlayClassName={clsx(styles.modalOverlay, color, overlayClassName)}
           className={clsx(styles.modalContent, styles[size], className)}
           closeTimeoutMS={closeTimeoutMS}

@@ -16,7 +16,7 @@
   justify-content: space-between;
   align-items: center;
   row-gap: px-to-rem(16);
-  flex-wrap: wrap;
+  flex-wrap: nowrap;
 
   &.large {
     padding-inline: px-to-rem(24);

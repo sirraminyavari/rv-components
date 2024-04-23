@@ -1,0 +1,29 @@
+@import '../../scss/modules/default';
+
+.menuContainer {
+  // display: flex;
+  // flex-wrap: wrap;
+  justify-content: center;
+  // align-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, px-to-rem(250));
+  row-gap: px-to-rem(24);
+  column-gap: px-to-rem(24);
+  padding-block: 10dvh;
+  padding-inline: 5dvw;
+  margin-inline: auto;
+
+  .menuButton {
+    border-radius: px-to-rem(10);
+    height: px-to-rem(120);
+    aspect-ratio: 2/1;
+    margin-block-start: px-to-rem(5);
+    flex-direction: column;
+    justify-content: space-around;
+    font-weight: 600;
+
+    svg {
+      font-size: px-to-rem(48);
+    }
+  }
+}
