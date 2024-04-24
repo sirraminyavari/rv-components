@@ -17,7 +17,7 @@ export interface RVTypography
   /** set the component color palette (default:RVColorProp.grayDark) */
   color?: RVColorProp;
   /** set the Typography to be rendered as the selected option html tag (default: H6) */
-  type?: 'H1' | 'H2' | 'H3' | 'H4' | 'H5' | 'H6' | 'p' | 'caption';
+  type?: 'H1' | 'H2' | 'H3' | 'H4' | 'H5' | 'H6' | 'p' | 'caption' | 'span';
   /** whether text to have the full or half color opacity (default: false) */
   muted?: boolean;
 }

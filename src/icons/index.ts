@@ -69,3 +69,5 @@ export { default as NumericSvg } from './numeric.svg';
 export { default as CheckListSvg } from './checkList.svg';
 export { default as RelationGraphSvg } from './relationGraph.svg';
 export { default as databaseAddSvg } from './databaseAdd.svg';
+export { default as UserQuestionSvg } from './userQuestion.svg';
+export { default as QuestionBookSvg } from './questionBook.svg';

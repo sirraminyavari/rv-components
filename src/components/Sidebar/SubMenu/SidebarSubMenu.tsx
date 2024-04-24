@@ -45,6 +45,7 @@ export interface RVSidebarSubMenu
     input?: boolean;
     color?: RVColorProp;
     childItems?: RVSidebarSubMenu['links'];
+    mutedLabel?: boolean;
   }[];
 }
 
@@ -117,10 +118,11 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
                 key={link.id || JSON.stringify(link)}
                 id={link.id || JSON.stringify(link)}
                 label={link.title}
-                color={color}
+                mutedLabel={link?.mutedLabel}
+                color={link.color || color}
                 onLabelClick={(e) => {
                   onActiveClick(e);
-                  link.onClick && link.onClick(e);
+                  if (link.onClick) link.onClick(e as MouseEvent<HTMLButtonElement>);
                 }}
                 contentClassName={styles.nestedAccordion}
                 onTriggerButtonLoad={(buttonElement) => {
@@ -157,7 +159,12 @@ const SidebarSubMenu = forwardRef<HTMLDivElement, RVSidebarSubMenu>(
                 }}
               >
                 {link.Icon && <link.Icon className={styles.menuTileIcon} outline />}
-                <Typography className={styles.menuTileTitle} color={RVColorProp.inherit} type="H4">
+                <Typography
+                  className={styles.menuTileTitle}
+                  color={link.color || RVColorProp.grayDark}
+                  muted={link.mutedLabel}
+                  type="H4"
+                >
                   {link.title && <span className={styles.menuTileTitleContent}>{link.title}</span>}
                   {link.badge && <span className={styles.menuTileTitleBadge}>{link.badge}</span>}
                 </Typography>

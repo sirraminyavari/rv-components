@@ -60,7 +60,7 @@ const Template: ComponentStory<typeof SidebarSubMenuComponent> = ({
             id: 'files',
             childItems: [
               { badge: 123, title: 'Diagrams', Icon: NotificationSvg },
-              { badge: 123, title: 'Diagrams', Icon: PeopleCircleSvg },
+              { badge: 123, title: 'Diagrams muted', Icon: PeopleCircleSvg, mutedLabel: true },
               { title: 'Reports1', Icon: ShapesSvg },
               { badge: 123, title: 'Diagrams2' },
             ],
