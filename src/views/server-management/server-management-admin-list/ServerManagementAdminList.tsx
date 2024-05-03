@@ -1,12 +1,14 @@
 import { useCallback, useEffect, useState } from 'react';
 import TrashSvg from '../../../icons/trash.svg';
-import { Button, Scrollbar, Skeleton, Typography } from '../../../components';
+import { Button, Modal, Scrollbar, Skeleton, Typography } from '../../../components';
 import { RVColorProp, RVSizeProp, RVVariantProp } from '../../../types';
 import styles from './ServerManagementAdminList.module.scss';
 import { RowItem } from '../../../layouts';
 import { ServerManagementEmptyState } from '../server-management-empty-state';
 import clsx from 'clsx';
 import { Trans } from 'react-i18next';
+import { ConfirmationCheckView } from '../../common';
+import { t } from 'i18next';
 
 export interface RVServerManagementAdminList {
   serversListCallback: () => Promise<{ id: string; label: string; details?: string }[]>;
@@ -20,6 +22,8 @@ const ServerManagementAdminList = ({
   removeCallback,
 }: RVServerManagementAdminList) => {
   const [isLoading, setIsLoading] = useState(false);
+  const [modalStatus, setModalStatus] = useState(false);
+  const [selectedItemId, setSelectedItemId] = useState<string>('');
   const [serversList, setServersList] =
     useState<{ label: string; id: string; details?: string }[]>();
   useEffect(() => {
@@ -32,13 +36,15 @@ const ServerManagementAdminList = ({
     })();
   }, [serversListCallback]);
 
-  const onServerRemove = useCallback(async (id: string) => {
+  const onServerRemove = useCallback(async () => {
     try {
-      await removeCallback(id);
+      await removeCallback(selectedItemId);
       const servers = await serversListCallback();
       setServersList(servers);
     } catch (error) {}
-  }, []);
+    setModalStatus(false);
+    setSelectedItemId('');
+  }, [selectedItemId]);
 
   return (
     <>
@@ -75,7 +81,10 @@ const ServerManagementAdminList = ({
                     className={styles.actionIconButton}
                     fullCircle
                     rounded="half"
-                    onClick={() => onServerRemove(id)}
+                    onClick={() => {
+                      setSelectedItemId(id);
+                      setModalStatus(true);
+                    }}
                   >
                     <TrashSvg />
                   </Button>
@@ -100,6 +109,28 @@ const ServerManagementAdminList = ({
             </RowItem>
           ))}
       </Scrollbar>
+      <Modal
+        isOpen={modalStatus}
+        size={RVSizeProp.small}
+        shouldCloseOnEsc
+        onRequestClose={() => {
+          setModalStatus(false);
+          setSelectedItemId('');
+        }}
+        style={{ content: { maxHeight: '80vh', overflow: 'unset' } }}
+      >
+        <ConfirmationCheckView
+          confirmationLabel={t('removal_confirmation', {
+            ns: 'common',
+            item: serversList?.find((item) => item.id === selectedItemId)?.label,
+          })}
+          cancelCallback={() => {
+            setModalStatus(false);
+            setSelectedItemId('');
+          }}
+          onConfirmCallback={onServerRemove}
+        />
+      </Modal>
     </>
   );
 };

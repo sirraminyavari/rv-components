@@ -60,6 +60,22 @@ const templatesPreviewCallback: RVTemplateSelectionPanel['loadPreviewItems'] = a
         type: 'radio',
         label: `template no. ${templateID} radio input`,
       },
+      {
+        type: 'checkbox',
+        label: `template no. ${templateID} checkbox input`,
+      },
+      {
+        type: 'numeric',
+        label: `template no. ${templateID} numeric input`,
+      },
+      {
+        type: 'date',
+        label: `template no. ${templateID} date input`,
+      },
+      {
+        type: 'radio',
+        label: `template no. ${templateID} radio input`,
+      },
     ];
   else return [];
 };
@@ -115,7 +131,7 @@ export const ModalView: ComponentStory<typeof TemplateSelectionPanel> = ({
         shouldCloseOnOverlayClick
         onRequestClose={() => setModalStatus(false)}
       >
-        <div style={{ height: '60vh' }}>
+        <div style={{ height: '90vh' }}>
           <TemplateSelectionPanel
             loadTemplateItems={loadTemplateItems}
             loadPreviewItems={loadPreviewItems}

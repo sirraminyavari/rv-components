@@ -59,7 +59,7 @@
 
         // flex-wrap: wrap;
         gap: px-to-rem(12);
-        white-space: nowrap;
+        // white-space: nowrap;
 
         span {
           display: inline-block;
@@ -85,13 +85,14 @@
 
     .templateButton {
       justify-content: start;
-      flex-wrap: wrap;
+      // flex-wrap: wrap;
       margin-block: px-to-rem(3);
       margin-inline: auto;
       max-width: 98%;
 
       .templateButtonLabel {
         margin-block: 0;
+        text-align: start;
 
         &.templateButtonActiveLabel {
           color: hsl(var(--base));
@@ -141,8 +142,7 @@
   .previewContainer {
     box-sizing: border-box;
     background-color: hsl(var(--color-gray-lighter) / 20%);
-    padding-block: px-to-rem(24);
-    padding-inline: px-to-rem(32);
+    padding-block-start: px-to-rem(24);
     height: 100%;
     width: 100%;
     overflow-y: auto;
@@ -154,17 +154,21 @@
       justify-content: center;
     }
 
-    .previewNodeItem {
-      margin-block: px-to-rem(33);
+    .templatesPreviewWrapper {
+      padding-inline: px-to-rem(32);
 
-      &:first-of-type {
-        margin-block-start: 0;
-      }
+      .previewNodeItem {
+        margin-block: px-to-rem(33);
 
-      .previewIcon {
-        margin-inline-end: px-to-rem(16);
-        font-size: px-to-rem(20);
-        color: hsl(var(--base));
+        &:first-of-type {
+          margin-block-start: 0;
+        }
+
+        .previewIcon {
+          margin-inline-end: px-to-rem(16);
+          font-size: px-to-rem(20);
+          color: hsl(var(--base));
+        }
       }
     }
 
@@ -175,6 +179,7 @@
       align-items: start;
       height: 100%;
       width: 100%;
+      padding-inline: px-to-rem(32);
 
       & > span {
         width: 100%;
@@ -195,6 +200,14 @@
         flex-shrink: 0;
         flex-grow: 0;
       }
+    }
+
+    .previewSelectButtonContainer {
+      position: sticky;
+      bottom: 0;
+      padding-inline: px-to-rem(32);
+      background-color: hsl(var(--color-grayLight-base) / 60%);
+      padding-block: px-to-rem(12);
     }
   }
 }

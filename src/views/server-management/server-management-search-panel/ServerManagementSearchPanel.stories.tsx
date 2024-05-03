@@ -75,7 +75,7 @@ export const SearchPanel: ComponentStory<typeof ServerManagementSearchPanel> = (
         serverSearchCallback={searchCallback}
         detailsCallback={setItemData}
         addCallback={async (id) => {
-          alert(id);
+          console.log(id);
           return true;
         }}
         // {...args}
