@@ -4,29 +4,36 @@
   transition: width 0.3s cubic-bezier(0.33, 1, 0.68, 1), padding 0.3s cubic-bezier(0.33, 1, 0.68, 1);
   width: var(--side-menu-width, 100%);
   height: var(--side-menu-height, 100%);
-  padding-block: px-to-rem(12);
-  padding-inline: px-to-rem(12);
-  flex-shrink: 0;
+  flex-shrink: 1;
   overflow: hidden;
-  box-sizing: content-box;
+  box-sizing: border-box;
 
   &.sideMenuClose {
     width: 0;
+    transition-delay: 0.3s;
     padding: 0;
+
+    .sideMenuContainer {
+      transition-delay: 0s;
+      transform: translateX(150%);
+    }
   }
 }
 
 .sideMenuContainer {
   box-sizing: border-box;
-
-  // padding: px-to-rem(12);
+  transition: transform 0.3s cubic-bezier(0.33, 1, 0.68, 1);
+  transition-delay: 0.2s;
   border-radius: $borderRadiusHalf;
-  background-color: hsl(var(--base));
+  background-color: hsl(var(--light));
+  color: hsl(var(--base-font));
   display: inline-block;
   position: relative;
-  width: var(--side-menu-width, 100%);
-  color: hsl(var(--base-font));
-  height: 100%;
+  width: 100%;
+  height: var(--side-menu-height, 100%);
+
+  padding-block: px-to-rem(12);
+  padding-inline: px-to-rem(12);
 }
 
 @include on-rtl {

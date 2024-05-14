@@ -98,6 +98,7 @@
   &[data-sudo='focus'],
   &[data-sudo='active'] {
     box-shadow: px-to-rem(1) px-to-rem(3) px-to-rem(7) hsl(var(--base) / 25%);
+    background-color: hsl(var(--darker));
   }
 
   &:active,
