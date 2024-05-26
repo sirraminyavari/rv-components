@@ -1,6 +1,6 @@
 {
   "name": "@cliqmind/rv-components",
-  "version": "0.12.1-beta.rc34.8",
+  "version": "0.12.1-beta.rc35",
   "license": "UNLICENSED",
   "typings": "./index.d.ts",
   "main": "./index.cjs",

@@ -16,6 +16,7 @@ import AnimateHeight from 'react-animate-height';
 import CaretSvg from '../../icons/caret.svg';
 import { RVColorProp } from '../../types/global';
 import styles from './Accordion.module.scss';
+import { Typography } from '../Typography';
 
 export interface RVAccordion
   extends Omit<
@@ -26,7 +27,11 @@ export interface RVAccordion
   id?: string;
   /** set the component color palette (default:RVColorProp.gray) */
   color?: RVColorProp;
+  /** set the label component color palette (default:RVColorProp.inherit) */
+  labelColor?: RVColorProp;
   /** set the Accordion toggle button label (accepts JSX/text) */
+  mutedLabel?: boolean;
+  /** set the Accordion label to be muted (default:False) */
   label?: ReactNode;
   /** forces the Accordion toggle to be always open or closed */
   open?: boolean;
@@ -37,7 +42,7 @@ export interface RVAccordion
   /** when the Accordion component and it's label button rendered, passed function will be called */
   onTriggerButtonLoad?: (element: HTMLButtonElement) => void;
   /** when the Accordion label button clicked, passed function will be called */
-  onLabelClick?: MouseEventHandler<HTMLButtonElement>;
+  onLabelClick?: MouseEventHandler<HTMLButtonElement | HTMLHeadingElement>;
   /** when the Accordion toggle state changes, passed function will be called */
   onAccordionStatusChange?: (
     event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>,
@@ -66,6 +71,8 @@ const Accordion = forwardRef<HTMLDivElement, RVAccordion>(
       labelClassName,
       contentClassName,
       activeLabel,
+      mutedLabel,
+      labelColor = RVColorProp.inherit,
       ...props
     },
     ref
@@ -101,7 +108,10 @@ const Accordion = forwardRef<HTMLDivElement, RVAccordion>(
           data-id={id}
         >
           <CaretSvg direction={'right'} />
-          <span
+          <Typography
+            type="span"
+            muted={mutedLabel}
+            color={labelColor}
             className={clsx(
               styles.triggerButtonLabel,
               activeLabel && styles.triggerButtonLabelActive
@@ -109,7 +119,7 @@ const Accordion = forwardRef<HTMLDivElement, RVAccordion>(
             onClick={onLabelClick}
           >
             {label}
-          </span>
+          </Typography>
         </button>
         <AnimateHeight duration={300} easing="ease" height={isOpen ? 'auto' : 0}>
           <div className={clsx(styles.content, contentClassName)}>{children}</div>

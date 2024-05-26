@@ -1,0 +1,39 @@
+@import '../../../scss/modules/default';
+
+.container {
+  box-sizing: border-box;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+
+  .form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 100%;
+    // border-style: solid;
+    // border-color: hsl(var(--base) / 20%);
+    // background-color: hsl(var(--white) / 100%);
+    backdrop-filter: blur(40px);
+    border-radius: px-to-rem(12);
+    border-width: px-to-rem(2);
+    gap: px-to-rem(12);
+    padding-block: px-to-rem(24);
+    padding-inline: px-to-rem(24);
+    max-width: px-to-rem(450);
+
+    &.fullWidth {
+      margin-inline: auto;
+      align-items: center;
+      width: 100%;
+      max-width: unset;
+    }
+
+    .formDescription {
+      margin-block-start: px-to-rem(0);
+      margin-block-end: px-to-rem(24);
+      text-align: center;
+    }
+  }
+}

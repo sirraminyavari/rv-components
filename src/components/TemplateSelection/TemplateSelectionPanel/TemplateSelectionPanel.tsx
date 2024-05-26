@@ -150,7 +150,7 @@ const TemplateSelectionPanel = ({
           showSkeleton={previewLoadingSkeleton}
         />
         {!previewLoadingSkeleton && previewItems && previewItems?.length !== 0 && (
-          <div>
+          <div className={styles.previewSelectButtonContainer}>
             <Button
               className={styles.templateActionButton}
               variant={

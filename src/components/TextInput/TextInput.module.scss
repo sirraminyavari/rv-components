@@ -212,3 +212,11 @@
 
   @include full-width;
 }
+
+@include on-rtl {
+  .textInputContainer {
+    .labelWithLeadingIcon {
+      transform: translate(px-to-rem(-17), -50%);
+    }
+  }
+}

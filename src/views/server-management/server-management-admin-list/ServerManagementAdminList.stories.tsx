@@ -30,11 +30,9 @@ export const list = ({ ...args }) => {
       <ServerManagementAdminList
         serversListCallback={serverListCallback}
         editCallback={async (id) => {
-          alert(id);
           return true;
         }}
         removeCallback={async (id) => {
-          alert(id);
           return true;
         }}
         {...args}

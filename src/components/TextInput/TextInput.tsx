@@ -51,6 +51,7 @@ const TextInput = forwardRef<HTMLInputElement, RVTextInput>(
       fullWidth,
       Icon,
       IconPosition = 'trailing',
+      autoComplete = 'off',
       ...props
     },
     ref
@@ -83,6 +84,7 @@ const TextInput = forwardRef<HTMLInputElement, RVTextInput>(
           placeholder={placeholder}
           className={styles.baseTextInput}
           disabled={disabled}
+          autoComplete={autoComplete}
           {...props}
         />
         {label && (

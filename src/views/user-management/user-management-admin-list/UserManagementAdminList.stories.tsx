@@ -69,7 +69,7 @@ const setRandomPassword: RVUserManagementAdminList['setUserRandomPasswordCallbac
 };
 const updateUserAdminStatusCallback: RVUserManagementAdminList['updateUserApprovalCallback'] =
   async (user) => {
-    alert(JSON.stringify(user));
+    console.log(JSON.stringify(user));
     return new Promise((res) =>
       setTimeout(() => {
         res(true);

@@ -10,7 +10,7 @@ import UserManagementAdminListModal from './user-management-admin-list-panels/Us
 import UserManagementAdminListCreateUserPanel from './user-management-admin-list-panels/UserManagementAdminListCreateUserPanel';
 import UserManagementAdminListRolePanel from './user-management-admin-list-panels/UserManagementAdminListRolePanel';
 import UserManagementAdminListResetPasswordPanel from './user-management-admin-list-panels/UserManagementAdminListResetPasswordPanel';
-// import { useDebounce } from 'use-debounce';
+import { useDebounce } from 'use-debounce';
 import UserManagementAdminListConfidentialityPanel from './user-management-admin-list-panels/UserManagementAdminListConfidentialityPanel';
 
 export interface RVUserManagementAdminList {
@@ -91,9 +91,9 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
   unblockUserCallback,
   usersCountPerPage = 10,
 }) => {
-  // const [loadAllUsersDataDebouncedCallback] = useDebounce(loadAllUsersDataCallback, 700, {
-  //   maxWait: 30000,
-  // });
+  const [loadAllUsersDataDebouncedCallback] = useDebounce(loadAllUsersDataCallback, 700, {
+    maxWait: 30000,
+  });
 
   const [searchInputQuery, setSearchInputQuery] = useState<string>('');
   const [modalStatus, setModalStatus] = useState(false);
@@ -127,7 +127,7 @@ const UserManagementAdminList: FunctionComponent<RVUserManagementAdminList> = ({
   } = useUserManagementAdminList({
     openModal,
     closeModal,
-    loadAllUsersDataCallback: loadAllUsersDataCallback,
+    loadAllUsersDataCallback: loadAllUsersDataDebouncedCallback,
     updateUserDataCallback,
     usersCountPerPage,
     loadConfidentialityLevelsCallback,
