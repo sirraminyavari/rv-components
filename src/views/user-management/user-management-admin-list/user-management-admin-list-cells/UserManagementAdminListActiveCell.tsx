@@ -14,8 +14,11 @@ interface RVUserManagementAdminListActiveCell {
 const UserManagementAdminListActiveCell =
   ({ cell, updateUserApprovalCallback }: RVUserManagementAdminListActiveCell) =>
   () => {
+    const row = cell.getValue() as RVUserManagementAdminListUserEntity;
     //eslint-disable-next-line  react-hooks/rules-of-hooks
     const [IsLoading, setIsLoading] = useState(false);
+    //eslint-disable-next-line  react-hooks/rules-of-hooks
+    const [approvalStatus, setApprovalStatus] = useState(row.IsApproved || false);
     //eslint-disable-next-line  react-hooks/rules-of-hooks
     const onApprovalChange = useCallback(
       async (statusToChange: boolean) => {
@@ -23,6 +26,7 @@ const UserManagementAdminListActiveCell =
         setIsLoading(true);
         try {
           await updateUserApprovalCallback({ UserID: row.UserID, IsApproved: statusToChange });
+          setApprovalStatus(statusToChange);
         } catch (error) {
           RVToast.error('error in updating ...');
         }
@@ -30,14 +34,14 @@ const UserManagementAdminListActiveCell =
       },
       [updateUserApprovalCallback]
     );
-    const row = cell.getValue() as RVUserManagementAdminListUserEntity;
+
     return (
       <>
         <form className={styles.clickableInputContainer}>
           <Switch
             id={`${String(row.UserID)}-allowance-switch`}
             name={`active__${row.UserID}`}
-            checked={Boolean(row.IsApproved)}
+            checked={approvalStatus}
             readOnly
             onChange={(e) => {
               onApprovalChange(e.target.checked);
