@@ -114,16 +114,16 @@ const Table: FunctionComponent<RVTable> = ({
   //The virtualizer needs to know the scrollable container element
   const tableContainerRef = useRef<HTMLDivElement>(null);
 
-  const rowVirtualizer = useVirtualizer({
-    count: rows.length + 1,
-    estimateSize: () => 33,
-    getScrollElement: () => tableContainerRef.current,
-    measureElement:
-      typeof window !== 'undefined' && navigator.userAgent.indexOf('Firefox') === -1
-        ? (element) => element?.getBoundingClientRect().height
-        : undefined,
-    overscan: overScan,
-  });
+  // const rowVirtualizer = useVirtualizer({
+  //   count: rows.length + 1,
+  //   estimateSize: () => 33,
+  //   getScrollElement: () => tableContainerRef.current,
+  //   measureElement:
+  //     typeof window !== 'undefined' && navigator.userAgent.indexOf('Firefox') === -1
+  //       ? (element) => element?.getBoundingClientRect().height
+  //       : undefined,
+  //   overscan: overScan,
+  // });
 
   const loadPaginatedData = useCallback(async () => {
     if (!loadTableDataCallback) return;
@@ -239,22 +239,24 @@ const Table: FunctionComponent<RVTable> = ({
           </thead>
           <tbody
             className={styles.tableBody}
-            style={{
-              height: `${rowVirtualizer.getTotalSize()}px`,
-            }}
+            style={
+              {
+                // height: `${rowVirtualizer.getTotalSize()}px`,
+              }
+            }
           >
-            {rowVirtualizer.getVirtualItems().map((virtualRow) => {
+            {rows.map((virtualRow) => {
               const row = rows[virtualRow.index] as Row<Record<string, string | number | Date>>;
               if (row)
                 return (
                   <Fragment key={row.id}>
                     <tr
                       data-index={virtualRow.index}
-                      ref={(node) => rowVirtualizer.measureElement(node)}
+                      // ref={(node) => rowVirtualizer.measureElement(node)}
                       key={row.id}
-                      style={{
-                        transform: `translateY(${virtualRow.start}px)`,
-                      }}
+                      // style={{
+                      //   transform: `translateY(${virtualRow.start}px)`,
+                      // }}
                     >
                       {row.getVisibleCells().map((cell) => {
                         return (
@@ -283,14 +285,16 @@ const Table: FunctionComponent<RVTable> = ({
                   (isFetching || showSkeleton) && (
                     <tr
                       data-index={virtualRow.index + 1}
-                      ref={(node) => rowVirtualizer.measureElement(node)}
+                      // ref={(node) => rowVirtualizer.measureElement(node)}
                       key={Date.now()}
-                      style={{
-                        background: 'inherit',
-                        transform: `translateY(${
-                          (virtualRow.start / virtualRow.index) * (virtualRow.index + 1)
-                        }px)`,
-                      }}
+                      style={
+                        {
+                          // background: 'inherit',
+                          // transform: `translateY(${
+                          //   (virtualRow.start / virtualRow.index) * (virtualRow.index + 1)
+                          // }px)`,
+                        }
+                      }
                     >
                       {columns?.map((cell) => {
                         return (
