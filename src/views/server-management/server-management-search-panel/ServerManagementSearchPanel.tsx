@@ -27,7 +27,8 @@ interface ServerResultEntity {
   title: string;
   authors: string[];
   server: { title: string };
-  details?: Record<string, string | number | null>;
+  rawDetails?: Record<string, string | number | null>;
+  formDetails?: Record<string, string>;
   serverJsonResult?: string;
   isError?: boolean;
 }
@@ -227,7 +228,19 @@ const ServerManagementSearchPanel = ({
           {results &&
             results.length !== 0 &&
             results.map(
-              ({ server, authors, title, id, details, serverJsonResult = '', isError }, idx) =>
+              (
+                {
+                  server,
+                  authors,
+                  title,
+                  id,
+                  rawDetails,
+                  formDetails,
+                  serverJsonResult = '',
+                  isError,
+                },
+                idx
+              ) =>
                 isError ? (
                   <RowItem
                     key={`row-result-${id || idx}`}
@@ -243,7 +256,8 @@ const ServerManagementSearchPanel = ({
                               authors: [],
                               title: '',
                               id,
-                              details: { serverJsonResult },
+                              rawDetails: { serverJsonResult },
+                              formDetails: {},
                               isError,
                             })
                           }
@@ -279,7 +293,8 @@ const ServerManagementSearchPanel = ({
                               authors,
                               title,
                               id,
-                              details,
+                              rawDetails,
+                              formDetails,
                               serverJsonResult,
                             })
                           }
@@ -295,7 +310,15 @@ const ServerManagementSearchPanel = ({
                           className={styles.actionButton}
                           onClick={() =>
                             addCallback([
-                              { id, server, authors, title, details, serverJsonResult, isError },
+                              {
+                                id,
+                                server,
+                                authors,
+                                title,
+                                formDetails,
+                                serverJsonResult,
+                                isError,
+                              },
                             ])
                           }
                         >
