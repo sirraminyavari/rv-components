@@ -1,0 +1,36 @@
+/*! regenerator-runtime -- Copyright (c) 2014-present, Facebook, Inc. -- license (MIT): https://github.com/facebook/regenerator/blob/main/LICENSE */
+
+/*********************************************************************
+ * @function  : persianToCalendars(year, month, day, [options])
+ *
+ * @purpose   : Converts Persian/Iranian Date (Jalali Date) to the corresponding Gregorian Date.
+ *              Handles Persian dates from -272,442 AP to +275,139 AP.
+ *              Uses the 'JS Calendar Conversion by Target Approximation' Method.
+ *              No external libraries or complex mathematical/astronautical formulas.
+ *
+ * @version   : 1.00
+ * @author    : Mohsen Alyafei
+ * @date      : 17 Feb 2022
+ * @licence   : MIT
+ * @param     : year  : (numeric) Persian year  (-272442 to 275139)
+ * @param     : month : (numeric) Persian month (1 to 12) note: months is standard 1 based
+ * @param     : day   : (numeric) Persian day   (1 to 31)
+ * @param     : options: Object with the following optional parameters:
+ *
+ *              'toCal' : Specifies the the type of output Calendar to convert to with 18 Calendars:
+ *                        - "gregory" : (default)
+ *                        - "buddhist", "chinese", "coptic", "dangi", "ethioaa", "ethiopic",
+ *                          "hebrew", "indian", "islamic", "islamic-umalqura", "islamic-tbla",
+ *                          "islamic-civil", "islamic-rgsa", "iso8601", "japanese", "persian", "roc".
+ *
+ *               'dateStyle' Same as used in the Intl.DateTimeFormat() constructor.
+ *                           If not stated, default output is in Gregorian ISO Format: YYYY:MM:DDTHH:mm:ss.sssZ
+ *
+ *               'locale' The BCP 47 language tag for formatting (default is 'en'). If the 'locale'
+ *                        is given then no date conversion happens and the Persian date is formatted
+ *                        based on the specified 'dateStyle' and 'locale'.
+ *
+ *               Other options: As used in the Intl.DateTimeFormat() constructor.
+ *
+ * @returns   : Return the date in the calendar and format of the specified 'options'
+ **********************************************************************/
