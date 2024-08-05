@@ -22,7 +22,7 @@ import { ServerManagementEmptyState } from '../server-management-empty-state';
 import { Trans } from 'react-i18next';
 import { t } from 'i18next';
 
-interface ServerResultEntity {
+export type ZServerResultEntity = {
   id: string;
   title: string;
   authors: string[];
@@ -31,17 +31,17 @@ interface ServerResultEntity {
   formDetails?: Record<string, string>;
   serverJsonResult?: string;
   isError?: boolean;
-}
+};
 
 export interface RVServerManagementSearchPanel {
   serversListCallback: () => Promise<RVSelectOptionItem[]>;
-  addCallback: (selectedItems: ServerResultEntity[]) => Promise<boolean>;
-  detailsCallback: (serverItem: ServerResultEntity) => Promise<boolean>;
+  addCallback: (selectedItems: ZServerResultEntity[]) => Promise<boolean>;
+  detailsCallback: (serverItem: ZServerResultEntity) => Promise<boolean>;
   serverSearchCallback: (arg: {
     serverID: string;
     serverTitle: string;
     query: string;
-  }) => Promise<ServerResultEntity[]>;
+  }) => Promise<ZServerResultEntity[]>;
 }
 
 const ServerManagementSearchPanel = ({
@@ -54,7 +54,7 @@ const ServerManagementSearchPanel = ({
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadingServerList, setIsLoadingServerList] = useState(false);
   const [searchQuery, setSearchQuery] = useState<string>('');
-  const [results, setResults] = useState<ServerResultEntity[]>();
+  const [results, setResults] = useState<ZServerResultEntity[]>();
   const [serversList, setServersList] = useState<RVSelectOptionItem[]>();
   const [selectedServers, setSelectedServers] = useState<Exclude<typeof serversList, undefined>>(
     []
