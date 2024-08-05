@@ -17,7 +17,7 @@
     "postbuild": "cpx './package.json' dist && cpx './README.md' dist && cpx './CHANGELOG.md' dist",
     "lint": "eslint src --color --fix",
     "stylint": "stylelint 'src/**/*.{scss,css}' --fix",
-    "format": "prettier --write 'src/**/*.{ts,tsx,scss,css,json}'",
+    "format": "prettier --write \"src/**/*.{ts,tsx,scss,css,json}\"",
     "storybook": "NODE_OPTIONS=\"--openssl-legacy-provider\" start-storybook -p 6006  --no-manager-cache",
     "storybook:build": "NODE_OPTIONS=\"--openssl-legacy-provider\" build-storybook",
     "storybook:chromatic": "chromatic --exit-zero-on-changes",
