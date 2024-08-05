@@ -26,6 +26,7 @@
 * :wheelchair: improve `ServerManagement` related components UX ([9bd1948](https://github.com/sirraminyavari/rv-components/commit/9bd19488b12c0571eb50a3346e90af8d963da73d))
 * :wheelchair: improve `ServerManagementRowDetails` UX ([15d57e7](https://github.com/sirraminyavari/rv-components/commit/15d57e754fe73930db978e5777311e339c1512f5))
 * Differentiate between Raw and Form details in Z-Server response ([fbd702f](https://github.com/sirraminyavari/rv-components/commit/fbd702f960ff57b834beb131204436337d622423))
+* Minor fixes ([7a11f35](https://github.com/sirraminyavari/rv-components/commit/7a11f3571b0b1520a630b549fa6ff8cbd2438e48))
 
 
 ### Features
